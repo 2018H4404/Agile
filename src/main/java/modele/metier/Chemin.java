@@ -2,11 +2,23 @@ package modele.metier;
 
 import java.util.ArrayList;
 
+/** 
+ * La classe Chemin.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public class Chemin {
 	
 	private ArrayList <Intersection> listeIntersections;
 	private ArrayList <Troncon> listeTroncons;
 	
+	/**
+	 * Constructeur de chemin
+	 * @param uneListeIntersections
+	 * @param uneListeTroncons
+	 */
 	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons) {
 		this.listeIntersections = uneListeIntersections;
 		this.listeTroncons = uneListeTroncons;
@@ -20,6 +32,10 @@ public class Chemin {
 		return listeTroncons;
 	}
 	
+	/**
+	 * Retourne le cout du chemin.
+	 * @return un double qui représente le cout du chemin.
+	 */
 	public double getCout() {
 		double somme = 0.0;
 		for(Troncon troncon : listeTroncons) {
