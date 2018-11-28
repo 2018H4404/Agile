@@ -32,6 +32,7 @@ import controleur.Controleur;
 public class ApplicationDemo extends Application{
 	private VueGraphique graph;
 	private VueTextuelle texte;
+	private Button button;
 	private MenuBar menuBar;
 	private Menu menuFile;
 	private Menu menuOperation;
@@ -77,6 +78,7 @@ public class ApplicationDemo extends Application{
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage) {
 		
 		menuBar = new MenuBar();
+		button = new Button();
 		
 		//Ajout de l'onglet Fichiers
 		menuFile = new Menu("Fichiers");

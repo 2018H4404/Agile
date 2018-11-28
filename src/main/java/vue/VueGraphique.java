@@ -41,6 +41,7 @@ public class VueGraphique extends Parent implements Observer{
 	
 	private Group tronconGroup;
 	private Group noeudGroup;
+	private Group buttonGroup;
 	private Group entrepotGroup;
 	private Group livraisonGroup;
 	private Group tourneeGroup;
@@ -81,6 +82,7 @@ public class VueGraphique extends Parent implements Observer{
 		rootGroup.getChildren().add(entrepotGroup);
 		rootGroup.getChildren().add(livraisonGroup);
 		rootGroup.getChildren().add(tourneeGroup);
+
 		rootGroup.scaleXProperty().bind(zoomSlider.valueProperty());
 		rootGroup.scaleYProperty().bind(zoomSlider.valueProperty());
 		
@@ -113,6 +115,7 @@ public class VueGraphique extends Parent implements Observer{
                 }
             }
         });
+		
 		
 		
 	}
