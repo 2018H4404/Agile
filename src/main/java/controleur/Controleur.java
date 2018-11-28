@@ -17,16 +17,19 @@ public class Controleur {
 	private VueGraphique graph;
 	private VueTextuelle texte;
 	private static Controleur instance = null;
-	private Etat etatPlanCharge;
-	private Etat etatInit;
-	private Etat etatDemandeLivraison;
+	private EtatPlanCharge etatPlanCharge;
+	private EtatInit etatInit;
+	private EtatDemandeLivraison etatDemandeLivraison;
 
 	
 	private Controleur() {
 		monPlan = new Plan();
 		maDemande = new DemandeLivraison();
 		monManager = new TourneeManager();
-		etat = new EtatInit();
+		etatPlanCharge = new EtatPlanCharge();
+		etatInit = new EtatInit();
+		etatDemandeLivraison = new EtatDemandeLivraison();
+		etat = etatInit;
 	}
 	
 	public static Controleur getInstance() {
@@ -88,6 +91,12 @@ public class Controleur {
 
 	public void setEtat(Etat etatCrt) {
 		Controleur.getInstance().etat = etatCrt;
+	}
+	public Etat getEtatCourant() {
+		return etat;
+	}
+	public Etat getEtatInit() {
+		return etatInit;
 	}
 
 	public Etat getEtatPlanCharge() {

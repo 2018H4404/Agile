@@ -32,6 +32,11 @@ import services.Paire;
 import controleur.Controleur;
 
 
+enum ETAT {
+    EtatInit,EtatPlanCharge,EtatDemandeLivraison;
+
+}
+
 @SuppressWarnings("restriction")
 public class ApplicationDemo extends Application{
 	private VueGraphique graph;
@@ -48,7 +53,7 @@ public class ApplicationDemo extends Application{
 	private MenuItem itemChargerPlan;
 	private MenuItem itemChargerDemandeLivraison;
 	private MenuItem itemCalculerTournees;
-	private MenuItem itemEffacerTournees;
+	private MenuItem itemEffacer;
 	private MenuItem itemAjouterLivraison;
 	private MenuItem itemSupprimerLivraison;
 
@@ -86,7 +91,10 @@ public class ApplicationDemo extends Application{
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison,buttonCalculer,buttonEfface,separator);
 
 		//Ajout de la barre de menu
-        AjouterBarreNavigateur(pane,primaryStage);
+        Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
+        AjouterBarreNavigateur(pane,primaryStage,Controleur.getInstance());
+		VerifierEtat(Controleur.getInstance());
+
         
         //Placement de differents vues
         pane.setLeft(texte);
@@ -103,10 +111,11 @@ public class ApplicationDemo extends Application{
         primaryStage.setScene(scene);
         primaryStage.setTitle("PLD Agile");
         primaryStage.show();
+        
 
 	}
 	
-	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage) {
+	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage,Controleur controleur) {
 		
 		menuBar = new MenuBar();
 		
@@ -126,11 +135,11 @@ public class ApplicationDemo extends Application{
                if(file != null) {
             	   try {
 					Controleur.getInstance().chargerFichierDemandeLivraison(file);
+					VerifierEtat(controleur);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            	   itemCalculerTournees.setDisable(false);
                }
 	         }
 	      });
@@ -147,16 +156,15 @@ public class ApplicationDemo extends Application{
               if(file != null) {
            	   try {
 				Controleur.getInstance().chargerFichierDemandeLivraison(file);
+				VerifierEtat(controleur);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-           	buttonCalculer.setDisable(false);
               }
 	         }
 	      });
-        itemChargerDemandeLivraison.setDisable(true);
-        buttonChargeDemandeLivraison.setDisable(true);
         itemChargerPlan = new MenuItem("Charger Plan");
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -169,18 +177,16 @@ public class ApplicationDemo extends Application{
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
                if(file != null) {
-        		   itemEffacerTournees.setDisable(false);
             	   try {
 					Controleur.getInstance().chargerFichierPlan(file);
+					VerifierEtat(controleur);
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            	   itemChargerDemandeLivraison.setDisable(false);
-            	   if(!itemCalculerTournees.isDisable()) {
-            		   itemCalculerTournees.setDisable(true);
-            	   }
             	   
+         	   
                }
                
 	         }
@@ -196,17 +202,14 @@ public class ApplicationDemo extends Application{
               fileChooser.getExtensionFilters().add(extFilter);
               File file = fileChooser.showOpenDialog(primaryStage);
               if(file != null) {
-               buttonEfface.setDisable(false);
            	   try {
 				Controleur.getInstance().chargerFichierPlan(file);
+				VerifierEtat(controleur);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-           	   buttonChargeDemandeLivraison.setDisable(false);
-           	   if(!buttonCalculer.isDisable()) {
-           		buttonCalculer.setDisable(true);
-           	   }
            	   
               }
               
@@ -218,8 +221,6 @@ public class ApplicationDemo extends Application{
       //Ajout de l'onglet Opération
         menuTournee = new Menu("Tournée");
         itemCalculerTournees = new MenuItem("Calculer les tournees");
-        itemCalculerTournees.setDisable(true);
-        buttonCalculer.setDisable(true);
 
         itemCalculerTournees.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -227,11 +228,12 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
                try {
 				Controleur.getInstance().CalculerLesTournees();
+				VerifierEtat(controleur);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-               itemEffacerTournees.setDisable(false);
 	         }
 	      }); 
         buttonCalculer.setOnAction(new EventHandler<ActionEvent>() {
@@ -240,24 +242,24 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
               try {
 				Controleur.getInstance().CalculerLesTournees();
+				VerifierEtat(controleur);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-              buttonCalculer.setDisable(false);
 	         }
 	      }); 
 
-        itemEffacerTournees = new MenuItem("Effacer les tournees");
-        itemEffacerTournees.setDisable(true);
-        buttonEfface.setDisable(true);
+        itemEffacer = new MenuItem("Effacer");
 
-        itemEffacerTournees.setOnAction(new EventHandler<ActionEvent>() {
+        itemEffacer.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
                graph.clearVue();
-               itemEffacerTournees.setDisable(true);
+               controleur.setEtat(controleur.getEtatInit());
+               VerifierEtat(controleur);
 	         }
 	      }); 
         buttonEfface.setOnAction(new EventHandler<ActionEvent>() {
@@ -265,10 +267,11 @@ public class ApplicationDemo extends Application{
 	         @Override
 	         public void handle(ActionEvent event) {
               graph.clearVue();
-              buttonEfface.setDisable(true);
+              controleur.setEtat(controleur.getEtatInit());
+              VerifierEtat(controleur);
 	         }
 	      }); 
-        menuTournee.getItems().addAll(itemCalculerTournees,itemEffacerTournees);
+        menuTournee.getItems().addAll(itemCalculerTournees,itemEffacer);
         
       //Ajout de l'onglet View(Composant prevu pour apres)
         menuLivraison = new Menu("Livraison");
@@ -280,7 +283,54 @@ public class ApplicationDemo extends Application{
         pane.setTop(menuBar);
 		
 	}
-	
+
+	public void VerifierEtat(Controleur c) {
+	    ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
+
+		switch(e) {
+		case EtatInit:
+			itemChargerPlan.setDisable(false);
+			buttonChargePlan.setDisable(false);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(true);
+			buttonEfface.setDisable(true);
+			break;
+		case EtatPlanCharge:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(false);
+			buttonChargeDemandeLivraison.setDisable(false);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(false);
+			buttonEfface.setDisable(false);
+			break;
+		case EtatDemandeLivraison:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(false);
+			buttonCalculer.setDisable(false);
+			itemEffacer.setDisable(false);
+			buttonEfface.setDisable(false);
+			break;
+		
+		default:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(true);
+			buttonEfface.setDisable(true);
+			break;
+		}
+	}
 	public static void main(String[] args) {
         launch(args);
 		
