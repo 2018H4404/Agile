@@ -55,13 +55,13 @@ public class LecteurDeXML {
 								int heure = Integer.parseInt(times[0]);
 								int minute = Integer.parseInt(times[1]);
 								int seconde = Integer.parseInt(times[2]);
-								IntersectionNormal tempInter = Controleur.getMonPlan().getIntersectionNormal(tempId);
+								IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
 								Entrepot tempObject = new Entrepot(tempId,tempInter.getLatitude(),tempInter.getLongitude(),heure,minute,seconde);
 								tempEntrepots.put(tempId,tempObject);
 							}else if(elemChild.getTagName().equals("livraison")) {
 								long tempId = Long.parseUnsignedLong(elemChild.getAttribute("adresse"));
 								int duree = Integer.parseInt(elemChild.getAttribute("duree"));
-								IntersectionNormal tempInter = Controleur.getMonPlan().getIntersectionNormal(tempId);
+								IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
 								PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
 								tempLivraisons.put(tempId,tempObject);
 							}else {
@@ -74,7 +74,7 @@ public class LecteurDeXML {
 		    } catch (Exception e) {   
 			    e.printStackTrace();   
 		    } 
-		Controleur.getMaDemande().intialiserDemandeLivraison(tempLivraisons, tempEntrepots);
+		Controleur.getInstance().getMaDemande().intialiserDemandeLivraison(tempLivraisons, tempEntrepots);
 	}
 
 	public void lecturePlanXML(File f) {
@@ -155,7 +155,7 @@ public class LecteurDeXML {
 		    } catch (Exception e) {   
 			    e.printStackTrace();   
 		    }
-		Controleur.getMonPlan().initialiserPlan(tempIntersections, tempTroncons, maxLong, minLong, maxLat, minLat);
+		Controleur.getInstance().getMonPlan().initialiserPlan(tempIntersections, tempTroncons, maxLong, minLong, maxLat, minLat);
 	}
 	
 	

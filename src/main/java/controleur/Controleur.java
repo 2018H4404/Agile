@@ -10,11 +10,11 @@ import vue.VueGraphique;
 import vue.VueTextuelle;
 
 public class Controleur {
-	private static Plan monPlan;
-	private static DemandeLivraison maDemande;
-	private static TourneeManager monManager;
-	private static VueGraphique graph;
-	private static VueTextuelle texte;
+	private Plan monPlan;
+	private DemandeLivraison maDemande;
+	private TourneeManager monManager;
+	private VueGraphique graph;
+	private VueTextuelle texte;
 	private static Controleur instance = null;
 	
 	private Controleur() {
@@ -56,24 +56,24 @@ public class Controleur {
 		monManager.addObserver(vue);
 	}
 
-	public static Plan getMonPlan() {
+	public Plan getMonPlan() {
 		return monPlan;
 	}
 
-	public static DemandeLivraison getMaDemande() {
+	public DemandeLivraison getMaDemande() {
 		return maDemande;
 	}
 	
-	public static TourneeManager getMonManager() {
+	public TourneeManager getMonManager() {
 		return monManager;
 	}
 
-	public static void setGraph(VueGraphique graph) {
-		Controleur.graph = graph;
+	public void setGraph(VueGraphique graph) {
+		Controleur.getInstance().graph = graph;
 	}
 
-	public static void setTexte(VueTextuelle texte) {
-		Controleur.texte = texte;
+	public void setTexte(VueTextuelle texte) {
+		Controleur.getInstance().texte = texte;
 	}
 	
 	
