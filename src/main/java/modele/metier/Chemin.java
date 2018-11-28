@@ -15,9 +15,9 @@ public class Chemin {
 	private ArrayList <Troncon> listeTroncons;
 	
 	/**
-	 * Constructeur de chemin
-	 * @param uneListeIntersections
-	 * @param uneListeTroncons
+	 * Constructeur paramétré de chemin.
+	 * @param uneListeIntersections une liste d'intersections.
+	 * @param uneListeTroncons 
 	 */
 	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons) {
 		this.listeIntersections = uneListeIntersections;
