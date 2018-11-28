@@ -17,11 +17,16 @@ public class Controleur {
 	private VueGraphique graph;
 	private VueTextuelle texte;
 	private static Controleur instance = null;
+	private Etat etatPlanCharge;
+	private Etat etatInit;
+	private Etat etatDemandeLivraison;
+
 	
 	private Controleur() {
 		monPlan = new Plan();
 		maDemande = new DemandeLivraison();
 		monManager = new TourneeManager();
+		etat = new EtatInit();
 	}
 	
 	public static Controleur getInstance() {
@@ -31,16 +36,16 @@ public class Controleur {
 		return instance;
 	}
 	
-	public void chargerFichierPlan(File f) {
-		LecteurDeXML.getInstance().lecturePlanXML(f);
+	public void chargerFichierPlan(File f) throws Exception {
+		etat.chargerFichierPlan(f);
 	}
 	
-	public void chargerFichierDemandeLivraison(File f) {
-		LecteurDeXML.getInstance().lectureLivraisonEntrepotXML(f);
+	public void chargerFichierDemandeLivraison(File f) throws Exception{
+		etat.lectureLivraisonEntrepotXML(f);
 	}
 	
-	public void CalculerLesTournees() {
-		monManager.calculerLesTournees(maDemande, monPlan);
+	public void CalculerLesTournees() throws Exception {
+		etat.CalculerLesTournees();
 	}
 	
 	public double transformerLatitude(double latitude, double hauteur) {
@@ -75,6 +80,18 @@ public class Controleur {
 
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;
+	}
+
+	public Etat getEtatDemandeLivraison() {
+		return etatDemandeLivraison;
+	}
+
+	public void setEtat(Etat etatCrt) {
+		Controleur.getInstance().etat = etatCrt;
+	}
+
+	public Etat getEtatPlanCharge() {
+		return etatPlanCharge;
 	}
 	
 	

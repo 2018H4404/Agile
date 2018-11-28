@@ -10,12 +10,12 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void chargerFichierDemandeLivraison(File f) throws Exception {
+	public void CalculerLesTournees() throws Exception {
 		
 	}
 
 	@Override
-	public void CalculerLesTournees() throws Exception {
+	public void lectureLivraisonEntrepotXML(File f) throws Exception {
 		
 	}
 

@@ -83,9 +83,6 @@ public class ApplicationDemo extends Application{
 		buttonCalculer.setMinWidth(300);
 		buttonEfface = new Button("Efface");
 		buttonEfface.setMinWidth(300);
-
-
-
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison,buttonCalculer,buttonEfface,separator);
 
 		//Ajout de la barre de menu
@@ -127,7 +124,12 @@ public class ApplicationDemo extends Application{
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
                if(file != null) {
-            	   Controleur.getInstance().chargerFichierDemandeLivraison(file);
+            	   try {
+					Controleur.getInstance().chargerFichierDemandeLivraison(file);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	   itemCalculerTournees.setDisable(false);
                }
 	         }
@@ -143,7 +145,12 @@ public class ApplicationDemo extends Application{
               fileChooser.getExtensionFilters().add(extFilter);
               File file = fileChooser.showOpenDialog(primaryStage);
               if(file != null) {
-           	   Controleur.getInstance().chargerFichierDemandeLivraison(file);
+           	   try {
+				Controleur.getInstance().chargerFichierDemandeLivraison(file);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
            	buttonCalculer.setDisable(false);
               }
 	         }
@@ -163,7 +170,12 @@ public class ApplicationDemo extends Application{
                File file = fileChooser.showOpenDialog(primaryStage);
                if(file != null) {
         		   itemEffacerTournees.setDisable(false);
-            	   Controleur.getInstance().chargerFichierPlan(file);
+            	   try {
+					Controleur.getInstance().chargerFichierPlan(file);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	   itemChargerDemandeLivraison.setDisable(false);
             	   if(!itemCalculerTournees.isDisable()) {
             		   itemCalculerTournees.setDisable(true);
@@ -185,7 +197,12 @@ public class ApplicationDemo extends Application{
               File file = fileChooser.showOpenDialog(primaryStage);
               if(file != null) {
                buttonEfface.setDisable(false);
-           	   Controleur.getInstance().chargerFichierPlan(file);
+           	   try {
+				Controleur.getInstance().chargerFichierPlan(file);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
            	   buttonChargeDemandeLivraison.setDisable(false);
            	   if(!buttonCalculer.isDisable()) {
            		buttonCalculer.setDisable(true);
@@ -208,7 +225,12 @@ public class ApplicationDemo extends Application{
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
-               Controleur.getInstance().CalculerLesTournees();
+               try {
+				Controleur.getInstance().CalculerLesTournees();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
                itemEffacerTournees.setDisable(false);
 	         }
 	      }); 
@@ -216,7 +238,12 @@ public class ApplicationDemo extends Application{
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
-              Controleur.getInstance().CalculerLesTournees();
+              try {
+				Controleur.getInstance().CalculerLesTournees();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
               buttonCalculer.setDisable(false);
 	         }
 	      }); 
