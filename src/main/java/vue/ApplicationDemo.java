@@ -14,8 +14,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
@@ -32,15 +36,23 @@ import controleur.Controleur;
 public class ApplicationDemo extends Application{
 	private VueGraphique graph;
 	private VueTextuelle texte;
-	private Button button;
+	private Button buttonChargePlan;
+	private Button buttonChargeDemandeLivraison;
+	private Button buttonCalculer;
+	private Button buttonEfface;
+
 	private MenuBar menuBar;
 	private Menu menuFile;
-	private Menu menuOperation;
-	private Menu menuView;
+	private Menu menuTournee;
+	private Menu menuLivraison;
 	private MenuItem itemChargerPlan;
 	private MenuItem itemChargerDemandeLivraison;
 	private MenuItem itemCalculerTournees;
 	private MenuItem itemEffacerTournees;
+	private MenuItem itemAjouterLivraison;
+	private MenuItem itemSupprimerLivraison;
+
+
 	
 
 	@Override
@@ -53,20 +65,42 @@ public class ApplicationDemo extends Application{
         Controleur.getInstance().setTexte(texte);
         graph.setCompagnie(texte);
         texte.setCompagnie(graph);
-        
 		BorderPane pane = new BorderPane();	
-        
+		
+		//vbox pour les buttons
+        VBox vbox = new VBox(8); // spacing = 8
+        vbox.setMinWidth(300);
+        Separator separator = new Separator();
+		separator.setOrientation(Orientation.VERTICAL);
+		separator.setMinHeight(1200);
+		separator.setMaxWidth(20);
+		separator.setLayoutX(0);
+		buttonChargePlan = new Button("Charger un plan");
+		buttonChargePlan.setMinWidth(300);
+		buttonChargeDemandeLivraison = new Button("Charger une demande");
+		buttonChargeDemandeLivraison.setMinWidth(300);
+		buttonCalculer = new Button("Calculer");
+		buttonCalculer.setMinWidth(300);
+		buttonEfface = new Button("Efface");
+		buttonEfface.setMinWidth(300);
+
+
+
+        vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison,buttonCalculer,buttonEfface,separator);
+
 		//Ajout de la barre de menu
         AjouterBarreNavigateur(pane,primaryStage);
         
         //Placement de differents vues
         pane.setLeft(texte);
         pane.setCenter(graph);
+        pane.setRight(vbox);
         BorderPane.setAlignment(graph, Pos.TOP_CENTER);
         BorderPane.setMargin(graph, new Insets(30,0,0,0));
+        BorderPane.setMargin(vbox, new Insets(30,0,0,0));
         
         //Creation de la scene
-        Scene scene = new Scene(pane, 1150, 900);
+        Scene scene = new Scene(pane, 1450, 900);
         scene.setFill(Color.BLACK);
 
         primaryStage.setScene(scene);
@@ -78,7 +112,6 @@ public class ApplicationDemo extends Application{
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage) {
 		
 		menuBar = new MenuBar();
-		button = new Button();
 		
 		//Ajout de l'onglet Fichiers
 		menuFile = new Menu("Fichiers");
@@ -99,7 +132,24 @@ public class ApplicationDemo extends Application{
                }
 	         }
 	      });
+        buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	
+	        	 FileChooser fileChooser = new FileChooser();
+	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
+              fileChooser.getExtensionFilters().add(extFilter);
+              File file = fileChooser.showOpenDialog(primaryStage);
+              if(file != null) {
+           	   Controleur.getInstance().chargerFichierDemandeLivraison(file);
+           	buttonCalculer.setDisable(false);
+              }
+	         }
+	      });
         itemChargerDemandeLivraison.setDisable(true);
+        buttonChargeDemandeLivraison.setDisable(true);
         itemChargerPlan = new MenuItem("Charger Plan");
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -112,25 +162,48 @@ public class ApplicationDemo extends Application{
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
                if(file != null) {
+        		   itemEffacerTournees.setDisable(false);
             	   Controleur.getInstance().chargerFichierPlan(file);
             	   itemChargerDemandeLivraison.setDisable(false);
             	   if(!itemCalculerTournees.isDisable()) {
             		   itemCalculerTournees.setDisable(true);
             	   }
-            	   if(!itemEffacerTournees.isDisable()) {
-            		   itemEffacerTournees.setDisable(true);
-            	   }
+            	   
                }
                
+	         }
+	      }); 
+        buttonChargePlan.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	
+	        	FileChooser fileChooser = new FileChooser();
+	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
+              fileChooser.getExtensionFilters().add(extFilter);
+              File file = fileChooser.showOpenDialog(primaryStage);
+              if(file != null) {
+               buttonEfface.setDisable(false);
+           	   Controleur.getInstance().chargerFichierPlan(file);
+           	   buttonChargeDemandeLivraison.setDisable(false);
+           	   if(!buttonCalculer.isDisable()) {
+           		buttonCalculer.setDisable(true);
+           	   }
+           	   
+              }
+              
 	         }
 	      }); 
  
         menuFile.getItems().addAll(itemChargerPlan,itemChargerDemandeLivraison);
  
       //Ajout de l'onglet Opération
-        menuOperation = new Menu("Opération");
+        menuTournee = new Menu("Tournée");
         itemCalculerTournees = new MenuItem("Calculer les tournees");
         itemCalculerTournees.setDisable(true);
+        buttonCalculer.setDisable(true);
+
         itemCalculerTournees.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -139,122 +212,50 @@ public class ApplicationDemo extends Application{
                itemEffacerTournees.setDisable(false);
 	         }
 	      }); 
+        buttonCalculer.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+              Controleur.getInstance().CalculerLesTournees();
+              buttonCalculer.setDisable(false);
+	         }
+	      }); 
+
         itemEffacerTournees = new MenuItem("Effacer les tournees");
         itemEffacerTournees.setDisable(true);
+        buttonEfface.setDisable(true);
+
         itemEffacerTournees.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
-               graph.clearTournees();
+               graph.clearVue();
                itemEffacerTournees.setDisable(true);
 	         }
 	      }); 
-        menuOperation.getItems().addAll(itemCalculerTournees,itemEffacerTournees);
+        buttonEfface.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+              graph.clearVue();
+              buttonEfface.setDisable(true);
+	         }
+	      }); 
+        menuTournee.getItems().addAll(itemCalculerTournees,itemEffacerTournees);
         
       //Ajout de l'onglet View(Composant prevu pour apres)
-        menuView = new Menu("View");
+        menuLivraison = new Menu("Livraison");
+        itemAjouterLivraison = new MenuItem("Ajouter une tournee");
+        itemSupprimerLivraison = new MenuItem("Supprimer une tournee");
         
-        menuBar.getMenus().addAll(menuFile, menuOperation, menuView);
-		////////////////////////////////////
-        //Code abandonnee
-		/*Group buttonGroup = new Group();
-		Button btnChargerPlan = new Button("Charger Plan");
-		//Position du bouton
-		btnChargerPlan.setLayoutX(0);
-		btnChargerPlan.setLayoutY(0);
-		btnChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
-			 
-	         @Override
-	         public void handle(ActionEvent event) {
-	        	
-	        	FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
-                fileChooser.getExtensionFilters().add(extFilter);
-                File file = fileChooser.showOpenDialog(primaryStage);
-                LecteurDeXML.getInstance().lecturePlanXML(file);
-	         }
-	      });
-		Button btnChargerDemandeLivraison = new Button("Charger DemandeLivraison");
-		//Position du bouton
-		btnChargerDemandeLivraison.setLayoutX(0);
-		btnChargerDemandeLivraison.setLayoutY(0);
-		btnChargerDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
-			 
-	         @Override
-	         public void handle(ActionEvent event) {
-	        	
-	        	FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
-                fileChooser.getExtensionFilters().add(extFilter);
-                File file = fileChooser.showOpenDialog(primaryStage);
-                LecteurDeXML.getInstance().lectureLivraisonEntrepotXML(file);
-	         }
-	      });
-		buttonGroup.getChildren().add(btnChargerPlan);
-		buttonGroup.getChildren().add(btnChargerDemandeLivraison);*/
-		pane.setTop(menuBar);
+        
+        menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
+        pane.setTop(menuBar);
+		
 	}
 	
 	public static void main(String[] args) {
         launch(args);
-		/*PriorityQueue<Paire> queue = new PriorityQueue<Paire>(1,
-				new Comparator<Paire>() {  
-	                  public int compare(Paire p1, Paire p2) {  
-	                	  if (p1.valeurF < p2.valeurF)
-	                      {
-	                          return -1;
-	                      }
-	                      if (p1.valeurF  > p2.valeurF)
-	                      {
-	                          return 1;
-	                      }
-	                      return 0;
-	                    }  
-	                  });
-		queue.offer(new Paire(23456,3.45556));
-		queue.offer(new Paire(21456,3.490556));
-		queue.offer(new Paire(54456,3.47856));
-		
-		Paire p = new Paire(2674456,3.5656);
-		queue.offer(p);
-		for(Paire element : queue) {
-			System.out.println(element.valeurF);
-		}
-		boolean retour = false;
-		for(Paire element : queue) {
-			if(element.monInter == 23456) {
-				retour = true;
-			}
-		}
-		queue.remove(p);
-		queue.add(new Paire(2674456,3.789));
-		System.out.println(retour);
-		for(Paire element : queue) {
-			System.out.println(element.valeurF);
-		}*/
-        /*Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
-				new Comparator<Double>() {  
-	                  public int compare(Double p1, Double p2) {  
-	                	  if (p1 < p2)
-	                      {
-	                          return -1;
-	                      }
-	                      if (p1 > p2)
-	                      {
-	                          return 1;
-	                      }
-	                      return 0;
-	                    }  
-	                  });
-        gris.put(20.0, new IntersectionNormal(20,9.0,8.0));
-        gris.put(29.0, new IntersectionNormal(23,9.0,8.0));
-        gris.put(21.0, new IntersectionNormal(25,9.0,8.0));
-        gris.put(90.0, new IntersectionNormal(45,9.0,8.0));
-        Set<Double> s = gris.keySet();
-        for(Double e : s) {
-        	System.out.println(e);
-        }
-        System.out.println(TourneeManager.trouverKey(new IntersectionNormal(23,9.0,8.0), gris));*/
 		
     }
 

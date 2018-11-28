@@ -10,6 +10,7 @@ import vue.VueGraphique;
 import vue.VueTextuelle;
 
 public class Controleur {
+	private Etat etat;
 	private Plan monPlan;
 	private DemandeLivraison maDemande;
 	private TourneeManager monManager;
