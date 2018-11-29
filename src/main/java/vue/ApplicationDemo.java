@@ -299,13 +299,7 @@ public class ApplicationDemo extends Application{
 		
 	}
 	
-	/**
-	 * La méthode main.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-        launch(args);
-
+	
 	public void VerifierEtat(Controleur c) {
 	    ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
 
@@ -353,6 +347,12 @@ public class ApplicationDemo extends Application{
 			break;
 		}
 	}
+	
+	/**
+	 * La méthode main.
+	 * @param args
+	 */
+
 	public static void main(String[] args) {
         launch(args);
 		
