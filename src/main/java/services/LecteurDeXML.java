@@ -18,6 +18,13 @@ import modele.metier.IntersectionNormal;
 import modele.metier.PointLivraison;
 import modele.metier.Troncon;
 
+/** 
+ * La classe du lecteur XML.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public class LecteurDeXML {
 	
 	private static LecteurDeXML instance = null;
@@ -29,6 +36,10 @@ public class LecteurDeXML {
 		return instance;
 	}
 	
+	/**
+	 * Méthode permettant la lecture du fichier XML des demandes de livraison.
+	 * @param f le fichier XML.
+	 */
 	public void lectureLivraisonEntrepotXML(File f){ 
 		HashMap<Long,PointLivraison> tempLivraisons = new HashMap<Long,PointLivraison>();
 		HashMap<Long,Entrepot> tempEntrepots = new HashMap<Long,Entrepot>();
@@ -77,6 +88,10 @@ public class LecteurDeXML {
 		Controleur.getInstance().getMaDemande().intialiserDemandeLivraison(tempLivraisons, tempEntrepots);
 	}
 
+	/**
+	 * Méthode permettant la lecture du fichier XML du plan.
+	 * @param f le fichier XML.
+	 */
 	public void lecturePlanXML(File f) {
 		HashMap<Long,IntersectionNormal> tempIntersections = new HashMap<Long,IntersectionNormal>();  
 		HashMap<Long,ArrayList<Troncon>> tempTroncons = new HashMap<Long,ArrayList<Troncon>>();
@@ -158,7 +173,11 @@ public class LecteurDeXML {
 		Controleur.getInstance().getMonPlan().initialiserPlan(tempIntersections, tempTroncons, maxLong, minLong, maxLat, minLat);
 	}
 	
-	
+	/**
+	 * Méthode permettant l'affectation des longitudes et latitudes des troncons.
+	 * @param tempIntersections les intersections.
+	 * @param tempTroncons les troncons.
+	 */
 	public void setLatLongDesTroncons(HashMap<Long,IntersectionNormal> tempIntersections, HashMap<Long,ArrayList<Troncon>> tempTroncons) {
 		for(HashMap.Entry<Long,ArrayList<Troncon>> entry: tempTroncons.entrySet())
         {

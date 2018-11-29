@@ -1,5 +1,12 @@
 package modele.algo;
 
+/** 
+ * La classe du TSP.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public interface TSP {
 		
 	/**

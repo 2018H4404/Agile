@@ -12,6 +12,13 @@ import modele.metier.Intersection;
 import modele.metier.Plan;
 import modele.metier.Troncon;
 
+/** 
+ * La classe de l'algorithme A*.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public class AEtoile {
 	
 	private static AEtoile instance = null;
@@ -25,6 +32,12 @@ public class AEtoile {
 		return instance;
 	}
 	
+	/**
+	 * Méthode pour traduire le trajet.
+	 * @param chemin le chemin en intersection.
+	 * @param unPlan le plan de la ville. 
+	 * @return la traduction du chemin en trajet.
+	 */
 	public ArrayList<Troncon> traductionTrajet(ArrayList<Intersection> chemin, Plan unPlan){
 		ArrayList<Troncon> traduction = new ArrayList<Troncon>();
 		int length = chemin.size();
@@ -41,10 +54,23 @@ public class AEtoile {
 		return traduction;
 	}
 	
+	/**
+	 * Méthode permettant de trouver les voisins d'une intersection.
+	 * @param idCourant l'identifiant de l'intersection en cours.
+	 * @param monPlan le plan de la ville.
+	 * @return la liste des voisins
+	 */
 	private ArrayList<Troncon> trouverVosins(final long idCourant, Plan monPlan) {
 		return monPlan.getTronconsParOrigine(idCourant);
 	}
 	
+	/**
+	 * Méthode de l'algorithme A*.
+	 * @param depart l'intersection de départ.
+	 * @param dest l'intersection de la déstination.
+	 * @param monPlan la plan de la ville.
+	 * @return la liste des intersections du chemin à prendre.
+	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan){
 		ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>();
 		
@@ -58,28 +84,16 @@ public class AEtoile {
 		/*PriorityQueue<Paire> gris = new PriorityQueue<Paire>(1,
 				new Comparator<Paire>() {  
 	                  public int compare(Paire p1, Paire p2) {  
-	                	  if (p1.valeurF < p2.valeurF)
-	                      {
-	                          return -1;
-	                      }
-	                      if (p1.valeurF  > p2.valeurF)
-	                      {
-	                          return 1;
-	                      }
+	                	  if (p1.valeurF < p2.valeurF) { return -1; }
+	                      if (p1.valeurF  > p2.valeurF){ return 1; }
 	                      return 0;
 	                    }  
 	                  }); */
 		Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
 				new Comparator<Double>() {  
 	                  public int compare(Double p1, Double p2) {  
-	                	  if (p1 < p2)
-	                      {
-	                          return -1;
-	                      }
-	                      if (p1 > p2)
-	                      {
-	                          return 1;
-	                      }
+	                	  if (p1 < p2) { return -1; }
+	                      if (p1 > p2) { return 1; }
 	                      return 0;
 	                    }  
 	                  });
@@ -140,6 +154,11 @@ public class AEtoile {
 		return meilleurChemin;
 	}
 	
+	/**
+	 * Méthode pour le premier élément.
+	 * @param map le mapping des intersections.
+	 * @return le premier élément.
+	 */
 	public Map.Entry<Double, Intersection> premierElement(Map<Double,Intersection> map){
 		Map.Entry<Double, Intersection> retour = null;
 		Set<Entry<Double,Intersection>> set = map.entrySet();
@@ -150,6 +169,12 @@ public class AEtoile {
 		return retour;
 	}
 	
+	/**
+	 * Méthode pour trouver la valeur F.
+	 * @param unInter une intersection.
+	 * @param distanceEstimeeF la distance éstimée de F.
+	 * @return la valeur de F.
+	 */
 	public Double trouverValuerF(Intersection unInter, HashMap<Intersection,Double> distanceEstimeeF){
 		Double retour = 0.0;
 		Set<Entry<Intersection,Double>> set = distanceEstimeeF.entrySet();
@@ -162,6 +187,12 @@ public class AEtoile {
 		return retour;
 	}
 	
+	/**
+	 * Méthode pour trouver la clé
+	 * @param inter une intersection.
+	 * @param map un mapping d'intersection.
+	 * @return retourn la clé.
+	 */
 	public Double trouverKey(Intersection inter, Map<Double,Intersection> map) {
 		Double keyTrouve = 0.0;
 		Set<Entry<Double,Intersection>> set = map.entrySet();
@@ -174,10 +205,22 @@ public class AEtoile {
 		return keyTrouve;
 	}
 	
+	/**
+	 * Méthode de l'heuristique.
+	 * @param depart intersection de départ.
+	 * @param dest intersection d'arrivée.
+	 * @return retourne la distance entre le départ et l'arrivée.
+	 */
 	public double heuristique(Intersection depart, Intersection dest) {
 		return getDistance(depart.getLatitude(), depart.getLongitude(), dest.getLatitude(), dest.getLongitude());
 	}
 	
+	/**
+	 * Méthode pour savoir si le noeud est gris.
+	 * @param gris noeuds gris.
+	 * @param voisin identifiant du voisin.
+	 * @return retourne vrai si le noeud est gris.
+	 */
 	public boolean isGris(Map<Double, Intersection> gris, Long voisin) {
 		boolean retour = false;
 		Set<Entry<Double,Intersection>> tempSet = gris.entrySet();
@@ -189,7 +232,14 @@ public class AEtoile {
 		return retour;
 	}
 	
-	//Calculer la distance entre deux points selon leurs latitude et longitude
+	/**
+	 * Méthode pour calculer la distance entre deux points.
+	 * @param latStart la latitude de début.
+	 * @param longStart la longitude du début.
+	 * @param latEnd la latitude d'arrivée.
+	 * @param longEnd la longitude d'arrivée.
+	 * @return la distance entre les deux points.
+	 */
 	public double getDistance(double latStart,double longStart,double latEnd,double longEnd)
     {
         double radLat1 = rad(latStart);
@@ -205,6 +255,11 @@ public class AEtoile {
     
     }
 	
+	/**
+	 * Méthode pour convertire un degré à un radian.
+	 * @param d le degré de l'angle.
+	 * @return la valeur en radian.
+	 */
 	private double rad(double d)
     {
         return d * Math.PI / 180.0;

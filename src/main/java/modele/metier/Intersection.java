@@ -1,14 +1,31 @@
 package modele.metier;
 
+/** 
+ * La classe de l'intersection.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public abstract class Intersection {
 	protected long id;
 	protected double latitude;
 	protected double longitude;
 	
+	/**
+	 * Constructeur d'intersection par identifiant.
+	 * @param id identifiant de l'intersection.
+	 */
 	public Intersection(long id) {
 		this.id = id;
 	}
 	
+	/**
+	 * Constructeur paramétré de l'intersection.
+	 * @param id identifiant de l'intersection.
+	 * @param latitude latitude de l'intersection.
+	 * @param longitude longitude de l'intersection.
+	 */
 	public Intersection(long id, double latitude, double longitude) {
 		this.id = id;
 		this.latitude = latitude;
@@ -38,19 +55,12 @@ public abstract class Intersection {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-
-	/*
-	public boolean equals(Intersection unInter) {
-		boolean retour = false;
-		if(this.id == unInter.getId() && this.latitude == unInter.getLatitude() && this.longitude == unInter.getLongitude()) {
-			retour = true;
-		}
-		return retour;	
-	}*/
 	
+	/**
+	 * Surcharge de la méthode equals entre intersections.
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		Intersection unInter = (Intersection)obj;
 		boolean retour = false;
 		if(this.id == unInter.getId()) {
@@ -64,6 +74,9 @@ public abstract class Intersection {
 		return (int)id;
 	}
 
+	/**
+	 * Surcharge de la méthode equals entre intersections sur l'identifiant.
+	 */
 	public boolean equals(long unId) {
 		boolean retour = false;
 		if(this.id == unId) {

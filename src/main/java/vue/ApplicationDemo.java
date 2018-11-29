@@ -31,6 +31,12 @@ import modele.metier.Plan;
 import services.Paire;
 import controleur.Controleur;
 
+/** 
+ * La classe de la démo de l'application.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
 
 enum ETAT {
     EtatInit,EtatPlanCharge,EtatDemandeLivraison;
@@ -60,6 +66,9 @@ public class ApplicationDemo extends Application{
 
 	
 
+	/**
+	 * Méthode permettant de commencer la démo de l'application.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -115,6 +124,12 @@ public class ApplicationDemo extends Application{
 
 	}
 	
+	/**
+	 * Méthode pour ajouter la barre de navigation.
+	 * @param pane
+	 * @param primaryStage
+   * @param controleur
+	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage,Controleur controleur) {
 		
 		menuBar = new MenuBar();
@@ -283,6 +298,13 @@ public class ApplicationDemo extends Application{
         pane.setTop(menuBar);
 		
 	}
+	
+	/**
+	 * La méthode main.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+        launch(args);
 
 	public void VerifierEtat(Controleur c) {
 	    ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
@@ -318,7 +340,7 @@ public class ApplicationDemo extends Application{
 			itemEffacer.setDisable(false);
 			buttonEfface.setDisable(false);
 			break;
-		
+        
 		default:
 			itemChargerPlan.setDisable(true);
 			buttonChargePlan.setDisable(true);

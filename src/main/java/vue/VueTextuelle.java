@@ -12,6 +12,13 @@ import javafx.scene.control.TabPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
+/** 
+ * La classe de la vue textuelle.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 @SuppressWarnings("restriction")
 public class VueTextuelle extends Parent implements Observer{
 	
@@ -23,6 +30,9 @@ public class VueTextuelle extends Parent implements Observer{
 	private Tab infosLivraison;
 	private Tab infosTournee;
 	
+	/**
+	 * Constructeur de la vue textuelle.
+	 */
 	public VueTextuelle() {
 		//Intialisation de sa compagnie par defaut
 		compagnie = null;

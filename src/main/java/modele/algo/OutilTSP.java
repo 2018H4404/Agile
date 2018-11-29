@@ -13,7 +13,11 @@ import modele.metier.Intersection;
 
 public class OutilTSP {
 	
-	//Cas d'un seul livreur
+	/**
+	 * Méthode qui retourne toutes les intersections des demandes.
+	 * @param demande les demande de livraison.
+	 * @return la liste des demandes de livraison.
+	 */
 	public static ArrayList<Intersection> getAllIntersectionDemande(DemandeLivraison demande){
 		Collection<Entrepot> entrepots = demande.getAllEntrepots();
 		Collection<PointLivraison> livraisons = demande.getAllPointLivraisons();
@@ -27,7 +31,14 @@ public class OutilTSP {
 		return retour;
 	}
 	
-	//Initialisation de tableau de cout demande par TSP
+	/**
+	 * Méthode pour initialiser le cout de la demande par TSP.
+	 * @param unPlan le plan de la ville.
+	 * @param intersectionsDemande les intersections de la demande.
+	 * @param cout le cout du chemin.
+	 * @param pccs le plus court chemin.
+	 * @param length la longueur du chemin.
+	 */
 	public static void initialisationTabCoutEtChemin(Plan unPlan, ArrayList<Intersection> intersectionsDemande, int[][] cout, Chemin[][] pccs, int length){
 		for(int i = 0; i < length; i++) {
 			for(int j = 0; j < length; j++) {
@@ -45,6 +56,12 @@ public class OutilTSP {
 		}
 	}
 	
+	/**
+	 * Méthode pour initialiser la durée de la demande par TSP.
+	 * @param intersectionsDemande la liste des intersections des demandes.
+	 * @param duree la durée des demandes.
+	 * @param length la longueur des demandes.
+	 */
 	//Initialisation du tableau de duree demande par TSP
 	public static void intialisationTabDuree( ArrayList<Intersection> intersectionsDemande, int[] duree, int length) {
 		duree[0] = 0;

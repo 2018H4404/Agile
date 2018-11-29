@@ -13,6 +13,12 @@ import modele.algo.TSPSimple;
 import java.util.Observable;
 import java.util.ArrayList;
 
+/** 
+ * La classe du tournée manager.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
 
 public class TourneeManager extends Observable{
 	
@@ -37,7 +43,11 @@ public class TourneeManager extends Observable{
 		this.listeTournees.clear();
 	}
 	
-	//Le cas pour un seul Livreur
+	/**
+	 * Méthode pour calculer les tournées d'un seul livreur.
+	 * @param demande les demandes de livraison.
+	 * @param unPlan le plan de la ville.
+	 */
 	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan) {
 		clear();
 		ArrayList<Intersection> intersectionsDemande = OutilTSP.getAllIntersectionDemande(demande);

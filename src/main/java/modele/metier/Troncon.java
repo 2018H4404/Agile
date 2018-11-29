@@ -1,5 +1,12 @@
 package modele.metier;
 
+/** 
+ * La classe du troncon.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public class Troncon {
 	
 	protected IntersectionNormal destination;
@@ -7,6 +14,13 @@ public class Troncon {
 	protected String nomRue;
 	protected IntersectionNormal origine;
 	
+	/**
+	 * Constructeur paramétré du troncon.
+	 * @param destination la destination du troncon.
+	 * @param origine l'origine du troncon.
+	 * @param longueur la longueur du troncon.
+	 * @param nomRue le nom de la rue du troncon.
+	 */
 	public Troncon(IntersectionNormal destination, IntersectionNormal origine, double longueur, String nomRue) {
 		this.destination = destination;
 		this.longueur = longueur;
@@ -51,8 +65,5 @@ public class Troncon {
 	public void setOrigine(IntersectionNormal origine) {
 		this.origine = origine;
 	}
-	
-	
-	
 	
 }

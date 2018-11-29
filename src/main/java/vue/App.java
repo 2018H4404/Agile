@@ -13,12 +13,18 @@ import modele.metier.Plan;
 import modele.metier.Troncon;
 import services.LecteurDeXML;
 
-/**
- * Hello world!
- *
- */
+/** 
+ * La classe de l'application.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
 public class App 
 {
+	/**
+	 * La méthode main.
+	 * @param args
+	 */
     public static void main( String[] args )
     {
     	ArrayList<Intersection> l = new ArrayList<Intersection>();
