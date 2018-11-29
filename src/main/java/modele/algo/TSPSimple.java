@@ -3,6 +3,13 @@ package modele.algo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/** 
+ * La classe du simple TSP.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public class TSPSimple extends TemplateTSP {
 
 	@Override

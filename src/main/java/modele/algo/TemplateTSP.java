@@ -3,6 +3,13 @@ package modele.algo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/** 
+ * La classe de la template du TSP.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 public abstract class TemplateTSP implements TSP {
 	
 	private Integer[] meilleureSolution;
