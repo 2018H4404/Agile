@@ -3,7 +3,7 @@ package modele.metier;
 import java.util.ArrayList;
 
 /** 
- * La classe tournée.
+ * La classe de la tournée.
  * @author H4404
  * @version 1.0
  * @since 1.0

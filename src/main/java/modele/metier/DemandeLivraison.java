@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 /** 
- * La classe demande de livraison.
+ * La classe de la demande de livraison.
  * @author H4404
  * @version 1.0
  * @since 1.0
