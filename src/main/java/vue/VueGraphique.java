@@ -14,7 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Alert;
-
+import javafx.scene.control.Button;
 import modele.TourneeManager;
 import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
@@ -44,9 +44,11 @@ public class VueGraphique extends Parent implements Observer{
 	
 	private Group tronconGroup;
 	private Group noeudGroup;
+	private Group buttonGroup;
 	private Group entrepotGroup;
 	private Group livraisonGroup;
 	private Group tourneeGroup;
+	private Button button;
 	private VueTextuelle compagnie;
 	private static double hauteur = 800;
 	private static double largeur = 800;
@@ -62,6 +64,8 @@ public class VueGraphique extends Parent implements Observer{
 		ScrollPane paneGraphique = new ScrollPane();
 		BorderPane container = new BorderPane();
 		Slider zoomSlider = new Slider();
+
+
 		zoomSlider.setMin(1);
 		zoomSlider.setMax(3);
 		zoomSlider.setValue(1);
@@ -87,12 +91,13 @@ public class VueGraphique extends Parent implements Observer{
 		rootGroup.getChildren().add(entrepotGroup);
 		rootGroup.getChildren().add(livraisonGroup);
 		rootGroup.getChildren().add(tourneeGroup);
+
 		rootGroup.scaleXProperty().bind(zoomSlider.valueProperty());
 		rootGroup.scaleYProperty().bind(zoomSlider.valueProperty());
 		
 		paneGraphique.setContent(rootGroup);
 		container.setCenter(paneGraphique);
-		
+
 		container.setBottom(zoomSlider);
 		
 		//Ajouter le EventListner
@@ -122,6 +127,7 @@ public class VueGraphique extends Parent implements Observer{
                 }
             }
         });
+		
 		
 		
 	}
@@ -222,6 +228,11 @@ public class VueGraphique extends Parent implements Observer{
 	public void clearTournees() {
 		tourneeGroup.getChildren().clear();
 	}
+
+	
+
+	
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
