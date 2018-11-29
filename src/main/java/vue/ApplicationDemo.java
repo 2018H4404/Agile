@@ -27,6 +27,12 @@ import modele.metier.Plan;
 import services.Paire;
 import controleur.Controleur;
 
+/** 
+ * La classe de la démo de l'application.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
 
 @SuppressWarnings("restriction")
 public class ApplicationDemo extends Application{
@@ -42,6 +48,9 @@ public class ApplicationDemo extends Application{
 	private MenuItem itemEffacerTournees;
 	
 
+	/**
+	 * Méthode permettant de commencer la démo de l'application.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -74,6 +83,11 @@ public class ApplicationDemo extends Application{
 
 	}
 	
+	/**
+	 * Méthode pour ajouter la barre de navigation.
+	 * @param pane
+	 * @param primaryStage
+	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage) {
 		
 		menuBar = new MenuBar();
@@ -193,6 +207,10 @@ public class ApplicationDemo extends Application{
 		pane.setTop(menuBar);
 	}
 	
+	/**
+	 * La méthode main.
+	 * @param args
+	 */
 	public static void main(String[] args) {
         launch(args);
 		/*PriorityQueue<Paire> queue = new PriorityQueue<Paire>(1,

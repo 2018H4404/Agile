@@ -4,6 +4,13 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Group;
 
+/** 
+ * La classe du groupe handler.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
 @SuppressWarnings("restriction")
 public class GroupHandler implements EventHandler<MouseEvent> {
 	 

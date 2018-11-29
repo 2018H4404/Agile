@@ -32,9 +32,12 @@ import vue.element.TourneeVue;
 import vue.element.TronconVue;
 import vue.handler.GroupHandler;
 
-
-
-
+/** 
+ * La classe de la vue graphique.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
 
 @SuppressWarnings("restriction")
 public class VueGraphique extends Parent implements Observer{
@@ -48,6 +51,9 @@ public class VueGraphique extends Parent implements Observer{
 	private static double hauteur = 800;
 	private static double largeur = 800;
 	
+	/**
+	 * Constructeur de la vue graphique.
+	 */
 	public VueGraphique() {
 		//Intialisation de sa compagnie par defaut
 		compagnie = null;
@@ -95,6 +101,9 @@ public class VueGraphique extends Parent implements Observer{
 		this.getChildren().add(container);
 	}
 	
+	/**
+	 * Méthode pour ajouter l'event listener.
+	 */
 	public void ajouterEventListner() {
 		tronconGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
@@ -121,6 +130,10 @@ public class VueGraphique extends Parent implements Observer{
 		this.compagnie = vue;
 	}
 	
+	/**
+	 * Méthode pour déssiner le plan.
+	 * @param monPlan mon plan.
+	 */
 	public void dessinerPlan(Plan monPlan) {
 		clearVue();
 		Collection<IntersectionNormal> lesIntersections = monPlan.getAllIntersectionNormals();
@@ -145,6 +158,10 @@ public class VueGraphique extends Parent implements Observer{
 		System.out.println("Done Plan");
 	}
 	
+	/**
+	 * Méthode pour dessiner les demandes de livraison.
+	 * @param maDemande mes demandes de livraison.
+	 */
 	public void dessinerDemandeLivraison(DemandeLivraison maDemande) {
 		clearEntrepotLivraison();
 		clearTournees();
@@ -163,6 +180,10 @@ public class VueGraphique extends Parent implements Observer{
 		System.out.println("Done Demande");
 	}
 	
+	/**
+	 * Méthode pour déssiner les tournées.
+	 * @param manager le manager des tournée.
+	 */
 	public void dessinerTournees(TourneeManager manager) {
 		clearTournees();
 		ArrayList<Tournee> tournees = manager.getListeTournees();
@@ -182,6 +203,9 @@ public class VueGraphique extends Parent implements Observer{
 		System.out.println("Done Tournees");
 	}
 	
+	/**
+	 * Méthode pour effacer la vue.
+	 */
 	public void clearVue() {
 		tronconGroup.getChildren().clear();
 		noeudGroup.getChildren().clear();
