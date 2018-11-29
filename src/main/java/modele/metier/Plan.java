@@ -5,6 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Observable;
 
+/** 
+ * La classe du Plan.
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+*/
+
+
 public class Plan extends Observable{
 
 	private HashMap<Long,IntersectionNormal> intersectionNormals;
@@ -14,13 +22,24 @@ public class Plan extends Observable{
 	private double maxLat;
 	private double minLat;
 	
-	
+	/**
+	 * Constructeur par défaut du Plan.
+	 */
 	public Plan() {
 		super();
 		intersectionNormals = null;
 		troncons = null;
 	}
 	
+	/**
+	 * Méthode permettant l'initialisation d'un plan.
+	 * @param intersections les intersections du plan.
+	 * @param troncons les troncons du plan.
+	 * @param maxLong la longitude maximale du plan.
+	 * @param minLong la longitude minimale du plan.
+	 * @param maxLat la latitude maximale du plan.
+	 * @param minLat la latitude minimale du plan.
+	 */
 	public void initialiserPlan(HashMap<Long, IntersectionNormal> intersections, HashMap<Long,ArrayList<Troncon>> troncons, double maxLong, double minLong,
 			double maxLat, double minLat) {
 		if(this.intersectionNormals != null && this.troncons != null) {
@@ -37,6 +56,9 @@ public class Plan extends Observable{
 		notifyObservers("Plan");
 	}
 
+	/**
+	 * Méthode permettant d'effacer le plan.
+	 */
 	public void clear() {
 		this.intersectionNormals.clear();
 		this.troncons.clear();
