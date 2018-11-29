@@ -60,8 +60,4 @@ public class PointLivraison extends Intersection{
 				+ heureArrivee + ", duree=" + duree + ", id=" + id + ", latitude=" + latitude + ", longitude="
 				+ longitude + "]";
 	}
-
-	
-
-
 }
