@@ -18,7 +18,7 @@ public class TSPSimple extends TemplateTSP {
 	}
 
 	@Override
-	protected int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
+	protected int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite) {
 		int min = Integer.MAX_VALUE;
 		int nbNonVu = nonVus.size();
 		int minVersDest = Integer.MAX_VALUE;
@@ -41,11 +41,21 @@ public class TSPSimple extends TemplateTSP {
 				}
 			}
 		}
-		min = min * nbNonVu;
+		if(tourneeFaite < nbTourneeAvantDest) {
+			if(cout[sommetCourant][0] < min) {
+				min = cout[sommetCourant][0];
+			}
+			if(minVersDest < min) {
+				min = minVersDest;
+			}
+		}
+		min = min * (nbNonVu + nbTourneeAvantDest - tourneeFaite) ;
 		for(Integer nonVu : nonVus) {
 			min += duree[nonVu];
 		}
+		min += duree[0] * (nbTourneeAvantDest - tourneeFaite);
 		min += minVersDest;
 		return min;
 	}
+
 }

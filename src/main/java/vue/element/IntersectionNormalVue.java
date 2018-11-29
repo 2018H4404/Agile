@@ -47,7 +47,7 @@ public class IntersectionNormalVue extends Circle{
 	}
 
 	/**
-	 * Méthode du listner.
+	 * Méthode du listener.
 	 */
 	public void ajouterListener() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {

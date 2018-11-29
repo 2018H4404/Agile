@@ -48,7 +48,7 @@ public class TourneeManager extends Observable{
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
-	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan) {
+	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan, int nbLivreur) {
 		clear();
 		ArrayList<Intersection> intersectionsDemande = OutilTSP.getAllIntersectionDemande(demande);
 		//Initialisation des parametres importants
@@ -59,39 +59,70 @@ public class TourneeManager extends Observable{
 		OutilTSP.initialisationTabCoutEtChemin(unPlan, intersectionsDemande, cout, pccs, length);
 		OutilTSP.intialisationTabDuree(intersectionsDemande, duree, length);
 		TSPSimple tsp = new TSPSimple();
-		Integer[] meilleureSolution = new Integer[length+1];
-		tsp.chercheSolution(TIME_LIMITE, length, cout, duree);
+		Integer[] meilleureSolution = new Integer[length+nbLivreur];
+		tsp.chercheSolution(TIME_LIMITE, length, cout, duree,nbLivreur);
 		if(tsp.getTempsLimiteAtteint()) {
-			System.out.println("Depasser la limite du temps.");
-			for(int i = 0; i < length; i++) {
+			//Prendre la meilleureSolution calculee
+			for(int i = 0; i < length+nbLivreur-1; i++) {
 				meilleureSolution[i] = tsp.getMeilleureSolution(i);
 			}
-			meilleureSolution[length] = 0;
-			ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
-			for(int i = 0; i < length; i++) {
-				listeSolution.add(pccs[meilleureSolution[i]][meilleureSolution[i+1]]);
+			meilleureSolution[length+nbLivreur-1] = 0;
+			
+			for(int i = 0; i < length+nbLivreur; i ++) {
+				System.out.println(meilleureSolution[i]);
+			}
+			ArrayList<Integer> positionEntrepots = trouverPositionsEntrepot(meilleureSolution);	
+			int nbPositionEntrepots = positionEntrepots.size()-1;
+			for(int i = 0; i < nbPositionEntrepots; i++) {
+				int positionStart = positionEntrepots.get(i);
+				int positionEnd = positionEntrepots.get(i+1);
+				ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
+				for(int j = positionStart; j < positionEnd; j++) {
+					listeSolution.add(pccs[meilleureSolution[j]][meilleureSolution[j+1]]);
+				}
+				Tournee solution = new Tournee(listeSolution);
+				this.listeTournees.add(solution);
 			}
 			System.out.println(tsp.getCoutMeilleureSolution());
-			Tournee solution = new Tournee(listeSolution);
-			this.listeTournees.add(solution);
 			setChanged();
 			notifyObservers("Alert Temps");
 		}else {
-			for(int i = 0; i < length; i++) {
+			//Prendre la meilleureSolution calculee
+			for(int i = 0; i < length+nbLivreur-1; i++) {
 				meilleureSolution[i] = tsp.getMeilleureSolution(i);
 			}
-			meilleureSolution[length] = 0;
-			ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
-			for(int i = 0; i < length; i++) {
-				listeSolution.add(pccs[meilleureSolution[i]][meilleureSolution[i+1]]);
+			meilleureSolution[length+nbLivreur-1] = 0;
+			
+			for(int i = 0; i < length+nbLivreur; i ++) {
+				System.out.println(meilleureSolution[i]);
+			}
+			ArrayList<Integer> positionEntrepots = trouverPositionsEntrepot(meilleureSolution);	
+			int nbPositionEntrepots = positionEntrepots.size()-1;
+			for(int i = 0; i < nbPositionEntrepots; i++) {
+				int positionStart = positionEntrepots.get(i);
+				int positionEnd = positionEntrepots.get(i+1);
+				ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
+				for(int j = positionStart; j < positionEnd; j++) {
+					listeSolution.add(pccs[meilleureSolution[j]][meilleureSolution[j+1]]);
+				}
+				Tournee solution = new Tournee(listeSolution);
+				this.listeTournees.add(solution);
 			}
 			System.out.println(tsp.getCoutMeilleureSolution());
-			Tournee solution = new Tournee(listeSolution);
-			this.listeTournees.add(solution);
 			setChanged();
 			notifyObservers("Tournees");
 		}
 		
+	}
+	
+	private ArrayList<Integer> trouverPositionsEntrepot(Integer[] meilleureSolution){
+		ArrayList<Integer> retour = new ArrayList<Integer>();
+		for(Integer i = 0; i < meilleureSolution.length; i++) {
+			if(meilleureSolution[i] == 0) {
+				retour.add(i);
+			}
+		}
+		return retour;
 	}
 
 	public ArrayList<Tournee> getListeTournees() {

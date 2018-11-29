@@ -110,4 +110,14 @@ public class DemandeLivraison extends Observable{
 	public Collection<PointLivraison> getAllPointLivraisons(){
 		return livraisons.values();
 	}
+	
+	/**
+	 * Méthode permettant de retourner le nombre maximum de livreur.
+	 * @return le nombre maximum de livreur.
+	 */
+	public int getNbLivreurMaximum(){
+		return livraisons.size();
+	}
+	
+	
 }

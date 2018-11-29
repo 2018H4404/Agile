@@ -20,15 +20,16 @@ public abstract class TemplateTSP implements TSP {
 		return tempsLimiteAtteint;
 	}
 	
-	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree){
+	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur){
 		tempsLimiteAtteint = false;
 		coutMeilleureSolution = Integer.MAX_VALUE;
-		meilleureSolution = new Integer[nbSommets];
+		meilleureSolution = new Integer[nbSommets+nbLivreur-1];
 		ArrayList<Integer> nonVus = new ArrayList<Integer>();
 		for (int i=1; i<nbSommets; i++) nonVus.add(i);
 		ArrayList<Integer> vus = new ArrayList<Integer>(nbSommets);
 		vus.add(0); // le premier sommet visite est 0
-		branchAndBound(0, nonVus, vus, 0, cout, duree, System.currentTimeMillis(), tpsLimite);
+		int nbPointLivraisonParLivreur = (nbSommets-1)/nbLivreur;
+		branchAndBound(0, nonVus, vus, 0, cout, duree, System.currentTimeMillis(), tpsLimite, nbPointLivraisonParLivreur, 0, nbLivreur-1,0);
 	}
 	
 	public Integer getMeilleureSolution(int i){
@@ -44,20 +45,20 @@ public abstract class TemplateTSP implements TSP {
 	/**
 	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
 	 * @param sommetCourant
-	 * @param nonVus tableau des sommets restant a visiter
-	 * @param cout cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
-	 * @param duree duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param nonVus : tableau des sommets restant a visiter
+	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
+	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
 	 * @return une borne inferieure du cout des permutations commencant par sommetCourant, 
 	 * contenant chaque sommet de nonVus exactement une fois et terminant par le sommet 0
 	 */
-	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree);
+	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite);
 	
 	/**
 	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
 	 * @param sommetCrt
-	 * @param nonVus tableau des sommets restant a visiter
-	 * @param cout cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
-	 * @param duree duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param nonVus : tableau des sommets restant a visiter
+	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
+	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
 	 * @return un iterateur permettant d'iterer sur tous les sommets de nonVus
 	 */
 	protected abstract Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout, int[] duree);
@@ -68,12 +69,12 @@ public abstract class TemplateTSP implements TSP {
 	 * @param nonVus la liste des sommets qui n'ont pas encore ete visites
 	 * @param vus la liste des sommets visites (y compris sommetCrt)
 	 * @param coutVus la somme des couts des arcs du chemin passant par tous les sommets de vus + la somme des duree des sommets de vus
-	 * @param cout cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
-	 * @param duree duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
-	 * @param tpsDebut moment ou la resolution a commence
-	 * @param tpsLimite limite de temps pour la resolution
+	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
+	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param tpsDebut : moment ou la resolution a commence
+	 * @param tpsLimite : limite de temps pour la resolution
 	 */	
-	 void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout, int[] duree, long tpsDebut, int tpsLimite){
+	 void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout, int[] duree, long tpsDebut, int tpsLimite, int nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels, int nbTourneeAvantDest, int tourneeFaite){
 		 if (System.currentTimeMillis() - tpsDebut > tpsLimite){
 			 tempsLimiteAtteint = true;
 			 return;
@@ -84,17 +85,37 @@ public abstract class TemplateTSP implements TSP {
 	    		vus.toArray(meilleureSolution);
 	    		coutMeilleureSolution = coutVus;
 	    	}
-	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree) < coutMeilleureSolution){
-	        Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
-	        while (it.hasNext()){
-	        	Integer prochainSommet = it.next();
-	        	vus.add(prochainSommet);
-	        	nonVus.remove(prochainSommet);
-	        	branchAndBound(prochainSommet, nonVus, vus, coutVus + cout[sommetCrt][prochainSommet] + duree[prochainSommet], cout, duree, tpsDebut, tpsLimite);
-	        	vus.remove(prochainSommet);
-	        	nonVus.add(prochainSommet);
-	        }	    
+	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite) < coutMeilleureSolution){
+	    	if(tourneeFaite < nbTourneeAvantDest) {
+	    		if(compteurNbLivraisonsActuels < nbPointLivraisonParLivreur) {
+	    			Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
+		 	        while (it.hasNext()){
+		 	        	Integer prochainSommet = it.next();
+		 	        	vus.add(prochainSommet);
+		 	        	nonVus.remove(prochainSommet);
+		 	        	branchAndBound(prochainSommet, nonVus, vus, coutVus + cout[sommetCrt][prochainSommet] + duree[prochainSommet], cout, duree, tpsDebut, tpsLimite,nbPointLivraisonParLivreur,compteurNbLivraisonsActuels+1,nbTourneeAvantDest,tourneeFaite);
+		 	        	vus.remove(prochainSommet);
+		 	        	nonVus.add(prochainSommet);
+		 	        }
+	    		}else {
+	    			Integer entrepot = 0;
+	    			vus.add(entrepot);
+	    			branchAndBound(0, nonVus, vus, coutVus + cout[sommetCrt][0] + duree[0], cout, duree, tpsDebut, tpsLimite,nbPointLivraisonParLivreur,0,nbTourneeAvantDest,tourneeFaite+1);
+	    			//System.out.println(vus.get(vus.size()-1));
+	    			vus.remove(vus.size()-1);
+	    		}
+	    	}else {
+	    		 Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
+	    		 //System.out.println(nonVus.size());
+	 	        while (it.hasNext()){
+	 	        	Integer prochainSommet = it.next();
+	 	        	vus.add(prochainSommet);
+	 	        	nonVus.remove(prochainSommet);
+	 	        	branchAndBound(prochainSommet, nonVus, vus, coutVus + cout[sommetCrt][prochainSommet] + duree[prochainSommet], cout, duree, tpsDebut, tpsLimite,nbPointLivraisonParLivreur,compteurNbLivraisonsActuels+1,nbTourneeAvantDest,tourneeFaite);
+	 	        	vus.remove(prochainSommet);
+	 	        	nonVus.add(prochainSommet);
+	 	        }
+	    	}	    
 	    }
 	}
 }
-

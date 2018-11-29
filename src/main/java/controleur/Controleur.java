@@ -47,8 +47,12 @@ public class Controleur {
 		etat.lectureLivraisonEntrepotXML(f);
 	}
 	
-	public void CalculerLesTournees() throws Exception {
-		etat.CalculerLesTournees();
+	public void calculerLesTournees(int nbLivreur) throws Exception{
+		etat.CalculerLesTournees(nbLivreur);
+	}
+	
+	public int getNbLivreurMaximum() throws Exception {
+		return etat.getNbLivreurMaximum();
 	}
 	
 	public double transformerLatitude(double latitude, double hauteur) {

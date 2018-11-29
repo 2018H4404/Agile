@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -44,11 +45,10 @@ public class VueGraphique extends Parent implements Observer{
 	
 	private Group tronconGroup;
 	private Group noeudGroup;
-	private Group buttonGroup;
 	private Group entrepotGroup;
 	private Group livraisonGroup;
-	private Group tourneeGroup;
-	private Button button;
+	private Group tourneesAfficheesGroup;
+	private ArrayList<Group> tourneesGroup;
 	private VueTextuelle compagnie;
 	private static double hauteur = 800;
 	private static double largeur = 800;
@@ -77,7 +77,8 @@ public class VueGraphique extends Parent implements Observer{
 		tronconGroup = new Group();
 		entrepotGroup = new Group();
 		livraisonGroup = new Group();
-		tourneeGroup = new Group();
+		tourneesAfficheesGroup = new Group();
+		tourneesGroup = new ArrayList<Group>();
 		Group rootGroup = new Group();
 		GroupHandler handler = new GroupHandler(rootGroup); 
 		rootGroup.setOnMousePressed(handler);
@@ -90,7 +91,7 @@ public class VueGraphique extends Parent implements Observer{
 		rootGroup.getChildren().add(noeudGroup);
 		rootGroup.getChildren().add(entrepotGroup);
 		rootGroup.getChildren().add(livraisonGroup);
-		rootGroup.getChildren().add(tourneeGroup);
+		rootGroup.getChildren().add(tourneesAfficheesGroup);
 
 		rootGroup.scaleXProperty().bind(zoomSlider.valueProperty());
 		rootGroup.scaleYProperty().bind(zoomSlider.valueProperty());
@@ -118,8 +119,10 @@ public class VueGraphique extends Parent implements Observer{
                 }
             }
         });
-		
-		tourneeGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	}
+	
+	public void ajouterListenerRueNom(Group g) {
+		g.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
                 if(event.getTarget() instanceof TourneeVue) {
                 	TourneeVue temp = (TourneeVue)event.getTarget();
@@ -127,9 +130,6 @@ public class VueGraphique extends Parent implements Observer{
                 }
             }
         });
-		
-		
-		
 	}
 	
 	public void setCompagnie(VueTextuelle vue) {
@@ -186,6 +186,20 @@ public class VueGraphique extends Parent implements Observer{
 		System.out.println("Done Demande");
 	}
 	
+	public Color[] genererCouleurs(int nbLivreur) {
+		Color[] couleurs = new Color[nbLivreur];
+		double red = 0.5;
+		double green = 0.8;
+		double blue =0.1;
+		for(int i =0; i < nbLivreur; i++) {
+			couleurs[i] = Color.color(red, green, blue);
+			green = 0.5;
+			red = Math.random();
+			blue = Math.random();
+		}
+		return couleurs;
+	}
+	
 	/**
 	 * Méthode pour déssiner les tournées.
 	 * @param manager le manager des tournée.
@@ -193,7 +207,11 @@ public class VueGraphique extends Parent implements Observer{
 	public void dessinerTournees(TourneeManager manager) {
 		clearTournees();
 		ArrayList<Tournee> tournees = manager.getListeTournees();
+		Color[] couleurs = genererCouleurs(tournees.size());
+		int index = 0;
 		for(Tournee tournee : tournees) {
+			Group tempGroup = new Group();
+			Color tourneeCouleur = couleurs[index];
 			ArrayList<Chemin> tempChemins = tournee.getListeChemins();
 			for(Chemin chemin : tempChemins) {
 				ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
@@ -201,23 +219,30 @@ public class VueGraphique extends Parent implements Observer{
 					IntersectionNormal depart = troncon.getOrigine();
 					IntersectionNormal destination = troncon.getDestination();
 					TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
-							Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue());
-					tourneeGroup.getChildren().add(tempTronconTournee);
+							Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
+					tempGroup.getChildren().add(tempTronconTournee);
 				}
 			}
+			ajouterListenerRueNom(tempGroup);
+			tourneesGroup.add(tempGroup);
+			tourneesAfficheesGroup.getChildren().add(tempGroup);
+			index++;
 		}
 		System.out.println("Done Tournees");
 	}
 	
 	/**
 	 * Méthode pour effacer la vue.
-	 */
+	 */	
 	public void clearVue() {
+		clearPlan();
+		clearEntrepotLivraison();
+		clearTournees();
+	}
+	
+	public void clearPlan() {
 		tronconGroup.getChildren().clear();
 		noeudGroup.getChildren().clear();
-		entrepotGroup.getChildren().clear();
-		livraisonGroup.getChildren().clear();
-		tourneeGroup.getChildren().clear();
 	}
 	
 	public void clearEntrepotLivraison() {
@@ -226,13 +251,16 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	public void clearTournees() {
-		tourneeGroup.getChildren().clear();
+		tourneesAfficheesGroup.getChildren().clear();
+		for(int i = 0; i < tourneesGroup.size(); i++) {
+			tourneesGroup.get(i).getChildren().clear();
+		}
+		tourneesGroup.clear();
 	}
-
 	
-
-	
-	
+	public void clearAfficheeTournees() {
+		tourneesAfficheesGroup.getChildren().clear();
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {

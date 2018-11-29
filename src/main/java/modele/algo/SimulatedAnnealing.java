@@ -67,7 +67,7 @@ public class SimulatedAnnealing implements TSP{
     }
 
 	@Override
-	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree) {
+	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree,int nbLivreur) {
 		// TODO Auto-generated method stub
 		
 	}

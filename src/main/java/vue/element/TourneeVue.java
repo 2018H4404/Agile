@@ -26,11 +26,11 @@ public class TourneeVue extends Line{
 	 * @param endY
 	 * @param name
 	 */
-	public TourneeVue(double startX, double startY, double endX, double endY, String name) {
+	public TourneeVue(double startX, double startY, double endX, double endY, String name, Color couleur) {
 		super(startX,startY,endX,endY);
 		this.rueName = name;
-		this.originalColor = Color.CHARTREUSE;
-		this.setStroke(Color.CHARTREUSE);
+		this.originalColor = couleur;
+		this.setStroke(couleur);
 		this.setStrokeWidth(2);
 		ajouterListner();
 	}

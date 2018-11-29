@@ -10,7 +10,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void CalculerLesTournees() throws Exception {
+	public void CalculerLesTournees(int nbLivreur) throws Exception {
 		
 	}
 
@@ -19,5 +19,9 @@ public class EtatDefaut implements Etat{
 		
 	}
 
+	@Override
+	public int getNbLivreurMaximum() throws Exception {
+		return 0;
+	}
 	
 }
