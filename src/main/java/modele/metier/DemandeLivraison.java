@@ -64,7 +64,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour accéder à l'entrepôt par l'ID
+	 * Méthode pour accéder à l'entrepôt par l'ID.
 	 * @param id identifiant de l'entrepôt.
 	 * @return l'entrepot voulu.
 	 */
