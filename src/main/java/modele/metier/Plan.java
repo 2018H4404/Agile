@@ -104,8 +104,4 @@ public class Plan extends Observable{
 		return (maxLat - latitude) * hauteur / (maxLat - minLat);
 	}
 	
-	
-	
-	
-	
 }

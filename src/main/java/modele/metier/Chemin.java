@@ -3,7 +3,7 @@ package modele.metier;
 import java.util.ArrayList;
 
 /** 
- * La classe Chemin.
+ * La classe du chemin.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@ public class Chemin {
 	private ArrayList <Troncon> listeTroncons;
 	
 	/**
-	 * Constructeur paramétré de chemin.
+	 * Constructeur paramétré du chemin.
 	 * @param uneListeIntersections une liste d'intersections.
 	 * @param uneListeTroncons 
 	 */
@@ -33,7 +33,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Retourne le cout du chemin.
+	 * Méthode pour avoir le cout du chemin.
 	 * @return un double qui représente le cout du chemin.
 	 */
 	public double getCout() {
