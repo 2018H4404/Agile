@@ -18,6 +18,12 @@ public class PointLivraison extends Intersection{
 	protected DateTime heureArrivee;
 	private int duree;
 	
+	public PointLivraison(long id, double latitude, double longitude) {
+		super(id,latitude,longitude);
+		this.heureDepart = null;
+		this.heureArrivee = null;
+	}	
+	
 	/**
 	 * Constructeur paramétré du point de livraison avec une durée.
 	 * @param id l'identifiant du point de livraison.

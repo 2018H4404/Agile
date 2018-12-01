@@ -23,5 +23,12 @@ public class EtatDefaut implements Etat{
 	public int getNbLivreurMaximum() throws Exception {
 		return 0;
 	}
+
+	@Override
+	public void modifierPointLivraison() throws Exception {
+		
+	}
 	
 }
+	
+

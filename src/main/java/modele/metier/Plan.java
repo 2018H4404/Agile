@@ -104,4 +104,11 @@ public class Plan extends Observable{
 		return (maxLat - latitude) * hauteur / (maxLat - minLat);
 	}
 	
+	public double reverseTransformLongitude(double longitudeTransforme,double largeur) {
+		return longitudeTransforme*(maxLong-minLong)/largeur+minLong;
+	}
+	
+	public double reverseTransformLatitude(double latitudeTransforme,double hauteur) {
+		return maxLat-(latitudeTransforme*(maxLat - minLat)/hauteur);
+	}
 }

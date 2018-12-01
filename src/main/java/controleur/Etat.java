@@ -13,5 +13,5 @@ public interface Etat {
 	
 	public int getNbLivreurMaximum()throws Exception;
 	
-
+	public void modifierPointLivraison()throws Exception;
 }

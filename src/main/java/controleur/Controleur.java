@@ -39,6 +39,11 @@ public class Controleur {
 		return instance;
 	}
 	
+	public VueGraphique getGraph() {
+		return this.graph;
+	}
+	
+	
 	public void chargerFichierPlan(File f) throws Exception {
 		etat.chargerFichierPlan(f);
 	}
@@ -61,6 +66,14 @@ public class Controleur {
 	
 	public double transformerLongitude(double longitude, double largeur) {
 		return monPlan.transformLongitude(longitude, largeur);
+	}
+	
+	public double reverseTransformLongitude(double longitudeTransforme,double largeur)throws Exception {
+		return monPlan.reverseTransformLongitude(longitudeTransforme,largeur);
+	}
+	
+	public double reverseTransformLatitude(double latitudeTransforme,double hauteur)throws Exception{
+		return monPlan.reverseTransformLatitude(latitudeTransforme,hauteur);
 	}
 	
 	public void addObserver(VueGraphique vue) {

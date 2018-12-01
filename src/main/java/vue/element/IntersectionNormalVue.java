@@ -1,5 +1,6 @@
 package vue.element;
 
+import controleur.Controleur;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -17,7 +18,8 @@ public class IntersectionNormalVue extends Circle{
 	private long idInter;
 	private boolean selectionnee;
 	private Color originalColor;
-	
+	private double copieX;
+	private double copieY;
 	/**
 	 * Constructeur de la vue de l'intersection normale.
 	 * @param x
@@ -31,6 +33,8 @@ public class IntersectionNormalVue extends Circle{
 		this.originalColor = Color.GRAY;
 		this.idInter = unId;
 		this.selectionnee = false;
+		this.copieX = x;
+		this.copieY = y;
 		ajouterListener();
 	}
 	
@@ -60,8 +64,22 @@ public class IntersectionNormalVue extends Circle{
             	changerCouleurNonSelectionnee();
             }
         });
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            public void handle(final MouseEvent event) {
+                System.out.println(idInter);
+                try {
+					Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
+					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
+					Controleur.getInstance().reverseTransformLongitude(copieX, Controleur.getInstance().getGraph().getHauteur())
+					);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}  
+        });
 	}
-	
 	/**
 	 * Méthode pour changer la couleur de l'intersection selectionnée.
 	 */

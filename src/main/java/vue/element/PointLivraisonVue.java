@@ -1,5 +1,6 @@
 package vue.element;
 
+import controleur.Controleur;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -18,6 +19,7 @@ public class PointLivraisonVue extends Circle{
 	private boolean selectionnee;
 	private Color originalColor;
 	
+	
 	/**
 	 * Constructeur de la vue du point de livraison.
 	 * @param x
@@ -31,6 +33,7 @@ public class PointLivraisonVue extends Circle{
 		this.originalColor = Color.CORNFLOWERBLUE;
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
+		
 		ajouterListener();
 	}
 	
@@ -46,6 +49,7 @@ public class PointLivraisonVue extends Circle{
 		this.selectionnee = selectionnee;
 	}
 	
+	
 	/**
 	 * Méthode pour ajouter un listner.
 	 */
@@ -59,6 +63,18 @@ public class PointLivraisonVue extends Circle{
             public void handle(final MouseEvent event) {
             	changerCouleurNonSelectionnee();
             }
+        });
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            public void handle(final MouseEvent event) {
+                System.out.println(idPointLivraison);
+                try {
+					Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}  
         });
 	}
 	

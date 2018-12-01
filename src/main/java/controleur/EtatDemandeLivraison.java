@@ -14,4 +14,9 @@ public class EtatDemandeLivraison extends EtatDefaut {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 	
+	@Override
+	public void modifierPointLivraison() throws Exception{
+		
+	}
+	
 }

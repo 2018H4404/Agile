@@ -55,6 +55,21 @@ public class DemandeLivraison extends Observable{
 		notifyObservers("DemandeLivraison");
 	}
 	
+	
+	
+	public void supprimerPoint(long id) {
+		livraisons.remove(id);
+		setChanged();
+		notifyObservers("DemandeLivraison");
+	
+	}
+	public void ajouterPoint(long id,double latitude, double longitude) {
+		PointLivraison tempObject = new PointLivraison(id,latitude,longitude);
+		livraisons.put(id,tempObject);
+		setChanged();
+		notifyObservers("DemandeLivraison");
+	
+	}
 	/**
 	 * Méthode permettant de libérer l'entreprôt et les livraisons.
 	 */

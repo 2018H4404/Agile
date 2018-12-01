@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -51,6 +52,8 @@ public class ApplicationDemo extends Application{
 	private Button buttonChargeDemandeLivraison;
 	private Button buttonCalculer;
 	private Button buttonEfface;
+	private Button buttonSupprimerPoint;
+
 
 	private MenuBar menuBar;
 	private Menu menuFile;
@@ -92,6 +95,8 @@ public class ApplicationDemo extends Application{
 		buttonCalculer.setMinWidth(300);
 		buttonEfface = new Button("Efface");
 		buttonEfface.setMinWidth(300);
+		
+		
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison,buttonCalculer,buttonEfface);
 
 		//Ajout de la barre de menu
@@ -225,6 +230,11 @@ public class ApplicationDemo extends Application{
               
 	         }
 	      }); 
+        
+        
+        
+       
+       
  
         menuFile.getItems().addAll(itemChargerPlan,itemChargerDemandeLivraison);
  
@@ -450,6 +460,7 @@ public class ApplicationDemo extends Application{
 			buttonCalculer.setDisable(true);
 			itemEffacer.setDisable(false);
 			buttonEfface.setDisable(false);
+
 			break;
 		case EtatDemandeLivraison:
 			itemChargerPlan.setDisable(true);
@@ -460,6 +471,7 @@ public class ApplicationDemo extends Application{
 			buttonCalculer.setDisable(false);
 			itemEffacer.setDisable(false);
 			buttonEfface.setDisable(false);
+
 			break;
         
 		default:
@@ -471,6 +483,7 @@ public class ApplicationDemo extends Application{
 			buttonCalculer.setDisable(true);
 			itemEffacer.setDisable(true);
 			buttonEfface.setDisable(true);
+
 			break;
 		}
 	}

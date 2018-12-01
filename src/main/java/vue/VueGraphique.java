@@ -50,8 +50,8 @@ public class VueGraphique extends Parent implements Observer{
 	private Group tourneesAfficheesGroup;
 	private ArrayList<Group> tourneesGroup;
 	private VueTextuelle compagnie;
-	private static double hauteur = 800;
-	private static double largeur = 800;
+	private  double hauteur = 800;
+	private  double largeur = 800;
 	
 	/**
 	 * Constructeur de la vue graphique.
@@ -136,6 +136,16 @@ public class VueGraphique extends Parent implements Observer{
 		this.compagnie = vue;
 	}
 	
+	public double getHauteur() {
+		return hauteur;
+		
+	}
+	
+	public double getLargeur() {
+		return largeur;
+		
+	}
+	
 	/**
 	 * Méthode pour déssiner le plan.
 	 * @param monPlan mon plan.
@@ -183,7 +193,6 @@ public class VueGraphique extends Parent implements Observer{
 			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),6,livraison.getId());
 			livraisonGroup.getChildren().add(tempPointLivraison);
 		}
-		System.out.println("Done Demande");
 	}
 	
 	public Color[] genererCouleurs(int nbLivreur) {
