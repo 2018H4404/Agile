@@ -195,6 +195,10 @@ public class VueGraphique extends Parent implements Observer{
 		}
 	}
 	
+	/**
+	 * Méthode pour generer des couleurs aleatoires que nous utilisons afin de dessiner les tournees.
+	 * @param nbLivreur : nombre des livreurs
+	 */
 	public Color[] genererCouleurs(int nbLivreur) {
 		Color[] couleurs = new Color[nbLivreur];
 		double red = 0.5;
@@ -202,9 +206,9 @@ public class VueGraphique extends Parent implements Observer{
 		double blue =0.1;
 		for(int i =0; i < nbLivreur; i++) {
 			couleurs[i] = Color.color(red, green, blue);
-			green = 0.5;
-			red = Math.random();
-			blue = Math.random();
+			green = 0.6;
+			red = Math.random()*0.6;
+			blue = Math.random()*0.3;
 		}
 		return couleurs;
 	}
@@ -241,6 +245,17 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
+	 * Méthode pour filtrer les tournees affichees.
+	 * @param afficheGroup : les numeros des tournees a afficher
+	 */
+	public void filtrerTournees(ArrayList<Integer> afficheGroup) {
+		clearAfficheeTournees();
+		for(Integer i : afficheGroup) {
+			tourneesAfficheesGroup.getChildren().add(tourneesGroup.get(i));
+		}
+	}
+	
+	/**
 	 * Méthode pour effacer la vue.
 	 */	
 	public void clearVue() {
@@ -249,16 +264,25 @@ public class VueGraphique extends Parent implements Observer{
 		clearTournees();
 	}
 	
+	/**
+	 * Méthode pour effacer le plan.
+	 */	
 	public void clearPlan() {
 		tronconGroup.getChildren().clear();
 		noeudGroup.getChildren().clear();
 	}
 	
+	/**
+	 * Méthode pour effacer les entrepots et les points de livraison.
+	 */	
 	public void clearEntrepotLivraison() {
 		entrepotGroup.getChildren().clear();
 		livraisonGroup.getChildren().clear();
 	}
 	
+	/**
+	 * Méthode pour effacer les tournees stockees et affichees.
+	 */	
 	public void clearTournees() {
 		tourneesAfficheesGroup.getChildren().clear();
 		for(int i = 0; i < tourneesGroup.size(); i++) {
@@ -267,6 +291,9 @@ public class VueGraphique extends Parent implements Observer{
 		tourneesGroup.clear();
 	}
 	
+	/**
+	 * Méthode pour effacer juste les tournees affichees.
+	 */	
 	public void clearAfficheeTournees() {
 		tourneesAfficheesGroup.getChildren().clear();
 	}

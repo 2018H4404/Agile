@@ -13,7 +13,6 @@ import org.joda.time.Interval;
 */
 
 public class PointLivraison extends Intersection{
-	private IntersectionNormal monInter;
 	protected DateTime heureDepart;
 	protected DateTime heureArrivee;
 	private int duree;
@@ -62,8 +61,11 @@ public class PointLivraison extends Intersection{
 
 	@Override
 	public String toString() {
-		return "PointLivraison [monInter=" + monInter + ", heureDepart=" + heureDepart + ", heureArrivee="
-				+ heureArrivee + ", duree=" + duree + ", id=" + id + ", latitude=" + latitude + ", longitude="
-				+ longitude + "]";
+		return "PointLivraison [heureDepart=" + heureDepart + ", heureArrivee=" + heureArrivee + ", duree=" + duree
+				+ ", id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
+	
+	
+
+	
 }

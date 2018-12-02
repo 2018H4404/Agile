@@ -76,7 +76,9 @@ public class LecteurDeXML {
 								PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
 								tempLivraisons.put(tempId,tempObject);
 							}else {
-								
+								Exception e = new Exception();
+								System.out.println("Erreur de l'architecture du fichier xml");
+								throw e;
 							}
 						}
 					}

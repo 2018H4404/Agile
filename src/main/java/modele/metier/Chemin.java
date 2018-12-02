@@ -13,6 +13,7 @@ public class Chemin {
 	
 	private ArrayList <Intersection> listeIntersections;
 	private ArrayList <Troncon> listeTroncons;
+	private int duree;
 	
 	/**
 	 * Constructeur param√©tr√© du chemin.
@@ -24,12 +25,48 @@ public class Chemin {
 		this.listeTroncons = uneListeTroncons;
 	}
 	
+	/**
+	 * Constructeur param√©tr√© du chemin.
+	 * @param uneListeIntersections une liste d'intersections.
+	 * @param uneListeTroncons 
+	 * @param uneDuree la dur®¶e utilis®¶e pour parcourir ce chemin
+	 */
+	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons, int uneDuree) {
+		this.listeIntersections = uneListeIntersections;
+		this.listeTroncons = uneListeTroncons;
+		this.duree = uneDuree;
+	}
+	
 	public ArrayList<Intersection> getListeIntersections() {
 		return listeIntersections;
 	}
 	
 	public ArrayList<Troncon> getListeTroncons(){
 		return listeTroncons;
+	}
+	
+	public int getDuree() {
+		return duree;
+	}
+	
+	public void setDuree(int uneDuree) {
+		this.duree = uneDuree;
+	}
+	
+	/**
+	 * M√©thode pour avoir l'origine du chemin.
+	 * @return Intersection qui est l'origine du chemin.
+	 */
+	public Intersection getIntersectionDepart() {
+		return listeIntersections.get(0);
+	}
+	
+	/**
+	 * M√©thode pour avoir la destination du chemin.
+	 * @return Intersection qui est la destination du chemin.
+	 */
+	public Intersection getIntersectionDest() {
+		return listeIntersections.get(listeIntersections.size()-1);
 	}
 	
 	/**
@@ -44,3 +81,4 @@ public class Chemin {
 		return somme;
 	}
 }
+

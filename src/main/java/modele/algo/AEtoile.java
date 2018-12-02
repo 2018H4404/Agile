@@ -109,6 +109,8 @@ public class AEtoile {
 			
 			if(dest.equals(interCourant)) {
 				meilleurChemin.clear();
+				meilleurChemin.clear();
+				meilleurChemin.add(0, dest);
 				while(!depart.equals(interCourant)) { 
 					meilleurChemin.add(0, interCourant);
 					interCourant = parents.get(interCourant);

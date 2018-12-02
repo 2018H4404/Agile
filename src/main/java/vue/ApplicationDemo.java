@@ -77,7 +77,7 @@ public class ApplicationDemo extends Application{
 		// TODO Auto-generated method stub
         graph = new VueGraphique();
         texte = new VueTextuelle();
-        Controleur.getInstance().addObserver(graph);
+        Controleur.getInstance().addObserver(graph,texte);
         Controleur.getInstance().setGraph(graph);
         Controleur.getInstance().setTexte(texte);
         graph.setCompagnie(texte);
@@ -410,6 +410,7 @@ public class ApplicationDemo extends Application{
 	         @Override
 	         public void handle(ActionEvent event) {
                graph.clearVue();
+               texte.clearVue();
                controleur.setEtat(controleur.getEtatInit());
                VerifierEtat(controleur);
 	         }
@@ -419,6 +420,7 @@ public class ApplicationDemo extends Application{
 	         @Override
 	         public void handle(ActionEvent event) {
               graph.clearVue();
+              texte.clearVue();
               controleur.setEtat(controleur.getEtatInit());
               VerifierEtat(controleur);
 	         }

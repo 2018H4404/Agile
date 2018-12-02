@@ -50,6 +50,7 @@ public class OutilTSP {
 					ArrayList<Troncon> pccTroncons = AEtoile.getInstance().traductionTrajet(pcc, unPlan);
 					Chemin tempChemin = new Chemin(pcc,pccTroncons);
 					cout[i][j] = (int)(tempChemin.getCout()/15000 * 60 * 60);
+					tempChemin.setDuree(cout[i][j]);
 					pccs[i][j] = tempChemin;
 				}
 			}
