@@ -420,7 +420,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
               graph.clearVue();
               controleur.setEtat(controleur.getEtatInit());
-              VerifierEtat(controleur);
+              VerifierEtat(controleur); 
 	         }
 	      }); 
         menuTournee.getItems().addAll(itemCalculerTournees,itemEffacer);

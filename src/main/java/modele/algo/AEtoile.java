@@ -72,7 +72,7 @@ public class AEtoile {
 	 * @return la liste des intersections du chemin à prendre.
 	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan){
-		ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>();
+		ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
 		
 		HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
 		parents.put(depart, depart);

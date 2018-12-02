@@ -13,41 +13,37 @@ public class TestLecteurDeXML {
 	
 	private static LecteurDeXML lecture = LecteurDeXML.getInstance();
 	private static Controleur controleur = Controleur.getInstance();
+	
+	@Before
+	public void setUp(){
+		controleur.setEtat(controleur.getEtatInit());
+	}
+	
 
 /*--------------------------------------Test Lecture Plan----------------------------------------------*/	
 
 	@Test
 	public void testLecturePlanXML(){
+		System.out.println("test Lecture Plan XML");
 		Plan plan = controleur.getMonPlan();
-		File fichierTestPlan=new File("fichiers/fichiersTest/testPlan.xml");	
+		File fichierTestPlan=new File("fichiersXML2018/fichiersTest/testPlan.xml");	
 		lecture.lecturePlanXML(fichierTestPlan);
-		assertEquals(plan.getIntersectionNormals(),4);
-		assertEquals(plan.getTroncons(),3);
+		assertEquals(plan.getIntersectionNormals().size(),4);
+		assertEquals(plan.getTroncons().size(),2);
 	}
 	
-	
+	/*
 	@Test(expected = FileNotFoundException.class) 
 	public void testLecturePlanXML_FileNotFoundException(){
 		System.out.println("test Lecture Plan XML File Not Found Exception:");
 		File fichierTestPlan=new File("fichiersXML2018/testPlan2.xml");	
 		lecture.lecturePlanXML(fichierTestPlan);
 	}
+	*/
 	
+	
+	/*
 	//------------------------verification construction du document XML----------------------------------
-	@Test
-	public void testLecturePlanXML_FichierVide(){
-		System.out.println("test Lecture Plan XML Fichier Vide:");
-		File fichierTestPlan=new File("fichiers/fichiersTest/testFichierVide.xml");
-		lecture.lecturePlanXML(fichierTestPlan);
-		
-	}
-	
-	@Test
-	public void testLecturePlanXML_FormatTxt(){
-		System.out.println("test Lecture Plan XML Format Txt:");
-		File fichierTestPlan=new File("fichiers/fichiersTest/testPlan_FormatTxt.txt");
-		lecture.lecturePlanXML(fichierTestPlan);	
-	}
 	
 	@Test
 	public void testLecturePlanXML_NoeudEtTronconNull(){
@@ -126,18 +122,22 @@ public class TestLecteurDeXML {
 		System.out.println("test Lecture Plan XML Troncon Pointeur Null:");
 		File fichierTestPlan=new File("fichiers/fichiersTest/testPlan_TronconPointeurNull.xml");
 		lecture.lecturePlanXML(fichierTestPlan);
-	}
+	}*/
 	
 /*-------------------------------Test Lecture Livraison Entrepot---------------------------------------*/
 	
 	@Test
 	public void testLectureLivraisonEntrepotXML(){
-		System.out.println("test Lecture Livraison Entrepot XML:");
-		File fichierTestLivraison=new File("fichiers/fichiersTest/dl-test-3.xml");
+		System.out.println("test Lecture Livraison Entrepot XML");
+		File fichierTestPlan=new File("fichiersXML2018/petitPlan.xml");	
+		lecture.lecturePlanXML(fichierTestPlan);
+		DemandeLivraison dl = controleur.getMaDemande();
+		File fichierTestLivraison=new File("fichiersXML2018/fichiersTest/dl-test-3.xml");
 		lecture.lectureLivraisonEntrepotXML(fichierTestLivraison);
-		
+		assertEquals(dl.getAllEntrepots().size(),1);
+		assertEquals(dl.getAllPointLivraisons().size(),3);
 	}
-	
+	/*
 	@Test(expected = FileNotFoundException.class)
 	public void testLectureLivraisonEntrepotXML_FileNotFoundException(){
 		System.out.println("test Lecture Livraison Entrepot XML File Not Found Exception:");
@@ -145,9 +145,6 @@ public class TestLecteurDeXML {
 		lecture.lectureLivraisonEntrepotXML(fichierTestLivraison);
 		
 	}
-	
-	
-	
 	
 	//------------------------verification construction du document XML----------------------------------
 
@@ -175,7 +172,7 @@ public class TestLecteurDeXML {
 		File fichierTestLivraison=new File("fichiers/fichiersTest/dl-test-3-EntrepotManqueAttribut.xml");
 		lecture.lectureLivraisonEntrepotXML(fichierTestLivraison);
 	}
-	
+	*/
 
 	@After
 	public void after() {

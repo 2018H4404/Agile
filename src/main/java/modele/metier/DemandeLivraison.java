@@ -19,8 +19,8 @@ public class DemandeLivraison extends Observable{
 	 * Constructeur par défaut de la classe de demande de livraison.
 	 */
 	public DemandeLivraison() {
-		livraisons = null;
-		entrepots = null;
+		livraisons = new HashMap<Long,PointLivraison>();
+		entrepots = new HashMap<Long,Entrepot>();
 	}
 	
 	/**
