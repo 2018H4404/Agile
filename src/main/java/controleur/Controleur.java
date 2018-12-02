@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
 import modele.metier.Plan;
-import services.LecteurDeXML;
+import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 

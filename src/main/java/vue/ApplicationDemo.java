@@ -29,7 +29,6 @@ import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
-import services.Paire;
 import controleur.Controleur;
 
 /** 
