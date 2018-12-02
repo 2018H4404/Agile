@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Observable;
 
+import org.joda.time.DateTime;
+
 /** 
  * La classe de la demande de livraison.
  * @author H4404
@@ -24,7 +26,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour initialiser la demande de livraison.
+	 * Methode pour initialiser la demande de livraison.
 	 * @param livraisons le disctionnaire des livraison.
 	 * @param entrepots le dictionnaire des entrepots.
 	 */
@@ -132,6 +134,22 @@ public class DemandeLivraison extends Observable{
 	 */
 	public int getNbLivreurMaximum(){
 		return livraisons.size();
+	}
+	
+	/**
+	 * M茅thode permettant de retourner l'heure de debut
+	 * @return l'heure de debut.
+	 */
+	public DateTime getDebutTime(){
+		if(entrepots.size() == 1) {
+			DateTime temp = null;
+			for(Entrepot e : entrepots.values()) {
+				temp = e.getHeureDeaprt();
+				break;
+			}
+			return temp;
+		}
+		return null;
 	}
 	
 	

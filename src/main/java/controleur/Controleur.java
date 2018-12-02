@@ -2,10 +2,12 @@ package controleur;
 
 import java.io.File;
 
+import org.joda.time.DateTime;
+
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
 import modele.metier.Plan;
-import services.LecteurDeXML;
+import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
@@ -76,10 +78,13 @@ public class Controleur {
 		return monPlan.reverseTransformLatitude(latitudeTransforme,hauteur);
 	}
 	
-	public void addObserver(VueGraphique vue) {
-		monPlan.addObserver(vue);
-		maDemande.addObserver(vue);
-		monManager.addObserver(vue);
+	public void addObserver(VueGraphique graph, VueTextuelle texte) {
+		monPlan.addObserver(graph);
+		maDemande.addObserver(graph);
+		monManager.addObserver(graph);
+		monPlan.addObserver(texte);
+		maDemande.addObserver(texte);
+		monManager.addObserver(texte);
 	}
 
 	public Plan getMonPlan() {
@@ -120,6 +125,8 @@ public class Controleur {
 		return etatPlanCharge;
 	}
 	
-	
+	public DateTime getActuelHeureDepart() {
+		return maDemande.getDebutTime();
+	}
 	
 }

@@ -11,7 +11,7 @@ import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
 import modele.metier.Troncon;
-import services.LecteurDeXML;
+import modele.services.LecteurDeXML;
 
 /** 
  * La classe de l'application.

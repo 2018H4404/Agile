@@ -12,7 +12,6 @@ import org.joda.time.DateTime;
 public class Entrepot extends Intersection {
 	
 	private DateTime heureDepart;
-	private DateTime heureArrivee;
 	
 	/**
 	 * 
@@ -26,14 +25,20 @@ public class Entrepot extends Intersection {
 	public Entrepot(long id, double latitude, double longitude, int heure, int minute, int seconde) {
 		super(id,latitude,longitude);
 		this.heureDepart = new DateTime(2018,11,30,heure,minute,seconde);
-		this.heureArrivee = null;
 	}
 
 	@Override
 	public String toString() {
-		return "Entrepot [heureDepart=" + heureDepart + ", heureArrivee=" + heureArrivee + ", id=" + id + ", latitude="
+		return "Entrepot [heureDepart=" + heureDepart + ", id=" + id + ", latitude="
 				+ latitude + ", longitude=" + longitude + "]";
-	}	
+	}
+	
+	/**
+	 * Methode qui retourne l'heure du depart
+	 */
+	public DateTime getHeureDeaprt() {
+		return heureDepart;
+	}
 	
 	public int getDuree() {return 0;}
 	

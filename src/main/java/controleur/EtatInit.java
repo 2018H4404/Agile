@@ -2,7 +2,7 @@ package controleur;
 
 import java.io.File;
 
-import services.LecteurDeXML;
+import modele.services.LecteurDeXML;
 
 public class EtatInit extends EtatDefaut {
 

@@ -20,6 +20,44 @@ public abstract class TemplateTSP implements TSP {
 		return tempsLimiteAtteint;
 	}
 	
+	/**
+	 * Methode qui calcule une repartition des points de livraisons sur les livreurs
+	 * @param nbLivreur : nombre de livreur
+	 * @param nbPointLivraisons : nombre de points de livraisons total
+	 */
+	public int[] clusteringNbPointLivraisonParLivreurNaive(int nbLivreur, int nbPointLivraisons) {
+		int[] resultat = new int[nbLivreur];
+		int nbDeBase = nbPointLivraisons/nbLivreur;
+		System.out.println(nbDeBase);
+		System.out.println(nbPointLivraisons%nbDeBase);
+		if(nbPointLivraisons%nbDeBase == 0 && nbPointLivraisons/nbDeBase == nbLivreur && nbDeBase != 1) {
+			for(int i =0 ; i < nbLivreur; i++) {
+				resultat[i] = nbDeBase;
+			}
+		}else{
+			int nbBasePlusOne = nbDeBase + 1;
+			int nbPartieMaxBasePlusOne = nbPointLivraisons/nbBasePlusOne;
+			int nbActuelBasePlusOne = nbPartieMaxBasePlusOne;
+			int somme = nbActuelBasePlusOne*(nbBasePlusOne) + (nbLivreur-nbActuelBasePlusOne)*nbDeBase;
+			while(somme != nbPointLivraisons) {
+				nbActuelBasePlusOne--;
+				somme = nbActuelBasePlusOne*nbBasePlusOne + (nbLivreur-nbActuelBasePlusOne)*nbDeBase;
+			}
+			for(int i = 0; i < nbActuelBasePlusOne; i++) {
+				resultat[i] = nbBasePlusOne;
+			}
+			for(int i = nbActuelBasePlusOne; i < nbLivreur; i++) {
+				resultat[i] = nbDeBase;
+			}
+		}
+		
+		for(int i = 0; i < nbLivreur; i++) {
+			System.out.print(resultat[i]+" ");
+		}
+		System.out.println("");
+		return resultat;
+	}
+	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur){
 		tempsLimiteAtteint = false;
 		coutMeilleureSolution = Integer.MAX_VALUE;
@@ -28,7 +66,7 @@ public abstract class TemplateTSP implements TSP {
 		for (int i=1; i<nbSommets; i++) nonVus.add(i);
 		ArrayList<Integer> vus = new ArrayList<Integer>(nbSommets);
 		vus.add(0); // le premier sommet visite est 0
-		int nbPointLivraisonParLivreur = (nbSommets-1)/nbLivreur;
+		int[] nbPointLivraisonParLivreur =  clusteringNbPointLivraisonParLivreurNaive(nbLivreur, nbSommets-1);
 		branchAndBound(0, nonVus, vus, 0, cout, duree, System.currentTimeMillis(), tpsLimite, nbPointLivraisonParLivreur, 0, nbLivreur-1,0);
 	}
 	
@@ -74,7 +112,7 @@ public abstract class TemplateTSP implements TSP {
 	 * @param tpsDebut : moment ou la resolution a commence
 	 * @param tpsLimite : limite de temps pour la resolution
 	 */	
-	 void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout, int[] duree, long tpsDebut, int tpsLimite, int nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels, int nbTourneeAvantDest, int tourneeFaite){
+	 void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout, int[] duree, long tpsDebut, int tpsLimite, int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels, int nbTourneeAvantDest, int tourneeFaite){
 		 if (System.currentTimeMillis() - tpsDebut > tpsLimite){
 			 tempsLimiteAtteint = true;
 			 return;
@@ -87,7 +125,7 @@ public abstract class TemplateTSP implements TSP {
 	    	}
 	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite) < coutMeilleureSolution){
 	    	if(tourneeFaite < nbTourneeAvantDest) {
-	    		if(compteurNbLivraisonsActuels < nbPointLivraisonParLivreur) {
+	    		if(compteurNbLivraisonsActuels < nbPointLivraisonParLivreur[tourneeFaite]) {
 	    			Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
 		 	        while (it.hasNext()){
 		 	        	Integer prochainSommet = it.next();
