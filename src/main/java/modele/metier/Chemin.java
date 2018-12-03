@@ -29,7 +29,7 @@ public class Chemin {
 	 * Constructeur param√©tr√© du chemin.
 	 * @param uneListeIntersections une liste d'intersections.
 	 * @param uneListeTroncons 
-	 * @param uneDuree la dur®¶e utilis®¶e pour parcourir ce chemin
+	 * @param uneDuree la duree utilisee pour parcourir ce chemin
 	 */
 	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons, int uneDuree) {
 		this.listeIntersections = uneListeIntersections;

@@ -5,7 +5,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+<<<<<<< HEAD
 import modele.services.LecteurDeXML;
+=======
+import modele.services.LecteurDeXML;	
+>>>>>>> 62c15e8c3189d0f437d747793b1908078a8074ef
 import controleur.Controleur;
 import modele.*;
 import modele.metier.*;

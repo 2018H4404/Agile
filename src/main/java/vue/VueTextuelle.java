@@ -53,7 +53,6 @@ public class VueTextuelle extends Parent implements Observer{
 	private Accordion conteneurInfoParTournee;
 	private CheckBox[] lesFiltres = null;
 	private TitledPane[] infoParTournee = null;
-	private Button filtreButton;
 	private TitledPane infosTournees;
 	
 	/**
@@ -99,7 +98,6 @@ public class VueTextuelle extends Parent implements Observer{
 				conteneurFiltres = new GridPane();
 				conteneurFiltres.setVgap(4);
 				conteneurFiltres.setPadding(new Insets(5, 5, 5, 5));
-				filtreButton = new Button("Filtrer");
 				filtreTournees.setContent(conteneurFiltres);
 				infosTournees = new TitledPane();
 				infosTournees.setMaxWidth(300);
@@ -114,7 +112,6 @@ public class VueTextuelle extends Parent implements Observer{
 				
 				infos.getTabs().addAll(nomRue,infosLivraison,infosTournee);
 				
-				ajouterListeners();
 				this.getChildren().add(infos);
 				this.getChildren().add(separator);
 	}
@@ -140,10 +137,14 @@ public class VueTextuelle extends Parent implements Observer{
 				System.out.println("In");
 				ajouterTimeTableTournees((TourneeManager)arg0);
 				ajouterFiltreTournees((TourneeManager)arg0);
+				ajouterListeners();
+
 				break;	
 			case "Alert Temps":
 				ajouterTimeTableTournees((TourneeManager)arg0);
 				ajouterFiltreTournees((TourneeManager)arg0);
+				ajouterListeners();
+
 				break;	
 				
 		}
@@ -163,10 +164,9 @@ public class VueTextuelle extends Parent implements Observer{
 			lesFiltres[i] = tempCheckBox;
 			conteneurFiltres.add(tempCheckBox, 0, i);
 		}
-		conteneurFiltres.add(filtreButton, 0, nbTournees);
 	}
 	
-	/**
+	/**manager.getListeTournees().size();
 	 * Methode qui ajoute l'agenda planifie pour l'horaire dans le panneau infos dans le TitledPane Tournees
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
@@ -234,29 +234,27 @@ public class VueTextuelle extends Parent implements Observer{
 	 * Methode qui ajoute des listeners necessaire pour les composants dans la vue textuelle
 	 */
 	public void ajouterListeners() {
-		filtreButton.setOnAction(new EventHandler<ActionEvent>() {
+		for(int i = 0;i<lesFiltres.length;i++) {
+		lesFiltres[i].setOnAction(new EventHandler<ActionEvent>() {
             public void handle(final ActionEvent event) {
-                if(lesFiltres == null) {
-                	System.out.println("Erreur durant l'ajout des filtres.");
-                	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    		        alert.setHeaderText("Attention");
-    		        alert.setContentText("Erreur durant l'ajout des filtres, reessayez s'il vous plait.");
-    		        alert.show();
-                }else {
-                	ArrayList<Integer> coches = new ArrayList<Integer>();
-                	for(int i = 0; i < infoParTournee.length; i++) {
-                		infoParTournee[i].setDisable(true);
-                	}
-                	for(int i = 0; i < lesFiltres.length; i++) {
-                		if(lesFiltres[i].isSelected()) {
-                			coches.add(i);
-                			infoParTournee[i].setDisable(false);
-                		}
-                	}
-                	compagnie.filtrerTournees(coches);
-                }
+            	for(int i = 0; i < infoParTournee.length; i++) {
+            		infoParTournee[i].setDisable(true);
+            	}
+            	
+                CheckBox chk = (CheckBox) event.getSource();
+                System.out.println("Action performed on checkbox " + chk.getText());
+            	ArrayList<Integer> coches = new ArrayList<Integer>();
+            	for(int i = 0 ;i<lesFiltres.length;i++) {
+	            	if(lesFiltres[i].isSelected()) {
+	        			coches.add(i);
+	        			infoParTournee[i].setDisable(false);
+	        		}
+            	}
+            	compagnie.filtrerTournees(coches);
+                
             }
         });
+	}
 	}
 	
 	/**

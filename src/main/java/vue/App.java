@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 import controleur.Controleur;
 import modele.TourneeManager;
@@ -27,6 +28,15 @@ public class App
 	 */
     public static void main( String[] args )
     {
+    	PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+    	queue.add(1);
+    	queue.add(2);
+    	queue.add(3);
+    	//System.out.println(queue.size());
+    	for(int i = 0; i < 3; i++) {
+    		System.out.println(queue.poll());
+    	}
+    	/*
     	ArrayList<Intersection> l = new ArrayList<Intersection>();
     	l.add(new IntersectionNormal(495424862,45.752663,4.857675));
     	l.add(new IntersectionNormal(495214862,45.752663,4.857675));
@@ -44,7 +54,7 @@ public class App
     	}
     	for(Intersection inter : l) {
     		System.out.println(inter);
-    	}
+    	}*/
     	/*
     	File f = new File("fichiersXML2018/petitPlan.xml");
     	Controleur.monPlan = new Plan();

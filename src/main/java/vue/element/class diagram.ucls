@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="vue.element.TronconVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/TronconVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="288" x="270" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="vue.element.PointLivraisonVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/PointLivraisonVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="245" width="272" x="598" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="vue.element.EntrepotVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/EntrepotVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="242" x="910" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="vue.element.IntersectionNormalVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/IntersectionNormalVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="281" width="297" x="1192" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="vue.element.TourneeVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/TourneeVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="320" x="1529" y="308"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

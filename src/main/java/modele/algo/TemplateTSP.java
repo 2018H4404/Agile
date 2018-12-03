@@ -2,6 +2,7 @@ package modele.algo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /** 
  * La classe de la template du TSP.
@@ -58,6 +59,35 @@ public abstract class TemplateTSP implements TSP {
 		return resultat;
 	}
 	
+	/**
+	 * Methode qui calcule un clustering des points de livraisons
+	 * @param nbSommets : nombre de sommets totals
+	 * @param nbParLivreur : liste des nombres de points de livraison par livreur
+	 * @param cout : le cout entre differents points de livraisons
+	 * @retour ArrayList<int[]> liste des groupes des points de livraison
+	 */
+	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
+		ArrayList<int[]> retour = new ArrayList<int[]>();
+		ArrayList<Integer> lesIntersections  =new ArrayList<Integer>();
+		for(int i = 1; i < nbSommets; i++) {
+			lesIntersections.add(i);
+		}
+		for(int i = 0; i < nbParLivreur.length; i++) {
+			int nbTotal = nbParLivreur[i];
+			int[] tempGroupe = new int[nbTotal];
+			Integer interCourant = lesIntersections.get(0);
+			PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+			int length = cout[interCourant].length;
+			for(int j = 0; j < length; j++) {
+				queue.add(cout[interCourant][j]);
+			}
+			for(int j = 1; j < nbTotal; j++) {
+				
+			}
+		}
+		return null;
+	}
+	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur){
 		tempsLimiteAtteint = false;
 		coutMeilleureSolution = Integer.MAX_VALUE;
@@ -86,10 +116,14 @@ public abstract class TemplateTSP implements TSP {
 	 * @param nonVus : tableau des sommets restant a visiter
 	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
 	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param nbTourneeAvantDest : nombre de tournees qui doivent etre faites avant la derniere tournee
+	 * @param tourneeFaite : nombre de tournees deja parcouru
+	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison par livreur
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le livreur actuel
 	 * @return une borne inferieure du cout des permutations commencant par sommetCourant, 
 	 * contenant chaque sommet de nonVus exactement une fois et terminant par le sommet 0
 	 */
-	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite);
+	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite,int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels);
 	
 	/**
 	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
@@ -123,7 +157,7 @@ public abstract class TemplateTSP implements TSP {
 	    		vus.toArray(meilleureSolution);
 	    		coutMeilleureSolution = coutVus;
 	    	}
-	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite) < coutMeilleureSolution){
+	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite, nbPointLivraisonParLivreur, compteurNbLivraisonsActuels) < coutMeilleureSolution){
 	    	if(tourneeFaite < nbTourneeAvantDest) {
 	    		if(compteurNbLivraisonsActuels < nbPointLivraisonParLivreur[tourneeFaite]) {
 	    			Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
