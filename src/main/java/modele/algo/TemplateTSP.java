@@ -2,6 +2,7 @@ package modele.algo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /** 
  * La classe de la template du TSP.
@@ -56,6 +57,35 @@ public abstract class TemplateTSP implements TSP {
 		}
 		System.out.println("");
 		return resultat;
+	}
+	
+	/**
+	 * Methode qui calcule un clustering des points de livraisons
+	 * @param nbSommets : nombre de sommets totals
+	 * @param nbParLivreur : liste des nombres de points de livraison par livreur
+	 * @param cout : le cout entre differents points de livraisons
+	 * @retour ArrayList<int[]> liste des groupes des points de livraison
+	 */
+	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
+		ArrayList<int[]> retour = new ArrayList<int[]>();
+		ArrayList<Integer> lesIntersections  =new ArrayList<Integer>();
+		for(int i = 1; i < nbSommets; i++) {
+			lesIntersections.add(i);
+		}
+		for(int i = 0; i < nbParLivreur.length; i++) {
+			int nbTotal = nbParLivreur[i];
+			int[] tempGroupe = new int[nbTotal];
+			Integer interCourant = lesIntersections.get(0);
+			PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+			int length = cout[interCourant].length;
+			for(int j = 0; j < length; j++) {
+				queue.add(cout[interCourant][j]);
+			}
+			for(int j = 1; j < nbTotal; j++) {
+				
+			}
+		}
+		return null;
 	}
 	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur){
