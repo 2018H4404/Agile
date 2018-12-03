@@ -24,7 +24,7 @@ public class TestLecteurDeXML {
 /*--------------------------------------Test Lecture Plan----------------------------------------------*/	
 
 	@Test
-	public void testLecturePlanXML(){
+	public void testLecturePlanXML() throws Exception{
 		System.out.println("test Lecture Plan XML");
 		Plan plan = controleur.getMonPlan();
 		File fichierTestPlan=new File("fichiersXML2018/fichiersTest/testPlan.xml");	
@@ -128,7 +128,7 @@ public class TestLecteurDeXML {
 /*-------------------------------Test Lecture Livraison Entrepot---------------------------------------*/
 	
 	@Test
-	public void testLectureLivraisonEntrepotXML(){
+	public void testLectureLivraisonEntrepotXML() throws Exception{
 		System.out.println("test Lecture Livraison Entrepot XML");
 		File fichierTestPlan=new File("fichiersXML2018/petitPlan.xml");	
 		lecture.lecturePlanXML(fichierTestPlan);
