@@ -1,6 +1,7 @@
 package vue;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,12 +24,14 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import modele.TourneeManager;
 import modele.metier.Chemin;
 import modele.metier.Entrepot;
 import modele.metier.Intersection;
+import modele.metier.PointLivraison;
 import modele.metier.Tournee;
 
 /** 
@@ -54,7 +57,8 @@ public class VueTextuelle extends Parent implements Observer{
 	private CheckBox[] lesFiltres = null;
 	private TitledPane[] infoParTournee = null;
 	private TitledPane infosTournees;
-	
+	private TitledPane[] infoParLivraison = null;
+
 	/**
 	 * Constructeur de la vue textuelle.
 	 */
@@ -85,6 +89,7 @@ public class VueTextuelle extends Parent implements Observer{
 				infosLivraison = new Tab();
 				infosLivraison.setText("Livraisons");
 				infosLivraison.setClosable(false);
+				
 				
 				infosTournee = new Tab();
 				infosTournee.setText("Tournees");
@@ -123,6 +128,9 @@ public class VueTextuelle extends Parent implements Observer{
 	public void setTabNomRue(String nomRue) {
 		monLabel.setText(nomRue);
 	}
+	
+
+	
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -242,7 +250,7 @@ public class VueTextuelle extends Parent implements Observer{
             	}
             	
                 CheckBox chk = (CheckBox) event.getSource();
-                System.out.println("Action performed on checkbox " + chk.getText());
+//                System.out.println("Action performed on checkbox " + chk.getText());
             	ArrayList<Integer> coches = new ArrayList<Integer>();
             	for(int i = 0 ;i<lesFiltres.length;i++) {
 	            	if(lesFiltres[i].isSelected()) {
@@ -287,6 +295,43 @@ public class VueTextuelle extends Parent implements Observer{
 			filtreTournees.setDisable(true);
 			break;
 		}
+	}
+
+	public void afficheListLivraison(Collection<PointLivraison> lesPointLivraisons) {
+
+		ajouteTitledPane(infosLivraison,lesPointLivraisons);
+	}
+	
+	public void ajouteTitledPane(Tab infosLivraison,Collection<PointLivraison> lesPointLivraisons) {
+		int index=0;
+		Accordion conteneurLivraison = new Accordion();
+		infoParLivraison = new TitledPane[lesPointLivraisons.size()];
+		for(PointLivraison pointLivraison: lesPointLivraisons) {
+			TitledPane tempPane = new TitledPane();
+
+			tempPane.setText("Point de livraison"+index);		
+			tempPane.setMaxWidth(300);
+			tempPane.setMinWidth(300);
+			VBox content = new VBox();
+			content.setMinWidth(300);
+			content.setMaxWidth(300);
+
+			Label label = new Label(pointLivraison.toString());
+			label.setMinWidth(300);
+			label.setMaxWidth(300);
+			label.setWrapText(true);
+			content.getChildren().add(label);
+			tempPane.setContent(content);
+
+			infoParLivraison[index] = tempPane;
+			index++;
+
+		}
+		conteneurLivraison.getPanes().addAll(infoParLivraison);
+		ScrollPane scrollLivraison = new ScrollPane();
+		scrollLivraison.setPrefViewportHeight(900);
+		scrollLivraison.setContent(conteneurLivraison);
+		infosLivraison.setContent(scrollLivraison);
 	}
 
 }
