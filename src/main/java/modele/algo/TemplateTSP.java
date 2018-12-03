@@ -86,10 +86,14 @@ public abstract class TemplateTSP implements TSP {
 	 * @param nonVus : tableau des sommets restant a visiter
 	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
 	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param nbTourneeAvantDest : nombre de tournees qui doivent etre faites avant la derniere tournee
+	 * @param tourneeFaite : nombre de tournees deja parcouru
+	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison par livreur
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le livreur actuel
 	 * @return une borne inferieure du cout des permutations commencant par sommetCourant, 
 	 * contenant chaque sommet de nonVus exactement une fois et terminant par le sommet 0
 	 */
-	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite);
+	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite,int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels);
 	
 	/**
 	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
@@ -123,7 +127,7 @@ public abstract class TemplateTSP implements TSP {
 	    		vus.toArray(meilleureSolution);
 	    		coutMeilleureSolution = coutVus;
 	    	}
-	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite) < coutMeilleureSolution){
+	    } else if (coutVus + bound(sommetCrt, nonVus, cout, duree, nbTourneeAvantDest, tourneeFaite, nbPointLivraisonParLivreur, compteurNbLivraisonsActuels) < coutMeilleureSolution){
 	    	if(tourneeFaite < nbTourneeAvantDest) {
 	    		if(compteurNbLivraisonsActuels < nbPointLivraisonParLivreur[tourneeFaite]) {
 	    			Iterator<Integer> it = iterator(sommetCrt, nonVus, cout, duree);
