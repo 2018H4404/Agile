@@ -10,7 +10,7 @@ import java.util.List;
  * @since 1.0
 */
 
-public class SimulatedAnnealing implements TSP{
+public class SimulatedAnnealing{
 	
 	/**
 	 * Les Attributs de la solution.
@@ -54,35 +54,5 @@ public class SimulatedAnnealing implements TSP{
         this.ratioRefroidisement = RATIO_REFROIDISSEMENT;
     }
     
-    @Override
-    /**
-     * Retourne le temps limite atteint.
-     */
-    public Boolean getTempsLimiteAtteint() {
-    	return tempsLimiteAtteint;
-    }
     
-    
-    public void demarrerRechercheSolution(int nombreLivreurs, int tempsLimite, Double[][] couts) throws AlgoException{
-    }
-
-	@Override
-	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree,int nbLivreur) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Integer getMeilleureSolution(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getCoutMeilleureSolution() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-
 }

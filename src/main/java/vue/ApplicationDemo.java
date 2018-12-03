@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import modele.TourneeManager;
+import modele.algo.SimulatedAnnealing;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
@@ -495,8 +496,9 @@ public class ApplicationDemo extends Application{
 	 */
 
 	public static void main(String[] args) {
-        launch(args);
-		
+		//launch(args);
+		SimulatedAnnealing sa = new SimulatedAnnealing();
+		System.out.println(sa);
     }
 
 }
