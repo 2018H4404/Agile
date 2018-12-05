@@ -44,7 +44,7 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * Méthode pour calculer les tournées d'un seul livreur.
+	 * Méthode pour calculer les tournées selon le nombre de livreur (Version sans clustering)
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
@@ -109,6 +109,105 @@ public class TourneeManager extends Observable{
 				this.listeTournees.add(solution);
 			}
 			System.out.println(tsp.getCoutMeilleureSolution());
+			setChanged();
+			notifyObservers("Tournees");
+		}
+		
+	}
+	
+	/**
+	 * Méthode pour calculer les tournées selon le nombre de livreur (Version sans clustering).
+	 * @param demande les demandes de livraison.
+	 * @param unPlan le plan de la ville.
+	 */
+	public void calculerLesTourneesClustering(DemandeLivraison demande, Plan unPlan, int nbLivreur) {
+		clear();
+		ArrayList<Intersection> intersectionsDemande = OutilTSP.getAllIntersectionDemande(demande);
+		//Initialisation des parametres importants
+		int length = intersectionsDemande.size();
+		int[][] cout = new int[length][length];
+		Chemin[][] pccs = new Chemin[length][length];
+		int[] duree = new int[length];
+		OutilTSP.initialisationTabCoutEtChemin(unPlan, intersectionsDemande, cout, pccs, length);
+		OutilTSP.intialisationTabDuree(intersectionsDemande, duree, length);
+		TSPSimple tsp = new TSPSimple();
+		int[] nbPointLivraisonParLivreur = tsp.clusteringNbPointLivraisonParLivreurNaive(nbLivreur, length-1);
+		ArrayList<int[]> groupes = tsp.clusteringPointLivraisonNaive(length, cout, nbPointLivraisonParLivreur);
+		for(int i = 0; i < groupes.size(); i++) {
+			int[] temp = groupes.get(i);
+			for(int j = 0; j < temp.length; j++) {
+				System.out.println(temp[j]);
+			}
+			System.out.println("");
+		}
+		int nbGroupes = groupes.size();
+		boolean alert = false;
+		for(int i = 0; i < nbGroupes; i++) {
+			ArrayList<Intersection> temp = new ArrayList<Intersection>();
+			temp.add(intersectionsDemande.get(0));
+			int[] tempGroupes = groupes.get(i);
+			for(int j = 0; j < tempGroupes.length; j++) {
+				temp.add(intersectionsDemande.get(tempGroupes[j]));
+			}
+			int tempLength = temp.size();
+			int[][] tempCout = new int[tempLength][tempLength];
+			Chemin[][] tempPccs = new Chemin[tempLength][tempLength];
+			int[] tempDuree = new int[tempLength];
+			OutilTSP.initialisationTabCoutEtChemin(unPlan, temp, tempCout, tempPccs, tempLength);
+			OutilTSP.intialisationTabDuree(temp, tempDuree, tempLength);
+			TSPSimple tempTsp = new TSPSimple();
+			Integer[] meilleureSolution = new Integer[tempLength+1];
+			tempTsp.chercheSolution(TIME_LIMITE, tempLength, tempCout, tempDuree,1);
+			if(tempTsp.getTempsLimiteAtteint()) {
+				alert = true;
+				for(int p = 0; p < tempLength; p++) {
+					meilleureSolution[p] = tempTsp.getMeilleureSolution(p);
+				}
+				meilleureSolution[tempLength] = 0;
+				
+				for(int p = 0; p < tempLength+1; p++) {
+					System.out.println(meilleureSolution[p]);
+				}
+				ArrayList<Integer> positionEntrepots = trouverPositionsEntrepot(meilleureSolution);	
+				int nbPositionEntrepots = positionEntrepots.size()-1;
+				for(int p = 0; p < nbPositionEntrepots; p++) {
+					int positionStart = positionEntrepots.get(p);
+					int positionEnd = positionEntrepots.get(p+1);
+					ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
+					for(int j = positionStart; j < positionEnd; j++) {
+						listeSolution.add(tempPccs[meilleureSolution[j]][meilleureSolution[j+1]]);
+					}
+					Tournee solution = new Tournee(listeSolution);
+					this.listeTournees.add(solution);
+				}
+			}else {
+				for(int p = 0; p < tempLength; p++) {
+					meilleureSolution[p] = tempTsp.getMeilleureSolution(p);
+				}
+				meilleureSolution[tempLength] = 0;
+				
+				for(int p = 0; p < tempLength+1; p++) {
+					System.out.println(meilleureSolution[p]);
+				}
+				ArrayList<Integer> positionEntrepots = trouverPositionsEntrepot(meilleureSolution);	
+				int nbPositionEntrepots = positionEntrepots.size()-1;
+				for(int p = 0; p < nbPositionEntrepots; p++) {
+					int positionStart = positionEntrepots.get(p);
+					int positionEnd = positionEntrepots.get(p+1);
+					ArrayList<Chemin> listeSolution = new ArrayList<Chemin>();
+					for(int j = positionStart; j < positionEnd; j++) {
+						listeSolution.add(tempPccs[meilleureSolution[j]][meilleureSolution[j+1]]);
+					}
+					Tournee solution = new Tournee(listeSolution);
+					this.listeTournees.add(solution);
+				}
+			}
+			
+		}
+		if(alert) {
+			setChanged();
+			notifyObservers("Alert Temps");
+		}else {
 			setChanged();
 			notifyObservers("Tournees");
 		}
