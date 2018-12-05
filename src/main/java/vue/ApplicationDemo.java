@@ -41,7 +41,7 @@ import controleur.Controleur;
 */
 
 enum ETAT {
-    EtatInit,EtatPlanCharge,EtatDemandeLivraison, EtatDeveloppement;
+    EtatInit,EtatPlanCharge,EtatDemandeLivraison;
 }
 
 @SuppressWarnings("restriction")
