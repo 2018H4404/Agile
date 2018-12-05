@@ -1,6 +1,7 @@
 package vue;
 
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -197,7 +198,7 @@ public class ApplicationDemo extends Application{
 					VerifierEtat(controleur);
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					System.out.println("d");
 					e.printStackTrace();
 				}
             	   
@@ -222,7 +223,13 @@ public class ApplicationDemo extends Application{
 				VerifierEtat(controleur);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				Alert alert = new Alert(AlertType.INFORMATION);
+		        alert.setTitle("Charge un plan");
+		 
+		        alert.setHeaderText(null);
+		        alert.setContentText("errors in file xml!");
+		 
+		        alert.showAndWait();
 				e.printStackTrace();
 			}
            	   

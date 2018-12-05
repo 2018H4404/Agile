@@ -65,7 +65,7 @@ public class PointLivraisonVue extends Circle{
             }
         });
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+			
             public void handle(final MouseEvent event) {
                 System.out.println(idPointLivraison);
                 try {

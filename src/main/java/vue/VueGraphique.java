@@ -52,6 +52,7 @@ public class VueGraphique extends Parent implements Observer{
 	private VueTextuelle compagnie;
 	private  double hauteur = 800;
 	private  double largeur = 800;
+	private static Color[] couleurs = {Color.CRIMSON,Color.CYAN,Color.FUCHSIA,Color.GREENYELLOW,Color.LIMEGREEN,Color.SKYBLUE};
 	
 	/**
 	 * Constructeur de la vue graphique.
@@ -193,24 +194,15 @@ public class VueGraphique extends Parent implements Observer{
 			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),6,livraison.getId());
 			livraisonGroup.getChildren().add(tempPointLivraison);
 		}
+		compagnie.afficheListLivraison(lesPointLivraisons);
 	}
 	
 	/**
 	 * Méthode pour generer des couleurs aleatoires que nous utilisons afin de dessiner les tournees.
 	 * @param nbLivreur : nombre des livreurs
 	 */
-	public Color[] genererCouleurs(int nbLivreur) {
-		Color[] couleurs = new Color[nbLivreur];
-		double red = 0.5;
-		double green = 0.8;
-		double blue =0.1;
-		for(int i =0; i < nbLivreur; i++) {
-			couleurs[i] = Color.color(red, green, blue);
-			green = 0.6;
-			red = Math.random()*0.6;
-			blue = Math.random()*0.3;
-		}
-		return couleurs;
+	public Color genererCouleurs(int index) {
+		return couleurs[index%couleurs.length];
 	}
 	
 	/**
@@ -220,11 +212,10 @@ public class VueGraphique extends Parent implements Observer{
 	public void dessinerTournees(TourneeManager manager) {
 		clearTournees();
 		ArrayList<Tournee> tournees = manager.getListeTournees();
-		Color[] couleurs = genererCouleurs(tournees.size());
 		int index = 0;
 		for(Tournee tournee : tournees) {
 			Group tempGroup = new Group();
-			Color tourneeCouleur = couleurs[index];
+			Color tourneeCouleur = genererCouleurs(index);
 			ArrayList<Chemin> tempChemins = tournee.getListeChemins();
 			for(Chemin chemin : tempChemins) {
 				ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();

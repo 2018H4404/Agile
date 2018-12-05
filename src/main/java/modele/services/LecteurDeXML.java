@@ -94,7 +94,7 @@ public class LecteurDeXML {
 	 * Méthode permettant la lecture du fichier XML du plan.
 	 * @param f le fichier XML.
 	 */
-	public void lecturePlanXML(File f) {
+	public void lecturePlanXML(File f) throws Exception{
 		HashMap<Long,IntersectionNormal> tempIntersections = new HashMap<Long,IntersectionNormal>();  
 		HashMap<Long,ArrayList<Troncon>> tempTroncons = new HashMap<Long,ArrayList<Troncon>>();
 		double maxLong = 0;
@@ -169,8 +169,8 @@ public class LecteurDeXML {
 				}
 				setLatLongDesTroncons(tempIntersections, tempTroncons);
 		    }   
-		    } catch (Exception e) {   
-			    e.printStackTrace();   
+		    } catch (Exception e) {  
+		    	throw e;   
 		    }
 		Controleur.getInstance().getMonPlan().initialiserPlan(tempIntersections, tempTroncons, maxLong, minLong, maxLat, minLat);
 	}

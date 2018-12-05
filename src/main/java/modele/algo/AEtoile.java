@@ -42,6 +42,7 @@ public class AEtoile {
 		ArrayList<Troncon> traduction = new ArrayList<Troncon>();
 		int length = chemin.size();
 		for(int i = 0; i < length-1; i++) {
+			System.out.println(chemin.get(i));
 			ArrayList<Troncon> tempListe = unPlan.getTronconsParOrigine(chemin.get(i).getId());
 			for(int j = 0; j < tempListe.size(); j++) {
 				Intersection tempDest = tempListe.get(j).getDestination();
@@ -51,6 +52,8 @@ public class AEtoile {
 				}
 			}
 		}
+		System.out.println(chemin.get(length-1));
+		System.out.println("");
 		return traduction;
 	}
 	
@@ -109,8 +112,8 @@ public class AEtoile {
 			
 			if(dest.equals(interCourant)) {
 				meilleurChemin.clear();
-				meilleurChemin.clear();
 				meilleurChemin.add(0, dest);
+				interCourant = parents.get(interCourant);
 				while(!depart.equals(interCourant)) { 
 					meilleurChemin.add(0, interCourant);
 					interCourant = parents.get(interCourant);
