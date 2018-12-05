@@ -406,6 +406,20 @@ public class ApplicationDemo extends Application{
               VerifierEtat(controleur); 
 	         }
 	      }); 
+        
+        buttonEffacerDemande.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+             graph.clearEntrepotLivraison();
+             graph.clearTournees();
+             labelNombreLivreurs.setText("Nombre de livreurs :");
+             textFieldnombreLivreur.setText("");
+             controleur.setEtat(controleur.getEtatPlanCharge());
+             VerifierEtat(controleur); 
+	         }
+	      }); 
+        
         menuTournee.getItems().addAll(itemCalculerTournees,itemEffacer);
         
       //Ajout de l'onglet View(Composant prevu pour apres)
