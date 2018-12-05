@@ -8,6 +8,7 @@ import java.util.Observer;
 import controleur.Controleur;
 
 import javafx.scene.input.MouseEvent;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.ScrollPane;
@@ -297,6 +298,23 @@ public class VueGraphique extends Parent implements Observer{
 	 */	
 	public void clearAfficheeTournees() {
 		tourneesAfficheesGroup.getChildren().clear();
+	}
+	
+	public void synchronisationLivraison(long id) {
+		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
+		for(Node e : tempLivraisons) {
+			if(e instanceof PointLivraisonVue) {
+				PointLivraisonVue tempReference = (PointLivraisonVue)e;
+				tempReference.changerCouleurNonSelectionnee();
+				if(tempReference.getIntersectionId() == id) {
+					if(!tempReference.isSynchronisee()) {
+						tempReference.changerFormeSynchronise();
+					}else {
+						tempReference.setSynchronisee(false);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
