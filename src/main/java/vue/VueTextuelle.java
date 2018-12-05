@@ -35,7 +35,7 @@ import modele.metier.Entrepot;
 import modele.metier.Intersection;
 import modele.metier.PointLivraison;
 import modele.metier.Tournee;
-import vue.element.LivraisonPane;
+//import vue.element.LivraisonPane;
 
 /** 
  * La classe de la vue textuelle.
@@ -257,7 +257,7 @@ public class VueTextuelle extends Parent implements Observer{
             	}
             	
                 CheckBox chk = (CheckBox) event.getSource();
-//                System.out.println("Action performed on checkbox " + chk.getText());
+                System.out.println("Action performed on checkbox " + chk.getText());
             	ArrayList<Integer> coches = new ArrayList<Integer>();
             	boolean all = false;
             	for(int i = 0 ;i<lesFiltres.length;i++) {
