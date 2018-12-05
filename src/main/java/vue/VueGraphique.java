@@ -301,6 +301,8 @@ public class VueGraphique extends Parent implements Observer{
 						tempReference.changerFormeSynchronise();
 					}else {
 						tempReference.setSynchronisee(false);
+						tempReference.setOriginalColor(Color.CORNFLOWERBLUE);
+						tempReference.changerCouleurNonSelectionnee();
 					}
 				}
 			}
