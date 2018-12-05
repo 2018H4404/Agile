@@ -40,7 +40,7 @@ import controleur.Controleur;
 */
 
 enum ETAT {
-    EtatInit,EtatPlanCharge,EtatDemandeLivraison;
+    EtatInit,EtatPlanCharge,EtatDemandeLivraison,EtatPosteCalcul;
 
 }
 
@@ -150,6 +150,7 @@ public class ApplicationDemo extends Application{
                if(file != null) {
             	   try {
 					Controleur.getInstance().chargerFichierDemandeLivraison(file);
+					Controleur.getInstance().ajouterListenerOnClick();
 					VerifierEtat(controleur);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -170,6 +171,7 @@ public class ApplicationDemo extends Application{
               if(file != null) {
            	   try {
 				Controleur.getInstance().chargerFichierDemandeLivraison(file);
+				Controleur.getInstance().ajouterListenerOnClick();
 				VerifierEtat(controleur);
 
 			} catch (Exception e) {
@@ -300,6 +302,7 @@ public class ApplicationDemo extends Application{
 	   	        				 try {
 	   	        					entreeLivreur.close();
 	   	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
+ 	   	        					Controleur.getInstance().effaceListenerOnClick();
 	   	        					VerifierEtat(controleur);
 	   	        				 }catch(Exception e) {
 	   	        					e.printStackTrace();
@@ -380,6 +383,9 @@ public class ApplicationDemo extends Application{
 	 	   	        				 try {
 	 	   	        					entreeLivreur.close();
 	 	   	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
+	 	   	        					System.out.println(Controleur.getInstance().getEtatCourant().getClass().getSimpleName());
+	 	   	        					System.out.println("ddd");
+	 	   	        					Controleur.getInstance().effaceListenerOnClick();
 	 	   	        					VerifierEtat(controleur);
 	 	   	        				 }catch(Exception e) {
 	 	   	        					e.printStackTrace();
@@ -488,6 +494,16 @@ public class ApplicationDemo extends Application{
 			buttonEfface.setDisable(false);
 
 			break;
+			
+		case EtatPosteCalcul:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(true);
+			buttonEfface.setDisable(true);
         
 		default:
 			itemChargerPlan.setDisable(true);

@@ -63,20 +63,22 @@ public class PointLivraisonVue extends Circle{
             public void handle(final MouseEvent event) {
             	changerCouleurNonSelectionnee();
             }
-        });
+        });	
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
-            public void handle(final MouseEvent event) {
-                System.out.println(idPointLivraison);
-                try {
+	        public void handle(final MouseEvent event) {
+	            System.out.println(idPointLivraison);
+	            try {
 					Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}  
-        });
+		});
 	}
+	
+	
 	
 	/**
 	 * Méthode pour changer la couleur du point de livraison sélectionné.
@@ -91,5 +93,16 @@ public class PointLivraisonVue extends Circle{
 	public void changerCouleurNonSelectionnee() {
 		this.setFill(originalColor);
 	}
+
+	public void effaceListenerOnClick() {
+		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(final MouseEvent event) {
+				
+			}
+		});
+		
+	}
+
+	
 	
 }

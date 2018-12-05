@@ -22,7 +22,7 @@ public class Controleur {
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
 	private EtatDemandeLivraison etatDemandeLivraison;
-
+	private EtatPosteCalcul etatPosteCalcul;
 	
 	private Controleur() {
 		monPlan = new Plan();
@@ -31,6 +31,7 @@ public class Controleur {
 		etatPlanCharge = new EtatPlanCharge();
 		etatInit = new EtatInit();
 		etatDemandeLivraison = new EtatDemandeLivraison();
+		etatPosteCalcul = new EtatPosteCalcul();
 		etat = etatInit;
 	}
 	
@@ -129,4 +130,15 @@ public class Controleur {
 		return maDemande.getDebutTime();
 	}
 	
+	public void ajouterListenerOnClick() {
+		etat.ajouterListenerOnClick();
+	}
+	
+	public void effaceListenerOnClick() {
+		etat.effaceListenerOnClick();
+	}
+
+	public Etat getEtatPosteCalcul() {
+		return etatPosteCalcul;
+	}
 }

@@ -108,6 +108,15 @@ public class VueGraphique extends Parent implements Observer{
 		this.getChildren().add(container);
 	}
 	
+	public Group getNoeudGroup() {
+		return this.noeudGroup;
+		
+	}
+	
+	public Group getLivraisonGroup() {
+		return this.livraisonGroup;
+	}
+	
 	/**
 	 * Méthode pour ajouter l'event listener.
 	 */
@@ -167,10 +176,11 @@ public class VueGraphique extends Parent implements Observer{
 				counter++;
 			}
 		}
-		for(IntersectionNormal intersection : lesIntersections) {
-			IntersectionNormalVue tempPoint = new IntersectionNormalVue(monPlan.transformLongitude(intersection.getLongitude(), largeur),monPlan.transformLatitude(intersection.getLatitude(), hauteur),4,intersection.getId());
-			noeudGroup.getChildren().add(tempPoint);
-		}
+			for(IntersectionNormal intersection : lesIntersections) {
+				IntersectionNormalVue tempPoint = new IntersectionNormalVue(monPlan.transformLongitude(intersection.getLongitude(), largeur),monPlan.transformLatitude(intersection.getLatitude(), hauteur),4,intersection.getId());
+				noeudGroup.getChildren().add(tempPoint);
+			}
+		
 		System.out.println(counter);
 		System.out.println("Done Plan");
 	}

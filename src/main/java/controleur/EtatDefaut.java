@@ -28,6 +28,16 @@ public class EtatDefaut implements Etat{
 	public void modifierPointLivraison() throws Exception {
 		
 	}
+
+	@Override
+	public void ajouterListenerOnClick() {
+		
+	}
+
+	@Override
+	public void effaceListenerOnClick() {
+		
+	}
 	
 }
 	

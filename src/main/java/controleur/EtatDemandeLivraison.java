@@ -1,11 +1,16 @@
 package controleur;
 
+import javafx.scene.Node;
+import vue.element.IntersectionNormalVue;
+import vue.element.PointLivraisonVue;
+
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override
 	public void CalculerLesTournees(int nbLivreur) {
 		
 		Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 
 	}
 	
@@ -13,6 +18,19 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	public int getNbLivreurMaximum() throws Exception {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
+	
+	public void ajouterListenerOnClick() {
+		for(Node vue : Controleur.getInstance().getGraph().getNoeudGroup().getChildren()) {
+			if(vue instanceof IntersectionNormalVue) {
+				
+				IntersectionNormalVue temp = (IntersectionNormalVue) vue;
+				temp.ajouterListenerOnClick();
+				
+			}
+		}
+	}
+	
+
 	
 	@Override
 	public void modifierPointLivraison() throws Exception{

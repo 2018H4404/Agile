@@ -64,10 +64,13 @@ public class IntersectionNormalVue extends Circle{
             	changerCouleurNonSelectionnee();
             }
         });
+		
+	}
+	
+	public void ajouterListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             public void handle(final MouseEvent event) {
-                System.out.println(idInter);
                 try {
 					Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
 					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
@@ -79,6 +82,14 @@ public class IntersectionNormalVue extends Circle{
 				}
 			}  
         });
+	}
+	
+	public void effaceListenerOnClick() {
+		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(final MouseEvent event) {
+				
+			}
+		});
 	}
 	/**
 	 * Méthode pour changer la couleur de l'intersection selectionnée.
