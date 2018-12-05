@@ -10,6 +10,5 @@ public class EtatInit extends EtatDefaut {
 	public void chargerFichierPlan(File f) throws Exception {
 		LecteurDeXML.getInstance().lecturePlanXML(f);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
-
 	}
 }

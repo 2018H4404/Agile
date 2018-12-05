@@ -51,8 +51,8 @@ public class VueGraphique extends Parent implements Observer{
 	private Group tourneesAfficheesGroup;
 	private ArrayList<Group> tourneesGroup;
 	private VueTextuelle compagnie;
-	private  double hauteur = 800;
-	private  double largeur = 800;
+	private  double hauteur = 600;
+	private  double largeur = 600;
 	private static Color[] couleurs = {Color.CRIMSON,Color.CYAN,Color.FUCHSIA,Color.GREENYELLOW,Color.LIMEGREEN,Color.SKYBLUE};
 	
 	/**
@@ -67,14 +67,13 @@ public class VueGraphique extends Parent implements Observer{
 		BorderPane container = new BorderPane();
 		Slider zoomSlider = new Slider();
 
-
 		zoomSlider.setMin(1);
 		zoomSlider.setMax(3);
 		zoomSlider.setValue(1);
 		zoomSlider.setBlockIncrement(0.01);
 		
-		paneGraphique.setPrefViewportHeight(800);
-		paneGraphique.setPrefViewportWidth(800);
+		paneGraphique.setPrefViewportHeight(600);
+		paneGraphique.setPrefViewportWidth(600);
 		noeudGroup = new Group();
 		tronconGroup = new Group();
 		entrepotGroup = new Group();
@@ -88,7 +87,6 @@ public class VueGraphique extends Parent implements Observer{
 		
 		//Ajouter les actions suivant les Événements
 		
-
 		rootGroup.getChildren().add(tronconGroup);
 		rootGroup.getChildren().add(noeudGroup);
 		rootGroup.getChildren().add(entrepotGroup);
@@ -327,11 +325,7 @@ public class VueGraphique extends Parent implements Observer{
 		        alert.setHeaderText("Attention");
 		        alert.setContentText("Dépasser la limite de temps : 10 secondes! Une Solution est affichée mais elle n'est pas optimale.");
 		        alert.show();
-				break;	
-				
-		}
-		
-	}
-
-	
+				break;			
+		}	
+	}	
 }
