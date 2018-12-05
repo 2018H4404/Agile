@@ -180,6 +180,7 @@ public class AEtoile {
 	 * @param distanceEstimeeF la distance éstimée de F.
 	 * @return la valeur de F.
 	 */
+	/*
 	public Double trouverValuerF(Intersection unInter, HashMap<Intersection,Double> distanceEstimeeF){
 		Double retour = 0.0;
 		Set<Entry<Intersection,Double>> set = distanceEstimeeF.entrySet();
@@ -190,7 +191,7 @@ public class AEtoile {
 			}
 		}
 		return retour;
-	}
+	}*/
 	
 	/**
 	 * Méthode pour trouver la clé
