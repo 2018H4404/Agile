@@ -18,4 +18,5 @@ public interface Etat {
 	public void ajouterListenerOnClick();
 
 	public void effaceListenerOnClick();
+	
 }

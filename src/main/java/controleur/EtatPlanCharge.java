@@ -10,7 +10,5 @@ public class EtatPlanCharge extends EtatDefaut {
 	public void lectureLivraisonEntrepotXML(File f) throws Exception {
 		LecteurDeXML.getInstance().lectureLivraisonEntrepotXML(f);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatDemandeLivraison());
-
 	}
-	
 }

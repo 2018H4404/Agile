@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import modele.TourneeManager;
+import modele.algo.SimulatedAnnealing;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
@@ -51,9 +52,13 @@ public class ApplicationDemo extends Application{
 	private Button buttonChargePlan;
 	private Button buttonChargeDemandeLivraison;
 	private Button buttonCalculer;
-	private Button buttonEfface;
+	private Button buttonEffacer;
+	private Button buttonEffacerDemande;
 	private Button buttonSupprimerPoint;
 
+	private Label labelNombreLivreurs;
+	private TextField textFieldnombreLivreur;
+	private Label labelError;
 
 	private MenuBar menuBar;
 	private Menu menuFile;
@@ -63,11 +68,9 @@ public class ApplicationDemo extends Application{
 	private MenuItem itemChargerDemandeLivraison;
 	private MenuItem itemCalculerTournees;
 	private MenuItem itemEffacer;
+	private MenuItem itemEffacerPlan;
 	private MenuItem itemAjouterLivraison;
 	private MenuItem itemSupprimerLivraison;
-
-
-	
 
 	/**
 	 * Méthode permettant de commencer la démo de l'application.
@@ -89,15 +92,54 @@ public class ApplicationDemo extends Application{
         vbox.setMinWidth(300);
 		buttonChargePlan = new Button("Charger un plan");
 		buttonChargePlan.setMinWidth(300);
+		buttonChargePlan.setMaxWidth(300);
 		buttonChargeDemandeLivraison = new Button("Charger une demande");
 		buttonChargeDemandeLivraison.setMinWidth(300);
+		buttonChargeDemandeLivraison.setMaxWidth(300);
 		buttonCalculer = new Button("Calculer");
 		buttonCalculer.setMinWidth(300);
-		buttonEfface = new Button("Efface");
-		buttonEfface.setMinWidth(300);
+		buttonCalculer.setMaxWidth(300);
+		
+		labelNombreLivreurs = new Label("Nombre de livreur:");
+		labelNombreLivreurs.setMinWidth(300);
+		labelNombreLivreurs.setMaxWidth(300);
+		labelNombreLivreurs.setWrapText(true);
+		
+		textFieldnombreLivreur = new TextField() {
+   	      @Override
+   	      public void replaceText(int start, int end, String text) {
+   	        if (!text.matches("[a-z]")) {
+   	          super.replaceText(start, end, text);
+   	        }
+   	      }
+
+   	      @Override
+   	      public void replaceSelection(String text) {
+   	        if (!text.matches("[a-z]")) {
+   	          super.replaceSelection(text);
+   	        }
+   	      }
+   	    };
+		textFieldnombreLivreur.setMinWidth(300);
+		textFieldnombreLivreur.setMaxWidth(300);
+		
+		labelError=new Label();   
+		labelError.setMinWidth(300);
+		labelError.setMaxWidth(300);
+		labelError.setWrapText(true);
+		labelError.setTextFill(Color.web("#FF0000"));
+		
+		buttonEffacer = new Button("Effacer tout");
+		buttonEffacer.setMinWidth(300);
+		buttonEffacer.setMaxWidth(300);
+		
+		buttonEffacerDemande = new Button("Effacer demande de livraison");
+		buttonEffacerDemande.setMinWidth(300);
+		buttonEffacerDemande.setMaxWidth(300);
 		
 		
-        vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison,buttonCalculer,buttonEfface);
+        vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
+        		textFieldnombreLivreur, labelError, buttonCalculer, buttonEffacer, buttonEffacerDemande);
 
 		//Ajout de la barre de menu
         Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -120,7 +162,6 @@ public class ApplicationDemo extends Application{
         primaryStage.setScene(scene);
         primaryStage.setTitle("PLD Agile");
         primaryStage.show();
-        
 
 	}
 	
@@ -131,6 +172,7 @@ public class ApplicationDemo extends Application{
    * @param controleur
 	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage,Controleur controleur) {
+		
 		
 		menuBar = new MenuBar();
 		
@@ -156,38 +198,44 @@ public class ApplicationDemo extends Application{
 					e.printStackTrace();
 				}
                }
+
 	         }
 	      });
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
-			 
-	         @Override
-	         public void handle(ActionEvent event) {
-	        	
-	          FileChooser fileChooser = new FileChooser();
-	          fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
-              fileChooser.getExtensionFilters().add(extFilter);
-              File file = fileChooser.showOpenDialog(primaryStage);
-              if(file != null) {
-           	   try {
-				Controleur.getInstance().chargerFichierDemandeLivraison(file);
-				Controleur.getInstance().ajouterListenerOnClick();
-				VerifierEtat(controleur);
+			
 
-			} catch (Exception e) {
-				System.out.println("AA");
-				Alert alert = new Alert(AlertType.INFORMATION);
-		        alert.setTitle("Chargement de demande de livraison");
-		        alert.setHeaderText(null);
-		        alert.setContentText("Erreurs dans le fichier XML des livraisons");
-		        alert.showAndWait();
-				e.printStackTrace();
-				
-			}
-              }
+	      @Override
+		    public void handle(ActionEvent event) {
+		        	
+	        	 FileChooser fileChooser = new FileChooser();
+	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
+	             fileChooser.getExtensionFilters().add(extFilter);
+	             File file = fileChooser.showOpenDialog(primaryStage);
+	             if(file != null) {
+	           	   	try {
+						Controleur.getInstance().chargerFichierDemandeLivraison(file);
+						Controleur.getInstance().ajouterListenerOnClick();
+						int maximum = Controleur.getInstance().getNbLivreurMaximum();
+						labelNombreLivreurs.setText("Nombre de livreurs (maximum " + maximum + "):");
+						textFieldnombreLivreur.setText("1");
+						VerifierEtat(controleur);
+	           	   	} catch (Exception e) {
+	           	   		  System.out.println("AA");
+                      Alert alert = new Alert(AlertType.INFORMATION);
+                      alert.setTitle("Chargement de demande de livraison");
+                      alert.setHeaderText(null);
+                      alert.setContentText("Erreurs dans le fichier XML des livraisons");
+                      alert.showAndWait();
+                      e.printStackTrace();
+					          e.printStackTrace();
+	           	   	}
+	             }
 	         }
 	      });
+        
         itemChargerPlan = new MenuItem("Charger Plan");
+        
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -195,25 +243,22 @@ public class ApplicationDemo extends Application{
 	        	
 	        	FileChooser fileChooser = new FileChooser();
 	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-               FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
-               fileChooser.getExtensionFilters().add(extFilter);
-               File file = fileChooser.showOpenDialog(primaryStage);
-               if(file != null) {
-            	   try {
-					Controleur.getInstance().chargerFichierPlan(file);
-					VerifierEtat(controleur);
-
-				} catch (Exception e) {
-					System.out.println("d");
-					e.printStackTrace();
-				}
-            	   
-         	   
-               }
-               
+	        	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
+	        	fileChooser.getExtensionFilters().add(extFilter);
+	        	File file = fileChooser.showOpenDialog(primaryStage);
+	        	if(file != null) {
+	        		try {
+	        			Controleur.getInstance().chargerFichierPlan(file);
+	        			VerifierEtat(controleur);
+	        		} catch (Exception e) {
+						System.out.println("d");
+						e.printStackTrace();
+	        		}
+	        	} 
 	         }
 	      }); 
-        buttonChargePlan.setOnAction(new EventHandler<ActionEvent>() {
+        
+    	buttonChargePlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
@@ -242,15 +287,9 @@ public class ApplicationDemo extends Application{
 			}
            	   
               }
-              
 	         }
 	      }); 
         
-        
-        
-       
-       
- 
         menuFile.getItems().addAll(itemChargerPlan,itemChargerDemandeLivraison);
  
       //Ajout de l'onglet Opération
@@ -262,7 +301,6 @@ public class ApplicationDemo extends Application{
 	         @Override
 	         public void handle(ActionEvent event) {
                try {
-            	Stage entreeLivreur = new Stage();
             	int maximum = Controleur.getInstance().getNbLivreurMaximum();
             	TextField nbLivreur = new TextField() {
             	      @Override
@@ -279,152 +317,90 @@ public class ApplicationDemo extends Application{
             	        }
             	      }
             	    };
-            	nbLivreur.setMaxWidth(200);
    	        	Label label = new Label("Nombre de livreurs"  + "(Maximum :" + maximum + ")" + " :");
    	        	Button validerButton = new Button("Calculer");
    	        	validerButton.setOnAction(new EventHandler<ActionEvent>() {
 	   	        	 @Override
 	   		         public void handle(ActionEvent event) {
-	   	        		 String contenu = nbLivreur.getText();
+	   	        		 String contenu = textFieldnombreLivreur.getText();
 	   	        		 if(contenu.equals("")) {
+	   	        			 //TODO
+	   	        			 /*
 	   	        			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	   	 		       		alert.setHeaderText("Attention");
 	   	 		       		alert.setContentText("Rentrer un nombre avant de lancer, s'il vous plait.");
 	   	 		       		alert.show();
+	   	 		       		*/
 	   	        		 }else {
 	   	        			 int nbLivreur = Integer.parseInt(contenu);
 	   	        			 if(nbLivreur > maximum) {
+	   	        				 //TODO
+	   	        				 /*
 	   	        				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		   	 		       		alert.setHeaderText("Attention");
 		   	 		       		alert.setContentText("Nombre trop grand!");
 		   	 		       		alert.show();
+		   	 		       		*/
 	   	        			 }else {
 	   	        				 try {
-	   	        					entreeLivreur.close();
 	   	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
  	   	        					Controleur.getInstance().effaceListenerOnClick();
 	   	        					VerifierEtat(controleur);
-	   	        				 }catch(Exception e) {
+	   	        				 } catch(Exception e) {
 	   	        					e.printStackTrace();
 	   	        				 }
 	   	        			 }
 	   	        		 }
 	   	        	 }
    	        	});
-   	            BorderPane fentreNbLivreur = new BorderPane();
-   	            fentreNbLivreur.setTop(label);
-   	            fentreNbLivreur.setCenter(nbLivreur);
-   	         	fentreNbLivreur.setBottom(validerButton);
-   	         	BorderPane.setAlignment(label, Pos.CENTER);
-   	         	BorderPane.setAlignment(nbLivreur, Pos.CENTER);
-   	         	BorderPane.setAlignment(validerButton, Pos.CENTER);
-   	            Scene secondScene = new Scene(fentreNbLivreur, 300, 70);
-
-   	            // New window (Stage)
-   	            entreeLivreur.setTitle("");
-   	            entreeLivreur.setScene(secondScene);
-   	 
-   	            // Specifies the owner Window (parent) for new window
-   	            entreeLivreur.initOwner(primaryStage);
-   	 
-   	            // Set position of second window, related to primary window.
-   	            entreeLivreur.setX(primaryStage.getX() + 650);
-   	            entreeLivreur.setY(primaryStage.getY() + 400);
-   	 
-   	            entreeLivreur.show();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	         }
 	      }); 
+        
+        /**
+         * Boutton calculer qui permet le calcul des tournées.
+         */
         buttonCalculer.setOnAction(new EventHandler<ActionEvent>() {
-			 
 	         @Override
 	         public void handle(ActionEvent event) {
 	        	 try {
-	             	int maximum = Controleur.getInstance().getNbLivreurMaximum();
-	             	Stage entreeLivreur = new Stage();
-	             	TextField nbLivreur = new TextField() {
-	             	      @Override
-	             	      public void replaceText(int start, int end, String text) {
-	             	        if (!text.matches("[a-z]")) {
-	             	          super.replaceText(start, end, text);
-	             	        }
-	             	      }
 
-	             	      @Override
-	             	      public void replaceSelection(String text) {
-	             	        if (!text.matches("[a-z]")) {
-	             	          super.replaceSelection(text);
-	             	        }
-	             	      }
-	             	    };
-	             	nbLivreur.setMaxWidth(200);
-	    	        	Label label = new Label("Nombre de livreurs"  + "(Maximum :" + maximum + ")" + " :");
-	    	        	Button validerButton = new Button("Calculer");
-	    	        	validerButton.setOnAction(new EventHandler<ActionEvent>() {
-	 	   	        	 @Override
-	 	   		         public void handle(ActionEvent event) {
-	 	   	        		 String contenu = nbLivreur.getText();
-	 	   	        		 if(contenu.equals("")) {
-	 	   	        			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	 	   	 		       		alert.setHeaderText("Attention");
-	 	   	 		       		alert.setContentText("Rentrer un nombre avant de lancer, s'il vous plait.");
-	 	   	 		       		alert.show();
-	 	   	        		 }else {
-	 	   	        			 int nbLivreur = Integer.parseInt(contenu);
-	 	   	        			 if(nbLivreur > maximum) {
-	 	   	        				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	 		   	 		       		alert.setHeaderText("Attention");
-	 		   	 		       		alert.setContentText("Nombre trop grand!");
-	 		   	 		       		alert.show();
-	 	   	        			 }else {
-	 	   	        				 try {
-	 	   	        					entreeLivreur.close();
-	 	   	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
-	 	   	        					System.out.println(Controleur.getInstance().getEtatCourant().getClass().getSimpleName());
-	 	   	        					Controleur.getInstance().effaceListenerOnClick();
-	 	   	        					VerifierEtat(controleur);
-	 	   	        				 }catch(Exception e) {
-	 	   	        					e.printStackTrace();
-	 	   	        				 }
-	 	   	        			 }
-	 	   	        		 }
-	 	   	        	 }
-	    	        	});
-	    	            BorderPane fentreNbLivreur = new BorderPane();
-	    	            fentreNbLivreur.setTop(label);
-	    	            fentreNbLivreur.setCenter(nbLivreur);
-	    	         	fentreNbLivreur.setBottom(validerButton);
-	    	         	BorderPane.setAlignment(label, Pos.CENTER);
-	    	         	BorderPane.setAlignment(nbLivreur, Pos.CENTER);
-	    	         	BorderPane.setAlignment(validerButton, Pos.CENTER);
-	    	            Scene secondScene = new Scene(fentreNbLivreur, 300, 70);
-	    	   
-	    	            // New window (Stage)
-	    	            entreeLivreur.setTitle("");
-	    	            entreeLivreur.setScene(secondScene);
-	    	 
-	    	            // Specifies the owner Window (parent) for new window
-	    	            entreeLivreur.initOwner(primaryStage);
-	    	 
-	    	            // Set position of second window, related to primary window.
-	    	            entreeLivreur.setX(primaryStage.getX() + 650);
-	    	            entreeLivreur.setY(primaryStage.getY() + 400);
-	    	 
-	    	            entreeLivreur.show();
+	        		 int maximum = Controleur.getInstance().getNbLivreurMaximum();
+   	        		 String contenu = textFieldnombreLivreur.getText();
+   	        		 if(contenu.equals("")) {
+	   	        			labelError.setText("Il n'y a pas d'entrée, "
+	   	        					+ "veuillez spécifier une valeur.");
+   	        		 } else {
+	        			 int nbLivreur = Integer.parseInt(contenu);
+	        			 if(nbLivreur > maximum) {
+	        				 labelError.setText("Le nombre de livreurs donnée est plus grand que le nombre "
+	        				 		+ "maximum de livreurs, veuillez spécifier une valeur valide.");
+	        			 } else {
+	        				 try {
+	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
+	   	        				Controleur.getInstance().effaceListenerOnClick();
+
+	        					VerifierEtat(controleur);
+	        				 }catch(Exception e) {
+	        					e.printStackTrace();
+	        				 }
+	        			 }
+	        		 }
 	 			} catch (Exception e) {
 	 				// TODO Auto-generated catch block
 	 				e.printStackTrace();
 	 			}
-	 	         }
-	 	      }); 
+	         }
+ 	      }); 
         
-        itemEffacer = new MenuItem("Effacer");
+        itemEffacer = new MenuItem("Effacer tout");
+        itemEffacerPlan = new MenuItem("Effacer le plan");
+        itemEffacerPlan = new MenuItem("Effacer la demande de livraison");
 
         itemEffacer.setOnAction(new EventHandler<ActionEvent>() {
-			 
 	         @Override
 	         public void handle(ActionEvent event) {
                graph.clearVue();
@@ -432,24 +408,40 @@ public class ApplicationDemo extends Application{
                controleur.setEtat(controleur.getEtatInit());
                VerifierEtat(controleur);
 	         }
-	      }); 
-        buttonEfface.setOnAction(new EventHandler<ActionEvent>() {
+	      });
+        
+        buttonEffacer.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
               graph.clearVue();
               texte.clearVue();
+              labelNombreLivreurs.setText("Nombre de livreurs :");
+              textFieldnombreLivreur.setText("");
               controleur.setEtat(controleur.getEtatInit());
               VerifierEtat(controleur); 
 	         }
 	      }); 
+        
+        buttonEffacerDemande.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+             graph.clearEntrepotLivraison();
+             graph.clearTournees();
+             labelNombreLivreurs.setText("Nombre de livreurs :");
+             textFieldnombreLivreur.setText("");
+             controleur.setEtat(controleur.getEtatPlanCharge());
+             VerifierEtat(controleur); 
+	         }
+	      }); 
+        
         menuTournee.getItems().addAll(itemCalculerTournees,itemEffacer);
         
       //Ajout de l'onglet View(Composant prevu pour apres)
         menuLivraison = new Menu("Livraison");
         itemAjouterLivraison = new MenuItem("Ajouter une tournee");
         itemSupprimerLivraison = new MenuItem("Supprimer une tournee");
-        
         
         menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
         pane.setTop(menuBar);
@@ -468,8 +460,11 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(true);
 			buttonCalculer.setDisable(true);
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(true);
-			buttonEfface.setDisable(true);
+			buttonEffacer.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
+			
 			break;
 		case EtatPlanCharge:
 			itemChargerPlan.setDisable(true);
@@ -478,8 +473,10 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(false);
 			itemCalculerTournees.setDisable(true);
 			buttonCalculer.setDisable(true);
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(false);
-			buttonEfface.setDisable(false);
+			buttonEffacer.setDisable(false);
+			buttonEffacerDemande.setDisable(true);
 
 			break;
 		case EtatDemandeLivraison:
@@ -489,8 +486,10 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(false);
 			buttonCalculer.setDisable(false);
+			textFieldnombreLivreur.setDisable(false);
 			itemEffacer.setDisable(false);
-			buttonEfface.setDisable(false);
+			buttonEffacer.setDisable(false);
+			buttonEffacerDemande.setDisable(false);
 
 			break;
 			
@@ -502,17 +501,21 @@ public class ApplicationDemo extends Application{
 			itemCalculerTournees.setDisable(true);
 			buttonCalculer.setDisable(true);
 			itemEffacer.setDisable(true);
-			buttonEfface.setDisable(true);
-        
+			buttonEffacer.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
+
+
 		default:
 			itemChargerPlan.setDisable(true);
 			buttonChargePlan.setDisable(true);
 			itemChargerDemandeLivraison.setDisable(true);
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(true);
-			buttonCalculer.setDisable(true);
+			buttonCalculer.setDisable(true); 
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(true);
-			buttonEfface.setDisable(true);
+			buttonEffacer.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
 
 			break;
 		}
@@ -524,8 +527,6 @@ public class ApplicationDemo extends Application{
 	 */
 
 	public static void main(String[] args) {
-        launch(args);
-		
+		launch(args);
     }
-
 }

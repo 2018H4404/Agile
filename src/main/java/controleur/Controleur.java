@@ -46,7 +46,6 @@ public class Controleur {
 		return this.graph;
 	}
 	
-	
 	public void chargerFichierPlan(File f) throws Exception {
 		etat.chargerFichierPlan(f);
 	}

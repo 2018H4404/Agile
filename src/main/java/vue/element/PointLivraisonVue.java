@@ -62,9 +62,13 @@ public class PointLivraisonVue extends Circle{
 	
 	public void changerFormeSynchronise() {
 		synchronisee = true;
-		this.setRadius(6);
+		this.setRadius(8);
 		this.setFill(Color.ORANGE);
 		this.originalColor = Color.ORANGE;
+	}
+	
+	public void setOriginalColor(Color couleur) {
+		this.originalColor = couleur;
 	}
 	
 	/**
@@ -102,7 +106,9 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setFill(Color.YELLOW);
-		this.setRadius(originalRadius);
+		if(!originalColor.equals(Color.ORANGE)) {
+			this.setRadius(originalRadius);
+		}
 	}
 	
 	/**
@@ -110,7 +116,9 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setFill(originalColor);
-		this.setRadius(originalRadius);
+		if(!originalColor.equals(Color.ORANGE)) {
+			this.setRadius(originalRadius);
+		}
 	}
 
 	public void effaceListenerOnClick() {
