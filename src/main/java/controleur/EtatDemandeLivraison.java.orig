@@ -9,9 +9,12 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	@Override
 	public void CalculerLesTournees(int nbLivreur) {
 		
+<<<<<<< HEAD
 		Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+=======
 		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+>>>>>>> d0349b729a1e5cc51607684aa97121bf8a494224
 
 	}
 	

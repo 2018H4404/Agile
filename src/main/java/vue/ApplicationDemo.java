@@ -384,7 +384,6 @@ public class ApplicationDemo extends Application{
 	 	   	        					entreeLivreur.close();
 	 	   	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
 	 	   	        					System.out.println(Controleur.getInstance().getEtatCourant().getClass().getSimpleName());
-	 	   	        					System.out.println("ddd");
 	 	   	        					Controleur.getInstance().effaceListenerOnClick();
 	 	   	        					VerifierEtat(controleur);
 	 	   	        				 }catch(Exception e) {
