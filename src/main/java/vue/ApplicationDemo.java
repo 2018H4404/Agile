@@ -371,7 +371,7 @@ public class ApplicationDemo extends Application{
 	        			 int nbLivreur = Integer.parseInt(contenu);
 	        			 if(nbLivreur > maximum) {
 	        				 labelError.setText("Le nombre de livreurs donnée est plus grand que le nombre "
-	        				 		+ "maximum de livreurs, veuillez spécifier une valeur valide.");
+	        				 		+ "maximum de livreurs (" + maximum + " livreurs),  veuillez spécifier une valeur valide.");
 	        			 } else {
 	        				 try {
 	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
