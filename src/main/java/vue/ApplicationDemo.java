@@ -150,7 +150,12 @@ public class ApplicationDemo extends Application{
         primaryStage.setTitle("PLD Agile");
         primaryStage.show();
         
-
+        //Activer (décommenter) pour des fins de développement
+//        File file = new File("fichiersXML2018/petitPlan.xml");
+//        Controleur.getInstance().chargerFichierPlan(file);
+//        file = new File("fichiersXML2018/dl-petit-6.xml");
+//        Controleur.getInstance().chargerFichierDemandeLivraison(file);
+        
 	}
 	
 	/**
@@ -189,27 +194,31 @@ public class ApplicationDemo extends Application{
 	      });
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			 
-         @Override
-	    public void handle(ActionEvent event) {
-	        	
+	        @Override
+		    public void handle(ActionEvent event) {
+		        	
 	        	 FileChooser fileChooser = new FileChooser();
 	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
-              fileChooser.getExtensionFilters().add(extFilter);
-              File file = fileChooser.showOpenDialog(primaryStage);
-              if(file != null) {
-           	   try {
-				Controleur.getInstance().chargerFichierDemandeLivraison(file);
-				VerifierEtat(controleur);
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-              }
+	             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
+	             fileChooser.getExtensionFilters().add(extFilter);
+	             File file = fileChooser.showOpenDialog(primaryStage);
+	             if(file != null) {
+	           	   	try {
+						Controleur.getInstance().chargerFichierDemandeLivraison(file);
+						int maximum = Controleur.getInstance().getNbLivreurMaximum();
+						labelNombreLivreurs.setText("Nombre de livreurs (maximum " + maximum + "):");
+						textFieldnombreLivreur.setText("1");
+						VerifierEtat(controleur);
+	           	   	} catch (Exception e) {
+	           	   		// TODO Auto-generated catch block
+					e.printStackTrace();
+	           	   	}
+	             }
 	         }
 	      });
+        
         itemChargerPlan = new MenuItem("Charger Plan");
+        
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -369,28 +378,7 @@ public class ApplicationDemo extends Application{
 	 	   	        					e.printStackTrace();
 	 	   	        				 }
 	 	   	        			 }
-	 	   	        		 }        
-//	    	            BorderPane fentreNbLivreur = new BorderPane();
-//	    	            fentreNbLivreur.setTop(label);
-//	    	            fentreNbLivreur.setCenter(nbLivreur);
-//	    	         	fentreNbLivreur.setBottom(validerButton);
-//	    	         	BorderPane.setAlignment(label, Pos.CENTER);
-//	    	         	BorderPane.setAlignment(nbLivreur, Pos.CENTER);
-//	    	         	BorderPane.setAlignment(validerButton, Pos.CENTER);
-//	    	            Scene secondScene = new Scene(fentreNbLivreur, 300, 70);
-//	    	   
-//	    	            // New window (Stage)
-//	    	            entreeLivreur.setTitle("");
-//	    	            entreeLivreur.setScene(secondScene);
-//	    	 
-//	    	            // Specifies the owner Window (parent) for new window
-//	    	            entreeLivreur.initOwner(primaryStage);
-//	    	 
-//	    	            // Set position of second window, related to primary window.
-//	    	            entreeLivreur.setX(primaryStage.getX() + 650);
-//	    	            entreeLivreur.setY(primaryStage.getY() + 400);
-//	    	 
-//	    	            entreeLivreur.show();
+	 	   	        		 }
 	 			} catch (Exception e) {
 	 				// TODO Auto-generated catch block
 	 				e.printStackTrace();
@@ -418,6 +406,8 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
               graph.clearVue();
               texte.clearVue();
+              labelNombreLivreurs.setText("Nombre de livreurs :");
+              textFieldnombreLivreur.setText("");
               controleur.setEtat(controleur.getEtatInit());
               VerifierEtat(controleur); 
 	         }
@@ -446,8 +436,12 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(true);
 			buttonCalculer.setDisable(true);
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(true);
 			buttonEffacer.setDisable(true);
+			buttonEffacerPlan.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
+			
 			break;
 		case EtatPlanCharge:
 			itemChargerPlan.setDisable(true);
@@ -456,8 +450,11 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(false);
 			itemCalculerTournees.setDisable(true);
 			buttonCalculer.setDisable(true);
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(false);
 			buttonEffacer.setDisable(false);
+			buttonEffacerPlan.setDisable(false);
+			buttonEffacerDemande.setDisable(true);
 
 			break;
 		case EtatDemandeLivraison:
@@ -467,20 +464,25 @@ public class ApplicationDemo extends Application{
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(false);
 			buttonCalculer.setDisable(false);
+			textFieldnombreLivreur.setDisable(false);
 			itemEffacer.setDisable(false);
 			buttonEffacer.setDisable(false);
+			buttonEffacerPlan.setDisable(false);
+			buttonEffacerDemande.setDisable(false);
 
 			break;
-        
 		default:
 			itemChargerPlan.setDisable(true);
 			buttonChargePlan.setDisable(true);
 			itemChargerDemandeLivraison.setDisable(true);
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(true);
-			buttonCalculer.setDisable(true);
+			buttonCalculer.setDisable(true); 
+			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(true);
 			buttonEffacer.setDisable(true);
+			buttonEffacerPlan.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
 
 			break;
 		}
