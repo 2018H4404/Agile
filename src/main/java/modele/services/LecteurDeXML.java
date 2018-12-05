@@ -39,8 +39,9 @@ public class LecteurDeXML {
 	/**
 	 * Méthode permettant la lecture du fichier XML des demandes de livraison.
 	 * @param f le fichier XML.
+	 * @throws Exception 
 	 */
-	public void lectureLivraisonEntrepotXML(File f){ 
+	public void lectureLivraisonEntrepotXML(File f) throws Exception{ 
 		HashMap<Long,PointLivraison> tempLivraisons = new HashMap<Long,PointLivraison>();
 		HashMap<Long,Entrepot> tempEntrepots = new HashMap<Long,Entrepot>();
 		try {   
@@ -85,7 +86,8 @@ public class LecteurDeXML {
 				}
 		    }   
 		    } catch (Exception e) {   
-			    e.printStackTrace();   
+		    	e.printStackTrace();
+		    	throw e;
 		    } 
 		Controleur.getInstance().getMaDemande().intialiserDemandeLivraison(tempLivraisons, tempEntrepots);
 	}
