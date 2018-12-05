@@ -194,6 +194,7 @@ public class VueGraphique extends Parent implements Observer{
 			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),6,livraison.getId());
 			livraisonGroup.getChildren().add(tempPointLivraison);
 		}
+		compagnie.afficheListLivraison(lesPointLivraisons);
 	}
 	
 	/**
