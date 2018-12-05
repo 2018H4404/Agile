@@ -60,6 +60,8 @@ public class ApplicationDemo extends Application{
 	private TextField textFieldnombreLivreur;
 	private Label labelError;
 
+	private Label labelInfo;
+	
 	private MenuBar menuBar;
 	private Menu menuFile;
 	private Menu menuTournee;
@@ -137,9 +139,13 @@ public class ApplicationDemo extends Application{
 		buttonEffacerDemande.setMinWidth(300);
 		buttonEffacerDemande.setMaxWidth(300);
 		
+		labelInfo = new Label();
+		labelInfo.setMinWidth(300);
+		labelInfo.setMaxWidth(300);
+		labelInfo.setWrapText(true);
 		
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
-        		textFieldnombreLivreur, labelError, buttonCalculer, buttonEffacer, buttonEffacerDemande);
+        		textFieldnombreLivreur, labelError, buttonCalculer, buttonEffacer, buttonEffacerDemande, labelInfo);
 
 		//Ajout de la barre de menu
         Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -201,6 +207,7 @@ public class ApplicationDemo extends Application{
 
 	         }
 	      });
+        
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			
 
@@ -221,14 +228,9 @@ public class ApplicationDemo extends Application{
 						textFieldnombreLivreur.setText("1");
 						VerifierEtat(controleur);
 	           	   	} catch (Exception e) {
-	           	   		  System.out.println("AA");
-                      Alert alert = new Alert(AlertType.INFORMATION);
-                      alert.setTitle("Chargement de demande de livraison");
-                      alert.setHeaderText(null);
-                      alert.setContentText("Erreurs dans le fichier XML des livraisons");
-                      alert.showAndWait();
-                      e.printStackTrace();
-					          e.printStackTrace();
+	           	   		labelInfo.setTextFill(Color.web("#FF0000"));
+	           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal formé.");
+			            e.printStackTrace();
 	           	   	}
 	             }
 	         }
@@ -282,8 +284,6 @@ public class ApplicationDemo extends Application{
 		 
 		        alert.showAndWait();
 				e.printStackTrace();
-				
-
 			}
            	   
               }
@@ -377,7 +377,7 @@ public class ApplicationDemo extends Application{
 	        			 int nbLivreur = Integer.parseInt(contenu);
 	        			 if(nbLivreur > maximum) {
 	        				 labelError.setText("Le nombre de livreurs donnée est plus grand que le nombre "
-	        				 		+ "maximum de livreurs, veuillez spécifier une valeur valide.");
+	        				 		+ "maximum de livreurs (" + maximum + " livreurs),  veuillez spécifier une valeur valide.");
 	        			 } else {
 	        				 try {
 	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
