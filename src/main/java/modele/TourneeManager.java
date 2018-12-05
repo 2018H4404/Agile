@@ -84,7 +84,7 @@ public class TourneeManager extends Observable{
 				this.listeTournees.add(solution);
 			}
 			System.out.println(tsp.getCoutMeilleureSolution());
-			setChanged();
+			setChanged(); 
 			notifyObservers("Alert Temps");
 		}else {
 			//Prendre la meilleureSolution calculee
