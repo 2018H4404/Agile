@@ -64,6 +64,7 @@ public class PointLivraisonVue extends Circle{
 		synchronisee = true;
 		this.setRadius(6);
 		this.setFill(Color.ORANGE);
+		this.originalColor = Color.ORANGE;
 	}
 	
 	/**
