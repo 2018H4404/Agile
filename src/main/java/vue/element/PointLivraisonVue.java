@@ -17,7 +17,9 @@ public class PointLivraisonVue extends Circle{
 	
 	private long idPointLivraison;
 	private boolean selectionnee;
+	private boolean synchronisee;
 	private Color originalColor;
+	private double originalRadius;
 	
 	
 	/**
@@ -33,7 +35,8 @@ public class PointLivraisonVue extends Circle{
 		this.originalColor = Color.CORNFLOWERBLUE;
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
-		
+		this.synchronisee = false;
+		this.originalRadius = radius;
 		ajouterListener();
 	}
 	
@@ -44,11 +47,25 @@ public class PointLivraisonVue extends Circle{
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}
+	
+	public boolean isSynchronisee() {
+		return synchronisee;
+	}
 
+	public void setSynchronisee(boolean bool) {
+		synchronisee = bool;;
+	}
+	
 	public void setSelectionnee(boolean selectionnee) {
 		this.selectionnee = selectionnee;
 	}
 	
+	public void changerFormeSynchronise() {
+		synchronisee = true;
+		this.setRadius(6);
+		this.setFill(Color.ORANGE);
+		this.originalColor = Color.ORANGE;
+	}
 	
 	/**
 	 * Méthode pour ajouter un listner.
@@ -83,6 +100,7 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setFill(Color.YELLOW);
+		this.setRadius(originalRadius);
 	}
 	
 	/**
@@ -90,6 +108,7 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setFill(originalColor);
+		this.setRadius(originalRadius);
 	}
 	
 }

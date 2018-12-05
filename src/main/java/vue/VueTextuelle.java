@@ -27,12 +27,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import modele.TourneeManager;
 import modele.metier.Chemin;
 import modele.metier.Entrepot;
 import modele.metier.Intersection;
 import modele.metier.PointLivraison;
 import modele.metier.Tournee;
+import vue.element.LivraisonPane;
 
 /** 
  * La classe de la vue textuelle.
@@ -57,7 +60,7 @@ public class VueTextuelle extends Parent implements Observer{
 	private CheckBox[] lesFiltres = null;
 	private TitledPane[] infoParTournee = null;
 	private TitledPane infosTournees;
-	private TitledPane[] infoParLivraison = null;
+	private LivraisonPane[] infoParLivraison = null;
 
 	/**
 	 * Constructeur de la vue textuelle.
@@ -165,13 +168,17 @@ public class VueTextuelle extends Parent implements Observer{
 	public void ajouterFiltreTournees(TourneeManager manager) {
 		conteneurFiltres.getChildren().clear();
 		int nbTournees = manager.getListeTournees().size();
-		lesFiltres = new CheckBox[nbTournees];
+		lesFiltres = new CheckBox[nbTournees+1];
 		for(int i = 0; i < nbTournees; i++) {
 			CheckBox tempCheckBox = new CheckBox();
 			tempCheckBox.setText("Tournee "+(i+1));
 			lesFiltres[i] = tempCheckBox;
 			conteneurFiltres.add(tempCheckBox, 0, i);
 		}
+		CheckBox tempCheckBox = new CheckBox();
+		tempCheckBox.setText("Toutes les tournees");
+		lesFiltres[nbTournees] = tempCheckBox;
+		conteneurFiltres.add(tempCheckBox, 0, nbTournees);
 	}
 	
 	/**manager.getListeTournees().size();
@@ -252,14 +259,25 @@ public class VueTextuelle extends Parent implements Observer{
                 CheckBox chk = (CheckBox) event.getSource();
 //                System.out.println("Action performed on checkbox " + chk.getText());
             	ArrayList<Integer> coches = new ArrayList<Integer>();
+            	boolean all = false;
             	for(int i = 0 ;i<lesFiltres.length;i++) {
 	            	if(lesFiltres[i].isSelected()) {
-	        			coches.add(i);
-	        			infoParTournee[i].setDisable(false);
+	            		if(lesFiltres[i].getText().equals("Toutes les tournees")) {
+	            			all =true;
+	            		}else {
+	            			coches.add(i);
+		        			infoParTournee[i].setDisable(false);
+	            		}
 	        		}
             	}
+            	if(all == true) {
+            		coches.clear();
+            		for(int i = 0 ;i<infoParTournee.length;i++) {
+            			infoParTournee[i].setDisable(false);
+            			coches.add(i);
+            		}
+            	}
             	compagnie.filtrerTournees(coches);
-                
             }
         });
 	}
@@ -271,6 +289,7 @@ public class VueTextuelle extends Parent implements Observer{
 	public void clearVue() {
 		conteneurFiltres.getChildren().clear();
 		conteneurInfoParTournee.getPanes().clear();
+		
 	}
 	
 	public void VerifierEtat(Controleur c) {
@@ -305,9 +324,9 @@ public class VueTextuelle extends Parent implements Observer{
 	public void ajouteTitledPane(Tab infosLivraison,Collection<PointLivraison> lesPointLivraisons) {
 		int index=0;
 		Accordion conteneurLivraison = new Accordion();
-		infoParLivraison = new TitledPane[lesPointLivraisons.size()];
+		infoParLivraison = new LivraisonPane[lesPointLivraisons.size()];
 		for(PointLivraison pointLivraison: lesPointLivraisons) {
-			TitledPane tempPane = new TitledPane();
+			LivraisonPane tempPane = new LivraisonPane(pointLivraison.getId());
 
 			tempPane.setText("Point de livraison"+index);		
 			tempPane.setMaxWidth(300);
@@ -324,6 +343,7 @@ public class VueTextuelle extends Parent implements Observer{
 			tempPane.setContent(content);
 
 			infoParLivraison[index] = tempPane;
+			synchronisationLivraisonsVue(infoParLivraison[index]);
 			index++;
 
 		}
@@ -332,6 +352,18 @@ public class VueTextuelle extends Parent implements Observer{
 		scrollLivraison.setPrefViewportHeight(900);
 		scrollLivraison.setContent(conteneurLivraison);
 		infosLivraison.setContent(scrollLivraison);
+	}
+	
+	public void synchronisationLivraisonsVue(LivraisonPane pane) {
+		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(final MouseEvent event) {
+            	MouseButton button = event.getButton();
+            	if(button.equals(MouseButton.PRIMARY)) {
+            		long id = pane.getLivraisonId();
+                	compagnie.synchronisationLivraison(id);
+            	}
+            }
+		});
 	}
 
 }

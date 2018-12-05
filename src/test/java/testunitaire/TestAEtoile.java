@@ -52,4 +52,30 @@ public class TestAEtoile {
 		assertEquals(chemin.get(2),test2); //latitude?Longer?
 	}
 	
+	@Test
+	public void testAlgoAEtoile3() throws Exception {
+		System.out.println("test Algo A Etoile 2:");
+		File fichierTestPlan = new File("fichiersXML2018/grandPlan.xml");	
+		controleur.chargerFichierPlan(fichierTestPlan);
+		Plan monPlan = controleur.getMonPlan();
+		Intersection depart = new IntersectionNormal(48830472,45.758003,4.874931);
+		Intersection dest = new IntersectionNormal(208769499,45.760597,4.87622);
+		ArrayList<Intersection> chemin = aEtoile.algoAEtoile(depart, dest, monPlan);
+		Intersection test = new IntersectionNormal(55475052,45.758472,4.8751354);
+		assertEquals(chemin.get(1),test);
+	}
+	
+	@Test
+	public void testTraductionTrajet() throws Exception {
+		File fichierTestPlan = new File("fichiersXML2018/fichiersTest/testPlan.xml");	
+		controleur.chargerFichierPlan(fichierTestPlan);
+		Plan monPlan = controleur.getMonPlan();
+		IntersectionNormal depart = new IntersectionNormal(26079801,45.754852,4.8574104);
+		IntersectionNormal dest = new IntersectionNormal(2117622723,45.75425,4.8591485);
+		ArrayList<Intersection> chemin = aEtoile.algoAEtoile(depart, dest, monPlan);
+		ArrayList<Troncon> troncons = aEtoile.traductionTrajet(chemin, monPlan);
+		IntersectionNormal inter = new IntersectionNormal(25175791,45.75406,4.857418);
+		assertEquals(troncons.get(1).getNomRue(),"Rue de l'Abondance");
+	}
+	
 }

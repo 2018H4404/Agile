@@ -5,7 +5,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	@Override
 	public void CalculerLesTournees(int nbLivreur) {
 		
-		Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
 
 	}
 	

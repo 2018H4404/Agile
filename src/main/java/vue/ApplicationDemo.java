@@ -201,7 +201,7 @@ public class ApplicationDemo extends Application{
 	      });
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			 
-	        @Override
+	      @Override
 		    public void handle(ActionEvent event) {
 		        	
 	        	 FileChooser fileChooser = new FileChooser();
@@ -217,8 +217,14 @@ public class ApplicationDemo extends Application{
 						textFieldnombreLivreur.setText("1");
 						VerifierEtat(controleur);
 	           	   	} catch (Exception e) {
-	           	   		// TODO Auto-generated catch block
-					e.printStackTrace();
+	           	   		  System.out.println("AA");
+                      Alert alert = new Alert(AlertType.INFORMATION);
+                      alert.setTitle("Chargement de demande de livraison");
+                      alert.setHeaderText(null);
+                      alert.setContentText("Erreurs dans le fichier XML des livraisons");
+                      alert.showAndWait();
+                      e.printStackTrace();
+					          e.printStackTrace();
 	           	   	}
 	             }
 	         }
@@ -264,14 +270,16 @@ public class ApplicationDemo extends Application{
 				VerifierEtat(controleur);
 
 			} catch (Exception e) {
+				System.out.println("BB");
 				Alert alert = new Alert(AlertType.INFORMATION);
-		        alert.setTitle("Charge un plan");
-		 
+		        alert.setTitle("Chargement de plan");
 		        alert.setHeaderText(null);
-		        alert.setContentText("errors in file xml!");
+		        alert.setContentText("Erreur dans le fichier XML du plan!");
 		 
 		        alert.showAndWait();
 				e.printStackTrace();
+				
+
 			}
            	   
               }
