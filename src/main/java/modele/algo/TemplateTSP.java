@@ -76,16 +76,29 @@ public abstract class TemplateTSP implements TSP {
 			int nbTotal = nbParLivreur[i];
 			int[] tempGroupe = new int[nbTotal];
 			Integer interCourant = lesIntersections.get(0);
+			lesIntersections.remove(interCourant);
 			PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
-			int length = cout[interCourant].length;
+			int length = lesIntersections.size();
 			for(int j = 0; j < length; j++) {
-				queue.add(cout[interCourant][j]);
+				queue.add(cout[interCourant][lesIntersections.get(j)]);
 			}
+			tempGroupe[0] = interCourant;
 			for(int j = 1; j < nbTotal; j++) {
-				
+				int tempPos = 0;
+				int coutCourant = queue.poll();
+				int size = cout[interCourant].length;
+				for(int p = 0; p < size; p++) {
+					if(coutCourant == cout[interCourant][p]) {
+						tempPos = p;
+						break;
+					}
+				}
+				tempGroupe[j] = tempPos;
+				lesIntersections.remove((Integer)tempPos);
 			}
+			retour.add(tempGroupe);
 		}
-		return null;
+		return retour;
 	}
 	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur){
