@@ -31,6 +31,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import modele.TourneeManager;
 import modele.metier.Chemin;
+import modele.metier.DemandeLivraison;
 import modele.metier.Entrepot;
 import modele.metier.Intersection;
 import modele.metier.PointLivraison;
@@ -50,6 +51,7 @@ public class VueTextuelle extends Parent implements Observer{
 	
 	@SuppressWarnings("unused")
 	private VueGraphique compagnie;
+	private ApplicationDemo parent;
 	private Label monLabel;
 	private TabPane infos;
 	private Tab nomRue;
@@ -62,13 +64,16 @@ public class VueTextuelle extends Parent implements Observer{
 	private TitledPane[] infoParTournee = null;
 	private TitledPane infosTournees;
 	private LivraisonPane[] infoParLivraison = null;
+	private ScrollPane scrollLivraison;
+	private VBox conteneurLivraison;
 
 	/**
 	 * Constructeur de la vue textuelle.
 	 */
-	public VueTextuelle() {
+	public VueTextuelle(ApplicationDemo unParent) {
 		//Intialisation de sa compagnie par defaut
 				compagnie = null;
+				parent = unParent;
 				
 				//Creation du separateur avec la vue graphique
 				Separator separator = new Separator();
@@ -98,7 +103,8 @@ public class VueTextuelle extends Parent implements Observer{
 				infosTournee = new Tab();
 				infosTournee.setText("Tournees");
 				ScrollPane scroll = new ScrollPane();
-				scroll.setPrefViewportHeight(900);
+				scroll.setMaxHeight(800);
+				scroll.setMinHeight(800);
 				Accordion conteneur = new Accordion();
 				filtreTournees = new TitledPane();
 				filtreTournees.setText("Filtre");
@@ -121,6 +127,13 @@ public class VueTextuelle extends Parent implements Observer{
 				
 				infos.getTabs().addAll(nomRue,infosLivraison,infosTournee);
 				
+				scrollLivraison = new ScrollPane();
+				scrollLivraison.setMaxHeight(800);
+				scrollLivraison.setMinHeight(800);
+				conteneurLivraison = new VBox();
+				scrollLivraison.setContent(conteneurLivraison);
+				infosLivraison.setContent(scrollLivraison);
+				
 				this.getChildren().add(infos);
 				this.getChildren().add(separator);
 	}
@@ -133,17 +146,19 @@ public class VueTextuelle extends Parent implements Observer{
 		monLabel.setText(nomRue);
 	}
 	
-
-	
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		String sujet = (String)arg1;
+		int maximum;
 		switch(sujet) {
 			case "Plan":
 				break;
 			case "DemandeLivraison":
+				ajouteTitledPane((DemandeLivraison)arg0);
+				DemandeLivraison temp = (DemandeLivraison)arg0;
+				maximum = temp.getNbLivreurMaximum();
+				parent.setLabelNbLivreur(maximum);
 				break;
 			case "Tournees":
 				System.out.println("In");
@@ -151,7 +166,31 @@ public class VueTextuelle extends Parent implements Observer{
 				ajouterFiltreTournees((TourneeManager)arg0);
 				ajouterListeners();
 
-				break;	
+				break;
+			case "UniqueTournee":
+				changerInfoTourneePane((TourneeManager)arg0);
+				ajouteTitledPane(Controleur.getInstance().getMaDemande());
+				try {
+					maximum = Controleur.getInstance().getNbLivreurMaximum();
+					parent.setLabelNbLivreur(maximum);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				activerSynchronisationLivraison();
+				break;
+			case "SupprimerTournee":
+				ajouterTimeTableTournees((TourneeManager)arg0);
+				ajouterFiltreTournees((TourneeManager)arg0);
+				ajouterListeners();
+				ajouteTitledPane(Controleur.getInstance().getMaDemande());
+				try {
+					maximum = Controleur.getInstance().getNbLivreurMaximum();
+					parent.setLabelNbLivreur(maximum);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				activerSynchronisationLivraison();
+				break;
 			case "Alert Temps":
 				ajouterTimeTableTournees((TourneeManager)arg0);
 				ajouterFiltreTournees((TourneeManager)arg0);
@@ -180,6 +219,52 @@ public class VueTextuelle extends Parent implements Observer{
 		tempCheckBox.setText("Toutes les tournees");
 		lesFiltres[nbTournees] = tempCheckBox;
 		conteneurFiltres.add(tempCheckBox, 0, nbTournees);
+	}
+	
+	/**
+	 * Methode qui mettre ¨¤ jour l'info d'une tourn¨¦e
+	 * @param manager : TourneeManager qui contient la liste des tournees
+	 */
+	public void changerInfoTourneePane(TourneeManager manager) {
+		int index = manager.getTourneeChangedIndex();
+		DateTime depart = Controleur.getInstance().getActuelHeureDepart();
+		Tournee t = manager.getListeTournees().get(index);
+		Label tempLabel = new Label();
+		tempLabel.setMaxWidth(300);
+		tempLabel.setMinWidth(300);
+		tempLabel.setWrapText(true);
+		infoParTournee[index].setContent(tempLabel);
+		ArrayList<Chemin> tempChemins = t.getListeChemins();
+		DateTime tempTime = new DateTime(depart);
+		String contenuLabel = "";
+		for(Chemin c : tempChemins) {
+			Intersection interDest = c.getIntersectionDest();
+			Intersection interDepart = c.getIntersectionDepart();
+			if(interDest instanceof Entrepot) {
+				contenuLabel += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+				contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+				tempTime = tempTime.plus(1000*c.getDuree());
+				contenuLabel += "Arrivee a l'entrepot";
+				contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+			}else {
+				if(interDepart instanceof Entrepot) {
+					contenuLabel += "Depart de l'entrepot : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(1000*c.getDuree());
+					contenuLabel += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(interDest.getDuree()*1000);
+				}else {
+					contenuLabel += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(1000*c.getDuree());
+					contenuLabel += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(interDest.getDuree()*1000);
+				}
+			}
+		}
+		tempLabel.setText(contenuLabel);
 	}
 	
 	/**manager.getListeTournees().size();
@@ -316,15 +401,11 @@ public class VueTextuelle extends Parent implements Observer{
 			break;
 		}
 	}
-
-	public void afficheListLivraison(Collection<PointLivraison> lesPointLivraisons) {
-
-		ajouteTitledPane(infosLivraison,lesPointLivraisons);
-	}
 	
-	public void ajouteTitledPane(Tab infosLivraison,Collection<PointLivraison> lesPointLivraisons) {
+	public void ajouteTitledPane(DemandeLivraison demande) {
+		Collection<PointLivraison> lesPointLivraisons = demande.getAllPointLivraisons();
+		conteneurLivraison.getChildren().clear();
 		int index=0;
-		Accordion conteneurLivraison = new Accordion();
 		infoParLivraison = new LivraisonPane[lesPointLivraisons.size()];
 		for(PointLivraison pointLivraison: lesPointLivraisons) {
 			LivraisonPane tempPane = new LivraisonPane(pointLivraison.getId());
@@ -344,15 +425,33 @@ public class VueTextuelle extends Parent implements Observer{
 			tempPane.setContent(content);
 
 			infoParLivraison[index] = tempPane;
+			infoParLivraison[index].setExpanded(false);
 			synchronisationLivraisonsVue(infoParLivraison[index]);
 			index++;
 
 		}
-		conteneurLivraison.getPanes().addAll(infoParLivraison);
-		ScrollPane scrollLivraison = new ScrollPane();
+		conteneurLivraison.getChildren().addAll(infoParLivraison);
 		scrollLivraison.setPrefViewportHeight(900);
 		scrollLivraison.setContent(conteneurLivraison);
-		infosLivraison.setContent(scrollLivraison);
+	}
+	
+	/**
+	 * MÃ©thode pour arr¨ºter temporairement la synchronisation.
+	 */	
+	public void arreterSynchronisationLivraison() {
+		for(int i = 0; i < infoParLivraison.length; i++) {
+			infoParLivraison[i].setExpanded(false);
+			infoParLivraison[i].setDisable(true);
+		}
+	}
+	
+	/**
+	 * MÃ©thode pour r¨¦activer temporairement la synchronisation.
+	 */	
+	public void activerSynchronisationLivraison() {
+		for(int i = 0; i < infoParLivraison.length; i++) {
+			infoParLivraison[i].setDisable(false);
+		}
 	}
 	
 	public void synchronisationLivraisonsVue(LivraisonPane pane) {
@@ -361,7 +460,11 @@ public class VueTextuelle extends Parent implements Observer{
             	MouseButton button = event.getButton();
             	if(button.equals(MouseButton.PRIMARY)) {
             		long id = pane.getLivraisonId();
-                	compagnie.synchronisationLivraison(id);
+            		if(pane.isExpanded()) {
+            			compagnie.synchronisationLivraison(id,true);
+            		}else {
+            			compagnie.synchronisationLivraison(id,false);
+            		}
             	}
             }
 		});

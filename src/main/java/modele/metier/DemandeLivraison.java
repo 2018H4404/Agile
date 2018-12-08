@@ -104,11 +104,17 @@ public class DemandeLivraison extends Observable{
 	 * @param longitude la longitude du point de livraison.
 	 * @param duree la duree de livraison.
 	 */
-	public void ajouterPointLivraison(long id, double latitude, double longitude,int duree) {
+	public void ajouterPointLivraisonMetier(long id, double latitude, double longitude,int duree) {
 		PointLivraison tempObject = new PointLivraison(id,latitude,longitude,duree);
 		livraisons.put(id,tempObject);
-		setChanged();
-		notifyObservers("DemandeLivraison");
+	}
+	
+	/**
+	 * Méthode pour supprimer un point de livraison.
+	 * @param id identifiant du point du livraison.
+	 */
+	public void supprimerPointLivraisonMetier(long id) {
+		livraisons.remove(id);
 	}
 	
 	/**

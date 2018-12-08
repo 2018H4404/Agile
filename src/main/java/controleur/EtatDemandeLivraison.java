@@ -7,12 +7,11 @@ import vue.element.PointLivraisonVue;
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override
-	public void CalculerLesTournees(int nbLivreur) {
+	public void CalculerLesTournees(int nbLivreur) throws Exception{
 		
-		Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
-		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+		//Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
 		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
-
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	
 	@Override

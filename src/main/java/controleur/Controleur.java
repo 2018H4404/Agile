@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
+import modele.metier.Intersection;
 import modele.metier.Plan;
 import modele.services.LecteurDeXML;
 import vue.VueGraphique;
@@ -18,11 +19,16 @@ public class Controleur {
 	private TourneeManager monManager;
 	private VueGraphique graph;
 	private VueTextuelle texte;
+	private long ajoutIdDepartPointLivraison;
+	private long ajoutIdNouvellePointLivraison;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
 	private EtatDemandeLivraison etatDemandeLivraison;
 	private EtatPosteCalcul etatPosteCalcul;
+	private EtatAjouterChoixPointLivraison etatChoixPointLivraison;
+	private EtatAjouterChoixNouvellePointLivraison etatChoixNouvellePointLivraison;
+	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
 	
 	private Controleur() {
 		monPlan = new Plan();
@@ -32,6 +38,9 @@ public class Controleur {
 		etatInit = new EtatInit();
 		etatDemandeLivraison = new EtatDemandeLivraison();
 		etatPosteCalcul = new EtatPosteCalcul();
+		etatChoixPointLivraison = new EtatAjouterChoixPointLivraison();
+		etatChoixNouvellePointLivraison = new EtatAjouterChoixNouvellePointLivraison();
+		etatSupprimerChoixPointLivraison = new EtatSupprimerChoixPointLivraison();
 		etat = etatInit;
 	}
 	
@@ -42,6 +51,24 @@ public class Controleur {
 		return instance;
 	}
 	
+	public void setAjoutDepart(long id) throws Exception{
+		this.ajoutIdDepartPointLivraison = id;
+		etat.choixNouvellePointLivraison();
+	}
+	
+	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
+		this.ajoutIdNouvellePointLivraison = id;
+		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
+	}
+	
+	public void setSupprimerPointLivraison(long id) throws Exception{
+		etat.effectuerSupprimerPointLivraison(id);
+	}
+	
+	public void ajouterPointLivraison() throws Exception{
+		etat.ajouterPointLivraison();
+	}
+
 	public VueGraphique getGraph() {
 		return this.graph;
 	}
@@ -111,6 +138,10 @@ public class Controleur {
 		return etatDemandeLivraison;
 	}
 
+	public EtatAjouterChoixNouvellePointLivraison getEtatChoixNouvellePointLivraison() {
+		return etatChoixNouvellePointLivraison;
+	}
+
 	public void setEtat(Etat etatCrt) {
 		Controleur.getInstance().etat = etatCrt;
 	}
@@ -125,6 +156,14 @@ public class Controleur {
 		return etatPlanCharge;
 	}
 	
+	public Etat getEtatChoixPointLivraison() {
+		return etatChoixPointLivraison;
+	}
+
+	public EtatSupprimerChoixPointLivraison getEtatSupprimerChoixPointLivraison() {
+		return etatSupprimerChoixPointLivraison;
+	}
+
 	public DateTime getActuelHeureDepart() {
 		return maDemande.getDebutTime();
 	}
@@ -133,9 +172,10 @@ public class Controleur {
 		etat.ajouterListenerOnClick();
 	}
 	
+	/*
 	public void effaceListenerOnClick() {
 		etat.effaceListenerOnClick();
-	}
+	}*/
 
 	public Etat getEtatPosteCalcul() {
 		return etatPosteCalcul;

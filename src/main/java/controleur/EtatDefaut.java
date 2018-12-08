@@ -35,9 +35,30 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void effaceListenerOnClick() {
+	public void ajouterPointLivraison() throws Exception {
 		
 	}
+
+	@Override
+	public void choixNouvellePointLivraison() throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerSupprimerPointLivraison(long id) throws Exception {
+		
+	}
+
+	/*
+	@Override
+	public void effaceListenerOnClick() {
+		
+	}*/
 	
 }
 	

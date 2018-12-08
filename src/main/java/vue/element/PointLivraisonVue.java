@@ -18,8 +18,8 @@ public class PointLivraisonVue extends Circle{
 	private long idPointLivraison;
 	private boolean selectionnee;
 	private boolean synchronisee;
+	private boolean activeChangerCouleurSelectionne;
 	private Color originalColor;
-	private double originalRadius;
 	
 	
 	/**
@@ -36,10 +36,14 @@ public class PointLivraisonVue extends Circle{
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
 		this.synchronisee = false;
-		this.originalRadius = radius;
+		activeChangerCouleurSelectionne = true;
 		ajouterListener();
 	}
 	
+	public void setActiveChangerCouleurSelectionne(boolean activeChangerCouleurSelectionne) {
+		this.activeChangerCouleurSelectionne = activeChangerCouleurSelectionne;
+	}
+
 	public long getIntersectionId() {
 		return idPointLivraison;
 	}
@@ -54,6 +58,10 @@ public class PointLivraisonVue extends Circle{
 
 	public void setSynchronisee(boolean bool) {
 		synchronisee = bool;;
+	}
+	
+	public void changeRadius(double radius) {
+		this.setRadius(radius);
 	}
 	
 	public void setSelectionnee(boolean selectionnee) {
@@ -90,7 +98,12 @@ public class PointLivraisonVue extends Circle{
 	        public void handle(final MouseEvent event) {
 	            System.out.println(idPointLivraison);
 	            try {
-					Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	            	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
+	            		Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	            	}else {
+	            		
+	            	}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -105,9 +118,8 @@ public class PointLivraisonVue extends Circle{
 	 * Méthode pour changer la couleur du point de livraison sélectionné.
 	 */
 	public void changerCouleurSelectionnee() {
-		this.setFill(Color.YELLOW);
-		if(!originalColor.equals(Color.ORANGE)) {
-			this.setRadius(originalRadius);
+		if(activeChangerCouleurSelectionne == true) {
+			this.setFill(Color.YELLOW);
 		}
 	}
 	
@@ -115,12 +127,12 @@ public class PointLivraisonVue extends Circle{
 	 * Méthode pour changer la couleur du point de livraison non sélectionné.
 	 */
 	public void changerCouleurNonSelectionnee() {
-		this.setFill(originalColor);
-		if(!originalColor.equals(Color.ORANGE)) {
-			this.setRadius(originalRadius);
+		if(activeChangerCouleurSelectionne == true) {
+			this.setFill(originalColor);
 		}
 	}
 
+	/*
 	public void effaceListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			public void handle(final MouseEvent event) {
@@ -128,7 +140,7 @@ public class PointLivraisonVue extends Circle{
 			}
 		});
 		
-	}
+	}*/
 
 	
 	

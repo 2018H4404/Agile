@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Slider;
@@ -51,16 +52,20 @@ public class VueGraphique extends Parent implements Observer{
 	private Group tourneesAfficheesGroup;
 	private ArrayList<Group> tourneesGroup;
 	private VueTextuelle compagnie;
-	private  double hauteur = 600;
-	private  double largeur = 600;
+	private ApplicationDemo parent;
+	private PointLivraisonVue ajoutPointChoisi = null;
+	private IntersectionNormalVue ajoutInterChoisi = null;
+	private  double hauteur;
+	private  double largeur;
 	private static Color[] couleurs = {Color.CRIMSON,Color.CYAN,Color.FUCHSIA,Color.GREENYELLOW,Color.LIMEGREEN,Color.SKYBLUE};
 	
 	/**
 	 * Constructeur de la vue graphique.
 	 */
-	public VueGraphique() {
+	public VueGraphique(double lFenetre, double hFenetre, ApplicationDemo unParent) {
 		//Intialisation de sa compagnie par defaut
 		compagnie = null;
+		parent = unParent;
 		
 		//Initialisation du contenu
 		ScrollPane paneGraphique = new ScrollPane();
@@ -72,8 +77,10 @@ public class VueGraphique extends Parent implements Observer{
 		zoomSlider.setValue(1);
 		zoomSlider.setBlockIncrement(0.01);
 		
-		paneGraphique.setPrefViewportHeight(600);
-		paneGraphique.setPrefViewportWidth(600);
+		hauteur = hFenetre*0.85;
+		largeur = hFenetre*0.85;
+		paneGraphique.setPrefViewportHeight(hFenetre*0.85);
+		paneGraphique.setPrefViewportWidth(hFenetre*0.85);
 		noeudGroup = new Group();
 		tronconGroup = new Group();
 		entrepotGroup = new Group();
@@ -125,6 +132,77 @@ public class VueGraphique extends Parent implements Observer{
                 if(event.getTarget() instanceof TronconVue) {
                 	TronconVue temp = (TronconVue)event.getTarget();
                 	compagnie.setTabNomRue(temp.getNomRue());
+                }
+            }
+        });
+		
+		noeudGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(final MouseEvent event) {
+                if(event.getTarget() instanceof IntersectionNormalVue) {
+                	 if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatAjouterChoixNouvellePointLivraison")){
+                		try {
+                			 IntersectionNormalVue temp = (IntersectionNormalVue)event.getTarget();
+                			 ajoutInterChoisi = temp;
+                			 int duree = parent.getDuree();
+                			 if(duree == Integer.MAX_VALUE) {
+                				 Exception e = new Exception();
+                				 throw e;
+                			 }
+                			 temp.setFill(Color.GREEN);
+                			 temp.setRadius(8);
+                			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
+                			 parent.VerifierEtat(Controleur.getInstance());
+                			 //Remettre a l'etat initial (couleur, radius)
+                			 ajoutInterChoisi.setRadius(4);
+                           	 ajoutInterChoisi.setFill(Color.GRAY);
+                			 ajoutPointChoisi.setFill(Color.CORNFLOWERBLUE);
+                			 ajoutPointChoisi.setRadius(6);
+                			 ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
+                			 //Rajout du point de livraison
+                			 IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(temp.getIntersectionId());
+                			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),6,tempInter.getId());
+                			 livraisonGroup.getChildren().add(tempPointLivraison);
+                			 parent.setInfo("Point de livraison ajout¨¦");
+                		}catch(Exception e) {
+                			System.out.println("Duree incorrect ou Probleme durant Ajout");
+                			e.printStackTrace();
+                		}
+                	 }
+                }
+            }
+        });
+		livraisonGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(final MouseEvent event) {
+                if(event.getTarget() instanceof PointLivraisonVue) {
+                	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatAjouterChoixPointLivraison")) {
+                		try {
+                			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                			ajoutPointChoisi = temp;
+                			temp.setActiveChangerCouleurSelectionne(false);
+                			temp.setFill(Color.GREEN);
+                			temp.setRadius(8);
+                			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
+                			parent.VerifierEtat(Controleur.getInstance());
+                			parent.setInfo("Choisissez maintenant o¨´ vous voulez rajouter un nouveau point de Livraison apr¨¨s le point de livraison que vous venez de choisir.");
+                		}catch(Exception e) {
+                			System.out.println("Duree incorrect ou Probleme durant Ajout");
+                			e.printStackTrace();
+                		}
+                	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatSupprimerChoixPointLivraison")) {
+                		 try {
+                 			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                 			temp.setActiveChangerCouleurSelectionne(false);
+                 			temp.setFill(Color.GREEN);
+                 			temp.setRadius(8);
+                 			Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());
+                 			livraisonGroup.getChildren().remove(temp);
+                 			parent.VerifierEtat(Controleur.getInstance());
+                 			parent.setInfo("Point de livraison supprim¨¦.");
+                 		}catch(Exception e) {
+                 			System.out.println("Duree incorrect ou Probleme durant Ajout");
+                 			e.printStackTrace();
+                 		}
+                	 }
                 }
             }
         });
@@ -203,7 +281,6 @@ public class VueGraphique extends Parent implements Observer{
 			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),6,livraison.getId());
 			livraisonGroup.getChildren().add(tempPointLivraison);
 		}
-		compagnie.afficheListLivraison(lesPointLivraisons);
 	}
 	
 	/**
@@ -298,23 +375,78 @@ public class VueGraphique extends Parent implements Observer{
 		tourneesAfficheesGroup.getChildren().clear();
 	}
 	
-	public void synchronisationLivraison(long id) {
+	/**
+	 * MÃ©thode pour synchroniser la vue avec la vue textuelle.
+	 * @param id : id de PointLivraisonVue qui doit ¨ºtre synchronis¨¦
+	 * @param expanded : boolean qui indique si le TitledPane est expanded
+	 */	
+	public void synchronisationLivraison(long id,boolean expanded) {
 		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
 		for(Node e : tempLivraisons) {
 			if(e instanceof PointLivraisonVue) {
 				PointLivraisonVue tempReference = (PointLivraisonVue)e;
 				tempReference.changerCouleurNonSelectionnee();
 				if(tempReference.getIntersectionId() == id) {
-					if(!tempReference.isSynchronisee()) {
+					if(expanded) {
 						tempReference.changerFormeSynchronise();
 					}else {
 						tempReference.setSynchronisee(false);
 						tempReference.setOriginalColor(Color.CORNFLOWERBLUE);
+						tempReference.changeRadius(6);
 						tempReference.changerCouleurNonSelectionnee();
 					}
 				}
 			}
 		}
+	}
+	
+	/**
+	 * MÃ©thode pour arr¨ºter temporairement la synchronisation.
+	 */	
+	public void arreterSynchronisationLivraison() {
+		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
+		for(Node e : tempLivraisons) {
+			PointLivraisonVue tempReference = (PointLivraisonVue)e;
+			tempReference.setSynchronisee(false);
+			tempReference.setOriginalColor(Color.CORNFLOWERBLUE);
+			tempReference.changeRadius(6);
+			tempReference.changerCouleurNonSelectionnee();
+		}
+		compagnie.arreterSynchronisationLivraison();
+	}
+	
+	/**
+	 * MÃ©thode pour changer juste l'affichage d'une tourn¨¦e.
+	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 */	
+	public void changerVueUneTournee(TourneeManager manager) {
+		int index = manager.getTourneeChangedIndex();
+		Group tempReference = tourneesGroup.get(index);
+		tempReference.getChildren().clear();
+		Color tourneeCouleur = genererCouleurs(index);
+		ArrayList<Chemin> tempChemins = manager.getListeTournees().get(index).getListeChemins();
+		for(Chemin chemin : tempChemins) {
+			ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
+			for(Troncon troncon : tempTroncons) {
+				IntersectionNormal depart = troncon.getOrigine();
+				IntersectionNormal destination = troncon.getDestination();
+				TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
+						Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
+				tempReference.getChildren().add(tempTronconTournee);
+			}
+		}
+		ajouterListenerRueNom(tempReference);
+	}
+	
+	/**
+	 * MÃ©thode pour supprimer une tourn¨¦e.
+	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 */	
+	public void supprimerUneTournee(TourneeManager manager) {
+		int index = manager.getTourneeChangedIndex();
+		Group tempReference = tourneesGroup.get(index);
+		tourneesAfficheesGroup.getChildren().remove(tempReference);
+		tourneesGroup.remove(tempReference);
 	}
 
 	@Override
@@ -330,6 +462,12 @@ public class VueGraphique extends Parent implements Observer{
 				break;
 			case "Tournees":
 				dessinerTournees((TourneeManager)o);
+				break;
+			case "UniqueTournee":
+				changerVueUneTournee((TourneeManager)o);
+				break;
+			case "SupprimerTournee":
+				supprimerUneTournee((TourneeManager)o);
 				break;	
 			case "Alert Temps":
 				dessinerTournees((TourneeManager)o);

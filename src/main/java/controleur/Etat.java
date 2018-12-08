@@ -16,7 +16,15 @@ public interface Etat {
 	public void modifierPointLivraison()throws Exception;
 
 	public void ajouterListenerOnClick();
+	
+	public void ajouterPointLivraison()throws Exception;
+	
+	public void choixNouvellePointLivraison()throws Exception;
+	
+	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree)throws Exception;
+	
+	public void effectuerSupprimerPointLivraison(long id) throws Exception;
 
-	public void effaceListenerOnClick();
+	//public void effaceListenerOnClick();
 	
 }

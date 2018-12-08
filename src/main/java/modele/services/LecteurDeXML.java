@@ -50,41 +50,47 @@ public class LecteurDeXML {
 			Document doc = builder.parse(f);   
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			NodeList nl = doc.getElementsByTagName("demandeDeLivraisons");   
-			for (int temp = 0; temp < nl.getLength(); temp++) {   
-				Node nNode = nl.item(temp);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					NodeList children = nNode.getChildNodes();
-					int nbChildren = children.getLength();
-					for(int i = 0; i < nbChildren; i++) {
-						Node child = children.item(i);
-						if (child.getNodeType() == Node.ELEMENT_NODE) {
-							Element elemChild = (Element) child;
-							if(elemChild.getTagName().equals("entrepot")) {
-								long tempId = Long.parseUnsignedLong(elemChild.getAttribute("adresse"));
-								String heureDepart = elemChild.getAttribute("heureDepart");
-								String[] times= heureDepart.split(":");
-								int heure = Integer.parseInt(times[0]);
-								int minute = Integer.parseInt(times[1]);
-								int seconde = Integer.parseInt(times[2]);
-								IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
-								Entrepot tempObject = new Entrepot(tempId,tempInter.getLatitude(),tempInter.getLongitude(),heure,minute,seconde);
-								tempEntrepots.put(tempId,tempObject);
-							}else if(elemChild.getTagName().equals("livraison")) {
-								long tempId = Long.parseUnsignedLong(elemChild.getAttribute("adresse"));
-								int duree = Integer.parseInt(elemChild.getAttribute("duree"));
-								IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
-								PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
-								tempLivraisons.put(tempId,tempObject);
-							}else {
-								Exception e = new Exception();
-								System.out.println("Erreur de l'architecture du fichier xml");
-								throw e;
+			if(doc.getDocumentElement().getNodeName().equals("demandeDeLivraisons")) {
+				NodeList nl = doc.getElementsByTagName("demandeDeLivraisons");   
+				for (int temp = 0; temp < nl.getLength(); temp++) {   
+					Node nNode = nl.item(temp);
+					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+						NodeList children = nNode.getChildNodes();
+						int nbChildren = children.getLength();
+						for(int i = 0; i < nbChildren; i++) {
+							Node child = children.item(i);
+							if (child.getNodeType() == Node.ELEMENT_NODE) {
+								Element elemChild = (Element) child;
+								if(elemChild.getTagName().equals("entrepot")) {
+									long tempId = Long.parseUnsignedLong(elemChild.getAttribute("adresse"));
+									String heureDepart = elemChild.getAttribute("heureDepart");
+									String[] times= heureDepart.split(":");
+									int heure = Integer.parseInt(times[0]);
+									int minute = Integer.parseInt(times[1]);
+									int seconde = Integer.parseInt(times[2]);
+									IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
+									Entrepot tempObject = new Entrepot(tempId,tempInter.getLatitude(),tempInter.getLongitude(),heure,minute,seconde);
+									tempEntrepots.put(tempId,tempObject);
+								}else if(elemChild.getTagName().equals("livraison")) {
+									long tempId = Long.parseUnsignedLong(elemChild.getAttribute("adresse"));
+									int duree = Integer.parseInt(elemChild.getAttribute("duree"));
+									IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(tempId);
+									PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
+									tempLivraisons.put(tempId,tempObject);
+								}else {
+									Exception e = new Exception();
+									System.out.println("Erreur de l'architecture du fichier xml");
+									throw e;
+								}
 							}
 						}
 					}
-				}
-		    }   
+			    }   
+			}else{
+				Exception e = new Exception();
+				System.out.println("Erreur de l'architecture du fichier xml");
+				throw e;
+			}
 		    } catch (Exception e) {   
 		    	e.printStackTrace();
 		    	throw e;
@@ -109,68 +115,75 @@ public class LecteurDeXML {
 			Document doc = builder.parse(f);   
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			NodeList nl = doc.getElementsByTagName("reseau");   
-			for (int temp = 0; temp < nl.getLength(); temp++) {  
-				boolean first = true;
-				Node nNode = nl.item(temp);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					NodeList children = nNode.getChildNodes();
-					int nbChildren = children.getLength();
-					for(int i = 0; i < nbChildren; i++) {
-						Node child = children.item(i);
-						if (child.getNodeType() == Node.ELEMENT_NODE) {
-							Element elemChild = (Element) child;
-							if(elemChild.getTagName().equals("noeud")) {
-								IntersectionNormal tempIntersection = null;
-								long tempId = Long.parseUnsignedLong(elemChild.getAttribute("id"));
-								double tempLatitude = Double.parseDouble(elemChild.getAttribute("latitude"));
-								double tempLongitude = Double.parseDouble(elemChild.getAttribute("longitude"));
-								if(first) {
-									maxLong = tempLongitude;
-									minLong = tempLongitude;
-									maxLat = tempLatitude;
-									minLat = tempLatitude;
-									first = false;
-								}else {
-									if(tempLongitude > maxLong) {
+			if(doc.getDocumentElement().getNodeName().equals("reseau")) {
+				NodeList nl = doc.getElementsByTagName("reseau");   
+				for (int temp = 0; temp < nl.getLength(); temp++) {  
+					boolean first = true;
+					Node nNode = nl.item(temp);
+					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+						NodeList children = nNode.getChildNodes();
+						int nbChildren = children.getLength();
+						for(int i = 0; i < nbChildren; i++) {
+							Node child = children.item(i);
+							if (child.getNodeType() == Node.ELEMENT_NODE) {
+								Element elemChild = (Element) child;
+								if(elemChild.getTagName().equals("noeud")) {
+									IntersectionNormal tempIntersection = null;
+									long tempId = Long.parseUnsignedLong(elemChild.getAttribute("id"));
+									double tempLatitude = Double.parseDouble(elemChild.getAttribute("latitude"));
+									double tempLongitude = Double.parseDouble(elemChild.getAttribute("longitude"));
+									if(first) {
 										maxLong = tempLongitude;
-									}else if(tempLongitude < minLong) {
 										minLong = tempLongitude;
-									}
-									if(tempLatitude > maxLat) {
 										maxLat = tempLatitude;
-									}else if(tempLatitude < minLat) {
 										minLat = tempLatitude;
+										first = false;
+									}else {
+										if(tempLongitude > maxLong) {
+											maxLong = tempLongitude;
+										}else if(tempLongitude < minLong) {
+											minLong = tempLongitude;
+										}
+										if(tempLatitude > maxLat) {
+											maxLat = tempLatitude;
+										}else if(tempLatitude < minLat) {
+											minLat = tempLatitude;
+										}
 									}
-								}
-								tempIntersection = new IntersectionNormal(tempId,tempLatitude,tempLongitude);
-								tempIntersections.put(tempId, tempIntersection);
-							}else if(elemChild.getTagName().equals("troncon")) {
-								Troncon tempTroncon = null;
-								long idDest = Long.parseUnsignedLong(elemChild.getAttribute("destination"));
-								double longueur = Double.parseDouble(elemChild.getAttribute("longueur"));
-								String nomRue = elemChild.getAttribute("nomRue");
-								long idOrigine = Long.parseUnsignedLong(elemChild.getAttribute("origine"));
-								IntersectionNormal dest = new IntersectionNormal(idDest);
-								IntersectionNormal origine = new IntersectionNormal(idOrigine);
-								tempTroncon = new Troncon(dest,origine,longueur,nomRue);
-								if(tempTroncons.containsKey(idOrigine)) {
-									tempTroncons.get(idOrigine).add(tempTroncon);
+									tempIntersection = new IntersectionNormal(tempId,tempLatitude,tempLongitude);
+									tempIntersections.put(tempId, tempIntersection);
+								}else if(elemChild.getTagName().equals("troncon")) {
+									Troncon tempTroncon = null;
+									long idDest = Long.parseUnsignedLong(elemChild.getAttribute("destination"));
+									double longueur = Double.parseDouble(elemChild.getAttribute("longueur"));
+									String nomRue = elemChild.getAttribute("nomRue");
+									long idOrigine = Long.parseUnsignedLong(elemChild.getAttribute("origine"));
+									IntersectionNormal dest = new IntersectionNormal(idDest);
+									IntersectionNormal origine = new IntersectionNormal(idOrigine);
+									tempTroncon = new Troncon(dest,origine,longueur,nomRue);
+									if(tempTroncons.containsKey(idOrigine)) {
+										tempTroncons.get(idOrigine).add(tempTroncon);
+									}else {
+										ArrayList<Troncon> tempListe = new ArrayList<Troncon>();
+										tempListe.add(tempTroncon);
+										tempTroncons.put(idOrigine, tempListe);
+									}
 								}else {
-									ArrayList<Troncon> tempListe = new ArrayList<Troncon>();
-									tempListe.add(tempTroncon);
-									tempTroncons.put(idOrigine, tempListe);
+									Exception e = new Exception();
+									System.out.println("Erreur de l'architecture du fichier xml");
+									throw e;
 								}
-							}else {
-								Exception e = new Exception();
-								System.out.println("Erreur de l'architecture du fichier xml");
-								throw e;
 							}
 						}
 					}
-				}
-				setLatLongDesTroncons(tempIntersections, tempTroncons);
-		    }   
+					setLatLongDesTroncons(tempIntersections, tempTroncons);
+			    }   
+			}else {
+				Exception e = new Exception();
+				System.out.println("Erreur de l'architecture du fichier xml");
+				throw e;
+			}
+			
 		    } catch (Exception e) {  
 		    	throw e;   
 		    }

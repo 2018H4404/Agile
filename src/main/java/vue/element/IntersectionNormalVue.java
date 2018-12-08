@@ -72,10 +72,15 @@ public class IntersectionNormalVue extends Circle{
 
             public void handle(final MouseEvent event) {
                 try {
-					Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
-					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
-					Controleur.getInstance().reverseTransformLongitude(copieX, Controleur.getInstance().getGraph().getHauteur())
-					);
+                	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
+                		Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
+            					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
+            					Controleur.getInstance().reverseTransformLongitude(copieX, Controleur.getInstance().getGraph().getHauteur())
+            					);
+                	}else {
+                		
+                	}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -84,13 +89,15 @@ public class IntersectionNormalVue extends Circle{
         });
 	}
 	
+	/*
 	public void effaceListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			public void handle(final MouseEvent event) {
 				
 			}
 		});
-	}
+	}*/
+	
 	/**
 	 * Méthode pour changer la couleur de l'intersection selectionnée.
 	 */
