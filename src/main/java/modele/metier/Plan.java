@@ -27,8 +27,8 @@ public class Plan extends Observable{
 	 */
 	public Plan() {
 		super();
-		intersectionNormals = null;
-		troncons = null;
+		intersectionNormals = new HashMap<Long,IntersectionNormal>();
+		troncons = new HashMap<Long,ArrayList<Troncon>>();
 	}
 	
 	/**

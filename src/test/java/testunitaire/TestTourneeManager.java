@@ -91,6 +91,25 @@ public class TestTourneeManager {
 		assert(updateAppele);
 	}
 	
+	@Test
+	public void testCalculerLesTourneesClustering() throws Exception {
+		File fichierTestPlan = new File("fichiersXML2018/fichiersTest/testTournee_plan2.xml");	
+		controleur.chargerFichierPlan(fichierTestPlan);
+		Plan unPlan = controleur.getMonPlan();
+		File fichierTestDemandeLivraison = new File("fichiersXML2018/fichiersTest/testTournee_dl3.xml");	
+		controleur.chargerFichierDemandeLivraison(fichierTestDemandeLivraison);
+		DemandeLivraison demande = controleur.getMaDemande();
+		tm.calculerLesTourneesClustering(demande, unPlan, 3);
+		int nbTournee = tm.getListeTournees().size();
+		assertEquals(nbTournee,3);
+		assertEquals(tm.getListeTournees().get(0).getListeChemins().size(),3);
+		Intersection test1 = new IntersectionNormal(26057085,45.756638,4.8683963);
+		Intersection test2 = new PointLivraison(26057084,45.756714,4.8673143,60);
+		
+		assertEquals(tm.getListeTournees().get(0).getListeChemins().get(0).getListeIntersections().get(2),test1);
+		assertEquals(tm.getListeTournees().get(0).getListeChemins().get(0).getListeIntersections().get(3),test2);
+		
+	}
 	
 	
 	
