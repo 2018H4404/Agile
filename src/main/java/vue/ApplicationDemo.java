@@ -88,7 +88,7 @@ public class ApplicationDemo extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-        graph = new VueGraphique(1450,900,this);
+        graph = new VueGraphique(700,700,this);
         texte = new VueTextuelle(this);
         Controleur.getInstance().addObserver(graph,texte);
         Controleur.getInstance().setGraph(graph);
@@ -130,6 +130,7 @@ public class ApplicationDemo extends Application{
    	        }
    	      }
    	    };
+   	    
    	    textFieldDuree.setMinWidth(300);
    	    textFieldDuree.setMaxWidth(300);
 		
@@ -605,6 +606,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -622,6 +624,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -639,6 +642,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -656,6 +660,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
+			textFieldDuree.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
@@ -673,6 +678,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -690,6 +696,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -707,6 +714,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
