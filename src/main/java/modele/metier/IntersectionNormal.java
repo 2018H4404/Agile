@@ -19,7 +19,7 @@ public class IntersectionNormal extends Intersection{
 	}
 
 	/**
-	 * Constructeur paramétré d'une intersection normal.
+	 * Constructeur parametre d'une intersection normal.
 	 * @param id identifiant de l'intersection.
 	 * @param latitude latitude de l'intersection.
 	 * @param longitude longitude de l'intersection.

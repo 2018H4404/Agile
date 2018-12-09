@@ -29,8 +29,8 @@ public class TronconVue extends Line{
 	public TronconVue(double startX, double startY, double endX, double endY, String name) {
 		super(startX,startY,endX,endY);
 		this.rueName = name;
-		this.originalColor = Color.BLACK;
-		this.setStroke(Color.BLACK);
+		this.originalColor = Color.web("0xaaaaaa",1.0);
+		this.setStroke(Color.web("0xaaaaaa",1.0));
 		this.setStrokeWidth(3);
 		ajouterListner();
 	}

@@ -28,7 +28,6 @@ import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import modele.TourneeManager;
-import modele.algo.SimulatedAnnealing;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
@@ -37,7 +36,7 @@ import controleur.Controleur;
 import controleur.EtatAjouterChoixNouvellePointLivraison;
 
 /** 
- * La classe de la d茅mo de l'application.
+ * La classe de la demo de l'application.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -87,12 +86,12 @@ public class ApplicationDemo extends Application{
 	private MenuItem itemDeplacerLivraison;
 
 	/**
-	 * M茅thode permettant de commencer la d茅mo de l'application.
+	 * Methode permettant de commencer la demo de l'application.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-        graph = new VueGraphique(1450,900,this);
+        graph = new VueGraphique(1400,900,this);
         texte = new VueTextuelle(this);
         Controleur.getInstance().addObserver(graph,texte);
         Controleur.getInstance().setGraph(graph);
@@ -114,7 +113,7 @@ public class ApplicationDemo extends Application{
 		buttonCalculer.setMinWidth(300);
 		buttonCalculer.setMaxWidth(300);
 		
-		labelDuree = new Label("Durée(en seconde) :");
+		labelDuree = new Label("Duree(en seconde) :");
 		labelDuree.setMinWidth(300);
 		labelDuree.setMaxWidth(300);
 		labelDuree.setWrapText(true);
@@ -134,6 +133,7 @@ public class ApplicationDemo extends Application{
    	        }
    	      }
    	    };
+   	    
    	    textFieldDuree.setMinWidth(300);
    	    textFieldDuree.setMaxWidth(300);
 		
@@ -227,12 +227,12 @@ public class ApplicationDemo extends Application{
 	}
 	
 	/**
-	 * M茅thode pour ajouter la durée saisie par utilisateur.
+	 * Methode pour ajouter la duree saisie par utilisateur.
 	 */
 	public int getDuree(){
 		String text = textFieldDuree.getText();
 		if(text.equals("")) {
-			labelDureeError.setText("Entrée une valeur, s'il vous plaît.");
+			labelDureeError.setText("Entree une valeur, s'il vous plaît.");
 			return Integer.MAX_VALUE;
 		}else {
 			labelDureeError.setText("");
@@ -241,7 +241,7 @@ public class ApplicationDemo extends Application{
 	}
 	
 	/**
-	 * M茅thode pour modifier l'information dans le labelInfo.
+	 * Methode pour modifier l'information dans le labelInfo.
 	 * @param texte : info à saisie
 	 */
 	public void setInfo(String texte){
@@ -252,7 +252,7 @@ public class ApplicationDemo extends Application{
 	
 	
 	/**
-	 * M茅thode pour ajouter la barre de navigation.
+	 * Methode pour ajouter la barre de navigation.
 	 * @param pane
 	 * @param primaryStage
    * @param controleur
@@ -284,7 +284,7 @@ public class ApplicationDemo extends Application{
 					VerifierEtat(controleur);
 				} catch (Exception e) {
 					labelInfo.setTextFill(Color.web("#FF0000"));
-           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal form茅.");
+           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
 					e.printStackTrace();
 				}
                }
@@ -312,7 +312,7 @@ public class ApplicationDemo extends Application{
 						VerifierEtat(controleur);
 	           	   	} catch (Exception e) {
 	           	   		labelInfo.setTextFill(Color.web("#FF0000"));
-	           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal form茅.");
+	           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
 			            e.printStackTrace();
 	           	   	}
 	             }
@@ -339,7 +339,7 @@ public class ApplicationDemo extends Application{
 	        		} catch (Exception e) {
 						System.out.println("d");
 						labelInfo.setTextFill(Color.web("#FF0000"));
-	           	   		labelInfo.setText("Le fichier XML de plan fourni est mal form茅.");
+	           	   		labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
 						e.printStackTrace();
 	        		}
 	        	} 
@@ -364,7 +364,7 @@ public class ApplicationDemo extends Application{
 
 			} catch (Exception e) {
 				labelInfo.setTextFill(Color.web("#FF0000"));
-       	   		labelInfo.setText("Le fichier XML de plan fourni est mal form茅.");
+       	   		labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
 				e.printStackTrace();
 			}
            	   
@@ -374,8 +374,8 @@ public class ApplicationDemo extends Application{
         
         menuFile.getItems().addAll(itemChargerPlan,itemChargerDemandeLivraison);
  
-      //Ajout de l'onglet Op茅ration
-        menuTournee = new Menu("Tourn茅e");
+      //Ajout de l'onglet Operation
+        menuTournee = new Menu("Tournee");
         itemCalculerTournees = new MenuItem("Calculer les tournees");
 
         itemCalculerTournees.setOnAction(new EventHandler<ActionEvent>() {
@@ -386,13 +386,13 @@ public class ApplicationDemo extends Application{
             	   int maximum = Controleur.getInstance().getNbLivreurMaximum();
  	        		 String contenu = textFieldnombreLivreur.getText();
  	        		 if(contenu.equals("")) {
-	   	        			labelError.setText("Il n'y a pas d'entr茅e, "
-	   	        					+ "veuillez sp茅cifier une valeur.");
+	   	        			labelError.setText("Il n'y a pas d'entree, "
+	   	        					+ "veuillez specifier une valeur.");
  	        		 } else {
 	        			 int nbLivreur = Integer.parseInt(contenu);
 	        			 if(nbLivreur > maximum || nbLivreur < 1) {
-	        				 labelError.setText("Le nombre de livreurs donn茅e est plus grand que le nombre "
-	        				 		+ "maximum de livreurs (" + maximum + " livreurs) ou inférieur à 1,  veuillez sp茅cifier une valeur valide.");
+	        				 labelError.setText("Le nombre de livreurs donnee est plus grand que le nombre "
+	        				 		+ "maximum de livreurs (" + maximum + " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
 	        			 } else {
 	        				 try {
 	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
@@ -412,7 +412,7 @@ public class ApplicationDemo extends Application{
 	      }); 
         
         /**
-         * Boutton calculer qui permet le calcul des tourn茅es.
+         * Boutton calculer qui permet le calcul des tournees.
          */
         buttonCalculer.setOnAction(new EventHandler<ActionEvent>() {
 	         @Override
@@ -422,13 +422,13 @@ public class ApplicationDemo extends Application{
 	        		 int maximum = Controleur.getInstance().getNbLivreurMaximum();
    	        		 String contenu = textFieldnombreLivreur.getText();
    	        		 if(contenu.equals("")) {
-	   	        			labelError.setText("Il n'y a pas d'entr茅e, "
-	   	        					+ "veuillez sp茅cifier une valeur.");
+	   	        			labelError.setText("Il n'y a pas d'entree, "
+	   	        					+ "veuillez specifier une valeur.");
    	        		 } else {
 	        			 int nbLivreur = Integer.parseInt(contenu);
 	        			 if(nbLivreur > maximum || nbLivreur < 1) {
-	        				 labelError.setText("Le nombre de livreurs donn茅e est plus grand que le nombre "
-	        				 		+ "maximum de livreurs (" + maximum + " livreurs) ou inférieur à 1,  veuillez sp茅cifier une valeur valide.");
+	        				 labelError.setText("Le nombre de livreurs donnee est plus grand que le nombre "
+	        				 		+ "maximum de livreurs (" + maximum + " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
 	        			 } else {
 	        				 try {
 	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
@@ -521,7 +521,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison après lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -559,8 +559,8 @@ public class ApplicationDemo extends Application{
 					texte.arreterSynchronisationLivraison();
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
-					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison après lequel vous voulez ajouter un point de Livraison.");
+					// labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -578,13 +578,14 @@ public class ApplicationDemo extends Application{
 					graph.arreterSynchronisationLivraison();
 					texte.arreterSynchronisationLivraison();
 					labelInfo.setTextFill(Color.BLACK);
-					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					// labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
 					labelInfo.setText("Choisissez le point de livraison que vous voulez supprimer.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 	         }
-	      }); 
+	      });
+    
         buttonDeplacerLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -602,6 +603,7 @@ public class ApplicationDemo extends Application{
 				}
 	         }
 	      }); 
+
         menuLivraison.getItems().addAll(itemAjouterLivraison,itemSupprimerLivraison);
         
         menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
@@ -631,6 +633,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -649,6 +652,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -667,6 +671,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -685,6 +690,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
+			textFieldDuree.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
 			buttonDeplacerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
@@ -703,6 +709,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -721,6 +728,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -739,6 +747,7 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -803,7 +812,7 @@ public class ApplicationDemo extends Application{
 	}
 	
 	/**
-	 * La m茅thode main.
+	 * La methode main.
 	 * @param args
 	 */
 

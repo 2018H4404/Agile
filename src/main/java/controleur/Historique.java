@@ -8,10 +8,6 @@ public class Historique {
 	
 	public Historique() {
 		listeDeCommande = new LinkedList();
-		indice = -1;
-		
-	}
-	
-
-	
+		indice = -1;	
+	}	
 }

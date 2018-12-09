@@ -21,7 +21,7 @@ public abstract class Intersection {
 	}
 	
 	/**
-	 * Constructeur paramétré de l'intersection.
+	 * Constructeur parametre de l'intersection.
 	 * @param id identifiant de l'intersection.
 	 * @param latitude latitude de l'intersection.
 	 * @param longitude longitude de l'intersection.
@@ -57,7 +57,7 @@ public abstract class Intersection {
 	}
 	
 	/**
-	 * Surcharge de la méthode equals entre intersections.
+	 * Surcharge de la methode equals entre intersections.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -75,7 +75,7 @@ public abstract class Intersection {
 	}
 
 	/**
-	 * Surcharge de la méthode equals entre intersections sur l'identifiant.
+	 * Surcharge de la methode equals entre intersections sur l'identifiant.
 	 */
 	public boolean equals(long unId) {
 		boolean retour = false;

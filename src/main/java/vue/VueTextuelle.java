@@ -230,7 +230,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * Methode qui mettre ¨¤ jour l'info d'une tourn¨¦e
+	 * Methode qui mettre a jour l'info d'une tournee
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
 	public void changerInfoTourneePane(TourneeManager manager) {
@@ -540,7 +540,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour arr¨ºter temporairement la synchronisation.
+	 * Methode pour arreter temporairement la synchronisation.
 	 */	
 	public void arreterSynchronisationLivraison() {
 		for(int i = 0; i < infoParLivraison.length; i++) {
@@ -550,7 +550,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour r¨¦activer temporairement la synchronisation.
+	 * Methode pour reactiver temporairement la synchronisation.
 	 */	
 	public void activerSynchronisationLivraison() {
 		for(int i = 0; i < infoParLivraison.length; i++) {

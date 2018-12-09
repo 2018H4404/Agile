@@ -31,8 +31,8 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public PointLivraisonVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.CORNFLOWERBLUE);
-		this.originalColor = Color.CORNFLOWERBLUE;
+		this.setFill(Color.web("0x0000FF",1.0));
+		this.originalColor = Color.web("0x0000FF",1.0);
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
 		this.synchronisee = false;
