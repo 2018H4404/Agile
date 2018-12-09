@@ -57,6 +57,8 @@ public class VueGraphique extends Parent implements Observer{
 	private IntersectionNormalVue ajoutInterChoisi = null;
 	private double hauteur;
 	private double largeur;
+	private PointLivraisonVue deplacerPointChoisiUn = null;
+	private PointLivraisonVue deplacerPointChoisiDeux = null;
 	private static Color[] couleurs = {Color.CRIMSON,Color.CYAN,Color.FUCHSIA,Color.GREENYELLOW,Color.LIMEGREEN,Color.SKYBLUE};
 	
 	/**
@@ -187,7 +189,7 @@ public class VueGraphique extends Parent implements Observer{
                 			parent.VerifierEtat(Controleur.getInstance());
                 			parent.setInfo("Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
                 		}catch(Exception e) {
-                			System.out.println("Duree incorrect ou Probleme durant Ajout");
+                			System.out.println("Probleme durant Ajout");
                 			e.printStackTrace();
                 		}
                 	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatSupprimerChoixPointLivraison")) {
@@ -201,10 +203,45 @@ public class VueGraphique extends Parent implements Observer{
                  			parent.VerifierEtat(Controleur.getInstance());
                  			parent.setInfo("Point de livraison supprime.");
                  		}catch(Exception e) {
-                 			System.out.println("Duree incorrect ou Probleme durant Ajout");
+                 			System.out.println("Probleme durant le processus pour supprimer");
                  			e.printStackTrace();
                  		}
-                	 }
+                	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonADeplacer")) {
+                		 try {
+                  			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                  			deplacerPointChoisiUn = temp;
+                  			temp.setActiveChangerCouleurSelectionne(false);
+                  			temp.setFill(Color.GREEN);
+                  			temp.setRadius(8);
+                  			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
+                  			parent.VerifierEtat(Controleur.getInstance());
+                  			parent.setInfo("Choisissez maintenant apr¨¨s quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
+                  		}catch(Exception e) {
+                  			System.out.println("Probleme durant le choix d'un point a deplacer");
+                  			e.printStackTrace();
+                  		}
+                 	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonApresDeplacer")) {
+                		 try {
+                  			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                  			deplacerPointChoisiDeux = temp;
+                  			temp.setActiveChangerCouleurSelectionne(false);
+                  			temp.setFill(Color.GREEN);
+                  			temp.setRadius(8);
+                  			Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
+	                  		//Remettre a l'etat initial (couleur, radius)
+                  			deplacerPointChoisiUn.setRadius(6);
+                  			deplacerPointChoisiUn.setFill(Color.CORNFLOWERBLUE);
+                  			deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
+                  			deplacerPointChoisiDeux.setFill(Color.CORNFLOWERBLUE);
+                  			deplacerPointChoisiDeux.setRadius(6);
+                  			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+                  			parent.VerifierEtat(Controleur.getInstance());
+                  			parent.setInfo("Point de livraison d¨¦plac¨¦.");
+                  		}catch(Exception e) {
+                  			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
+                  			e.printStackTrace();
+                  		}
+                 	 }
                 }
             }
         });
@@ -444,6 +481,76 @@ public class VueGraphique extends Parent implements Observer{
 	 * Methode pour supprimer une tournee.
 	 * @param manager : objet TourneeManager stocke dans le controleur
 	 */	
+	public void changerVueTourneeSansSupprimer(TourneeManager manager) {
+		System.out.println("Deplacement sans supprimer");
+		int indexUn = manager.getTourneeAjouterIndex();
+		int indexDeux = manager.getTourneeSupprimerIndex();
+		Group tempReference = tourneesGroup.get(indexUn);
+		tempReference.getChildren().clear();
+		Color tourneeCouleur = genererCouleurs(indexUn);
+		ArrayList<Chemin> tempChemins = manager.getListeTournees().get(indexUn).getListeChemins();
+		for(Chemin chemin : tempChemins) {
+			ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
+			for(Troncon troncon : tempTroncons) {
+				IntersectionNormal depart = troncon.getOrigine();
+				IntersectionNormal destination = troncon.getDestination();
+				TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
+						Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
+				tempReference.getChildren().add(tempTronconTournee);
+			}
+		}
+		ajouterListenerRueNom(tempReference);
+		
+		tempReference = tourneesGroup.get(indexDeux);
+		tempReference.getChildren().clear();
+		tourneeCouleur = genererCouleurs(indexDeux);
+		tempChemins = manager.getListeTournees().get(indexDeux).getListeChemins();
+		for(Chemin chemin : tempChemins) {
+			ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
+			for(Troncon troncon : tempTroncons) {
+				IntersectionNormal depart = troncon.getOrigine();
+				IntersectionNormal destination = troncon.getDestination();
+				TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
+						Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
+				tempReference.getChildren().add(tempTronconTournee);
+			}
+		}
+		ajouterListenerRueNom(tempReference);
+	}
+	
+	/**
+	 * MÃ©thode pour changer l'affichage des deux tourn¨¦es chang¨¦es(Avec Supprimer) apr¨¨s le d¨¦placement.
+	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 */	
+	public void changerVueTourneeSupprimer(TourneeManager manager) {
+		System.out.println("Deplacement supprimer");
+		int indexUn = manager.getTourneeAjouterIndex();
+		int indexDeux = manager.getTourneeSupprimerIndex();
+		Group tempReference = tourneesGroup.get(indexUn);
+		tempReference.getChildren().clear();
+		Color tourneeCouleur = genererCouleurs(indexUn);
+		ArrayList<Chemin> tempChemins = manager.getListeTournees().get(indexUn).getListeChemins();
+		for(Chemin chemin : tempChemins) {
+			ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
+			for(Troncon troncon : tempTroncons) {
+				IntersectionNormal depart = troncon.getOrigine();
+				IntersectionNormal destination = troncon.getDestination();
+				TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
+						Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
+				tempReference.getChildren().add(tempTronconTournee);
+			}
+		}
+		ajouterListenerRueNom(tempReference);
+		
+		tempReference = tourneesGroup.get(indexDeux);
+		tourneesAfficheesGroup.getChildren().remove(tempReference);
+		tourneesGroup.remove(tempReference);
+	}
+	
+	/**
+	 * Methode pour supprimer une tourn¨¦e.
+	 * @param manager : objet TourneeManager stocke dans le controleur
+	 */	
 	public void supprimerUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();
 		Group tempReference = tourneesGroup.get(index);
@@ -471,6 +578,12 @@ public class VueGraphique extends Parent implements Observer{
 			case "SupprimerTournee":
 				supprimerUneTournee((TourneeManager)o);
 				break;	
+			case "DeplacementSupprimerTournee":
+				changerVueTourneeSupprimer((TourneeManager)o);
+				break;
+			case "DeplacementSansSupprimerTournee":
+				changerVueTourneeSansSupprimer((TourneeManager)o);
+				break;
 			case "Alert Temps":
 				dessinerTournees((TourneeManager)o);
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);

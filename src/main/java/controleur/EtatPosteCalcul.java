@@ -28,7 +28,17 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	@Override
 	public void ajouterPointLivraison() throws Exception {
-		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatChoixPointLivraison());
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatAjouterChoixPointLivraison());
+	}
+	
+	@Override
+	public void deplacerPointLivraison() throws Exception {
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatChoixPointLivraisonADeplacer());
+	}
+	
+	@Override
+	public void supprimerPointLivraison() throws Exception {
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatSupprimerChoixPointLivraison());
 	}
 	
 	@Override

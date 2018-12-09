@@ -57,8 +57,6 @@ public class DemandeLivraison extends Observable{
 		notifyObservers("DemandeLivraison");
 	}
 	
-	
-	
 	public void supprimerPoint(long id) {
 		livraisons.remove(id);
 		setChanged();
@@ -136,14 +134,22 @@ public class DemandeLivraison extends Observable{
 	
 	/**
 	 * Methode permettant de retourner le nombre maximum de livreur.
+	 * @return le map des points de livraison.
+	 */
+	public HashMap<Long, PointLivraison> getLivraisons() {
+		return livraisons;
+	}
+	
+	/**
+	 * Methode permettant de retourner le nombre maximum de livreur.
 	 * @return le nombre maximum de livreur.
 	 */
 	public int getNbLivreurMaximum(){
 		return livraisons.size();
 	}
-	
+
 	/**
-	 * M茅thode permettant de retourner l'heure de debut
+	 * Methode permettant de retourner l'heure de debut
 	 * @return l'heure de debut.
 	 */
 	public DateTime getDebutTime(){

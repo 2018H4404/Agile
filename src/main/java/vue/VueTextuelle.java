@@ -191,6 +191,14 @@ public class VueTextuelle extends Parent implements Observer{
 				}
 				activerSynchronisationLivraison();
 				break;
+			case "DeplacementSupprimerTournee":
+				changerInfoTourneePaneSupprimer((TourneeManager)arg0);
+				activerSynchronisationLivraison();
+				break;
+			case "DeplacementSansSupprimerTournee":
+				changerInfoTourneePaneSansSupprimer((TourneeManager)arg0);
+				activerSynchronisationLivraison();
+				break;
 			case "Alert Temps":
 				ajouterTimeTableTournees((TourneeManager)arg0);
 				ajouterFiltreTournees((TourneeManager)arg0);
@@ -265,6 +273,102 @@ public class VueTextuelle extends Parent implements Observer{
 			}
 		}
 		tempLabel.setText(contenuLabel);
+	}
+	
+	/**
+	 * Methode qui mettre ¨¤ jour l'info des tourn¨¦es chang¨¦es apr¨¨s le d¨¦placement (Sans supprimer)
+	 * @param manager : TourneeManager qui contient la liste des tournees
+	 */
+	public void changerInfoTourneePaneSansSupprimer(TourneeManager manager) {
+		int indexUn = manager.getTourneeAjouterIndex();
+		int indexDeux = manager.getTourneeSupprimerIndex();
+		DateTime depart = Controleur.getInstance().getActuelHeureDepart();
+		Tournee t = manager.getListeTournees().get(indexUn);
+		Label tempLabel = new Label();
+		tempLabel.setMaxWidth(300);
+		tempLabel.setMinWidth(300);
+		tempLabel.setWrapText(true);
+		infoParTournee[indexUn].setContent(tempLabel);
+		ArrayList<Chemin> tempChemins = t.getListeChemins();
+		DateTime tempTime = new DateTime(depart);
+		String contenuLabel = "";
+		for(Chemin c : tempChemins) {
+			Intersection interDest = c.getIntersectionDest();
+			Intersection interDepart = c.getIntersectionDepart();
+			if(interDest instanceof Entrepot) {
+				contenuLabel += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+				contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+				tempTime = tempTime.plus(1000*c.getDuree());
+				contenuLabel += "Arrivee a l'entrepot";
+				contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+			}else {
+				if(interDepart instanceof Entrepot) {
+					contenuLabel += "Depart de l'entrepot : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(1000*c.getDuree());
+					contenuLabel += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(interDest.getDuree()*1000);
+				}else {
+					contenuLabel += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(1000*c.getDuree());
+					contenuLabel += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabel += tempTime.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTime = tempTime.plus(interDest.getDuree()*1000);
+				}
+			}
+		}
+		tempLabel.setText(contenuLabel);
+		
+		Tournee tDeux = manager.getListeTournees().get(indexDeux);
+		Label tempLabelDeux = new Label();
+		tempLabelDeux.setMaxWidth(300);
+		tempLabelDeux.setMinWidth(300);
+		tempLabelDeux.setWrapText(true);
+		infoParTournee[indexDeux].setContent(tempLabelDeux);
+		ArrayList<Chemin> tempCheminsDeux = tDeux.getListeChemins();
+		DateTime tempTimeDeux = new DateTime(depart);
+		String contenuLabelDeux = "";
+		for(Chemin c : tempCheminsDeux) {
+			Intersection interDest = c.getIntersectionDest();
+			Intersection interDepart = c.getIntersectionDepart();
+			if(interDest instanceof Entrepot) {
+				contenuLabelDeux += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+				contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+				tempTimeDeux = tempTimeDeux.plus(1000*c.getDuree());
+				contenuLabelDeux += "Arrivee a l'entrepot";
+				contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+			}else {
+				if(interDepart instanceof Entrepot) {
+					contenuLabelDeux += "Depart de l'entrepot : ";
+					contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTimeDeux = tempTimeDeux.plus(1000*c.getDuree());
+					contenuLabelDeux += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTimeDeux = tempTimeDeux.plus(interDest.getDuree()*1000);
+				}else {
+					contenuLabelDeux += "Depart du point de livraison(" + interDepart.getLatitude() + "," + interDepart.getLongitude() + ") : ";
+					contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTimeDeux = tempTimeDeux.plus(1000*c.getDuree());
+					contenuLabelDeux += "Arrivee au point de Livraison(" + interDest.getLatitude() + "," + interDest.getLongitude() + ") : ";
+					contenuLabelDeux += tempTimeDeux.toString("MM-dd-yyyy hh:mm:ss") + "\n";
+					tempTimeDeux = tempTimeDeux.plus(interDest.getDuree()*1000);
+				}
+			}
+		}
+		tempLabelDeux.setText(contenuLabelDeux);
+	}
+	
+	/**
+	 * Methode qui mettre ¨¤ jour l'info des tourn¨¦es chang¨¦es apr¨¨s le d¨¦placement (Avec supprimer)
+	 * @param manager : TourneeManager qui contient la liste des tournees
+	 */
+	public void changerInfoTourneePaneSupprimer(TourneeManager manager) {
+		ajouterTimeTableTournees(manager);
+		ajouterFiltreTournees(manager);
+		ajouterListeners();
+		
 	}
 	
 	/**manager.getListeTournees().size();
