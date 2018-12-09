@@ -54,6 +54,26 @@ public class EtatDefaut implements Etat{
 		
 	}
 
+	@Override
+	public void choixPointLivraisonApresDeplacer() throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception {
+		
+	}
+
+	@Override
+	public void supprimerPointLivraison() throws Exception {
+		
+	}
+
+	@Override
+	public void deplacerPointLivraison() throws Exception {
+		
+	}
+
 	/*
 	@Override
 	public void effaceListenerOnClick() {

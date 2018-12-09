@@ -21,14 +21,18 @@ public class Controleur {
 	private VueTextuelle texte;
 	private long ajoutIdDepartPointLivraison;
 	private long ajoutIdNouvellePointLivraison;
+	private long idADeplacerPointLivraison;
+	private long idApresDeplacerPointLivraison;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
 	private EtatDemandeLivraison etatDemandeLivraison;
 	private EtatPosteCalcul etatPosteCalcul;
-	private EtatAjouterChoixPointLivraison etatChoixPointLivraison;
-	private EtatAjouterChoixNouvellePointLivraison etatChoixNouvellePointLivraison;
+	private EtatAjouterChoixPointLivraison etatAjouterChoixPointLivraison;
+	private EtatAjouterChoixNouvellePointLivraison etatAjouterChoixNouvellePointLivraison;
 	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
+	private EtatChoixPointLivraisonADeplacer etatChoixPointLivraisonADeplacer;
+	private EtatChoixPointLivraisonApresDeplacer etatChoixPointLivraisonApresDeplacer;
 	
 	private Controleur() {
 		monPlan = new Plan();
@@ -38,9 +42,11 @@ public class Controleur {
 		etatInit = new EtatInit();
 		etatDemandeLivraison = new EtatDemandeLivraison();
 		etatPosteCalcul = new EtatPosteCalcul();
-		etatChoixPointLivraison = new EtatAjouterChoixPointLivraison();
-		etatChoixNouvellePointLivraison = new EtatAjouterChoixNouvellePointLivraison();
+		etatAjouterChoixPointLivraison = new EtatAjouterChoixPointLivraison();
+		etatAjouterChoixNouvellePointLivraison = new EtatAjouterChoixNouvellePointLivraison();
 		etatSupprimerChoixPointLivraison = new EtatSupprimerChoixPointLivraison();
+		etatChoixPointLivraisonADeplacer = new EtatChoixPointLivraisonADeplacer();
+		etatChoixPointLivraisonApresDeplacer = new EtatChoixPointLivraisonApresDeplacer();
 		etat = etatInit;
 	}
 	
@@ -61,12 +67,30 @@ public class Controleur {
 		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
 	}
 	
+	public void setADeplacer(long id) throws Exception{
+		this.idADeplacerPointLivraison = id;
+		etat.choixPointLivraisonApresDeplacer();
+	}
+	
+	public void setApresDeplacer(long id) throws Exception{
+		this.idApresDeplacerPointLivraison = id;
+		etat.effectuerDeplacement(idADeplacerPointLivraison, idApresDeplacerPointLivraison);
+	}
+	
 	public void setSupprimerPointLivraison(long id) throws Exception{
 		etat.effectuerSupprimerPointLivraison(id);
 	}
 	
 	public void ajouterPointLivraison() throws Exception{
 		etat.ajouterPointLivraison();
+	}
+	
+	public void supprimerPointLivraison() throws Exception{
+		etat.supprimerPointLivraison();
+	}
+	
+	public void deplacerPointLivraison() throws Exception{
+		etat.deplacerPointLivraison();
 	}
 
 	public VueGraphique getGraph() {
@@ -138,8 +162,8 @@ public class Controleur {
 		return etatDemandeLivraison;
 	}
 
-	public EtatAjouterChoixNouvellePointLivraison getEtatChoixNouvellePointLivraison() {
-		return etatChoixNouvellePointLivraison;
+	public EtatAjouterChoixNouvellePointLivraison getEtatAjouterChoixNouvellePointLivraison() {
+		return etatAjouterChoixNouvellePointLivraison;
 	}
 
 	public void setEtat(Etat etatCrt) {
@@ -156,12 +180,20 @@ public class Controleur {
 		return etatPlanCharge;
 	}
 	
-	public Etat getEtatChoixPointLivraison() {
-		return etatChoixPointLivraison;
+	public Etat getEtatAjouterChoixPointLivraison() {
+		return etatAjouterChoixPointLivraison;
 	}
 
 	public EtatSupprimerChoixPointLivraison getEtatSupprimerChoixPointLivraison() {
 		return etatSupprimerChoixPointLivraison;
+	}
+	
+	public EtatChoixPointLivraisonADeplacer getEtatChoixPointLivraisonADeplacer() {
+		return etatChoixPointLivraisonADeplacer;
+	}
+	
+	public EtatChoixPointLivraisonApresDeplacer getEtatChoixPointLivraisonApresDeplacer() {
+		return etatChoixPointLivraisonApresDeplacer;
 	}
 
 	public DateTime getActuelHeureDepart() {

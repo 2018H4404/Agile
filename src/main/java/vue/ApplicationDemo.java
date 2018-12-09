@@ -44,7 +44,9 @@ import controleur.EtatAjouterChoixNouvellePointLivraison;
 */
 
 enum ETAT {
-    EtatInit,EtatPlanCharge,EtatDemandeLivraison,EtatPosteCalcul,EtatAjouterChoixPointLivraison,EtatAjouterChoixNouvellePointLivraison,EtatSupprimerChoixPointLivraison;
+    EtatInit,EtatPlanCharge,EtatDemandeLivraison,EtatPosteCalcul,
+    EtatAjouterChoixPointLivraison,EtatAjouterChoixNouvellePointLivraison,
+    EtatSupprimerChoixPointLivraison,EtatChoixPointLivraisonADeplacer,EtatChoixPointLivraisonApresDeplacer;
 
 }
 
@@ -59,6 +61,7 @@ public class ApplicationDemo extends Application{
 	private Button buttonEffacerDemande;
 	private Button buttonSupprimerLivraison;
 	private Button buttonAjouterLivraison;
+	private Button buttonDeplacerLivraison;
 
 	private Label labelNombreLivreurs;
 	private TextField textFieldnombreLivreur;
@@ -81,6 +84,7 @@ public class ApplicationDemo extends Application{
 	private MenuItem itemEffacerDemande;
 	private MenuItem itemAjouterLivraison;
 	private MenuItem itemSupprimerLivraison;
+	private MenuItem itemDeplacerLivraison;
 
 	/**
 	 * M茅thode permettant de commencer la d茅mo de l'application.
@@ -184,6 +188,10 @@ public class ApplicationDemo extends Application{
 		buttonAjouterLivraison.setMinWidth(300);
 		buttonAjouterLivraison.setMaxWidth(300);
 		
+		buttonDeplacerLivraison = new Button("Déplacer un point de livraison");
+		buttonDeplacerLivraison.setMinWidth(300);
+		buttonDeplacerLivraison.setMaxWidth(300);
+		
 		labelInfo = new Label();
 		labelInfo.setMinWidth(300);
 		labelInfo.setMaxWidth(300);
@@ -191,7 +199,7 @@ public class ApplicationDemo extends Application{
 		
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
         		textFieldnombreLivreur, labelError, buttonCalculer,buttonAjouterLivraison,labelDuree,textFieldDuree,
-        		labelDureeError,buttonSupprimerLivraison,
+        		labelDureeError,buttonSupprimerLivraison,buttonDeplacerLivraison,
         		buttonEffacer, buttonEffacerDemande, labelInfo);
 
 		//Ajout de la barre de menu
@@ -499,6 +507,7 @@ public class ApplicationDemo extends Application{
         menuLivraison = new Menu("Livraison");
         itemAjouterLivraison = new MenuItem("Ajouter un point de livraison");
         itemSupprimerLivraison = new MenuItem("Supprimer un point de livraison");
+        itemDeplacerLivraison = new MenuItem("Déplacer un point de livraison");
         
         itemAjouterLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -564,13 +573,30 @@ public class ApplicationDemo extends Application{
 	         @Override
 	         public void handle(ActionEvent event) {
 	        	 try {
-	        	    Controleur.getInstance().setEtat(Controleur.getInstance().getEtatSupprimerChoixPointLivraison());
+	        	    Controleur.getInstance().supprimerPointLivraison();
 					VerifierEtat(controleur);
 					graph.arreterSynchronisationLivraison();
 					texte.arreterSynchronisationLivraison();
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
 					labelInfo.setText("Choisissez le point de livraison que vous voulez supprimer.");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	         }
+	      }); 
+        buttonDeplacerLivraison.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	 try {
+	        		 Controleur.getInstance().deplacerPointLivraison();
+					VerifierEtat(controleur);
+					graph.arreterSynchronisationLivraison();
+					texte.arreterSynchronisationLivraison();
+					labelInfo.setTextFill(Color.BLACK);
+					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					labelInfo.setText("Choisissez le point de livraison que vous voulez déplacer.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -606,6 +632,7 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;
@@ -623,6 +650,7 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;
@@ -640,6 +668,7 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;
@@ -657,6 +686,7 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
+			buttonDeplacerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
 			break;
@@ -674,6 +704,7 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;
@@ -691,10 +722,11 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;
-		
+			
 		case EtatSupprimerChoixPointLivraison:
 			itemChargerPlan.setDisable(true);
 			buttonChargePlan.setDisable(true);
@@ -708,6 +740,43 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
+			itemSupprimerLivraison.setDisable(true);
+			itemAjouterLivraison.setDisable(true);
+			break;
+		
+		case EtatChoixPointLivraisonADeplacer:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(true);
+			buttonEffacer.setDisable(true);
+			itemEffacerDemande.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
+			buttonAjouterLivraison.setDisable(true);
+			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
+			itemSupprimerLivraison.setDisable(true);
+			itemAjouterLivraison.setDisable(true);
+			break;
+			
+		case EtatChoixPointLivraisonApresDeplacer:
+			itemChargerPlan.setDisable(true);
+			buttonChargePlan.setDisable(true);
+			itemChargerDemandeLivraison.setDisable(true);
+			buttonChargeDemandeLivraison.setDisable(true);
+			itemCalculerTournees.setDisable(true);
+			buttonCalculer.setDisable(true);
+			itemEffacer.setDisable(true);
+			buttonEffacer.setDisable(true);
+			itemEffacerDemande.setDisable(true);
+			buttonEffacerDemande.setDisable(true);
+			buttonAjouterLivraison.setDisable(true);
+			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
 			break;

@@ -3,7 +3,7 @@ package controleur;
 public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	@Override
 	public void choixNouvellePointLivraison() throws Exception {
-		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatChoixNouvellePointLivraison());
+		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatAjouterChoixNouvellePointLivraison());
 	}
 	
 	@Override
