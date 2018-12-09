@@ -23,7 +23,7 @@ public class Plan extends Observable{
 	private double minLat;
 	
 	/**
-	 * Constructeur par défaut du Plan.
+	 * Constructeur par defaut du Plan.
 	 */
 	public Plan() {
 		super();
@@ -32,7 +32,7 @@ public class Plan extends Observable{
 	}
 	
 	/**
-	 * Méthode permettant l'initialisation d'un plan.
+	 * Methode permettant l'initialisation d'un plan.
 	 * @param intersections les intersections du plan.
 	 * @param troncons les troncons du plan.
 	 * @param maxLong la longitude maximale du plan.
@@ -57,7 +57,7 @@ public class Plan extends Observable{
 	}
 
 	/**
-	 * Méthode permettant d'effacer le plan.
+	 * Methode permettant d'effacer le plan.
 	 */
 	public void clear() {
 		this.intersectionNormals.clear();

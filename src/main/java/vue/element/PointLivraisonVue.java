@@ -18,8 +18,8 @@ public class PointLivraisonVue extends Circle{
 	private long idPointLivraison;
 	private boolean selectionnee;
 	private boolean synchronisee;
+	private boolean activeChangerCouleurSelectionne;
 	private Color originalColor;
-	private double originalRadius;
 	
 	
 	/**
@@ -31,15 +31,19 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public PointLivraisonVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.CORNFLOWERBLUE);
-		this.originalColor = Color.CORNFLOWERBLUE;
+		this.setFill(Color.web("0x0000FF",1.0));
+		this.originalColor = Color.web("0x0000FF",1.0);
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
 		this.synchronisee = false;
-		this.originalRadius = radius;
+		activeChangerCouleurSelectionne = true;
 		ajouterListener();
 	}
 	
+	public void setActiveChangerCouleurSelectionne(boolean activeChangerCouleurSelectionne) {
+		this.activeChangerCouleurSelectionne = activeChangerCouleurSelectionne;
+	}
+
 	public long getIntersectionId() {
 		return idPointLivraison;
 	}
@@ -56,15 +60,23 @@ public class PointLivraisonVue extends Circle{
 		synchronisee = bool;;
 	}
 	
+	public void changeRadius(double radius) {
+		this.setRadius(radius);
+	}
+	
 	public void setSelectionnee(boolean selectionnee) {
 		this.selectionnee = selectionnee;
 	}
 	
 	public void changerFormeSynchronise() {
 		synchronisee = true;
-		this.setRadius(6);
+		this.setRadius(8);
 		this.setFill(Color.ORANGE);
 		this.originalColor = Color.ORANGE;
+	}
+	
+	public void setOriginalColor(Color couleur) {
+		this.originalColor = couleur;
 	}
 	
 	/**
@@ -80,35 +92,56 @@ public class PointLivraisonVue extends Circle{
             public void handle(final MouseEvent event) {
             	changerCouleurNonSelectionnee();
             }
-        });
+        });	
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
-            public void handle(final MouseEvent event) {
-                System.out.println(idPointLivraison);
-                try {
-					Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	        public void handle(final MouseEvent event) {
+	            System.out.println(idPointLivraison);
+	            try {
+	            	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
+	            		Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	            	}else {
+	            		
+	            	}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}  
-        });
+		});
 	}
+	
+	
 	
 	/**
 	 * Méthode pour changer la couleur du point de livraison sélectionné.
 	 */
 	public void changerCouleurSelectionnee() {
-		this.setFill(Color.YELLOW);
-		this.setRadius(originalRadius);
+		if(activeChangerCouleurSelectionne == true) {
+			this.setFill(Color.YELLOW);
+		}
 	}
 	
 	/**
 	 * Méthode pour changer la couleur du point de livraison non sélectionné.
 	 */
 	public void changerCouleurNonSelectionnee() {
-		this.setFill(originalColor);
-		this.setRadius(originalRadius);
+		if(activeChangerCouleurSelectionne == true) {
+			this.setFill(originalColor);
+		}
 	}
+
+	/*
+	public void effaceListenerOnClick() {
+		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(final MouseEvent event) {
+				
+			}
+		});
+		
+	}*/
+
+	
 	
 }

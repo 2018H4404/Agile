@@ -28,6 +28,57 @@ public class EtatDefaut implements Etat{
 	public void modifierPointLivraison() throws Exception {
 		
 	}
+
+	@Override
+	public void ajouterListenerOnClick() {
+		
+	}
+
+	@Override
+	public void ajouterPointLivraison() throws Exception {
+		
+	}
+
+	@Override
+	public void choixNouvellePointLivraison() throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerSupprimerPointLivraison(long id) throws Exception {
+		
+	}
+
+	@Override
+	public void choixPointLivraisonApresDeplacer() throws Exception {
+		
+	}
+
+	@Override
+	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception {
+		
+	}
+
+	@Override
+	public void supprimerPointLivraison() throws Exception {
+		
+	}
+
+	@Override
+	public void deplacerPointLivraison() throws Exception {
+		
+	}
+
+	/*
+	@Override
+	public void effaceListenerOnClick() {
+		
+	}*/
 	
 }
 	

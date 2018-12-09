@@ -16,7 +16,7 @@ public class Chemin {
 	private int duree;
 	
 	/**
-	 * Constructeur paramétré du chemin.
+	 * Constructeur parametre du chemin.
 	 * @param uneListeIntersections une liste d'intersections.
 	 * @param uneListeTroncons 
 	 */
@@ -26,7 +26,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Constructeur paramétré du chemin.
+	 * Constructeur parametre du chemin.
 	 * @param uneListeIntersections une liste d'intersections.
 	 * @param uneListeTroncons 
 	 * @param uneDuree la duree utilisee pour parcourir ce chemin
@@ -54,7 +54,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Méthode pour avoir l'origine du chemin.
+	 * Methode pour avoir l'origine du chemin.
 	 * @return Intersection qui est l'origine du chemin.
 	 */
 	public Intersection getIntersectionDepart() {
@@ -62,7 +62,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Méthode pour avoir la destination du chemin.
+	 * Methode pour avoir la destination du chemin.
 	 * @return Intersection qui est la destination du chemin.
 	 */
 	public Intersection getIntersectionDest() {
@@ -70,8 +70,8 @@ public class Chemin {
 	}
 	
 	/**
-	 * Méthode pour avoir le cout du chemin.
-	 * @return un double qui représente le cout du chemin.
+	 * Methode pour avoir le cout du chemin.
+	 * @return un double qui represente le cout du chemin.
 	 */
 	public double getCout() {
 		double somme = 0.0;

@@ -31,7 +31,7 @@ public class TestDemandeLivraison {
 	public void testAjouterPointLivraison() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.addObserver(observer);
-		dl.ajouterPointLivraison(48830472, 45.75406, 4.857418, 360);
+		dl.ajouterPointLivraisonMetier(48830472, 45.75406, 4.857418, 360);
 		assert(updateAppele);
 	}
 	
@@ -39,7 +39,7 @@ public class TestDemandeLivraison {
 	public void testClear() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
-		dl.ajouterPointLivraison(48830471, 45.75406, 4.857418, 360);
+		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
 		dl.clear();	
 		assertNull(dl.getEntrepotParId(48830472));
 		assertNull(dl.getPointLivraisonParId(48830471));

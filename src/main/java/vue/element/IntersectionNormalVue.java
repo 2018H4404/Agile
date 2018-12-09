@@ -29,8 +29,8 @@ public class IntersectionNormalVue extends Circle{
 	 */
 	public IntersectionNormalVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.GRAY);
-		this.originalColor = Color.GRAY;
+		this.setFill(Color.BLACK);
+		this.originalColor = Color.BLACK;
 		this.idInter = unId;
 		this.selectionnee = false;
 		this.copieX = x;
@@ -64,15 +64,23 @@ public class IntersectionNormalVue extends Circle{
             	changerCouleurNonSelectionnee();
             }
         });
+		
+	}
+	
+	public void ajouterListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             public void handle(final MouseEvent event) {
-                System.out.println(idInter);
                 try {
-					Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
-					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
-					Controleur.getInstance().reverseTransformLongitude(copieX, Controleur.getInstance().getGraph().getHauteur())
-					);
+                	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
+                		Controleur.getInstance().getMaDemande().ajouterPoint(idInter,
+            					Controleur.getInstance().reverseTransformLatitude(copieY, Controleur.getInstance().getGraph().getLargeur()),
+            					Controleur.getInstance().reverseTransformLongitude(copieX, Controleur.getInstance().getGraph().getHauteur())
+            					);
+                	}else {
+                		
+                	}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -80,6 +88,16 @@ public class IntersectionNormalVue extends Circle{
 			}  
         });
 	}
+	
+	/*
+	public void effaceListenerOnClick() {
+		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(final MouseEvent event) {
+				
+			}
+		});
+	}*/
+	
 	/**
 	 * Méthode pour changer la couleur de l'intersection selectionnée.
 	 */
