@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /** 
- * La classe de l'itérateur.
+ * La classe de l'iterateur.
  * @author H4404
  * @version 1.0
  * @since 1.0

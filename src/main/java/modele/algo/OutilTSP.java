@@ -14,7 +14,7 @@ import modele.metier.Intersection;
 public class OutilTSP {
 	
 	/**
-	 * Méthode qui retourne toutes les intersections des demandes.
+	 * Methode qui retourne toutes les intersections des demandes.
 	 * @param demande les demande de livraison.
 	 * @return la liste des demandes de livraison.
 	 */
@@ -32,7 +32,7 @@ public class OutilTSP {
 	}
 	
 	/**
-	 * Méthode pour initialiser le cout de la demande par TSP.
+	 * Methode pour initialiser le cout de la demande par TSP.
 	 * @param unPlan le plan de la ville.
 	 * @param intersectionsDemande les intersections de la demande.
 	 * @param cout le cout du chemin.
@@ -58,9 +58,9 @@ public class OutilTSP {
 	}
 	
 	/**
-	 * Méthode pour initialiser la durée de la demande par TSP.
+	 * Methode pour initialiser la duree de la demande par TSP.
 	 * @param intersectionsDemande la liste des intersections des demandes.
-	 * @param duree la durée des demandes.
+	 * @param duree la duree des demandes.
 	 * @param length la longueur des demandes.
 	 */
 	//Initialisation du tableau de duree demande par TSP

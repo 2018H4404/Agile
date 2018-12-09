@@ -24,11 +24,11 @@ public class PointLivraison extends Intersection{
 	}	
 	
 	/**
-	 * Constructeur paramétré du point de livraison avec une durée.
+	 * Constructeur parametre du point de livraison avec une duree.
 	 * @param id l'identifiant du point de livraison.
 	 * @param latitude la latitude du point de livraison.
 	 * @param longitude la longitude du point de livraison.
-	 * @param uneDuree la durée du point de livraison.
+	 * @param uneDuree la duree du point de livraison.
 	 */
 	public PointLivraison(long id, double latitude, double longitude, int uneDuree) {
 		super(id,latitude,longitude);
@@ -38,12 +38,12 @@ public class PointLivraison extends Intersection{
 	}
 	
 	/**
-	 * Constructeur paramétré du point de livraison avec une heure de départ et une heure d'arrivée.
+	 * Constructeur parametre du point de livraison avec une heure de depart et une heure d'arrivee.
 	 * @param id l'identifiant du point de livraison.
 	 * @param latitude la latitude du point de livraison.
 	 * @param longitude la longitude du point de livraison.
-	 * @param heureDepart l'heure de départ du point de livraison.
-	 * @param heureArrivee l'heure d'arrivée du point de livraison.
+	 * @param heureDepart l'heure de depart du point de livraison.
+	 * @param heureArrivee l'heure d'arrivee du point de livraison.
 	 */
 	public PointLivraison(long id, double latitude, double longitude, DateTime heureDepart,DateTime heureArrivee) {
 		super(id,latitude,longitude);

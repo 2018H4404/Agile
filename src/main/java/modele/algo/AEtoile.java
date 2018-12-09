@@ -33,7 +33,7 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode pour traduire le trajet.
+	 * Methode pour traduire le trajet.
 	 * @param chemin le chemin en intersection.
 	 * @param unPlan le plan de la ville. 
 	 * @return la traduction du chemin en trajet.
@@ -58,7 +58,7 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode permettant de trouver les voisins d'une intersection.
+	 * Methode permettant de trouver les voisins d'une intersection.
 	 * @param idCourant l'identifiant de l'intersection en cours.
 	 * @param monPlan le plan de la ville.
 	 * @return la liste des voisins
@@ -68,9 +68,9 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode de l'algorithme A*.
-	 * @param depart l'intersection de départ.
-	 * @param dest l'intersection de la déstination.
+	 * Methode de l'algorithme A*.
+	 * @param depart l'intersection de depart.
+	 * @param dest l'intersection de la destination.
 	 * @param monPlan la plan de la ville.
 	 * @return la liste des intersections du chemin à prendre.
 	 */
@@ -160,9 +160,9 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode pour le premier élément.
+	 * Methode pour le premier element.
 	 * @param map le mapping des intersections.
-	 * @return le premier élément.
+	 * @return le premier element.
 	 */
 	public Map.Entry<Double, Intersection> premierElement(Map<Double,Intersection> map){
 		Map.Entry<Double, Intersection> retour = null;
@@ -175,9 +175,9 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode pour trouver la valeur F.
+	 * Methode pour trouver la valeur F.
 	 * @param unInter une intersection.
-	 * @param distanceEstimeeF la distance éstimée de F.
+	 * @param distanceEstimeeF la distance estimee de F.
 	 * @return la valeur de F.
 	 */
 	/*
@@ -194,10 +194,10 @@ public class AEtoile {
 	}*/
 	
 	/**
-	 * Méthode pour trouver la clé
+	 * Methode pour trouver la cle
 	 * @param inter une intersection.
 	 * @param map un mapping d'intersection.
-	 * @return retourn la clé.
+	 * @return retourn la cle.
 	 */
 	public Double trouverKey(Intersection inter, Map<Double,Intersection> map) {
 		Double keyTrouve = 0.0;
@@ -212,17 +212,17 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode de l'heuristique.
-	 * @param depart intersection de départ.
-	 * @param dest intersection d'arrivée.
-	 * @return retourne la distance entre le départ et l'arrivée.
+	 * Methode de l'heuristique.
+	 * @param depart intersection de depart.
+	 * @param dest intersection d'arrivee.
+	 * @return retourne la distance entre le depart et l'arrivee.
 	 */
 	public double heuristique(Intersection depart, Intersection dest) {
 		return getDistance(depart.getLatitude(), depart.getLongitude(), dest.getLatitude(), dest.getLongitude());
 	}
 	
 	/**
-	 * Méthode pour savoir si le noeud est gris.
+	 * Methode pour savoir si le noeud est gris.
 	 * @param gris noeuds gris.
 	 * @param voisin identifiant du voisin.
 	 * @return retourne vrai si le noeud est gris.
@@ -239,11 +239,11 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Méthode pour calculer la distance entre deux points.
-	 * @param latStart la latitude de début.
-	 * @param longStart la longitude du début.
-	 * @param latEnd la latitude d'arrivée.
-	 * @param longEnd la longitude d'arrivée.
+	 * Methode pour calculer la distance entre deux points.
+	 * @param latStart la latitude de debut.
+	 * @param longStart la longitude du debut.
+	 * @param latEnd la latitude d'arrivee.
+	 * @param longEnd la longitude d'arrivee.
 	 * @return la distance entre les deux points.
 	 */
 	public double getDistance(double latStart,double longStart,double latEnd,double longEnd)
@@ -262,8 +262,8 @@ public class AEtoile {
     }
 	
 	/**
-	 * Méthode pour convertire un degré à un radian.
-	 * @param d le degré de l'angle.
+	 * Methode pour convertire un degre à un radian.
+	 * @param d le degre de l'angle.
 	 * @return la valeur en radian.
 	 */
 	private double rad(double d)

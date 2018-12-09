@@ -18,7 +18,7 @@ public class DemandeLivraison extends Observable{
 	private HashMap<Long,Entrepot> entrepots;
 	
 	/**
-	 * Constructeur par défaut de la classe de demande de livraison.
+	 * Constructeur par defaut de la classe de demande de livraison.
 	 */
 	public DemandeLivraison() {
 		livraisons = new HashMap<Long,PointLivraison>();
@@ -42,13 +42,13 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour ajouter un entrepôt.
+	 * Methode pour ajouter un entrepôt.
 	 * @param id identifiant de l'entrepôt.
 	 * @param latitude latitude de l'entrepôt.
 	 * @param longitude longitude de l'entrepôt.
-	 * @param heure heures de début de la tournée.
-	 * @param minute minutes de début de la tournée.
-	 * @param seconde secondes de début de la tournée.
+	 * @param heure heures de debut de la tournee.
+	 * @param minute minutes de debut de la tournee.
+	 * @param seconde secondes de debut de la tournee.
 	 */
 	public void ajouterEntrepot(long id, double latitude, double longitude,int heure,int minute,int seconde) {
 		Entrepot tempObject = new Entrepot(id,latitude,longitude,heure,minute,seconde);
@@ -73,7 +73,7 @@ public class DemandeLivraison extends Observable{
 	
 	}
 	/**
-	 * Méthode permettant de libérer l'entreprôt et les livraisons.
+	 * Methode permettant de liberer l'entreprôt et les livraisons.
 	 */
 	public void clear() {
 		entrepots.clear();
@@ -81,7 +81,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour accéder à l'entrepôt par l'ID.
+	 * Methode pour acceder à l'entrepôt par l'ID.
 	 * @param id identifiant de l'entrepôt.
 	 * @return l'entrepot voulu.
 	 */
@@ -90,7 +90,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode permettant de retourner tous les entrepôts.
+	 * Methode permettant de retourner tous les entrepôts.
 	 * @return la collection de tous les entrepôts.
 	 */
 	public Collection<Entrepot> getAllEntrepots(){
@@ -98,7 +98,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour ajouter un point de livraison.
+	 * Methode pour ajouter un point de livraison.
 	 * @param id identifiant du point du livraison.
 	 * @param latitude la latitude du point de livraison.
 	 * @param longitude la longitude du point de livraison.
@@ -110,7 +110,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour supprimer un point de livraison.
+	 * Methode pour supprimer un point de livraison.
 	 * @param id identifiant du point du livraison.
 	 */
 	public void supprimerPointLivraisonMetier(long id) {
@@ -118,7 +118,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode pour avoir un point de livraison.
+	 * Methode pour avoir un point de livraison.
 	 * @param id identification.
 	 * @return le point de livraison.
 	 */
@@ -127,7 +127,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode permettant de retourner une collection des points de livraisons.
+	 * Methode permettant de retourner une collection des points de livraisons.
 	 * @return la collection des points de livraison.
 	 */
 	public Collection<PointLivraison> getAllPointLivraisons(){
@@ -135,7 +135,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Méthode permettant de retourner le nombre maximum de livreur.
+	 * Methode permettant de retourner le nombre maximum de livreur.
 	 * @return le nombre maximum de livreur.
 	 */
 	public int getNbLivreurMaximum(){
