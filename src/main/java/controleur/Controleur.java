@@ -10,6 +10,7 @@ import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.Plan;
+import modele.metier.PointLivraison;
 import modele.metier.Tournee;
 import modele.services.LecteurDeXML;
 import vue.VueGraphique;
@@ -33,7 +34,9 @@ public class Controleur {
 	private long ajoutIdNouvellePointLivraison;
 	private long idADeplacerPointLivraison;
 	private long idApresDeplacerPointLivraison;
-	private int ajoutDuree;
+	private long commandeId;
+	private long commandeIdPrece;
+	private int commandeDuree;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
@@ -44,8 +47,11 @@ public class Controleur {
 	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
 	private EtatChoixPointLivraisonADeplacer etatChoixPointLivraisonADeplacer;
 	private EtatChoixPointLivraisonApresDeplacer etatChoixPointLivraisonApresDeplacer;
-	private PointLivraisonVue vueSelectionne;
-	
+	private PointLivraisonVue commandeVue;
+	private ArrayList<Tournee> listeTournees;
+	private ArrayList<Tournee> listeTourneesPrece;
+	private long commandeIdPointLivraison;
+	private PointLivraison commandePointLivraison;
 	/**
 	 * Constructeur du controlleur.
 	 */
@@ -65,7 +71,7 @@ public class Controleur {
 		etatChoixPointLivraisonADeplacer = new EtatChoixPointLivraisonADeplacer();
 		etatChoixPointLivraisonApresDeplacer = new EtatChoixPointLivraisonApresDeplacer();
 		etat = etatInit;
-		vueSelectionne = null;
+		commandeVue = null;
 	}
 	
   
@@ -74,12 +80,52 @@ public class Controleur {
 		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
 	}
 	
-	public void setAjoutDuree(int duree) {
-		this.ajoutDuree = duree;
+	public void setCommandeDuree(int duree) {
+		this.commandeDuree = duree;
 	}
   
-  public void setVueSelectionne(PointLivraisonVue vue) {
-		this.vueSelectionne = vue;
+	public void setCommandeVue(PointLivraisonVue vue) {
+		this.commandeVue = vue;
+	}
+	
+	public void setCommandeId(long id) {
+		this.commandeId = id;
+	}
+	
+	public void setCommandeIdPrece(long id) {
+		this.commandeIdPrece = id;
+	}
+	
+	public void setListeTournees(ArrayList<Tournee> listeTournees) {
+		this.listeTournees = listeTournees;
+	}
+	
+	public ArrayList<Tournee> getListeTournees(){
+		return this.listeTournees;
+	}
+	
+	public void setListeTourneesPrece(ArrayList<Tournee> listeTourneesPrece) {
+		this.listeTourneesPrece = listeTourneesPrece;
+	}
+	
+	public ArrayList<Tournee> getListeTourneesPrece() {
+		return this.listeTourneesPrece;
+	}
+	
+	public long getCommandeId() {
+		return commandeId;
+	}
+	
+	public long getCommandeIdPrece() {
+		return commandeIdPrece;
+	}
+	
+	public PointLivraisonVue getCommandeVue() {
+		return commandeVue;
+	}
+	
+	public int getCommandeDuree() {
+		return commandeDuree;
 	}
 	
   /**
@@ -287,17 +333,13 @@ public class Controleur {
 		return instance;
 	}
 	
-	public PointLivraisonVue getVueSelectionne() {
-		return vueSelectionne;
-	}
+
 	
 	public long getIdAjoutDepart()throws Exception{
 		return this.ajoutIdDepartPointLivraison;
 	}
 	
-  public int getAjoutDuree() {
-		return ajoutDuree;
-	}
+
   
   public long getIdAjoutNouvellePoint() {
 		return ajoutIdNouvellePointLivraison;
@@ -455,5 +497,23 @@ public class Controleur {
 
 	public Historique getHistorique() {
 		return historique;
+	}
+
+
+	public void setIdCommandePointLivraison(long id) {
+		this.commandeIdPointLivraison = id;
+	}
+
+
+	public void setCommandePointLivraison(PointLivraison commandePointLivraison) {
+		this.commandePointLivraison = commandePointLivraison;
+	}
+	
+	public PointLivraison getCommandePointLivraison() {
+		return this.commandePointLivraison;
+	}
+	
+	public long getIdCommandePointLivraison() {
+		return this.commandeIdPointLivraison;
 	}
 }

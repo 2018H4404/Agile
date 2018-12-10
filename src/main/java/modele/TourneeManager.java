@@ -1,6 +1,13 @@
 package modele;
 
 
+import java.util.ArrayList;
+import java.util.Observable;
+
+import controleur.Controleur;
+import modele.algo.AEtoile;
+import modele.algo.OutilTSP;
+import modele.algo.TSPSimple;
 import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
 import modele.metier.Entrepot;
@@ -8,18 +15,8 @@ import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 //import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
-import modele.metier.PointLivraison;
 import modele.metier.Tournee;
 import modele.metier.Troncon;
-import modele.algo.AEtoile;
-import modele.algo.OutilTSP;
-import modele.algo.TSPSimple;
-
-import java.util.Observable;
-
-import controleur.Controleur;
-
-import java.util.ArrayList;
 
 /** 
  * La classe du tournee manager.
@@ -45,12 +42,21 @@ public class TourneeManager extends Observable{
 	
 	public void calculTournees(Plan plan){
 		listeTournees = Algo(plan);
-		
+		notifyObservers("Supprimer");
+
 	}
 	
 	public ArrayList<Tournee> Algo(Plan plan){
 		ArrayList<Tournee> res = null;
 		return res;
+	}
+	
+	public void setTournee(ArrayList<Tournee> listeTournees) {
+		this.listeTournees = listeTournees;
+		setChanged();
+		notifyObservers("Tournees");
+
+		
 	}
 	
 	public Tournee getDernierTournee() {
@@ -529,4 +535,13 @@ public class TourneeManager extends Observable{
 		return ret;
 
 	}
+	
+	public ArrayList<Tournee> cloneList(ArrayList<Tournee> list){
+		ArrayList<Tournee> clone = new ArrayList<Tournee>(list.size());
+	    for (Tournee item : list) {
+	    	clone.add(new Tournee(item));
+	    }
+	    return clone;
+	}
+	
 }

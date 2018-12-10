@@ -1,21 +1,30 @@
 package controleur;
 
+import java.util.ArrayList;
+
 import javafx.scene.paint.Color;
+import modele.metier.PointLivraison;
 import modele.metier.Tournee;
+import vue.element.PointLivraisonVue;
 
 public class CommandeSupprimeLivraison implements Commande {
-	private Tournee tournee;
-
+	private long idCommandePointLivraisonPrece;
+	private long idCommandePointLivraison;
+	private PointLivraisonVue vue;
+	private int dureeCommandePointLivraison;
 	
-	public CommandeSupprimeLivraison(Tournee tournee) {
-		this.tournee = tournee;
+	public CommandeSupprimeLivraison(long idCommandePointLivraisonPrece,long idCommandePointLivraison,PointLivraisonVue vue,int dureeCommandePointLivraison) {
+		this.idCommandePointLivraisonPrece = idCommandePointLivraisonPrece;
+		this.idCommandePointLivraison = idCommandePointLivraison;
+		this.vue = vue;
+		this.dureeCommandePointLivraison = dureeCommandePointLivraison;
 	}
 
 	@Override
 	public void doCmd() {
 		try {
-			Controleur.getInstance().getMonManager().supprimerPointLivraison(Controleur.getInstance().getIdAjoutNouvellePoint());
-			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().remove(Controleur.getInstance().getVueSelectionne());
+			Controleur.getInstance().getMonManager().supprimerPointLivraison(idCommandePointLivraison);
+			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().remove(vue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -25,10 +34,11 @@ public class CommandeSupprimeLivraison implements Commande {
 	@Override
 	public void undoCmd() {
 		try {
-			Controleur.getInstance().getMonManager().ajouterPointLivraison(Controleur.getInstance().getIdAjoutDepart(),Controleur.getInstance().getIdAjoutNouvellePoint(),Controleur.getInstance().getAjoutDuree());
-			Controleur.getInstance().getVueSelectionne().setRadius(5);
-			Controleur.getInstance().getVueSelectionne().setFill(Color.BLUE);
-			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().add(Controleur.getInstance().getVueSelectionne());
+			vue.setRadius(5);
+			vue.setFill(Color.BLUE);
+			Controleur.getInstance().getMonManager().ajouterPointLivraison(idCommandePointLivraisonPrece,idCommandePointLivraison,dureeCommandePointLivraison);
+			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().add(vue);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

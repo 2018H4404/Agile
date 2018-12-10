@@ -9,7 +9,7 @@ public class EtatAjouterChoixNouvellePointLivraison extends EtatDefaut{
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
 		Controleur.getInstance().getMonManager().ajouterPointLivraison(idDepart, idNouvelle, duree);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
-		CommandeAjouterLivraison cmd = new CommandeAjouterLivraison(Controleur.getInstance().getMonManager().getDernierTournee());
+		CommandeAjouterLivraison cmd = new CommandeAjouterLivraison(Controleur.getInstance().getCommandeIdPrece(),Controleur.getInstance().getCommandeId(),Controleur.getInstance().getCommandeVue(),Controleur.getInstance().getCommandeDuree());
 		Controleur.getInstance().getHistorique().ajouteCmd(cmd);
 	}
 	

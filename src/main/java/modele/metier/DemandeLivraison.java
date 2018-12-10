@@ -70,6 +70,12 @@ public class DemandeLivraison extends Observable{
 		notifyObservers("DemandeLivraison");
 	
 	}
+	
+	public void ajouterPoint(long id,PointLivraison p) {
+		livraisons.put(id, p);
+		setChanged();
+		notifyObservers("DemandeLivraison");
+	}
 	/**
 	 * Methode permettant de liberer l'entreprôt et les livraisons.
 	 */

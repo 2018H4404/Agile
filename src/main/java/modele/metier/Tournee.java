@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class Tournee {
 	
+	
+	
 	private ArrayList<Chemin> listeChemins;
 	
 	/**
@@ -19,6 +21,10 @@ public class Tournee {
 	 */
 	public Tournee(ArrayList<Chemin> uneListeChemins) {
 		this.listeChemins = uneListeChemins;
+	}
+	
+	public Tournee(Tournee t) {
+		listeChemins = t.listeChemins;
 	}
 
 	public ArrayList<Chemin> getListeChemins() {

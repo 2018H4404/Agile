@@ -157,7 +157,14 @@ public class VueGraphique extends Parent implements Observer{
                 			 temp.setFill(Color.GREEN);
                 			 temp.setRadius(8);
 
-                			 Controleur.getInstance().setAjoutDuree(duree);
+//                			 Controleur.getInstance().setAjoutDuree(duree);
+                			//Rajout du point de livraison
+                			 IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(temp.getIntersectionId());
+                			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),5,tempInter.getId());
+                  			 Controleur.getInstance().setCommandeVue(tempPointLivraison);
+
+                			 Controleur.getInstance().setCommandeId(temp.getIntersectionId());
+                			 
                 			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
                 			 //Remettre a l'etat initial (couleur, radius)
@@ -166,10 +173,10 @@ public class VueGraphique extends Parent implements Observer{
                 			 ajoutPointChoisi.setFill(Color.BLUE);
                 			 ajoutPointChoisi.setRadius(5);
                 			 ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
-                			 //Rajout du point de livraison
-                			 IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(temp.getIntersectionId());
-                			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),5,tempInter.getId());
-                			 Controleur.getInstance().setVueSelectionne(tempPointLivraison);
+                			 
+//                			 Controleur.getInstance().setVueSelectionne(tempPointLivraison);
+                  			 Controleur.getInstance().setCommandeDuree(duree);
+                  			 System.out.println(Controleur.getInstance().getCommandeVue());
                 			 livraisonGroup.getChildren().add(tempPointLivraison);
 
                 			 parent.VerifierEtat(Controleur.getInstance());
@@ -194,6 +201,8 @@ public class VueGraphique extends Parent implements Observer{
 
                 			temp.setRadius(7);
                 			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
+                 			Controleur.getInstance().setCommandeIdPrece(temp.getIntersectionId());
+
                 			parent.VerifierEtat(Controleur.getInstance());
 
                 			parent.setInfo("Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
@@ -208,18 +217,23 @@ public class VueGraphique extends Parent implements Observer{
                  			temp.setFill(Color.GREEN);
                  			temp.setRadius(7);
                  	
-                 			Controleur.getInstance().setVueSelectionne(temp);
 
                   			int duree = Controleur.getInstance().getDureePointLivraison(temp.getIntersectionId());
-                 			Controleur.getInstance().setAjoutDuree(duree);
-
+                 			
                 			Controleur.getInstance().setAjoutDepart(Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
                			 	Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
+                 			Controleur.getInstance().setCommandeId(temp.getIntersectionId());
+                 			Controleur.getInstance().setCommandeDuree(duree);
+                 			Controleur.getInstance().setCommandeIdPrece(Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
+                 			Controleur.getInstance().setCommandeVue(temp);
+//               			 	ArrayList<Tournee> clone = Controleur.getInstance().getMonManager().cloneList(Controleur.getInstance().getMonManager().getListeTournees());
+//               			 	Controleur.getInstance().setListeTourneesPrece(clone);
+//               			 	Controleur.getInstance().setIdCommandePointLivraison(temp.getIntersectionId());
+//               			 	Controleur.getInstance().setCommandePointLivraison(Controleur.getInstance().getMaDemande().getPointLivraisonParId(temp.getIntersectionId()));
                  			
-
-                 			Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());
-                 			
-               			 	
+               			 	Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());//methode calcul
+//               			 	ArrayList<Tournee> clone1 = Controleur.getInstance().getMonManager().cloneList(Controleur.getInstance().getMonManager().getListeTournees());
+//                 			Controleur.getInstance().setListeTournees(clone1);
 
                  			livraisonGroup.getChildren().remove(temp);
                  			parent.VerifierEtat(Controleur.getInstance());

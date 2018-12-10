@@ -407,6 +407,7 @@ public class VueTextuelle extends Parent implements Observer{
 		conteneurInfoParTournee.getPanes().clear();
 		ArrayList<Tournee> tournees = manager.getListeTournees();
 		int nbTournees = tournees.size();
+		System.out.println(nbTournees);
 		DateTime depart = Controleur.getInstance().getActuelHeureDepart();
 		infoParTournee = new TitledPane[nbTournees];
 		int index = 0;
