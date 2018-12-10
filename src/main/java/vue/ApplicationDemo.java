@@ -1,3 +1,8 @@
+//Ces exceptions, où faut-il les mettre ? 
+//throw new IntersectionNonLivrableException : Quand on clique sur un point de livraison impossible à ajouter
+//throw new UndoRedoNoPointDLException : Quand on clique sur "Undo" après avoir supprimé tous les points de livraison un par un (Zhenyu et Yang qu'avez-vous décidé ?)
+//throw new DeplacementPointDLException : Quand on déplace un point de livraison d'une tournée vers la même
+
 package vue;
 
 import javafx.scene.control.*;
