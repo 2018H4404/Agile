@@ -8,13 +8,13 @@ public interface Commande {
 
 	/**
 	 * Réaliser la commande.
-	 * @param controleur
+	 * @param controleur le controleur.
 	 */
 	 void doCmd(Controleur controleur);
 	
 	 /**
 	  * Annuler la commande.
-	  * @param controleur
+	  * @param controleur le controleur.
 	  */
 	 void undoCmd(Controleur controleur);
 }

@@ -24,7 +24,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return 0;
 	}
 
@@ -44,7 +44,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void choixNouvellePointLivraison() throws Exception {
+	public void choixNouveauPointLivraison() throws Exception {
 		
 	}
 

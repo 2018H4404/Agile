@@ -324,7 +324,7 @@ public class Controleur {
 	 */
 	public void setAjoutDepart(long id) throws Exception{
 		this.ajoutIdDepartPointLivraison = id;
-		etat.choixNouvellePointLivraison();
+		etat.choixNouveauPointLivraison();
 	}
 	
 	/**

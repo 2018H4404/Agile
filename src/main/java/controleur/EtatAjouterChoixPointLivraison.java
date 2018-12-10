@@ -6,12 +6,12 @@ package controleur;
  */
 public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	@Override
-	public void choixNouvellePointLivraison() throws Exception {
+	public void choixNouveauPointLivraison() throws Exception {
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatAjouterChoixNouvellePointLivraison());
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 }

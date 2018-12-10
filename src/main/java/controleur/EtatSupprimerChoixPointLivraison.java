@@ -12,7 +12,7 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 }
