@@ -295,13 +295,18 @@ public class ApplicationDemo extends Application{
 					VerifierEtat(controleur);
 				} catch (Exception e) {
 					labelInfo.setTextFill(Color.web("#FF0000"));
-           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
+           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal formé.");
 					e.printStackTrace();
 				}
                }
 
 	         }
 	      });
+        
+        //Vérifier que le fichier XML est bien formé (pas de caractère absent ou manquant) 
+        //sinon : throw new XMLMalFormeException 
+        //Vérifier que le fichier XML correspond à une demande de livraison (<demandeDeLivraisons> puis <entrepot> puis <livraison>)
+        //sinon : throw new DemandeLivraisonXMLFileException
         
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -330,6 +335,11 @@ public class ApplicationDemo extends Application{
 	         }
 	      });
         
+        //Vérifier que le fichier XML est bien formé (pas de caractère absent ou manquant)
+        //sinon : throw new XMLMalFormeException 
+        //Vérifier que le fichier XML correspond à un plan ( <reseau> puis <noeud> et <troncon>)
+        //sinon : throw new PlanXMLFileException 
+        
         itemChargerPlan = new MenuItem("Charger Plan");
         
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
@@ -356,6 +366,7 @@ public class ApplicationDemo extends Application{
 	        	} 
 	         }
 	      }); 
+        
         
     	buttonChargePlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
