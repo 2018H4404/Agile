@@ -25,8 +25,8 @@ public class Tournee {
 		return listeChemins;
 	}
 
-	public void setListeChemins(ArrayList<Chemin> listeChemins) {
+	/*public void setListeChemins(ArrayList<Chemin> listeChemins) {
 		this.listeChemins = listeChemins;
-	}	
+	}*/	
 	
 }

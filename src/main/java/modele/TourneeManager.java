@@ -43,15 +43,15 @@ public class TourneeManager extends Observable{
 		tourneeAjouterIndex = 0;
 	}
 	
-	public void calculTournees(Plan plan){
+	/*public void calculTournees(Plan plan){
 		listeTournees = Algo(plan);
 		
-	}
+	}*/
 	
-	public ArrayList<Tournee> Algo(Plan plan){
+	/*public ArrayList<Tournee> Algo(Plan plan){
 		ArrayList<Tournee> res = null;
 		return res;
-	}
+	}*/
 	
 	public Tournee getDernierTournee() {
 		return listeTournees.get(listeTournees.size()-1);
@@ -286,10 +286,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idDepart)) {
-						find = 1;
-						break;
-					}
+					
 					if(dest.equals(idDepart)) {
 						find = 1;
 						break;
@@ -344,10 +341,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(id)) {
-						find = 1;
-						break;
-					}
+					
 					if(dest.equals(id)) {
 						find = 1;
 						break;
@@ -404,10 +398,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idADeplacer)) {
-						findADplacer = 1;
-						break;
-					}
+					
 					if(dest.equals(idADeplacer)) {
 						findADplacer = 1;
 						break;
@@ -430,10 +421,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idApresDeplacer)) {
-						findApresDplacer = 1;
-						break;
-					}
+					
 					if(dest.equals(idApresDeplacer)) {
 						findApresDplacer = 1;
 						break;
