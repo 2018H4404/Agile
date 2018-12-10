@@ -60,7 +60,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'instance du controleur.
-	 * @return
+	 * @return retourne l'instance.
 	 */
 	public static Controleur getInstance() {
 		if(instance == null) {
@@ -71,7 +71,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat ajouterPointLivraison.
-	 * @throws Exception
+	 * @throws Exception l'exception a l'ajout du point de livraison.
 	 */
 	public void ajouterPointLivraison() throws Exception{
 		etat.ajouterPointLivraison();
@@ -79,7 +79,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat supprimerPointLivraison.
-	 * @throws Exception
+	 * @throws Exception l'exception a la suppression du point de livraison.
 	 */
 	public void supprimerPointLivraison() throws Exception{
 		etat.supprimerPointLivraison();
@@ -87,7 +87,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat deplacerPointLivraison.
-	 * @return
+	 * throws Exception l'exception au deplacement du point de livraison.
 	 */
 	public void deplacerPointLivraison() throws Exception{
 		etat.deplacerPointLivraison();
@@ -95,8 +95,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat chargerFichierPlan.
-	 * @param f
-	 * @throws Exception
+	 * @param f le fichier XML.
+	 * @throws Exception au chargement du point de livraison.
 	 */
 	public void chargerFichierPlan(File f) throws Exception {
 		etat.chargerFichierPlan(f);
@@ -104,8 +104,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat lectureLivraisonEntrepotXML.
-	 * @param f
-	 * @throws Exception
+	 * @param f le fichier XML.
+	 * @throws Exception l'exception a la lecture du fichier.
 	 */
 	public void chargerFichierDemandeLivraison(File f) throws Exception{
 		etat.lectureLivraisonEntrepotXML(f);
@@ -113,8 +113,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat CalculerLesTournees.
-	 * @param nbLivreur
-	 * @throws Exception
+	 * @param nbLivreur nombre de livreurs.
+	 * @throws Exception l'exception au calcul des tournee.
 	 */
 	public void calculerLesTournees(int nbLivreur) throws Exception{
 		etat.CalculerLesTournees(nbLivreur);
@@ -122,8 +122,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat getNbLivreurMaximum.
-	 * @return
-	 * @throws Exception
+	 * @return l'etat.
+	 * @throws Exception l'exception lors de l'etat.
 	 */
 	public int getNbLivreurMaximum() throws Exception {
 		return etat.getNbLivreurMaximum();
@@ -131,7 +131,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir le plan.
-	 * @return
+	 * @return le plan.
 	 */
 	public Plan getMonPlan() {
 		return monPlan;
@@ -139,7 +139,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir la demande de livraison.
-	 * @return
+	 * @return la demande de livraison.
 	 */
 	public DemandeLivraison getMaDemande() {
 		return maDemande;
@@ -147,7 +147,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir le tournee manager.
-	 * @return
+	 * @return le tournee manager.
 	 */
 	public TourneeManager getMonManager() {
 		return monManager;
@@ -155,7 +155,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir l'etat getEtatDemandeLivraison.
-	 * @return
+	 * @return l'etat de la demande de livraison.
 	 */
 	public Etat getEtatDemandeLivraison() {
 		return etatDemandeLivraison;
@@ -163,7 +163,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir l'etat etatAjouterChoixNouvellePointLivraison.
-	 * @return
+	 * @return l'etat etatAjouterChoixNouvellePointLivraison.
 	 */
 	public EtatAjouterChoixNouvellePointLivraison getEtatAjouterChoixNouvellePointLivraison() {
 		return etatAjouterChoixNouvellePointLivraison;
@@ -171,7 +171,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'etat.
-	 * @return
+	 * @return l'etat.
 	 */
 	public Etat getEtatCourant() {
 		return etat;
@@ -179,7 +179,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'etat initial.
-	 * @return
+	 * @return l'etat etatInit.
 	 */
 	public Etat getEtatInit() {
 		return etatInit;
@@ -187,7 +187,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour l'etat plan charge.
-	 * @return
+	 * @return l'etat etatPlanCharge.
 	 */
 	public Etat getEtatPlanCharge() {
 		return etatPlanCharge;
@@ -195,7 +195,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'etat AjouterChoixPointLivraison.
-	 * @return
+	 * @return l'etat etatAjouterChoixPointLivraison.
 	 */
 	public Etat getEtatAjouterChoixPointLivraison() {
 		return etatAjouterChoixPointLivraison;
@@ -203,7 +203,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir l'etat etatSupprimerChoixPointLivraison.
-	 * @return
+	 * @return l'etat etatSupprimerChoixPointLivraison.
 	 */
 	public EtatSupprimerChoixPointLivraison getEtatSupprimerChoixPointLivraison() {
 		return etatSupprimerChoixPointLivraison;
@@ -211,7 +211,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'etat etatChoixPointLivraisonADeplacer.
-	 * @return
+	 * @return l'etat etatChoixPointLivraisonADeplacer.
 	 */
 	public EtatChoixPointLivraisonADeplacer getEtatChoixPointLivraisonADeplacer() {
 		return etatChoixPointLivraisonADeplacer;
@@ -219,7 +219,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour avoir l'etat etatChoixPointLivraisonApresDeplacer.
-	 * @return
+	 * @return l'etat etatChoixPointLivraisonApresDeplacer.
 	 */
 	public EtatChoixPointLivraisonApresDeplacer getEtatChoixPointLivraisonApresDeplacer() {
 		return etatChoixPointLivraisonApresDeplacer;
@@ -227,7 +227,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir l'heure actuelle de depart.
-	 * @return
+	 * @return le temps de debut de la demande
 	 */
 	public DateTime getActuelHeureDepart() {
 		return maDemande.getDebutTime();
@@ -235,7 +235,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour avoir l'etat etatPosteCalcul.
-	 * @return
+	 * @return l'etat du poste de calcul.
 	 */
 	public Etat getEtatPosteCalcul() {
 		return etatPosteCalcul;
@@ -243,7 +243,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour retourner le graphe de la vue graphique.
-	 * @return
+	 * @return le graphe de la vue graphique.
 	 */
 	public VueGraphique getGraph() {
 		return this.graph;
@@ -251,9 +251,9 @@ public class Controleur {
 	
 	/**
 	 * Methode pour transformer la latitude et la hauteur du plan.
-	 * @param latitude
-	 * @param hauteur
-	 * @return
+	 * @param latitude la latitude du plan.
+	 * @param hauteur la hauteur du plan.
+	 * @return la transformation.
 	 */
 	public double transformerLatitude(double latitude, double hauteur) {
 		return monPlan.transformLatitude(latitude, hauteur);
@@ -261,9 +261,9 @@ public class Controleur {
 	
 	/**
 	 * Methode pour transformer la longitude du plan.
-	 * @param longitude
-	 * @param largeur
-	 * @return
+	 * @param longitude la longitude du plan.
+	 * @param largeur la largeur du plan.
+	 * @return le plan transforme.
 	 */
 	public double transformerLongitude(double longitude, double largeur) {
 		return monPlan.transformLongitude(longitude, largeur);
@@ -271,10 +271,10 @@ public class Controleur {
 	
 	/**
 	 * Methode pour appliquer la methode reverse transform de mon plan.
-	 * @param latitudeTransforme
-	 * @param hauteur
-	 * @return
-	 * @throws Exception
+	 * @param latitudeTransforme la latitude de la transformation.
+	 * @param hauteur la hauteur de la transformation.
+	 * @return la transformation
+	 * @throws Exception l'exception lors de la transformation.
 	 */
 	public double reverseTransformLatitude(double latitudeTransforme,double hauteur)throws Exception{
 		return monPlan.reverseTransformLatitude(latitudeTransforme,hauteur);
@@ -282,10 +282,10 @@ public class Controleur {
 	
 	/**
 	 * Methode pour pour reverseTransformLongitude de plans.
-	 * @param longitudeTransforme
-	 * @param largeur
-	 * @return
-	 * @throws Exception
+	 * @param longitudeTransforme la longitude de la transformation.
+	 * @param largeur la largeur de la transformation.
+	 * @return le plan transforme.
+	 * @throws Exception lors de la transformation.
 	 */
 	public double reverseTransformLongitude(double longitudeTransforme,double largeur)throws Exception {
 		return monPlan.reverseTransformLongitude(longitudeTransforme,largeur);
@@ -293,8 +293,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour ajouter l'observateur.
-	 * @param graph
-	 * @param texte
+	 * @param graph le graphe de la vue graphique.
+	 * @param texte de texte de la vue textuelle.
 	 */
 	public void addObserver(VueGraphique graph, VueTextuelle texte) {
 		monPlan.addObserver(graph);
@@ -319,8 +319,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controlleur sur l'etat choixNouvellePointLivraison.
-	 * @param id
-	 * @throws Exception
+	 * @param id l'id du point de livraison.
+	 * @throws Exception lors de l'ajout de la livraison.
 	 */
 	public void setAjoutDepart(long id) throws Exception{
 		this.ajoutIdDepartPointLivraison = id;
@@ -329,19 +329,19 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controlleur sur l'etat effectuerAjoutPointLivraison.
-	 * @param id
-	 * @param duree
-	 * @throws Exception
+	 * @param id du nouvau point a ajouter.
+	 * @param duree la duree de la livraison.
+	 * @throws Exception l'exception d'ajout de nouvel point de livraison.
 	 */
-	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
+	public void setAjoutNouveauPoint(long id,int duree) throws Exception{
 		this.ajoutIdNouvellePointLivraison = id;
 		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
 	}
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat choixPointLivraisonApresDeplacer.
-	 * @param id
-	 * @throws Exception
+	 * @param id l'id du point de livraison a deplacer.
+	 * @throws Exception l'exception au choix du point de livraison apres le deplacement.
 	 */
 	public void setADeplacer(long id) throws Exception{
 		this.idADeplacerPointLivraison = id;
@@ -350,8 +350,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat effectuerDeplacement.
-	 * @param id
-	 * @throws Exception
+	 * @param id l'id du point de livraison.
+	 * @throws Exception l'exception lors du deplacement.
 	 */
 	public void setApresDeplacer(long id) throws Exception{
 		this.idApresDeplacerPointLivraison = id;
@@ -360,8 +360,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat effectuerSupprimerPointLivraison.
-	 * @param id
-	 * @throws Exception
+	 * @param id l'id du point de livraison.
+	 * @throws Exception l'exception lors du deplacement.
 	 */
 	public void setSupprimerPointLivraison(long id) throws Exception{
 		etat.effectuerSupprimerPointLivraison(id);
@@ -369,7 +369,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre l'etat.
-	 * @param etatCrt
+	 * @param etatCrt l'etat du controleur.
 	 */
 	public void setEtat(Etat etatCrt) {
 		Controleur.getInstance().etat = etatCrt;
@@ -377,7 +377,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le graphe.
-	 * @param graph
+	 * @param graph l'etat du graphe de la vue graphique.
 	 */
 	public void setGraph(VueGraphique graph) {
 		Controleur.getInstance().graph = graph;
@@ -385,7 +385,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre le texte.
-	 * @param texte
+	 * @param texte le texte de la vue textuelle.
 	 */
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;

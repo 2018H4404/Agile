@@ -63,6 +63,9 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Constructeur de la vue graphique.
+	 * @param lFenetre la longueure de la fenetre.
+	 * @param hFenetre la hauteur de la fenetre.
+	 * @param unParent le parent.
 	 */
 	public VueGraphique(double lFenetre, double hFenetre, ApplicationDemo unParent) {
 		//Intialisation de sa compagnie par defaut
@@ -153,7 +156,7 @@ public class VueGraphique extends Parent implements Observer{
                 			 }
                 			 temp.setFill(Color.GREEN);
                 			 temp.setRadius(8);
-                			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
+                			 Controleur.getInstance().setAjoutNouveauPoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
                 			 //Remettre a l'etat initial (couleur, radius)
                 			 ajoutInterChoisi.setRadius(4);
@@ -324,7 +327,7 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Methode pour generer des couleurs aleatoires que nous utilisons afin de dessiner les tournees.
-	 * @param nbLivreur : nombre des livreurs
+	 * @param index : un index
 	 */
 	public Color genererCouleurs(int index) {
 		return couleurs[index%couleurs.length];
