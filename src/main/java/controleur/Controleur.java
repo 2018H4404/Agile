@@ -68,7 +68,6 @@ public class Controleur {
 		vueSelectionne = null;
 	}
 	
-	/
   
 	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
 		this.ajoutIdNouvellePointLivraison = id;
@@ -277,7 +276,7 @@ public class Controleur {
 		return this.graph;
 	}
 	
-  **
+	/**
 	 * Methode pour avoir l'instance du controleur.
 	 * @return retourne l'instance.
 	 */
