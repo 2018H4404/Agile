@@ -29,6 +29,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+
 import modele.TourneeManager;
 import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
@@ -55,6 +58,8 @@ public class VueTextuelle extends Parent implements Observer{
 	private Label monLabel;
 	private TabPane infos;
 	private Tab nomRue;
+	private VBox infoGeneral;
+	private GridPane lesFormesSens;
 	private Tab infosLivraison;
 	private Tab infosTournee;
 	private TitledPane filtreTournees;
@@ -89,10 +94,32 @@ public class VueTextuelle extends Parent implements Observer{
 				monLabel.setMinWidth(300);
 				monLabel.setWrapText(true);
 				monLabel.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+				infoGeneral = new VBox();
+				lesFormesSens = new GridPane();
+				Circle signeLivraison  = new Circle(8);
+				signeLivraison.setFill(Color.BLUE);
+				lesFormesSens.add(signeLivraison, 1, 1);
+				lesFormesSens.add(new Label("Point de livraison"), 2, 1);
+				Circle signeEntrepot  = new Circle(8);
+				signeEntrepot.setFill(Color.RED);
+				lesFormesSens.add(signeEntrepot, 1, 2);
+				lesFormesSens.add(new Label("Entrepot"), 2, 2);
+				Circle signeSyncronise  = new Circle(8);
+				signeSyncronise.setFill(Color.ORANGE);
+				lesFormesSens.add(signeSyncronise, 1, 3);
+				lesFormesSens.add(new Label("Point synchronise"), 2, 3);
+				Circle signeNoeudNormal  = new Circle(8);
+				signeNoeudNormal.setFill(Color.BLACK);
+				lesFormesSens.add(signeNoeudNormal, 1, 4);
+				lesFormesSens.add(new Label("Point normal"), 2, 4);
+				Separator sep = new Separator();
+				sep.setMinWidth(300);
+				sep.setMaxWidth(300);
+				infoGeneral.getChildren().addAll(monLabel,sep,lesFormesSens);
 				//Creation des Tabs
 				nomRue = new Tab();
 				nomRue.setClosable(false);
-				nomRue.setContent(monLabel);
+				nomRue.setContent(infoGeneral);
 				nomRue.setText("Nom de la rue");
 				
 				infosLivraison = new Tab();
