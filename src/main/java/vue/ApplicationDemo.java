@@ -370,7 +370,6 @@ public class ApplicationDemo extends Application {
 						labelInfo.setText("");
 						VerifierEtat(controleur);
 					} catch (Exception e) {
-						System.out.println("d");
 						labelInfo.setTextFill(Color.web("#FF0000"));
 						labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
 						e.printStackTrace();

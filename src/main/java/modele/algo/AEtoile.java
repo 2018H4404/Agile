@@ -42,7 +42,6 @@ public class AEtoile {
 		ArrayList<Troncon> traduction = new ArrayList<Troncon>();
 		int length = chemin.size();
 		for(int i = 0; i < length-1; i++) {
-			System.out.println(chemin.get(i));
 			ArrayList<Troncon> tempListe = unPlan.getTronconsParOrigine(chemin.get(i).getId());
 			for(int j = 0; j < tempListe.size(); j++) {
 				Intersection tempDest = tempListe.get(j).getDestination();
@@ -52,8 +51,6 @@ public class AEtoile {
 				}
 			}
 		}
-		System.out.println(chemin.get(length-1));
-		System.out.println("");
 		return traduction;
 	}
 	
@@ -133,10 +130,7 @@ public class AEtoile {
 				Intersection interVoisin = voisin.getDestination();
 				double nouvelleDistance = distanceEstimeeF.get(interCourant) + voisin.getLongueur() - heuristique(interCourant,dest) + heuristique(interVoisin,dest);
 				if(isGris(gris,voisin.getDestination().getId())) {
-					//System.out.println(interVoisin);
-					//System.out.println(distanceEstimeeF.get(interVoisin));
-					//Double ancienneDistance = trouverValuerF(interVoisin,distanceEstimeeF);
-					//System.out.println(ancienneDistance);
+					
 					if(distanceEstimeeF.get(interVoisin) > nouvelleDistance) {
 						distanceEstimeeF.remove(interVoisin);
 						distanceEstimeeF.put(interVoisin, nouvelleDistance);

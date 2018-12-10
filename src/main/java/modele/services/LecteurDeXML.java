@@ -52,7 +52,6 @@ public class LecteurDeXML {
 			DocumentBuilder builder = factory.newDocumentBuilder();   
 			Document doc = builder.parse(f);   
 			doc.getDocumentElement().normalize();
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 			if(doc.getDocumentElement().getNodeName().equals("demandeDeLivraisons")) {
 				NodeList nl = doc.getElementsByTagName("demandeDeLivraisons");   
 				for (int temp = 0; temp < nl.getLength(); temp++) {   
@@ -117,7 +116,6 @@ public class LecteurDeXML {
 			DocumentBuilder builder = factory.newDocumentBuilder();   
 			Document doc = builder.parse(f);   
 			doc.getDocumentElement().normalize();
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 			if(doc.getDocumentElement().getNodeName().equals("reseau")) {
 				NodeList nl = doc.getElementsByTagName("reseau");   
 				for (int temp = 0; temp < nl.getLength(); temp++) {  
