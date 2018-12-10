@@ -20,7 +20,6 @@ public class Historique {
 		indice++;
 		listeDeCommande.add(cmd);
 		System.out.println("cmd list length:"+ listeDeCommande.size());
-//		cmd.doCmd();
 	}
 	
 	public void undo() {
