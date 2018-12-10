@@ -59,6 +59,7 @@ public class VueGraphique extends Parent implements Observer{
 	private double largeur;
 	private PointLivraisonVue deplacerPointChoisiUn = null;
 	private PointLivraisonVue deplacerPointChoisiDeux = null;
+	private boolean permisSynchronise;
 	private static Color[] couleurs = {Color.CRIMSON,Color.CYAN,Color.FUCHSIA,Color.GREENYELLOW,Color.LIMEGREEN,Color.SKYBLUE};
 	
 	/**
@@ -71,6 +72,7 @@ public class VueGraphique extends Parent implements Observer{
 		//Intialisation de sa compagnie par defaut
 		compagnie = null;
 		parent = unParent;
+		permisSynchronise = true;
 		
 		//Initialisation du contenu
 		ScrollPane paneGraphique = new ScrollPane();
@@ -192,18 +194,20 @@ public class VueGraphique extends Parent implements Observer{
 		livraisonGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
                 if(event.getTarget() instanceof PointLivraisonVue) {
-                	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatAjouterChoixPointLivraison")) {
-                		try {
-                			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
-                			ajoutPointChoisi = temp;
-                			temp.setActiveChangerCouleurSelectionne(false);
-                			temp.setFill(Color.GREEN);
+                	if(!permisSynchronise) {
+                		if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatAjouterChoixPointLivraison")) {
+                    		try {
+                    			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                    			ajoutPointChoisi = temp;
+                    			temp.setActiveChangerCouleurSelectionne(false);
+                    			temp.setFill(Color.GREEN);
 
                 			temp.setRadius(7);
                 			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
                  			Controleur.getInstance().setCommandeIdPrece(temp.getIntersectionId());
 
                 			parent.VerifierEtat(Controleur.getInstance());
+
 
                 			parent.setInfo("Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
                 		}catch(Exception e) {
@@ -217,6 +221,7 @@ public class VueGraphique extends Parent implements Observer{
                  			temp.setFill(Color.GREEN);
                  			temp.setRadius(7);
                  	
+
 
                   			int duree = Controleur.getInstance().getDureePointLivraison(temp.getIntersectionId());
                  			
@@ -235,50 +240,73 @@ public class VueGraphique extends Parent implements Observer{
 //               			 	ArrayList<Tournee> clone1 = Controleur.getInstance().getMonManager().cloneList(Controleur.getInstance().getMonManager().getListeTournees());
 //                 			Controleur.getInstance().setListeTournees(clone1);
 
-                 			livraisonGroup.getChildren().remove(temp);
-                 			parent.VerifierEtat(Controleur.getInstance());
 
-                 			parent.setInfo("Point de livraison supprime.");
-                 		}catch(Exception e) {
-                 			System.out.println("Probleme durant le processus pour supprimer");
-                 			e.printStackTrace();
-                 		}
-                	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonADeplacer")) {
-                		 try {
-                  			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
-                  			deplacerPointChoisiUn = temp;
-                  			temp.setActiveChangerCouleurSelectionne(false);
-                  			temp.setFill(Color.GREEN);
-                  			temp.setRadius(7);
-                  			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
-                  			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Choisissez maintenant apres quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
-                  		}catch(Exception e) {
-                  			System.out.println("Probleme durant le choix d'un point a deplacer");
-                  			e.printStackTrace();
-                  		}
-                 	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonApresDeplacer")) {
-                		 try {
-                  			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
-                  			deplacerPointChoisiDeux = temp;
-                  			temp.setActiveChangerCouleurSelectionne(false);
-                  			temp.setFill(Color.GREEN);
-                  			temp.setRadius(8);
-                  			Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
-	                  		//Remettre a l'etat initial (couleur, radius)
-                  			deplacerPointChoisiUn.setRadius(5);
-                  			deplacerPointChoisiUn.setFill(Color.BLUE);
-                  			deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
-                  			deplacerPointChoisiDeux.setFill(Color.BLUE);
-                  			deplacerPointChoisiDeux.setRadius(5);
-                  			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
-                  			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Point de livraison deplace.");
-                  		}catch(Exception e) {
-                  			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
-                  			e.printStackTrace();
-                  		}
-                 	 }
+                     			livraisonGroup.getChildren().remove(temp);
+                     			parent.VerifierEtat(Controleur.getInstance());
+
+                     			parent.setInfo("Point de livraison supprime.");
+                     		}catch(Exception e) {
+                     			System.out.println("Probleme durant le processus pour supprimer");
+                     			e.printStackTrace();
+                     		}
+                    	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonADeplacer")) {
+                    		 try {
+                      			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                      			deplacerPointChoisiUn = temp;
+                      			temp.setActiveChangerCouleurSelectionne(false);
+                      			temp.setFill(Color.GREEN);
+                      			temp.setRadius(7);
+                      			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
+                      			parent.VerifierEtat(Controleur.getInstance());
+                      			parent.setInfo("Choisissez maintenant apres quel point de livraison vous voulez placer le point de livraison que vous venez de choisir..");
+                      		}catch(Exception e) {
+                      			System.out.println("Probleme durant le choix d'un point a deplacer");
+                      			e.printStackTrace();
+                      		}
+                     	 }else if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatChoixPointLivraisonApresDeplacer")) {
+                    		 try {
+                      			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
+                      			deplacerPointChoisiDeux = temp;
+                      			temp.setActiveChangerCouleurSelectionne(false);
+                      			temp.setFill(Color.GREEN);
+                      			temp.setRadius(8);
+                      			Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
+    	                  		//Remettre a l'etat initial (couleur, radius)
+                      			deplacerPointChoisiUn.setRadius(5);
+                      			deplacerPointChoisiUn.setFill(Color.BLUE);
+                      			deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
+                      			deplacerPointChoisiDeux.setFill(Color.BLUE);
+                      			deplacerPointChoisiDeux.setRadius(5);
+                      			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+                      			parent.VerifierEtat(Controleur.getInstance());
+                      			parent.setInfo("Point de livraison deplace.");
+                      		}catch(Exception e) {
+                      			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
+                      			parent.setInfo("Nous ne pouvons pas faire un deplacement sur deux points d'une meme tournee.");
+                      			deplacerPointChoisiUn.setRadius(5);
+                      			deplacerPointChoisiUn.setFill(Color.BLUE);
+                      			deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
+                      			deplacerPointChoisiDeux.setFill(Color.BLUE);
+                      			deplacerPointChoisiDeux.setRadius(5);
+                      			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+                      			Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+                      			parent.VerifierEtat(Controleur.getInstance());
+                      			e.printStackTrace();
+                      		}
+                     	 }
+                	}else {
+                		PointLivraisonVue vue = (PointLivraisonVue)event.getTarget();
+                		if(!vue.isSynchronisee()) {
+                			vue.changerFormeSynchronise();
+                			compagnie.synchroniserLivraisonPane(vue.getIntersectionId(),true);
+                		}else {
+                			vue.setSynchronisee(false);
+                			vue.setOriginalColor(Color.BLUE);
+                			vue.changeRadius(5);
+                			vue.changerCouleurNonSelectionnee();
+                			compagnie.synchroniserLivraisonPane(vue.getIntersectionId(),false);
+                		}
+                	}
                 }
             }
         });
@@ -467,8 +495,8 @@ public class VueGraphique extends Parent implements Observer{
 						tempReference.changerFormeSynchronise();
 					}else {
 						tempReference.setSynchronisee(false);
-						tempReference.setOriginalColor(Color.web("0x0000FF", 1));
-						tempReference.changeRadius(4);
+						tempReference.setOriginalColor(Color.BLUE);
+						tempReference.changeRadius(5);
 						tempReference.changerCouleurNonSelectionnee();
 					}
 				}
@@ -476,19 +504,29 @@ public class VueGraphique extends Parent implements Observer{
 		}
 	}
 	
+	
+	
 	/**
 	 * Methode pour arreter temporairement la synchronisation.
 	 */	
 	public void arreterSynchronisationLivraison() {
+		permisSynchronise = false;
 		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
 		for(Node e : tempLivraisons) {
 			PointLivraisonVue tempReference = (PointLivraisonVue)e;
 			tempReference.setSynchronisee(false);
-			tempReference.setOriginalColor(Color.web("0x0000FF", 1));
-			tempReference.changeRadius(4);
+			tempReference.setOriginalColor(Color.BLUE);
+			tempReference.changeRadius(5);
 			tempReference.changerCouleurNonSelectionnee();
 		}
 		compagnie.arreterSynchronisationLivraison();
+	}
+	
+	/**
+	 * Methode pour reactiver la synchronisation.
+	 */	
+	public void activerSynchronisationLivraison() {
+		permisSynchronise = true;
 	}
 	
 	/**
@@ -560,28 +598,7 @@ public class VueGraphique extends Parent implements Observer{
 	 * @param manager : objet TourneeManager stocke dans le controleur
 	 */	
 	public void changerVueTourneeSupprimer(TourneeManager manager) {
-		System.out.println("Deplacement supprimer");
-		int indexUn = manager.getTourneeAjouterIndex();
-		int indexDeux = manager.getTourneeSupprimerIndex();
-		Group tempReference = tourneesGroup.get(indexUn);
-		tempReference.getChildren().clear();
-		Color tourneeCouleur = genererCouleurs(indexUn);
-		ArrayList<Chemin> tempChemins = manager.getListeTournees().get(indexUn).getListeChemins();
-		for(Chemin chemin : tempChemins) {
-			ArrayList<Troncon> tempTroncons = chemin.getListeTroncons();
-			for(Troncon troncon : tempTroncons) {
-				IntersectionNormal depart = troncon.getOrigine();
-				IntersectionNormal destination = troncon.getDestination();
-				TourneeVue tempTronconTournee = new TourneeVue(Controleur.getInstance().transformerLongitude(depart.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(depart.getLatitude(), hauteur),
-						Controleur.getInstance().transformerLongitude(destination.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(destination.getLatitude(), hauteur),troncon.getNomRue(), tourneeCouleur);
-				tempReference.getChildren().add(tempTronconTournee);
-			}
-		}
-		ajouterListenerRueNom(tempReference);
-		
-		tempReference = tourneesGroup.get(indexDeux);
-		tourneesAfficheesGroup.getChildren().remove(tempReference);
-		tourneesGroup.remove(tempReference);
+		dessinerTournees(manager);
 	}
 	
 	/**
@@ -611,15 +628,19 @@ public class VueGraphique extends Parent implements Observer{
 				break;
 			case "UniqueTournee":
 				changerVueUneTournee((TourneeManager)o);
+				activerSynchronisationLivraison();
 				break;
 			case "SupprimerTournee":
 				supprimerUneTournee((TourneeManager)o);
+				activerSynchronisationLivraison();
 				break;	
 			case "DeplacementSupprimerTournee":
 				changerVueTourneeSupprimer((TourneeManager)o);
+				activerSynchronisationLivraison();
 				break;
 			case "DeplacementSansSupprimerTournee":
 				changerVueTourneeSansSupprimer((TourneeManager)o);
+				activerSynchronisationLivraison();
 				break;
 			case "Alert Temps":
 				dessinerTournees((TourneeManager)o);

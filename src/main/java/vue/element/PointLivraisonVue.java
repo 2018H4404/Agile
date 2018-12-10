@@ -99,7 +99,7 @@ public class PointLivraisonVue extends Circle{
 	            System.out.println(idPointLivraison);
 	            try {
 	            	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
-	            		Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	            		//Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
 	            	}else {
 	            		
 	            	}

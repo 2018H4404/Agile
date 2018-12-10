@@ -1,8 +1,6 @@
 package controleur;
 
 import javafx.scene.paint.Color;
-import modele.metier.DemandeLivraison;
-import modele.metier.Tournee;
 import vue.element.PointLivraisonVue;
 
 public class CommandeAjouterLivraison implements Commande{
@@ -38,7 +36,7 @@ public class CommandeAjouterLivraison implements Commande{
 			try {
 				System.out.println(vue);
 				Controleur.getInstance().getMonManager().supprimerPointLivraison(idCommandePointLivraison);
-				Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().remove(vue);
+			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().remove(vue);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,9 +1,5 @@
 package controleur;
 
-/**
- * La classe de l'etat de supprimer le choix de livraison.
- * @author H4404
- */
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
@@ -11,6 +7,7 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 		CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(Controleur.getInstance().getCommandeIdPrece(),Controleur.getInstance().getCommandeId(),Controleur.getInstance().getCommandeVue(),Controleur.getInstance().getCommandeDuree());
 		Controleur.getInstance().getHistorique().ajouteCmd(cmd);
+
 	}
 	
 	@Override

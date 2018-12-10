@@ -139,7 +139,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode permettant de retourner le nombre maximum de livreur.
+	 * Methode permettant de retourner le map des points de livraison.
 	 * @return le map des points de livraison.
 	 */
 	public HashMap<Long, PointLivraison> getLivraisons() {

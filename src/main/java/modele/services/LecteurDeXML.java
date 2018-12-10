@@ -13,6 +13,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import controleur.Controleur;
+import exceptions.DemandeLivraisonXMLFileException;
+import exceptions.PlanXMLFileException;
+import exceptions.XMLMalFormeException;
 import modele.metier.Entrepot;
 import modele.metier.IntersectionNormal;
 import modele.metier.PointLivraison;
@@ -78,7 +81,7 @@ public class LecteurDeXML {
 									PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
 									tempLivraisons.put(tempId,tempObject);
 								}else {
-									Exception e = new Exception();
+									DemandeLivraisonXMLFileException e = new DemandeLivraisonXMLFileException();
 									System.out.println("Erreur de l'architecture du fichier xml");
 									throw e;
 								}
@@ -87,7 +90,7 @@ public class LecteurDeXML {
 					}
 			    }   
 			}else{
-				Exception e = new Exception();
+				XMLMalFormeException e = new XMLMalFormeException();
 				System.out.println("Erreur de l'architecture du fichier xml");
 				throw e;
 			}
@@ -169,7 +172,7 @@ public class LecteurDeXML {
 										tempTroncons.put(idOrigine, tempListe);
 									}
 								}else {
-									Exception e = new Exception();
+									PlanXMLFileException e = new PlanXMLFileException();
 									System.out.println("Erreur de l'architecture du fichier xml");
 									throw e;
 								}
@@ -179,7 +182,7 @@ public class LecteurDeXML {
 					setLatLongDesTroncons(tempIntersections, tempTroncons);
 			    }   
 			}else {
-				Exception e = new Exception();
+				XMLMalFormeException e = new XMLMalFormeException();
 				System.out.println("Erreur de l'architecture du fichier xml");
 				throw e;
 			}

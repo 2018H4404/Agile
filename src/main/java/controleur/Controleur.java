@@ -6,16 +6,12 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 
 import modele.TourneeManager;
-import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
-import modele.metier.Intersection;
 import modele.metier.Plan;
 import modele.metier.PointLivraison;
 import modele.metier.Tournee;
-import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
-import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 
 /**

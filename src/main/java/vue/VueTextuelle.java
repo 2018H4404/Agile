@@ -507,31 +507,7 @@ public class VueTextuelle extends Parent implements Observer{
 	public void clearVue() {
 		conteneurFiltres.getChildren().clear();
 		conteneurInfoParTournee.getPanes().clear();
-		
-	}
-	
-	public void VerifierEtat(Controleur c) {
-	    ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
-
-		switch(e) {
-		case EtatInit:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		case EtatPlanCharge:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		case EtatDemandeLivraison:
-			infosTournees.setDisable(false);
-			filtreTournees.setDisable(false);
-			break;
-        
-		default:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		}
+		conteneurLivraison.getChildren().clear();
 	}
 	
 	public void ajouteTitledPane(DemandeLivraison demande) {
@@ -578,7 +554,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * Methode pour reactiver temporairement la synchronisation.
+	 * Methode pour reactiver la synchronisation.
 	 */	
 	public void activerSynchronisationLivraison() {
 		for(int i = 0; i < infoParLivraison.length; i++) {
@@ -586,6 +562,10 @@ public class VueTextuelle extends Parent implements Observer{
 		}
 	}
 	
+	/**
+	 * Methode pour synchroniser la vue graphique avec les panneaus des points de livraison.
+	 * @param pane : panneau a synchroniser avec la vue graphique
+	 */	
 	public void synchronisationLivraisonsVue(LivraisonPane pane) {
 		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
@@ -600,6 +580,22 @@ public class VueTextuelle extends Parent implements Observer{
             	}
             }
 		});
+	}
+	
+	/**
+	 * Methode pour synchroniser les panneaus des points de livraison avec la vue graphique.
+	 * @param id : id du point de livraison (pour trouver le panneau correspondant)
+	 */	
+	public void synchroniserLivraisonPane(long id,boolean ordre) {
+		for(int i = 0; i < infoParLivraison.length; i++) {
+			if(infoParLivraison[i].getLivraisonId() == id) {
+				if(ordre) {
+					infoParLivraison[i].setExpanded(true);
+				}else {
+					infoParLivraison[i].setExpanded(false);
+				}
+			}
+		}
 	}
 
 }
