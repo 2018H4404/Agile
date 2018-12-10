@@ -91,7 +91,7 @@ public class ApplicationDemo extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-        graph = new VueGraphique(700,700,this);
+        graph = new VueGraphique(1400,900,this);
         texte = new VueTextuelle(this);
         Controleur.getInstance().addObserver(graph,texte);
         Controleur.getInstance().setGraph(graph);
@@ -271,7 +271,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
@@ -299,7 +299,7 @@ public class ApplicationDemo extends Application{
 		    public void handle(ActionEvent event) {
 		        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
 	             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	             fileChooser.getExtensionFilters().add(extFilter);
 	             File file = fileChooser.showOpenDialog(primaryStage);
@@ -327,7 +327,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
 	        	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	        	fileChooser.getExtensionFilters().add(extFilter);
 	        	File file = fileChooser.showOpenDialog(primaryStage);
@@ -352,7 +352,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
               FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
               fileChooser.getExtensionFilters().add(extFilter);
               File file = fileChooser.showOpenDialog(primaryStage);
@@ -521,7 +521,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -560,7 +560,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					// labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

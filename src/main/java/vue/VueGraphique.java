@@ -218,7 +218,7 @@ public class VueGraphique extends Parent implements Observer{
                   			temp.setRadius(8);
                   			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
                   			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Choisissez maintenant apr¨¨s quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
+                  			parent.setInfo("Choisissez maintenant apres quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point a deplacer");
                   			e.printStackTrace();
@@ -239,7 +239,7 @@ public class VueGraphique extends Parent implements Observer{
                   			deplacerPointChoisiDeux.setRadius(6);
                   			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
                   			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Point de livraison d¨¦plac¨¦.");
+                  			parent.setInfo("Point de livraison deplace.");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
                   			e.printStackTrace();
