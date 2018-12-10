@@ -63,6 +63,9 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Constructeur de la vue graphique.
+	 * @param lFenetre la longueure de la fenetre.
+	 * @param hFenetre la hauteur de la fenetre.
+	 * @param unParent le parent.
 	 */
 	public VueGraphique(double lFenetre, double hFenetre, ApplicationDemo unParent) {
 		//Intialisation de sa compagnie par defaut
@@ -153,6 +156,7 @@ public class VueGraphique extends Parent implements Observer{
                 			 }
                 			 temp.setFill(Color.GREEN);
                 			 temp.setRadius(8);
+
                 			 Controleur.getInstance().setAjoutDuree(duree);
                 			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
@@ -234,7 +238,6 @@ public class VueGraphique extends Parent implements Observer{
                   			temp.setRadius(7);
                   			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
                   			parent.VerifierEtat(Controleur.getInstance());
-
                   			parent.setInfo("Choisissez maintenant apres quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point a deplacer");
@@ -256,7 +259,6 @@ public class VueGraphique extends Parent implements Observer{
                   			deplacerPointChoisiDeux.setRadius(5);
                   			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
                   			parent.VerifierEtat(Controleur.getInstance());
-
                   			parent.setInfo("Point de livraison deplace.");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
@@ -345,7 +347,7 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Methode pour generer des couleurs aleatoires que nous utilisons afin de dessiner les tournees.
-	 * @param nbLivreur : nombre des livreurs
+	 * @param index : un index
 	 */
 	public Color genererCouleurs(int index) {
 		return couleurs[index%couleurs.length];
@@ -436,16 +438,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour synchroniser la vue avec la vue textuelle.
-	 * @param id : id de PointLivraisonVue qui doit ��tre synchronis��
-||||||| merged common ancestors
-	 * Méthode pour synchroniser la vue avec la vue textuelle.
-	 * @param id : id de PointLivraisonVue qui doit ��tre synchronis��
-=======
 	 * Methode pour synchroniser la vue avec la vue textuelle.
 	 * @param id : id de PointLivraisonVue qui doit etre synchronisee
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
 	 * @param expanded : boolean qui indique si le TitledPane est expanded
 	 */	
 	public void synchronisationLivraison(long id,boolean expanded) {
@@ -469,13 +463,7 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour arr��ter temporairement la synchronisation.
-||||||| merged common ancestors
-	 * Méthode pour arr��ter temporairement la synchronisation.
-=======
 	 * Methode pour arreter temporairement la synchronisation.
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
 	 */	
 	public void arreterSynchronisationLivraison() {
 		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
@@ -490,16 +478,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour changer juste l'affichage d'une tourn��e.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-||||||| merged common ancestors
-	 * Méthode pour changer juste l'affichage d'une tourn��e.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-=======
 	 * Methode pour changer juste l'affichage d'une tournee.
 	 * @param manager : objet TourneeManager stocke dans le controleur
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
 	 */	
 	public void changerVueUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();
@@ -521,16 +501,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour changer l'affichage des deux tourn��es chang��es(Sans Supprimer) apr��s le d��placement.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-||||||| merged common ancestors
-	 * Méthode pour changer l'affichage des deux tourn��es chang��es(Sans Supprimer) apr��s le d��placement.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-=======
 	 * Methode pour supprimer une tournee.
 	 * @param manager : objet TourneeManager stocke dans le controleur
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
 	 */	
 	public void changerVueTourneeSansSupprimer(TourneeManager manager) {
 		System.out.println("Deplacement sans supprimer");
@@ -570,16 +542,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour changer l'affichage des deux tourn��es chang��es(Avec Supprimer) apr��s le d��placement.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-||||||| merged common ancestors
-	 * Méthode pour changer l'affichage des deux tourn��es chang��es(Avec Supprimer) apr��s le d��placement.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-=======
-	 * MÃ©thode pour changer l'affichage des deux tourn¨¦es chang¨¦es(Avec Supprimer) apr¨¨s le d¨¦placement.
-	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
+	 * Methode pour changer l'affichage des deux tournees changees(Avec Supprimer) apres le deplacement.
+	 * @param manager : objet TourneeManager stocke dans le controleur
 	 */	
 	public void changerVueTourneeSupprimer(TourneeManager manager) {
 		System.out.println("Deplacement supprimer");
@@ -607,16 +571,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Méthode pour supprimer une tourn��e.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-||||||| merged common ancestors
-	 * Méthode pour supprimer une tourn��e.
-	 * @param manager : objet TourneeManager stock�� dans le controleur
-=======
-	 * Methode pour supprimer une tourn¨¦e.
+	 * Methode pour supprimer une tournee.
 	 * @param manager : objet TourneeManager stocke dans le controleur
->>>>>>> cf8440420d09e3be2e693a54a2dd71c62cbdf604
 	 */	
 	public void supprimerUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();

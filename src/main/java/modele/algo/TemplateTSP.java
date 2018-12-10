@@ -22,9 +22,10 @@ public abstract class TemplateTSP implements TSP {
 	}
 	
 	/**
-	 * Methode qui calcule une repartition des points de livraisons sur les livreurs
-	 * @param nbLivreur : nombre de livreur
-	 * @param nbPointLivraisons : nombre de points de livraisons total
+	 * Methode qui calcule une repartition des points de livraisons sur les livreurs.
+	 * @param nbLivreur : nombre de livreur.
+	 * @param nbPointLivraisons : nombre de points de livraisons total.
+	 * @return le clustering des points de livraison par livreur.
 	 */
 	public int[] clusteringNbPointLivraisonParLivreurNaive(int nbLivreur, int nbPointLivraisons) {
 		int[] resultat = new int[nbLivreur];
@@ -64,7 +65,7 @@ public abstract class TemplateTSP implements TSP {
 	 * @param nbSommets : nombre de sommets totals
 	 * @param nbParLivreur : liste des nombres de points de livraison par livreur
 	 * @param cout : le cout entre differents points de livraisons
-	 * @retour ArrayList<int[]> liste des groupes des points de livraison
+	 * @retour liste des groupes des points de livraison
 	 */
 	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
 		ArrayList<int[]> retour = new ArrayList<int[]>();
@@ -124,17 +125,17 @@ public abstract class TemplateTSP implements TSP {
 	}
 	
 	/**
-	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
-	 * @param sommetCourant
-	 * @param nonVus : tableau des sommets restant a visiter
-	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
-	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
-	 * @param nbTourneeAvantDest : nombre de tournees qui doivent etre faites avant la derniere tournee
-	 * @param tourneeFaite : nombre de tournees deja parcouru
-	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison par livreur
-	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le livreur actuel
-	 * @return une borne inferieure du cout des permutations commencant par sommetCourant, 
-	 * contenant chaque sommet de nonVus exactement une fois et terminant par le sommet 0
+	 * Methode devant etre redefinie par les sous-classes de TemplateTSP.
+	 * @param sommetCourant.
+	 * @param nonVus : tableau des sommets restant a visiter.
+	 * @param cout : cout[i][j] = duree pour aller de i a j.
+	 * @param duree : duree[i] = duree pour visiter le sommet i.
+	 * @param nbTourneeAvantDest : nombre de tournees qui doivent etre faites avant la derniere tournee.
+	 * @param tourneeFaite : nombre de tournees deja parcouru.
+	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison par livreur.
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le livreur actuel.
+	 * @return une borne inferieure du cout des permutations commencant par sommetCourant.
+	 * contenant chaque sommet de nonVus exactement une fois et terminant par le sommet 0.
 	 */
 	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite,int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels);
 	

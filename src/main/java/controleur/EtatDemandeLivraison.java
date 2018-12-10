@@ -4,6 +4,10 @@ import javafx.scene.Node;
 import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 
+/**
+ * La classe de l'etat de demande de livraison.
+ * @author H4404
+ */
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override
@@ -15,7 +19,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 	

@@ -303,7 +303,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * Methode qui mettre ¨¤ jour l'info des tourn¨¦es chang¨¦es apr¨¨s le d¨¦placement (Sans supprimer)
+	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement (Sans supprimer)
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
 	public void changerInfoTourneePaneSansSupprimer(TourneeManager manager) {
@@ -388,7 +388,7 @@ public class VueTextuelle extends Parent implements Observer{
 	}
 	
 	/**
-	 * Methode qui mettre ¨¤ jour l'info des tourn¨¦es chang¨¦es apr¨¨s le d¨¦placement (Avec supprimer)
+	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement (Avec supprimer)
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
 	public void changerInfoTourneePaneSupprimer(TourneeManager manager) {
