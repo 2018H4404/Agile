@@ -11,6 +11,8 @@ import modele.metier.Plan;
 import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
+import vue.element.IntersectionNormalVue;
+import vue.element.PointLivraisonVue;
 
 public class Controleur {
 	private Etat etat;
@@ -19,10 +21,12 @@ public class Controleur {
 	private TourneeManager monManager;
 	private VueGraphique graph;
 	private VueTextuelle texte;
+	private Historique historique;
 	private long ajoutIdDepartPointLivraison;
 	private long ajoutIdNouvellePointLivraison;
 	private long idADeplacerPointLivraison;
 	private long idApresDeplacerPointLivraison;
+	private int ajoutDuree;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
@@ -33,11 +37,13 @@ public class Controleur {
 	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
 	private EtatChoixPointLivraisonADeplacer etatChoixPointLivraisonADeplacer;
 	private EtatChoixPointLivraisonApresDeplacer etatChoixPointLivraisonApresDeplacer;
+	private PointLivraisonVue vueSelectionne;
 	
 	private Controleur() {
 		monPlan = new Plan();
 		maDemande = new DemandeLivraison();
 		monManager = new TourneeManager();
+		historique = new Historique();
 		etatPlanCharge = new EtatPlanCharge();
 		etatInit = new EtatInit();
 		etatDemandeLivraison = new EtatDemandeLivraison();
@@ -48,6 +54,7 @@ public class Controleur {
 		etatChoixPointLivraisonADeplacer = new EtatChoixPointLivraisonADeplacer();
 		etatChoixPointLivraisonApresDeplacer = new EtatChoixPointLivraisonApresDeplacer();
 		etat = etatInit;
+		vueSelectionne = null;
 	}
 	
 	public static Controleur getInstance() {
@@ -57,14 +64,38 @@ public class Controleur {
 		return instance;
 	}
 	
+	public void setVueSelectionne(PointLivraisonVue vue) {
+		this.vueSelectionne = vue;
+	}
+	
+	public PointLivraisonVue getVueSelectionne() {
+		return vueSelectionne;
+	}
+	
 	public void setAjoutDepart(long id) throws Exception{
 		this.ajoutIdDepartPointLivraison = id;
 		etat.choixNouvellePointLivraison();
 	}
 	
+	public long getIdAjoutDepart()throws Exception{
+		return this.ajoutIdDepartPointLivraison;
+	}
+	
 	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
 		this.ajoutIdNouvellePointLivraison = id;
 		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
+	}
+	
+	public long getIdAjoutNouvellePoint() {
+		return ajoutIdNouvellePointLivraison;
+	}
+	
+	public void setAjoutDuree(int duree) {
+		this.ajoutDuree = duree;
+	}
+	
+	public int getAjoutDuree() {
+		return ajoutDuree;
 	}
 	
 	public void setADeplacer(long id) throws Exception{
@@ -211,5 +242,17 @@ public class Controleur {
 
 	public Etat getEtatPosteCalcul() {
 		return etatPosteCalcul;
+	}
+
+	public void undo() {
+		etat.undo();
+	}
+
+	public void redo() {
+		etat.redo();
+	}
+
+	public Historique getHistorique() {
+		return historique;
 	}
 }

@@ -32,6 +32,10 @@ public interface Etat {
 	public void choixPointLivraisonApresDeplacer() throws Exception;
 	
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception;
+
+	public void undo();
+
+	public void redo();
 	
 	//public void effaceListenerOnClick();
 	

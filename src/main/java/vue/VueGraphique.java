@@ -152,6 +152,7 @@ public class VueGraphique extends Parent implements Observer{
                 			 }
                 			 temp.setFill(Color.GREEN);
                 			 temp.setRadius(8);
+                			 Controleur.getInstance().setAjoutDuree(duree);
                 			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
                 			 //Remettre a l'etat initial (couleur, radius)
@@ -163,8 +164,9 @@ public class VueGraphique extends Parent implements Observer{
                 			 //Rajout du point de livraison
                 			 IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(temp.getIntersectionId());
                 			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),6,tempInter.getId());
+                			 Controleur.getInstance().setVueSelectionne(tempPointLivraison);
                 			 livraisonGroup.getChildren().add(tempPointLivraison);
-                			 parent.setInfo("Point de livraison ajout¨¦");
+                			 parent.setInfo("Point de livraison ajoutï¿½ï¿½");
                 		}catch(Exception e) {
                 			System.out.println("Duree incorrect ou Probleme durant Ajout");
                 			e.printStackTrace();
@@ -185,7 +187,7 @@ public class VueGraphique extends Parent implements Observer{
                 			temp.setRadius(8);
                 			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
                 			parent.VerifierEtat(Controleur.getInstance());
-                			parent.setInfo("Choisissez maintenant o¨´ vous voulez rajouter un nouveau point de Livraison apr¨¨s le point de livraison que vous venez de choisir.");
+                			parent.setInfo("Choisissez maintenant oï¿½ï¿½ vous voulez rajouter un nouveau point de Livraison aprï¿½ï¿½s le point de livraison que vous venez de choisir.");
                 		}catch(Exception e) {
                 			System.out.println("Probleme durant Ajout");
                 			e.printStackTrace();
@@ -199,7 +201,7 @@ public class VueGraphique extends Parent implements Observer{
                  			Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());
                  			livraisonGroup.getChildren().remove(temp);
                  			parent.VerifierEtat(Controleur.getInstance());
-                 			parent.setInfo("Point de livraison supprim¨¦.");
+                 			parent.setInfo("Point de livraison supprimï¿½ï¿½.");
                  		}catch(Exception e) {
                  			System.out.println("Probleme durant le processus pour supprimer");
                  			e.printStackTrace();
@@ -213,7 +215,7 @@ public class VueGraphique extends Parent implements Observer{
                   			temp.setRadius(8);
                   			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
                   			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Choisissez maintenant apr¨¨s quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
+                  			parent.setInfo("Choisissez maintenant aprï¿½ï¿½s quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point a deplacer");
                   			e.printStackTrace();
@@ -234,7 +236,7 @@ public class VueGraphique extends Parent implements Observer{
                   			deplacerPointChoisiDeux.setRadius(6);
                   			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
                   			parent.VerifierEtat(Controleur.getInstance());
-                  			parent.setInfo("Point de livraison d¨¦plac¨¦.");
+                  			parent.setInfo("Point de livraison dï¿½ï¿½placï¿½ï¿½.");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
                   			e.printStackTrace();
@@ -414,7 +416,7 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * MÃ©thode pour synchroniser la vue avec la vue textuelle.
-	 * @param id : id de PointLivraisonVue qui doit ¨ºtre synchronis¨¦
+	 * @param id : id de PointLivraisonVue qui doit ï¿½ï¿½tre synchronisï¿½ï¿½
 	 * @param expanded : boolean qui indique si le TitledPane est expanded
 	 */	
 	public void synchronisationLivraison(long id,boolean expanded) {
@@ -438,7 +440,7 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour arr¨ºter temporairement la synchronisation.
+	 * MÃ©thode pour arrï¿½ï¿½ter temporairement la synchronisation.
 	 */	
 	public void arreterSynchronisationLivraison() {
 		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
@@ -453,8 +455,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour changer juste l'affichage d'une tourn¨¦e.
-	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 * MÃ©thode pour changer juste l'affichage d'une tournï¿½ï¿½e.
+	 * @param manager : objet TourneeManager stockï¿½ï¿½ dans le controleur
 	 */	
 	public void changerVueUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();
@@ -476,8 +478,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour changer l'affichage des deux tourn¨¦es chang¨¦es(Sans Supprimer) apr¨¨s le d¨¦placement.
-	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 * MÃ©thode pour changer l'affichage des deux tournï¿½ï¿½es changï¿½ï¿½es(Sans Supprimer) aprï¿½ï¿½s le dï¿½ï¿½placement.
+	 * @param manager : objet TourneeManager stockï¿½ï¿½ dans le controleur
 	 */	
 	public void changerVueTourneeSansSupprimer(TourneeManager manager) {
 		System.out.println("Deplacement sans supprimer");
@@ -517,8 +519,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour changer l'affichage des deux tourn¨¦es chang¨¦es(Avec Supprimer) apr¨¨s le d¨¦placement.
-	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 * MÃ©thode pour changer l'affichage des deux tournï¿½ï¿½es changï¿½ï¿½es(Avec Supprimer) aprï¿½ï¿½s le dï¿½ï¿½placement.
+	 * @param manager : objet TourneeManager stockï¿½ï¿½ dans le controleur
 	 */	
 	public void changerVueTourneeSupprimer(TourneeManager manager) {
 		System.out.println("Deplacement supprimer");
@@ -546,8 +548,8 @@ public class VueGraphique extends Parent implements Observer{
 	}
 	
 	/**
-	 * MÃ©thode pour supprimer une tourn¨¦e.
-	 * @param manager : objet TourneeManager stock¨¦ dans le controleur
+	 * MÃ©thode pour supprimer une tournï¿½ï¿½e.
+	 * @param manager : objet TourneeManager stockï¿½ï¿½ dans le controleur
 	 */	
 	public void supprimerUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();

@@ -33,6 +33,7 @@ import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
+import controleur.CommandeAjouterLivraison;
 import controleur.Controleur;
 import controleur.EtatAjouterChoixNouvellePointLivraison;
 
@@ -62,6 +63,8 @@ public class ApplicationDemo extends Application{
 	private Button buttonSupprimerLivraison;
 	private Button buttonAjouterLivraison;
 	private Button buttonDeplacerLivraison;
+	private Button buttonRedo;
+	private Button buttonUndo;
 
 	private Label labelNombreLivreurs;
 	private TextField textFieldnombreLivreur;
@@ -192,6 +195,14 @@ public class ApplicationDemo extends Application{
 		buttonDeplacerLivraison.setMinWidth(300);
 		buttonDeplacerLivraison.setMaxWidth(300);
 		
+		buttonRedo = new Button("Redo");
+		buttonRedo.setMinWidth(300);
+		buttonRedo.setMaxWidth(300);
+		
+		buttonUndo = new Button("Undo");
+		buttonUndo.setMinWidth(300);
+		buttonUndo.setMaxWidth(300);
+		
 		labelInfo = new Label();
 		labelInfo.setMinWidth(300);
 		labelInfo.setMaxWidth(300);
@@ -200,7 +211,7 @@ public class ApplicationDemo extends Application{
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
         		textFieldnombreLivreur, labelError, buttonCalculer,buttonAjouterLivraison,labelDuree,textFieldDuree,
         		labelDureeError,buttonSupprimerLivraison,buttonDeplacerLivraison,
-        		buttonEffacer, buttonEffacerDemande, labelInfo);
+        		buttonEffacer, buttonEffacerDemande, labelInfo,buttonRedo,buttonUndo);
 
 		//Ajout de la barre de menu
         Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -597,6 +608,32 @@ public class ApplicationDemo extends Application{
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
 					labelInfo.setText("Choisissez le point de livraison que vous voulez déplacer.");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	         }
+	      }); 
+        buttonRedo.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	 try {
+	        		 Controleur.getInstance().redo();
+					VerifierEtat(controleur);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	         }
+	      }); 
+        buttonUndo.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	 try {
+	        		 Controleur.getInstance().undo();
+					VerifierEtat(controleur);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
