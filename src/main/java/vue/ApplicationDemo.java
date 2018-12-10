@@ -498,6 +498,7 @@ public class ApplicationDemo extends Application{
               labelNombreLivreurs.setText("Nombre de livreurs :");
               textFieldnombreLivreur.setText("");
               Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
+              Controleur.getInstance().getHistorique().reset();
               VerifierEtat(controleur); 
 	         }
 	      }); 
@@ -512,6 +513,7 @@ public class ApplicationDemo extends Application{
              labelNombreLivreurs.setText("Nombre de livreurs :");
              textFieldnombreLivreur.setText("");
              Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
+             Controleur.getInstance().getHistorique().reset();
              VerifierEtat(controleur); 
 	         }
 	      }); 
@@ -700,6 +702,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		case EtatPlanCharge:
 			itemChargerPlan.setDisable(true);
@@ -722,6 +726,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		case EtatDemandeLivraison:
 			itemChargerPlan.setDisable(true);
@@ -744,6 +750,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatPosteCalcul:
@@ -766,6 +774,10 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
+			if(c.getHistorique().getLength()>0) {
+				buttonRedo.setDisable(false);
+				buttonUndo.setDisable(false);
+			}
 			break;
 			
 		case EtatAjouterChoixPointLivraison:
@@ -788,6 +800,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatAjouterChoixNouvellePointLivraison:
@@ -810,6 +824,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatSupprimerChoixPointLivraison:
@@ -832,6 +848,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		
 		case EtatChoixPointLivraisonADeplacer:
@@ -853,6 +871,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatChoixPointLivraisonApresDeplacer:
@@ -874,6 +894,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 
@@ -894,6 +916,8 @@ public class ApplicationDemo extends Application{
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		}
 	}

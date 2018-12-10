@@ -187,6 +187,7 @@ public class VueGraphique extends Parent implements Observer{
                 			ajoutPointChoisi = temp;
                 			temp.setActiveChangerCouleurSelectionne(false);
                 			temp.setFill(Color.GREEN);
+
                 			temp.setRadius(7);
                 			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
                 			parent.VerifierEtat(Controleur.getInstance());
@@ -202,7 +203,20 @@ public class VueGraphique extends Parent implements Observer{
                  			temp.setActiveChangerCouleurSelectionne(false);
                  			temp.setFill(Color.GREEN);
                  			temp.setRadius(7);
+                 	
+                 			Controleur.getInstance().setVueSelectionne(temp);
+
+                  			int duree = Controleur.getInstance().getDureePointLivraison(temp.getIntersectionId());
+                 			Controleur.getInstance().setAjoutDuree(duree);
+
+                			Controleur.getInstance().setAjoutDepart(Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
+               			 	Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
+                 			
+
                  			Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());
+                 			
+               			 	
+
                  			livraisonGroup.getChildren().remove(temp);
                  			parent.VerifierEtat(Controleur.getInstance());
 

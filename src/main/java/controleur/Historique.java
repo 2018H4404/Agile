@@ -20,7 +20,6 @@ public class Historique {
 		indice++;
 		listeDeCommande.add(cmd);
 		System.out.println("cmd list length:"+ listeDeCommande.size());
-//		cmd.doCmd();
 	}
 	
 	public void undo() {
@@ -40,7 +39,12 @@ public class Historique {
 	}
 	
 	public void reset() {
-		
+		this.listeDeCommande = new LinkedList();
+		this.indice = -1;
+	}
+	
+	public int getLength() {
+		return listeDeCommande.size();
 	}
 	
 

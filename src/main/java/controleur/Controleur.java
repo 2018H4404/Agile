@@ -1,13 +1,16 @@
 package controleur;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
 import modele.TourneeManager;
+import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.Plan;
+import modele.metier.Tournee;
 import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
@@ -188,7 +191,22 @@ public class Controleur {
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;
 	}
+	
+	public int getDureePointLivraison(long id) {
+		
+		return maDemande.getPointLivraisonParId(id).getDuree();
+		
+	}
 
+	public long getPrePointLivraisonId(long id) throws Exception{
+		long retour = monManager.getPrePointLivraisonId(id);
+		if(retour == id) {
+			Exception e = new Exception();
+			throw e;
+		}
+		return retour;
+	}
+	
 	public Etat getEtatDemandeLivraison() {
 		return etatDemandeLivraison;
 	}

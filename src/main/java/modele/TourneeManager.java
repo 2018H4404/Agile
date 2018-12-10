@@ -511,4 +511,28 @@ public class TourneeManager extends Observable{
 		}
 		}
 	}
+
+	public long getPrePointLivraisonId(long id) {
+		int find =0;
+		long ret = id;
+		for(Tournee t : listeTournees) {
+			if(find == 0) {
+				ArrayList<Chemin> tempChemin = t.getListeChemins();
+				for(Chemin c : tempChemin) {
+					Intersection depart = c.getIntersectionDepart();
+					Intersection dest = c.getIntersectionDest();
+					
+					if(dest.equals(id)) {
+						find = 1;
+						ret = depart.getId();
+						return ret;
+					}
+				}
+			}else {
+				break;
+			}
+		}
+		return ret;
+
+	}
 }
