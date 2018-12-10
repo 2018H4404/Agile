@@ -44,7 +44,7 @@ public class PointLivraison extends Intersection{
 	 * @param longitude la longitude du point de livraison.
 	 * @param heureDepart l'heure de depart du point de livraison.
 	 * @param heureArrivee l'heure d'arrivee du point de livraison.
-	 */
+	 *//*
 	public PointLivraison(long id, double latitude, double longitude, DateTime heureDepart,DateTime heureArrivee) {
 		super(id,latitude,longitude);
 		this.heureDepart = heureDepart;
@@ -52,7 +52,7 @@ public class PointLivraison extends Intersection{
 		Period period = new Interval(heureDepart, heureArrivee).toPeriod();
 
 		duree = period.getMinutes();
-	}
+	}*/
 	
 	@Override
 	public int getDuree() {

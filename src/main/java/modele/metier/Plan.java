@@ -84,17 +84,17 @@ public class Plan extends Observable{
 		return troncons.values();
 	}
 
-	public void setIntersectionNormals(HashMap<Long, IntersectionNormal> intersectionNormals) {
+/*	public void setIntersectionNormals(HashMap<Long, IntersectionNormal> intersectionNormals) {
 		this.intersectionNormals = intersectionNormals;
-	}
+	}*/
 	
 	public HashMap<Long,ArrayList<Troncon>> getTroncons() {
 		return troncons;
 	}
 
-	public void setTroncons(HashMap<Long,ArrayList<Troncon>> troncons) {
+	/*public void setTroncons(HashMap<Long,ArrayList<Troncon>> troncons) {
 		this.troncons = troncons;
-	}
+	}*/
 
 	public double transformLongitude(double longitude, double largeur) {
 		return (longitude - minLong) * largeur / (maxLong - minLong);

@@ -63,6 +63,9 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Constructeur de la vue graphique.
+	 * @param lFenetre la longueure de la fenetre.
+	 * @param hFenetre la hauteur de la fenetre.
+	 * @param unParent le parent.
 	 */
 	public VueGraphique(double lFenetre, double hFenetre, ApplicationDemo unParent) {
 		//Intialisation de sa compagnie par defaut
@@ -153,6 +156,7 @@ public class VueGraphique extends Parent implements Observer{
                 			 }
                 			 temp.setFill(Color.GREEN);
                 			 temp.setRadius(8);
+
                 			 Controleur.getInstance().setAjoutDuree(duree);
                 			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
@@ -234,7 +238,6 @@ public class VueGraphique extends Parent implements Observer{
                   			temp.setRadius(7);
                   			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
                   			parent.VerifierEtat(Controleur.getInstance());
-
                   			parent.setInfo("Choisissez maintenant apres quel point de livraison vous voulez placer le point de livraison que vous venez de choisir..");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point a deplacer");
@@ -256,7 +259,6 @@ public class VueGraphique extends Parent implements Observer{
                   			deplacerPointChoisiDeux.setRadius(5);
                   			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
                   			parent.VerifierEtat(Controleur.getInstance());
-
                   			parent.setInfo("Point de livraison deplace.");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
@@ -354,7 +356,7 @@ public class VueGraphique extends Parent implements Observer{
 	
 	/**
 	 * Methode pour generer des couleurs aleatoires que nous utilisons afin de dessiner les tournees.
-	 * @param nbLivreur : nombre des livreurs
+	 * @param index : un index
 	 */
 	public Color genererCouleurs(int index) {
 		return couleurs[index%couleurs.length];

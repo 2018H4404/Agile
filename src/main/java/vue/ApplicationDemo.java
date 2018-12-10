@@ -1,3 +1,8 @@
+//Ces exceptions, où faut-il les mettre ? 
+//throw new IntersectionNonLivrableException : Quand on clique sur un point de livraison impossible à ajouter
+//throw new UndoRedoNoPointDLException : Quand on clique sur "Undo" après avoir supprimé tous les points de livraison un par un (Zhenyu et Yang qu'avez-vous décidé ?)
+//throw new DeplacementPointDLException : Quand on déplace un point de livraison d'une tournée vers la même
+
 package vue;
 
 import javafx.scene.control.*;
@@ -286,7 +291,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
@@ -299,13 +304,18 @@ public class ApplicationDemo extends Application{
 					VerifierEtat(controleur);
 				} catch (Exception e) {
 					labelInfo.setTextFill(Color.web("#FF0000"));
-           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
+           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal formé.");
 					e.printStackTrace();
 				}
                }
 
 	         }
 	      });
+        
+        //Vérifier que le fichier XML est bien formé (pas de caractère absent ou manquant) 
+        //sinon : throw new XMLMalFormeException 
+        //Vérifier que le fichier XML correspond à une demande de livraison (<demandeDeLivraisons> puis <entrepot> puis <livraison>)
+        //sinon : throw new DemandeLivraisonXMLFileException
         
         buttonChargeDemandeLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -314,7 +324,7 @@ public class ApplicationDemo extends Application{
 		    public void handle(ActionEvent event) {
 		        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
 	             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	             fileChooser.getExtensionFilters().add(extFilter);
 	             File file = fileChooser.showOpenDialog(primaryStage);
@@ -334,6 +344,11 @@ public class ApplicationDemo extends Application{
 	         }
 	      });
         
+        //Vérifier que le fichier XML est bien formé (pas de caractère absent ou manquant)
+        //sinon : throw new XMLMalFormeException 
+        //Vérifier que le fichier XML correspond à un plan ( <reseau> puis <noeud> et <troncon>)
+        //sinon : throw new PlanXMLFileException 
+        
         itemChargerPlan = new MenuItem("Charger Plan");
         
         itemChargerPlan.setOnAction(new EventHandler<ActionEvent>() {
@@ -342,7 +357,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
 	        	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	        	fileChooser.getExtensionFilters().add(extFilter);
 	        	File file = fileChooser.showOpenDialog(primaryStage);
@@ -361,13 +376,14 @@ public class ApplicationDemo extends Application{
 	         }
 	      }); 
         
+        
     	buttonChargePlan.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
               FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
               fileChooser.getExtensionFilters().add(extFilter);
               File file = fileChooser.showOpenDialog(primaryStage);
@@ -538,7 +554,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -595,7 +611,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

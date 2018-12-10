@@ -43,15 +43,15 @@ public class TourneeManager extends Observable{
 		tourneeAjouterIndex = 0;
 	}
 	
-	public void calculTournees(Plan plan){
+	/*public void calculTournees(Plan plan){
 		listeTournees = Algo(plan);
 		
-	}
+	}*/
 	
-	public ArrayList<Tournee> Algo(Plan plan){
+	/*public ArrayList<Tournee> Algo(Plan plan){
 		ArrayList<Tournee> res = null;
 		return res;
-	}
+	}*/
 	
 	public Tournee getDernierTournee() {
 		return listeTournees.get(listeTournees.size()-1);
@@ -69,13 +69,13 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * Methode pour retourner l'index de la tournee oe nous avons ajoute un point de livraison apres le deplacement
+	 * Methode pour retourner l'index de la tournee ou nous avons ajoute un point de livraison apres le deplacement
 	 */
 	public int getTourneeAjouterIndex() {
 		return tourneeAjouterIndex;
 	}
 	/**
-	 * Methode pour retourner l'index de la tournee oe nous avons supprime un point de livraison apres le deplacement
+	 * Methode pour retourner l'index de la tournee ou nous avons supprime un point de livraison apres le deplacement
 	 */
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
@@ -286,10 +286,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idDepart)) {
-						find = 1;
-						break;
-					}
+					
 					if(dest.equals(idDepart)) {
 						find = 1;
 						break;
@@ -344,10 +341,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(id)) {
-						find = 1;
-						break;
-					}
+					
 					if(dest.equals(id)) {
 						find = 1;
 						break;
@@ -404,10 +398,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idADeplacer)) {
-						findADplacer = 1;
-						break;
-					}
+					
 					if(dest.equals(idADeplacer)) {
 						findADplacer = 1;
 						break;
@@ -430,10 +421,7 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					if(depart.equals(idApresDeplacer)) {
-						findApresDplacer = 1;
-						break;
-					}
+					
 					if(dest.equals(idApresDeplacer)) {
 						findApresDplacer = 1;
 						break;
@@ -445,6 +433,7 @@ public class TourneeManager extends Observable{
 			}
 			indexApresDeplacer++;
 		}
+
 		if(indexADeplacer == indexApresDeplacer) {
 			System.out.println("Deplacement irrealisable");
 			Exception e = new Exception();
@@ -498,7 +487,7 @@ public class TourneeManager extends Observable{
 				listeTournees.get(indexADeplacer).getListeChemins().add(posCheminADeplacer, newDepartNewDest);
 				tourneeSupprimerIndex = indexADeplacer;
 			}
-			
+
 			if(supprimerTourneeADeplacer) {
 				setChanged();
 				notifyObservers("DeplacementSupprimerTournee");
