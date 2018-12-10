@@ -91,7 +91,7 @@ public class ApplicationDemo extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-        graph = new VueGraphique(1400,900,this);
+        graph = new VueGraphique(700,700,this);
         texte = new VueTextuelle(this);
         Controleur.getInstance().addObserver(graph,texte);
         Controleur.getInstance().setGraph(graph);
