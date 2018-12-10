@@ -29,8 +29,8 @@ public class IntersectionNormalVue extends Circle{
 	 */
 	public IntersectionNormalVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.GRAY);
-		this.originalColor = Color.GRAY;
+		this.setFill(Color.BLACK);
+		this.originalColor = Color.BLACK;
 		this.idInter = unId;
 		this.selectionnee = false;
 		this.copieX = x;

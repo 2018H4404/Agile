@@ -3,7 +3,7 @@ package modele.metier;
 import java.util.ArrayList;
 
 /** 
- * La classe de la tournée.
+ * La classe de la tournee.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -14,8 +14,8 @@ public class Tournee {
 	private ArrayList<Chemin> listeChemins;
 	
 	/**
-	 * Constructeur paramétré de la tournée.
-	 * @param uneListeChemins la liste de chemins de la tournée.
+	 * Constructeur parametre de la tournee.
+	 * @param uneListeChemins la liste de chemins de la tournee.
 	 */
 	public Tournee(ArrayList<Chemin> uneListeChemins) {
 		this.listeChemins = uneListeChemins;
