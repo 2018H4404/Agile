@@ -2,7 +2,7 @@ package controleur;
 
 public interface Commande {
 
-	 void doCmd(Controleur controleur);
+	 void doCmd();
 	
-	 void undoCmd(Controleur controleur);
+	 void undoCmd();
 }

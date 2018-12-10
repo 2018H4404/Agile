@@ -22,7 +22,7 @@ import controleur.Controleur;
 import java.util.ArrayList;
 
 /** 
- * La classe du tourn¨¦e manager.
+ * La classe du tournï¿½ï¿½e manager.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -53,32 +53,36 @@ public class TourneeManager extends Observable{
 		return res;
 	}
 	
+	public Tournee getDernierTournee() {
+		return listeTournees.get(listeTournees.size()-1);
+	}
+	
 	public void clear() {
 		this.listeTournees.clear();
 	}
 	
 	/**
-	 * M¨¦thode pour retourner l'index de la tourn¨¦e chang¨¦e
+	 * Mï¿½ï¿½thode pour retourner l'index de la tournï¿½ï¿½e changï¿½ï¿½e
 	 */
 	public int getTourneeChangedIndex() {
 		return tourneeChangedIndex;
 	}
 	
 	/**
-	 * M¨¦thode pour retourner l'index de la tourn¨¦e o¨´ nous avons ajout¨¦ un point de livraison apr¨¨s le d¨¦placement
+	 * Mï¿½ï¿½thode pour retourner l'index de la tournï¿½ï¿½e oï¿½ï¿½ nous avons ajoutï¿½ï¿½ un point de livraison aprï¿½ï¿½s le dï¿½ï¿½placement
 	 */
 	public int getTourneeAjouterIndex() {
 		return tourneeAjouterIndex;
 	}
 	/**
-	 * M¨¦thode pour retourner l'index de la tourn¨¦e o¨´ nous avons supprim¨¦ un point de livraison apr¨¨s le d¨¦placement
+	 * Mï¿½ï¿½thode pour retourner l'index de la tournï¿½ï¿½e oï¿½ï¿½ nous avons supprimï¿½ï¿½ un point de livraison aprï¿½ï¿½s le dï¿½ï¿½placement
 	 */
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
 	}
 
 	/**
-	 * M¨¦thode pour calculer les tourn¨¦es selon le nombre de livreur (Version sans clustering)
+	 * Mï¿½ï¿½thode pour calculer les tournï¿½ï¿½es selon le nombre de livreur (Version sans clustering)
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
@@ -150,7 +154,7 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * M¨¦thode pour calculer les tourn¨¦es selon le nombre de livreur (Version clustering).
+	 * Mï¿½ï¿½thode pour calculer les tournï¿½ï¿½es selon le nombre de livreur (Version clustering).
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
@@ -267,7 +271,7 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * M¨¦thode pour ajouter un point de livraison dans une tourn¨¦e sp¨¦cifi¨¦e.
+	 * Mï¿½ï¿½thode pour ajouter un point de livraison dans une tournï¿½ï¿½e spï¿½ï¿½cifiï¿½ï¿½e.
 	 * @param idDepart : id du point de livraison .
 	 * @param unPlan le plan de la ville.
 	 */
@@ -389,7 +393,7 @@ public class TourneeManager extends Observable{
 	}
 
 	public void deplacerPointLivraison(long idADeplacer, long idApresDeplacer) throws Exception{
-		//Trouver o¨´ se situe le point ¨¤ d¨¦placer dans la liste des tourn¨¦es
+		//Trouver oï¿½ï¿½ se situe le point ï¿½ï¿½ dï¿½ï¿½placer dans la liste des tournï¿½ï¿½es
 		int findADplacer = 0;
 		int indexADeplacer = 0;
 		int posCheminADeplacer = 0;
@@ -415,7 +419,7 @@ public class TourneeManager extends Observable{
 			}
 			indexADeplacer++;
 		}
-		//Trouver o¨´ se situe le point apr¨¨s lequel nous voulons mettre le point trouv¨¦ au-dessus dans la liste des tourn¨¦es
+		//Trouver oï¿½ï¿½ se situe le point aprï¿½ï¿½s lequel nous voulons mettre le point trouvï¿½ï¿½ au-dessus dans la liste des tournï¿½ï¿½es
 		int findApresDplacer = 0;
 		int indexApresDeplacer = 0;
 		int posCheminApresDeplacer = 0;
@@ -441,9 +445,9 @@ public class TourneeManager extends Observable{
 			}
 			indexApresDeplacer++;
 		}
-		//Effectuer le d¨¦placement
+		//Effectuer le dï¿½ï¿½placement
 		if(findADplacer == 1 && findApresDplacer == 1) {
-			//Supprimer le point de livraison ¨¤ d¨¦placer 
+			//Supprimer le point de livraison ï¿½ï¿½ dï¿½ï¿½placer 
 			boolean supprimerTourneeADeplacer = false;
 			indexADeplacer--;
 			int posOneEnleve = posCheminADeplacer;
@@ -467,7 +471,7 @@ public class TourneeManager extends Observable{
 				tourneeSupprimerIndex = indexADeplacer;
 			}
 			
-			//Ajouter le point de livraison ¨¤ d¨¦placer dans la nouvelle tourn¨¦e
+			//Ajouter le point de livraison ï¿½ï¿½ dï¿½ï¿½placer dans la nouvelle tournï¿½ï¿½e
 			indexApresDeplacer--;
 			posCheminApresDeplacer++;
 			Intersection depart = listeTournees.get(indexApresDeplacer).getListeChemins().get(posCheminApresDeplacer).getIntersectionDepart();
