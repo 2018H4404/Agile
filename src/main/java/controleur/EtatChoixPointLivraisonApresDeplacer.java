@@ -1,5 +1,9 @@
 package controleur;
 
+/**
+ * La classe de l'etat du choix du point de livraison a appeler apres deplacer.
+ * @author H4404
+ */
 public class EtatChoixPointLivraisonApresDeplacer extends EtatDefaut{
 	@Override
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception {
@@ -8,7 +12,7 @@ public class EtatChoixPointLivraisonApresDeplacer extends EtatDefaut{
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 }

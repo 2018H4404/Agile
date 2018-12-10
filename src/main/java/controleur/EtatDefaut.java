@@ -2,6 +2,10 @@ package controleur;
 
 import java.io.File;
 
+/**
+ * La classe de l'etat par defaut.
+ * @author H4404
+ */
 public class EtatDefaut implements Etat{
 
 	@Override
@@ -20,7 +24,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return 0;
 	}
 
@@ -40,7 +44,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void choixNouvellePointLivraison() throws Exception {
+	public void choixNouveauPointLivraison() throws Exception {
 		
 	}
 
