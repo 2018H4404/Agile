@@ -5,7 +5,7 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
 		Controleur.getInstance().getMonManager().supprimerPointLivraison(id);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
-		CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(Controleur.getInstance().getMonManager().getDernierTournee());
+		CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison();
 		Controleur.getInstance().getHistorique().ajouteCmd(cmd);
 	}
 	

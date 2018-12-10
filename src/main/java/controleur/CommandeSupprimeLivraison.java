@@ -4,11 +4,9 @@ import javafx.scene.paint.Color;
 import modele.metier.Tournee;
 
 public class CommandeSupprimeLivraison implements Commande {
-	private Tournee tournee;
 
 	
-	public CommandeSupprimeLivraison(Tournee tournee) {
-		this.tournee = tournee;
+	public CommandeSupprimeLivraison() {
 	}
 
 	@Override

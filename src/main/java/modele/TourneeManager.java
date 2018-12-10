@@ -22,7 +22,7 @@ import controleur.Controleur;
 import java.util.ArrayList;
 
 /** 
- * La classe du tourn��e manager.
+ * La classe du tournee manager.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -62,27 +62,27 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * M��thode pour retourner l'index de la tourn��e chang��e
+	 * Methode pour retourner l'index de la tournee changee
 	 */
 	public int getTourneeChangedIndex() {
 		return tourneeChangedIndex;
 	}
 	
 	/**
-	 * M��thode pour retourner l'index de la tourn��e o�� nous avons ajout�� un point de livraison apr��s le d��placement
+	 * Methode pour retourner l'index de la tournee oe nous avons ajoute un point de livraison apres le deplacement
 	 */
 	public int getTourneeAjouterIndex() {
 		return tourneeAjouterIndex;
 	}
 	/**
-	 * M��thode pour retourner l'index de la tourn��e o�� nous avons supprim�� un point de livraison apr��s le d��placement
+	 * Methode pour retourner l'index de la tournee oe nous avons supprime un point de livraison apres le deplacement
 	 */
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
 	}
 
 	/**
-	 * M��thode pour calculer les tourn��es selon le nombre de livreur (Version sans clustering)
+	 * Methode pour calculer les tournees selon le nombre de livreur (Version sans clustering)
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
@@ -154,7 +154,7 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * M��thode pour calculer les tourn��es selon le nombre de livreur (Version clustering).
+	 * Methode pour calculer les tournees selon le nombre de livreur (Version clustering).
 	 * @param demande les demandes de livraison.
 	 * @param unPlan le plan de la ville.
 	 */
@@ -271,7 +271,7 @@ public class TourneeManager extends Observable{
 	}
 	
 	/**
-	 * M��thode pour ajouter un point de livraison dans une tourn��e sp��cifi��e.
+	 * Methode pour ajouter un point de livraison dans une tournee specifiee.
 	 * @param idDepart : id du point de livraison .
 	 * @param unPlan le plan de la ville.
 	 */
@@ -393,7 +393,7 @@ public class TourneeManager extends Observable{
 	}
 
 	public void deplacerPointLivraison(long idADeplacer, long idApresDeplacer) throws Exception{
-		//Trouver o�� se situe le point �� d��placer dans la liste des tourn��es
+		//Trouver oe se situe le point e deplacer dans la liste des tournees
 		int findADplacer = 0;
 		int indexADeplacer = 0;
 		int posCheminADeplacer = 0;
@@ -419,7 +419,7 @@ public class TourneeManager extends Observable{
 			}
 			indexADeplacer++;
 		}
-		//Trouver o�� se situe le point apr��s lequel nous voulons mettre le point trouv�� au-dessus dans la liste des tourn��es
+		//Trouver oe se situe le point apres lequel nous voulons mettre le point trouve au-dessus dans la liste des tournees
 		int findApresDplacer = 0;
 		int indexApresDeplacer = 0;
 		int posCheminApresDeplacer = 0;
@@ -450,33 +450,9 @@ public class TourneeManager extends Observable{
 			Exception e = new Exception();
 			throw e;
 		}else {
-		//Effectuer le d��placement
+		//Effectuer le deplacement
 		if(findADplacer == 1 && findApresDplacer == 1) {
-			//Supprimer le point de livraison �� d��placer 
-			boolean supprimerTourneeADeplacer = false;
-			indexADeplacer--;
-			int posOneEnleve = posCheminADeplacer;
-			int posTwoEnleve = posCheminADeplacer + 1;
-			Intersection newDepart = listeTournees.get(indexADeplacer).getListeChemins().get(posOneEnleve).getIntersectionDepart();
-			Intersection newDest = listeTournees.get(indexADeplacer).getListeChemins().get(posTwoEnleve).getIntersectionDest();
-			ArrayList<Intersection> internewDepartNewDest = AEtoile.getInstance().algoAEtoile(newDepart, newDest, Controleur.getInstance().getMonPlan());
-			ArrayList<Troncon> tronNewDestNewDest = AEtoile.getInstance().traductionTrajet(internewDepartNewDest, Controleur.getInstance().getMonPlan());
-			Chemin newDepartNewDest = new Chemin(internewDepartNewDest,tronNewDestNewDest);
-			int newDuree = (int)(newDepartNewDest.getCout()/15000 * 60 * 60);
-			newDepartNewDest.setDuree(newDuree);
-			if(newDepart instanceof Entrepot && newDest instanceof Entrepot) {
-				System.out.println("Empty");
-				supprimerTourneeADeplacer = true;
-				listeTournees.remove(indexADeplacer);
-				tourneeSupprimerIndex = indexADeplacer;
-			}else {
-				listeTournees.get(indexADeplacer).getListeChemins().remove(posTwoEnleve);
-				listeTournees.get(indexADeplacer).getListeChemins().remove(posOneEnleve);
-				listeTournees.get(indexADeplacer).getListeChemins().add(posCheminADeplacer, newDepartNewDest);
-				tourneeSupprimerIndex = indexADeplacer;
-			}
-			
-			//Ajouter le point de livraison �� d��placer dans la nouvelle tourn��e
+			//Ajouter le point de livraison e deplacer dans la nouvelle tournee
 			indexApresDeplacer--;
 			posCheminApresDeplacer++;
 			Intersection depart = listeTournees.get(indexApresDeplacer).getListeChemins().get(posCheminApresDeplacer).getIntersectionDepart();
@@ -496,6 +472,32 @@ public class TourneeManager extends Observable{
 			listeTournees.get(indexApresDeplacer).getListeChemins().add(posCheminApresDeplacer, departNouveauDest);
 			listeTournees.get(indexApresDeplacer).getListeChemins().add(posCheminApresDeplacer+1, nouveauDestOldDest);
 			tourneeAjouterIndex = indexApresDeplacer;
+			System.out.println(tourneeAjouterIndex);
+			
+			//Supprimer le point de livraison e deplacer 
+			boolean supprimerTourneeADeplacer = false;
+			indexADeplacer--;
+			int posOneEnleve = posCheminADeplacer;
+			int posTwoEnleve = posCheminADeplacer + 1;
+			Intersection newDepart = listeTournees.get(indexADeplacer).getListeChemins().get(posOneEnleve).getIntersectionDepart();
+			Intersection newDest = listeTournees.get(indexADeplacer).getListeChemins().get(posTwoEnleve).getIntersectionDest();
+			ArrayList<Intersection> internewDepartNewDest = AEtoile.getInstance().algoAEtoile(newDepart, newDest, Controleur.getInstance().getMonPlan());
+			ArrayList<Troncon> tronNewDestNewDest = AEtoile.getInstance().traductionTrajet(internewDepartNewDest, Controleur.getInstance().getMonPlan());
+			Chemin newDepartNewDest = new Chemin(internewDepartNewDest,tronNewDestNewDest);
+			int newDuree = (int)(newDepartNewDest.getCout()/15000 * 60 * 60);
+			newDepartNewDest.setDuree(newDuree);
+			if(newDepart instanceof Entrepot && newDest instanceof Entrepot) {
+				System.out.println("Empty");
+				supprimerTourneeADeplacer = true;
+				listeTournees.remove(indexADeplacer);
+				tourneeSupprimerIndex = indexADeplacer;
+				System.out.println(indexADeplacer);
+			}else {
+				listeTournees.get(indexADeplacer).getListeChemins().remove(posTwoEnleve);
+				listeTournees.get(indexADeplacer).getListeChemins().remove(posOneEnleve);
+				listeTournees.get(indexADeplacer).getListeChemins().add(posCheminADeplacer, newDepartNewDest);
+				tourneeSupprimerIndex = indexADeplacer;
+			}
 			
 			if(supprimerTourneeADeplacer) {
 				setChanged();
