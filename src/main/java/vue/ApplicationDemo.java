@@ -208,10 +208,14 @@ public class ApplicationDemo extends Application{
 		labelInfo.setMaxWidth(300);
 		labelInfo.setWrapText(true);
 		
+		Separator separator = new Separator();
+		separator.setMinWidth(300);
+		separator.setMaxWidth(300);
+		
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
         		textFieldnombreLivreur, labelError, buttonCalculer,buttonAjouterLivraison,labelDuree,textFieldDuree,
         		labelDureeError,buttonSupprimerLivraison,buttonDeplacerLivraison,
-        		buttonEffacer, buttonEffacerDemande, labelInfo,buttonRedo,buttonUndo);
+        		buttonEffacer, buttonEffacerDemande,buttonRedo,buttonUndo,separator,labelInfo);
 
 		//Ajout de la barre de menu
         Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -282,7 +286,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
                fileChooser.getExtensionFilters().add(extFilter);
                File file = fileChooser.showOpenDialog(primaryStage);
@@ -315,7 +319,7 @@ public class ApplicationDemo extends Application{
 		    public void handle(ActionEvent event) {
 		        	
 	        	 FileChooser fileChooser = new FileChooser();
-	        	 fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	 fileChooser.setInitialDirectory(new File("./fichiersXMLDL/"));
 	             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	             fileChooser.getExtensionFilters().add(extFilter);
 	             File file = fileChooser.showOpenDialog(primaryStage);
@@ -348,7 +352,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
 	        	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
 	        	fileChooser.getExtensionFilters().add(extFilter);
 	        	File file = fileChooser.showOpenDialog(primaryStage);
@@ -374,7 +378,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
 	        	
 	        	FileChooser fileChooser = new FileChooser();
-	        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        	fileChooser.setInitialDirectory(new File("./fichiersXMLPlan/"));
               FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML Fichiers", "*.xml");
               fileChooser.getExtensionFilters().add(extFilter);
               File file = fileChooser.showOpenDialog(primaryStage);
@@ -454,7 +458,6 @@ public class ApplicationDemo extends Application{
 	        			 } else {
 	        				 try {
 	        					Controleur.getInstance().calculerLesTournees(nbLivreur);
-	   	        				//Controleur.getInstance().effaceListenerOnClick();
 	        					labelError.setText("");
 	        					VerifierEtat(controleur);
 	        				 }catch(Exception e) {
@@ -506,6 +509,7 @@ public class ApplicationDemo extends Application{
               labelNombreLivreurs.setText("Nombre de livreurs :");
               textFieldnombreLivreur.setText("");
               Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
+              Controleur.getInstance().getHistorique().reset();
               VerifierEtat(controleur); 
 	         }
 	      }); 
@@ -519,6 +523,7 @@ public class ApplicationDemo extends Application{
              labelNombreLivreurs.setText("Nombre de livreurs :");
              textFieldnombreLivreur.setText("");
              Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
+             Controleur.getInstance().getHistorique().reset();
              VerifierEtat(controleur); 
 	         }
 	      }); 
@@ -543,7 +548,7 @@ public class ApplicationDemo extends Application{
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -569,6 +574,24 @@ public class ApplicationDemo extends Application{
 	         }
 	      }); 
         
+        itemDeplacerLivraison.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	        	 try {
+	        		 Controleur.getInstance().deplacerPointLivraison();
+					VerifierEtat(controleur);
+					graph.arreterSynchronisationLivraison();
+					texte.arreterSynchronisationLivraison();
+					labelInfo.setTextFill(Color.BLACK);
+					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					labelInfo.setText("Choisissez le point de livraison que vous voulez déplacer.");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	         }
+	      }); 
+        
         
         buttonAjouterLivraison.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -581,8 +604,8 @@ public class ApplicationDemo extends Application{
 					texte.arreterSynchronisationLivraison();
 					textFieldDuree.setText("0");
 					labelInfo.setTextFill(Color.BLACK);
-					// labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison apres lequel vous voulez ajouter un point de Livraison.");
+					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					labelInfo.setText("Choisissez un point de livraison deja existant.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -600,7 +623,7 @@ public class ApplicationDemo extends Application{
 					graph.arreterSynchronisationLivraison();
 					texte.arreterSynchronisationLivraison();
 					labelInfo.setTextFill(Color.BLACK);
-					// labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
 					labelInfo.setText("Choisissez le point de livraison que vous voulez supprimer.");
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -652,7 +675,7 @@ public class ApplicationDemo extends Application{
 	         }
 	      }); 
 
-        menuLivraison.getItems().addAll(itemAjouterLivraison,itemSupprimerLivraison);
+        menuLivraison.getItems().addAll(itemAjouterLivraison,itemSupprimerLivraison,itemDeplacerLivraison);
         
         menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
         pane.setTop(menuBar);
@@ -684,8 +707,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		case EtatPlanCharge:
 			itemChargerPlan.setDisable(true);
@@ -703,8 +729,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		case EtatDemandeLivraison:
 			itemChargerPlan.setDisable(true);
@@ -722,8 +751,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatPosteCalcul:
@@ -741,8 +773,13 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
 			buttonDeplacerLivraison.setDisable(false);
+			itemDeplacerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
+			if(c.getHistorique().getLength()>0) {
+				buttonRedo.setDisable(false);
+				buttonUndo.setDisable(false);
+			}
 			break;
 			
 		case EtatAjouterChoixPointLivraison:
@@ -760,8 +797,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatAjouterChoixNouvellePointLivraison:
@@ -779,8 +819,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatSupprimerChoixPointLivraison:
@@ -798,8 +841,11 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		
 		case EtatChoixPointLivraisonADeplacer:
@@ -816,8 +862,11 @@ public class ApplicationDemo extends Application{
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 		case EtatChoixPointLivraisonApresDeplacer:
@@ -834,8 +883,11 @@ public class ApplicationDemo extends Application{
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 			
 
@@ -853,8 +905,11 @@ public class ApplicationDemo extends Application{
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonRedo.setDisable(true);
+			buttonUndo.setDisable(true);
 			break;
 		}
 	}
