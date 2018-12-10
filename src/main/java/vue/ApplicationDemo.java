@@ -304,7 +304,7 @@ public class ApplicationDemo extends Application{
 					VerifierEtat(controleur);
 				} catch (Exception e) {
 					labelInfo.setTextFill(Color.web("#FF0000"));
-           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal formé.");
+           	   		labelInfo.setText(e.getMessage());
 					e.printStackTrace();
 				}
                }
@@ -336,8 +336,9 @@ public class ApplicationDemo extends Application{
 						textFieldnombreLivreur.setText("1");
 						VerifierEtat(controleur);
 	           	   	} catch (Exception e) {
-	           	   		labelInfo.setTextFill(Color.web("#FF0000"));
-	           	   		labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
+		           	   	labelInfo.setTextFill(Color.web("#FF0000"));
+		           	   	System.out.println(e.getMessage());
+	           	   		labelInfo.setText(e.getMessage());
 			            e.printStackTrace();
 	           	   	}
 	             }
@@ -369,7 +370,8 @@ public class ApplicationDemo extends Application{
 	        		} catch (Exception e) {
 						System.out.println("d");
 						labelInfo.setTextFill(Color.web("#FF0000"));
-	           	   		labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
+						System.out.println(e.getMessage());
+	           	   		labelInfo.setText(e.getMessage());
 						e.printStackTrace();
 	        		}
 	        	} 
@@ -395,7 +397,8 @@ public class ApplicationDemo extends Application{
 
 			} catch (Exception e) {
 				labelInfo.setTextFill(Color.web("#FF0000"));
-       	   		labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
+				System.out.println(e.getMessage());
+       	   		labelInfo.setText(e.getMessage());
 				e.printStackTrace();
 			}
            	   
@@ -912,13 +915,16 @@ public class ApplicationDemo extends Application{
 			itemChargerDemandeLivraison.setDisable(true);
 			buttonChargeDemandeLivraison.setDisable(true);
 			itemCalculerTournees.setDisable(true);
-			buttonCalculer.setDisable(true); 
-			textFieldnombreLivreur.setDisable(true);
+			buttonCalculer.setDisable(true);
 			itemEffacer.setDisable(true);
 			buttonEffacer.setDisable(true);
+			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);

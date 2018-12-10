@@ -286,7 +286,6 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					
 					if(dest.equals(idDepart)) {
 						find = 1;
 						break;
@@ -341,7 +340,6 @@ public class TourneeManager extends Observable{
 				for(Chemin c : tempChemin) {
 					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
-					
 					if(dest.equals(id)) {
 						find = 1;
 						break;

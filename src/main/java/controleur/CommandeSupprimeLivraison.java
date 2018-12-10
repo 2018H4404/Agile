@@ -4,9 +4,11 @@ import javafx.scene.paint.Color;
 import modele.metier.Tournee;
 
 public class CommandeSupprimeLivraison implements Commande {
-
 	
-	public CommandeSupprimeLivraison() {
+	private long supprimeId;
+	
+	public CommandeSupprimeLivraison(long id) {
+		supprimeId = id;
 	}
 
 	@Override
