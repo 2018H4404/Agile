@@ -157,14 +157,14 @@ public class VueGraphique extends Parent implements Observer{
                 			 Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                 			 parent.VerifierEtat(Controleur.getInstance());
                 			 //Remettre a l'etat initial (couleur, radius)
-                			 ajoutInterChoisi.setRadius(4);
+                			 ajoutInterChoisi.setRadius(3);
                            	 ajoutInterChoisi.setFill(Color.BLACK);
-                			 ajoutPointChoisi.setFill(Color.CORNFLOWERBLUE);
-                			 ajoutPointChoisi.setRadius(6);
+                			 ajoutPointChoisi.setFill(Color.BLUE);
+                			 ajoutPointChoisi.setRadius(5);
                 			 ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
                 			 //Rajout du point de livraison
                 			 IntersectionNormal tempInter = Controleur.getInstance().getMonPlan().getIntersectionNormal(temp.getIntersectionId());
-                			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),6,tempInter.getId());
+                			 PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur),5,tempInter.getId());
                 			 Controleur.getInstance().setVueSelectionne(tempPointLivraison);
                 			 livraisonGroup.getChildren().add(tempPointLivraison);
 
@@ -187,8 +187,9 @@ public class VueGraphique extends Parent implements Observer{
                 			ajoutPointChoisi = temp;
                 			temp.setActiveChangerCouleurSelectionne(false);
                 			temp.setFill(Color.GREEN);
-                			temp.setRadius(8);
-               			 	
+
+                			temp.setRadius(7);
+                			Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
                 			parent.VerifierEtat(Controleur.getInstance());
 
                 			parent.setInfo("Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
@@ -201,7 +202,7 @@ public class VueGraphique extends Parent implements Observer{
                  			PointLivraisonVue temp = (PointLivraisonVue)event.getTarget();
                  			temp.setActiveChangerCouleurSelectionne(false);
                  			temp.setFill(Color.GREEN);
-                 			temp.setRadius(8);
+                 			temp.setRadius(7);
                  	
                  			Controleur.getInstance().setVueSelectionne(temp);
 
@@ -211,6 +212,7 @@ public class VueGraphique extends Parent implements Observer{
                 			Controleur.getInstance().setAjoutDepart(Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
                			 	Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(),duree);
                  			
+
                  			Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());
                  			
                			 	
@@ -229,11 +231,11 @@ public class VueGraphique extends Parent implements Observer{
                   			deplacerPointChoisiUn = temp;
                   			temp.setActiveChangerCouleurSelectionne(false);
                   			temp.setFill(Color.GREEN);
-                  			temp.setRadius(8);
+                  			temp.setRadius(7);
                   			Controleur.getInstance().setADeplacer(temp.getIntersectionId());
                   			parent.VerifierEtat(Controleur.getInstance());
 
-                  			parent.setInfo("Choisissez maintenant apr¨¨s quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
+                  			parent.setInfo("Choisissez maintenant apres quel point de livvraison vous voulez placer le point de livraison que vous venez de choisir..");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point a deplacer");
                   			e.printStackTrace();
@@ -247,15 +249,15 @@ public class VueGraphique extends Parent implements Observer{
                   			temp.setRadius(8);
                   			Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
 	                  		//Remettre a l'etat initial (couleur, radius)
-                  			deplacerPointChoisiUn.setRadius(6);
-                  			deplacerPointChoisiUn.setFill(Color.CORNFLOWERBLUE);
+                  			deplacerPointChoisiUn.setRadius(5);
+                  			deplacerPointChoisiUn.setFill(Color.BLUE);
                   			deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
-                  			deplacerPointChoisiDeux.setFill(Color.CORNFLOWERBLUE);
-                  			deplacerPointChoisiDeux.setRadius(6);
+                  			deplacerPointChoisiDeux.setFill(Color.BLUE);
+                  			deplacerPointChoisiDeux.setRadius(5);
                   			deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
                   			parent.VerifierEtat(Controleur.getInstance());
 
-                  			parent.setInfo("Point de livraison d¨¦plac¨¦.");
+                  			parent.setInfo("Point de livraison deplace.");
                   		}catch(Exception e) {
                   			System.out.println("Probleme durant le choix d'un point apres lequel nous placons un point");
                   			e.printStackTrace();
@@ -312,7 +314,7 @@ public class VueGraphique extends Parent implements Observer{
 			}
 		}
 			for(IntersectionNormal intersection : lesIntersections) {
-				IntersectionNormalVue tempPoint = new IntersectionNormalVue(monPlan.transformLongitude(intersection.getLongitude(), largeur),monPlan.transformLatitude(intersection.getLatitude(), hauteur),2,intersection.getId());
+				IntersectionNormalVue tempPoint = new IntersectionNormalVue(monPlan.transformLongitude(intersection.getLongitude(), largeur),monPlan.transformLatitude(intersection.getLatitude(), hauteur),3,intersection.getId());
 				noeudGroup.getChildren().add(tempPoint);
 			}
 		
@@ -332,11 +334,11 @@ public class VueGraphique extends Parent implements Observer{
 		System.out.println(lesEntrepots.size());
 		System.out.println(lesPointLivraisons.size());
 		for(Entrepot entrepot : lesEntrepots) {
-			EntrepotVue tempEntrepot = new EntrepotVue(Controleur.getInstance().transformerLongitude(entrepot.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(entrepot.getLatitude(), hauteur),4,entrepot.getId());
+			EntrepotVue tempEntrepot = new EntrepotVue(Controleur.getInstance().transformerLongitude(entrepot.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(entrepot.getLatitude(), hauteur),5,entrepot.getId());
 			entrepotGroup.getChildren().add(tempEntrepot);
 		}
 		for(PointLivraison livraison : lesPointLivraisons) {
-			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),4,livraison.getId());
+			PointLivraisonVue tempPointLivraison = new PointLivraisonVue(Controleur.getInstance().transformerLongitude(livraison.getLongitude(), largeur),Controleur.getInstance().transformerLatitude(livraison.getLatitude(), hauteur),5,livraison.getId());
 			livraisonGroup.getChildren().add(tempPointLivraison);
 		}
 	}

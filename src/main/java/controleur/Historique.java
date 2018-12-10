@@ -39,7 +39,12 @@ public class Historique {
 	}
 	
 	public void reset() {
-		
+		this.listeDeCommande = new LinkedList();
+		this.indice = -1;
+	}
+	
+	public int getLength() {
+		return listeDeCommande.size();
 	}
 	
 
