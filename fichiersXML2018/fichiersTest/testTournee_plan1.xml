@@ -1,66 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <reseau>
+	<noeud id="26316513" latitude="45.757706" longitude="4.870082" />
 	<noeud id="26079655" latitude="45.757935" longitude="4.8685865" />
 	<noeud id="26057085" latitude="45.756638" longitude="4.8683963" />
-	<noeud id="26317229" latitude="45.75465" longitude="4.8674865" />
-	<noeud id="26317232" latitude="45.75503" longitude="4.8707204" />
-	<noeud id="26317234" latitude="45.75526" longitude="4.8726516" />
-	<noeud id="26057106" latitude="45.7561" longitude="4.8726816" />
-	<noeud id="26057098" latitude="45.75631" longitude="4.871078" />
-	<noeud id="26316429" latitude="45.7573" longitude="4.8731403" />
-	<noeud id="26316513" latitude="45.757706" longitude="4.870082" />
-	<noeud id="26317228" latitude="45.755142" longitude="4.871614" />
+	
+	<troncon destination="26316513" longueur="118.77753"
+		nomRue="Rue Antoine Charial" origine="26079655" />
+	<troncon destination="26079655" longueur="118.77753"
+		nomRue="Rue Antoine Charial" origine="26316513" />
 	
 	<troncon destination="26057085" longueur="145.00984"
 		nomRue="Rue Turbil" origine="26079655" />
-	<troncon destination="26317229" longueur="232.252"
+	<troncon destination="26079655" longueur="145.00984"
 		nomRue="Rue Turbil" origine="26057085" />
-	<troncon destination="26317229" longueur="254.54216"
-		nomRue="Avenue Félix Faure" origine="26317232" />
-	<troncon destination="26317232" longueur="254.54216"
-		nomRue="Avenue Félix Faure" origine="26317229" />
-	<troncon destination="26317232" longueur="70.396255"
-		nomRue="Avenue Félix Faure" origine="26317228" />
-	<troncon destination="26317228" longueur="81.59183"
-		nomRue="Avenue Félix Faure" origine="26317234" />
-	<troncon destination="26317228" longueur="70.396255"
-		nomRue="Avenue Félix Faure" origine="26317232" />
-	<troncon destination="26317232" longueur="70.396255"
-		nomRue="Avenue Félix Faure" origine="26317228" />
-	<troncon destination="26317234" longueur="81.59183"
-		nomRue="Avenue Félix Faure" origine="26317228" />
-	<troncon destination="26057098" longueur="145.27324"
-		nomRue="Rue Meynis" origine="26317232" />
-	<troncon destination="26317229" longueur="254.54216"
-		nomRue="Avenue Félix Faure" origine="26317232" />
-	<troncon destination="26317234" longueur="81.59183"
-		nomRue="Avenue Félix Faure" origine="26317228" />
-	<troncon destination="26057106" longueur="93.64789"
-		nomRue="Petite Rue Saint-Eusèbe" origine="26317234" />
-	<troncon destination="26317228" longueur="81.59183"
-		nomRue="Avenue Félix Faure" origine="26317234" />
-	<troncon destination="26057106" longueur="93.64789"
-		nomRue="Petite Rue Saint-Eusèbe" origine="26317234" />
-	<troncon destination="26057098" longueur="126.56524"
-		nomRue="Rue Paul Bert" origine="26057106" />
-	<troncon destination="26316429" longueur="138.28099"
-		nomRue="Rue Saint-Eusèbe" origine="26057106" />
-	<troncon destination="26057085" longueur="211.31693"
-		nomRue="Rue Paul Bert" origine="26057098" />
-	<troncon destination="26316429" longueur="241.59207"
-		nomRue="Rue Antoine Charial" origine="26316513" />
-	<troncon destination="26086130" longueur="114.03479"
-		nomRue="Rue Combet-Descombes" origine="26316513" />
-	<troncon destination="26316513" longueur="118.77753"
-		nomRue="Rue Antoine Charial" origine="26079655" />
-	<troncon destination="26317228" longueur="79.975136"
-		nomRue="Rue de Carry" origine="26317209" />
 </reseau>
-	
-	
-	
-	
-	
-	
-	
-	

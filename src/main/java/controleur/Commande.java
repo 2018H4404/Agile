@@ -6,15 +6,14 @@ package controleur;
  */
 public interface Commande {
 
-	/**
-	 * Réaliser la commande.
-	 * @param controleur le controleur.
+  /**
+	 * Realiser la commande.
 	 */
-	 void doCmd(Controleur controleur);
+	 void doCmd();
 	
 	 /**
 	  * Annuler la commande.
-	  * @param controleur le controleur.
 	  */
-	 void undoCmd(Controleur controleur);
+	 void undoCmd();
+  
 }

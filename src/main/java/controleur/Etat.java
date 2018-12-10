@@ -99,6 +99,10 @@ public interface Etat {
 	 * @throws Exception l'exception lors du deplacement.
 	 */
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception;
+
+	public void undo();
+
+	public void redo();
 	
 	//public void effaceListenerOnClick();
 	

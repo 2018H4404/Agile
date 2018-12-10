@@ -1,16 +1,21 @@
 package controleur;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
 import modele.TourneeManager;
+import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.Plan;
+import modele.metier.Tournee;
 import modele.services.LecteurDeXML;
 import vue.VueGraphique;
 import vue.VueTextuelle;
+import vue.element.IntersectionNormalVue;
+import vue.element.PointLivraisonVue;
 
 /**
  * La classe controleur.
@@ -23,10 +28,12 @@ public class Controleur {
 	private TourneeManager monManager;
 	private VueGraphique graph;
 	private VueTextuelle texte;
+	private Historique historique;
 	private long ajoutIdDepartPointLivraison;
 	private long ajoutIdNouvellePointLivraison;
 	private long idADeplacerPointLivraison;
 	private long idApresDeplacerPointLivraison;
+	private int ajoutDuree;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
@@ -37,6 +44,7 @@ public class Controleur {
 	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
 	private EtatChoixPointLivraisonADeplacer etatChoixPointLivraisonADeplacer;
 	private EtatChoixPointLivraisonApresDeplacer etatChoixPointLivraisonApresDeplacer;
+	private PointLivraisonVue vueSelectionne;
 	
 	/**
 	 * Constructeur du controlleur.
@@ -46,6 +54,7 @@ public class Controleur {
 		monPlan = new Plan();
 		maDemande = new DemandeLivraison();
 		monManager = new TourneeManager();
+		historique = new Historique();
 		etatPlanCharge = new EtatPlanCharge();
 		etatInit = new EtatInit();
 		etatDemandeLivraison = new EtatDemandeLivraison();
@@ -56,20 +65,25 @@ public class Controleur {
 		etatChoixPointLivraisonADeplacer = new EtatChoixPointLivraisonADeplacer();
 		etatChoixPointLivraisonApresDeplacer = new EtatChoixPointLivraisonApresDeplacer();
 		etat = etatInit;
+		vueSelectionne = null;
 	}
 	
-	/**
-	 * Methode pour avoir l'instance du controleur.
-	 * @return retourne l'instance.
-	 */
-	public static Controleur getInstance() {
-		if(instance == null) {
-			instance = new Controleur();
-		}
-		return instance;
+	/
+  
+	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
+		this.ajoutIdNouvellePointLivraison = id;
+		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
 	}
 	
-	/**
+	public void setAjoutDuree(int duree) {
+		this.ajoutDuree = duree;
+	}
+  
+  public void setVueSelectionne(PointLivraisonVue vue) {
+		this.vueSelectionne = vue;
+	}
+	
+  /**
 	 * Methode pour mettre sur le controleur sur l'etat ajouterPointLivraison.
 	 * @throws Exception l'exception a l'ajout du point de livraison.
 	 */
@@ -153,7 +167,21 @@ public class Controleur {
 		return monManager;
 	}
 
-	/**
+  
+	public int getDureePointLivraison(long id) {
+		return maDemande.getPointLivraisonParId(id).getDuree();
+	}
+
+	public long getPrePointLivraisonId(long id) throws Exception{
+		long retour = monManager.getPrePointLivraisonId(id);
+		if(retour == id) {
+			Exception e = new Exception();
+			throw e;
+		}
+		return retour;
+	}
+	
+  	/**
 	 * Methode pour avoir l'etat getEtatDemandeLivraison.
 	 * @return l'etat de la demande de livraison.
 	 */
@@ -249,6 +277,33 @@ public class Controleur {
 		return this.graph;
 	}
 	
+  **
+	 * Methode pour avoir l'instance du controleur.
+	 * @return retourne l'instance.
+	 */
+	public static Controleur getInstance() {
+		if(instance == null) {
+			instance = new Controleur();
+		}
+		return instance;
+	}
+	
+	public PointLivraisonVue getVueSelectionne() {
+		return vueSelectionne;
+	}
+	
+	public long getIdAjoutDepart()throws Exception{
+		return this.ajoutIdDepartPointLivraison;
+	}
+	
+  public int getAjoutDuree() {
+		return ajoutDuree;
+	}
+  
+  public long getIdAjoutNouvellePoint() {
+		return ajoutIdNouvellePointLivraison;
+	}
+  
 	/**
 	 * Methode pour transformer la latitude et la hauteur du plan.
 	 * @param latitude la latitude du plan.
@@ -389,5 +444,17 @@ public class Controleur {
 	 */
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;
+	}
+
+	public void undo() {
+		etat.undo();
+	}
+
+	public void redo() {
+		etat.redo();
+	}
+
+	public Historique getHistorique() {
+		return historique;
 	}
 }

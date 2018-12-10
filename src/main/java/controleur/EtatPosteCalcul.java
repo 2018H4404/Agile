@@ -54,5 +54,14 @@ public class EtatPosteCalcul extends EtatDefaut {
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	
+	public void undo() {
+		Controleur.getInstance().getHistorique().undo();
+	}
+	
+	public void redo() {
+		Controleur.getInstance().getHistorique().redo();
+
+	}
+	
 	
 }

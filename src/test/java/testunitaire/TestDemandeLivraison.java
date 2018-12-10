@@ -2,6 +2,7 @@ package testunitaire;
 
 import static org.junit.Assert.*;
 import org.junit.*;
+import org.joda.time.DateTime;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class TestDemandeLivraison {
 	}
 	
 	@Test
-	public void TestAjouterEntrepot() {
+	public void testAjouterEntrepot() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.addObserver(observer);
 		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
@@ -27,15 +28,16 @@ public class TestDemandeLivraison {
 	}
 	
 	@Test
-	public void TestAjouterPointLivraison() {
+	public void testAjouterPointLivraison() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.addObserver(observer);
 		dl.ajouterPointLivraisonMetier(48830472, 45.75406, 4.857418, 360);
-		assert(updateAppele);
+		PointLivraison test = new PointLivraison(48830472, 45.75406, 4.857418, 360);
+		assert(dl.getAllPointLivraisons().contains(test));
 	}
 	
 	@Test
-	public void TestClear() {
+	public void testClear() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
 		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
@@ -43,6 +45,39 @@ public class TestDemandeLivraison {
 		assertNull(dl.getEntrepotParId(48830472));
 		assertNull(dl.getPointLivraisonParId(48830471));
 	}
+	
+	@Test
+	public void testAjouterPoint() {
+		
+		
+	}
+	
+	@Test
+	public void testSupprimerPoint() {
+		
+		
+		
+	}
+	
+	@Test
+	public void testGetNbLivreurMaximum() {
+		DemandeLivraison dl = new DemandeLivraison();
+		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
+		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
+		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
+		int nblivreur = dl.getNbLivreurMaximum();
+		assertEquals(nblivreur,1);
+	}
+	
+	@Test
+	public void testGetDebutTime() {
+		DemandeLivraison dl = new DemandeLivraison();
+		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
+		DateTime test = new DateTime(2018,11,30,8,0,0);
+		DateTime timeDepart = dl.getDebutTime();
+		assertEquals(test,timeDepart);
+	}
+	
 	
 
 }

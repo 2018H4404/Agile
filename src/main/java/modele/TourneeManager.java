@@ -53,6 +53,10 @@ public class TourneeManager extends Observable{
 		return res;
 	}
 	
+	public Tournee getDernierTournee() {
+		return listeTournees.get(listeTournees.size()-1);
+	}
+	
 	public void clear() {
 		this.listeTournees.clear();
 	}
@@ -118,7 +122,7 @@ public class TourneeManager extends Observable{
 				this.listeTournees.add(solution);
 			}
 			System.out.println(tsp.getCoutMeilleureSolution());
-			setChanged();
+			setChanged(); 
 			notifyObservers("Alert Temps");
 		}else {
 			//Prendre la meilleureSolution calculee
@@ -500,5 +504,29 @@ public class TourneeManager extends Observable{
 			Exception e = new Exception();
 			throw e;
 		}
+	}
+
+	public long getPrePointLivraisonId(long id) {
+		int find =0;
+		long ret = id;
+		for(Tournee t : listeTournees) {
+			if(find == 0) {
+				ArrayList<Chemin> tempChemin = t.getListeChemins();
+				for(Chemin c : tempChemin) {
+					Intersection depart = c.getIntersectionDepart();
+					Intersection dest = c.getIntersectionDest();
+					
+					if(dest.equals(id)) {
+						find = 1;
+						ret = depart.getId();
+						return ret;
+					}
+				}
+			}else {
+				break;
+			}
+		}
+		return ret;
+
 	}
 }
