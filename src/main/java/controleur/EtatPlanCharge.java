@@ -4,6 +4,10 @@ import java.io.File;
 
 import modele.services.LecteurDeXML;
 
+/**
+ * La classe de l'etat plan charge.
+ * @author H4404
+ */
 public class EtatPlanCharge extends EtatDefaut {
 
 	@Override

@@ -2,6 +2,10 @@ package controleur;
 
 import java.io.File;
 
+/**
+ * La classe de l'etat par defaut.
+ * @author H4404
+ */
 public class EtatDefaut implements Etat{
 
 	@Override

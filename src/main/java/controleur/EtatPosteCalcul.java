@@ -4,14 +4,16 @@ import javafx.scene.Node;
 import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 
+/**
+ * La classe de l'etat poste calcul.
+ * @author H4404
+ */
 public class EtatPosteCalcul extends EtatDefaut {
 	/*public void effaceListenerOnClick() {
 		for(Node vue : Controleur.getInstance().getGraph().getLivraisonGroup().getChildren()) {
 			if(vue instanceof PointLivraisonVue) {
-				
 				PointLivraisonVue temp = (PointLivraisonVue) vue;
 				temp.effaceListenerOnClick();
-				
 			}			
 		}
 	for(Node vue : Controleur.getInstance().getGraph().getNoeudGroup().getChildren()) {
@@ -21,9 +23,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 			temp.effaceListenerOnClick();
 			
 		}
-	
 	}
-
 	}*/
 	
 	@Override

@@ -1,5 +1,9 @@
 package controleur;
 
+/**
+ * La classe de l'etat de l'ajout du choix de nouvelle point de livraison.
+ * @author H4404
+ */
 public class EtatAjouterChoixNouvellePointLivraison extends EtatDefaut{
 	@Override
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {

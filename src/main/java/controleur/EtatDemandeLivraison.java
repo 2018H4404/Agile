@@ -4,6 +4,10 @@ import javafx.scene.Node;
 import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 
+/**
+ * La classe de l'etat de demande de livraison.
+ * @author H4404
+ */
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override

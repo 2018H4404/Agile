@@ -1,5 +1,9 @@
 package controleur;
 
+/**
+ * La classe de l'etat ajouter le choix de livraison
+ * @author H4404
+ */
 public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	@Override
 	public void choixNouvellePointLivraison() throws Exception {

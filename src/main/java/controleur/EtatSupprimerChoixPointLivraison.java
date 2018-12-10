@@ -1,5 +1,9 @@
 package controleur;
 
+/**
+ * La classe de l'etat de supprimer le choix de livraison.
+ * @author H4404
+ */
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
