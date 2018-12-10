@@ -32,7 +32,8 @@ public class TestDemandeLivraison {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.addObserver(observer);
 		dl.ajouterPointLivraisonMetier(48830472, 45.75406, 4.857418, 360);
-		assert(updateAppele);
+		PointLivraison test = new PointLivraison(48830472, 45.75406, 4.857418, 360);
+		assert(dl.getAllPointLivraisons().contains(test));
 	}
 	
 	@Test
@@ -62,8 +63,8 @@ public class TestDemandeLivraison {
 	public void testGetNbLivreurMaximum() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
-		dl.ajouterPointLivraison(48830471, 45.75406, 4.857418, 360);
-		dl.ajouterPointLivraison(48830471, 45.75406, 4.857418, 360);
+		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
+		dl.ajouterPointLivraisonMetier(48830471, 45.75406, 4.857418, 360);
 		int nblivreur = dl.getNbLivreurMaximum();
 		assertEquals(nblivreur,1);
 	}
