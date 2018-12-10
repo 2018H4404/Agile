@@ -506,31 +506,7 @@ public class VueTextuelle extends Parent implements Observer{
 	public void clearVue() {
 		conteneurFiltres.getChildren().clear();
 		conteneurInfoParTournee.getPanes().clear();
-		
-	}
-	
-	public void VerifierEtat(Controleur c) {
-	    ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
-
-		switch(e) {
-		case EtatInit:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		case EtatPlanCharge:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		case EtatDemandeLivraison:
-			infosTournees.setDisable(false);
-			filtreTournees.setDisable(false);
-			break;
-        
-		default:
-			infosTournees.setDisable(true);
-			filtreTournees.setDisable(true);
-			break;
-		}
+		conteneurLivraison.getChildren().clear();
 	}
 	
 	public void ajouteTitledPane(DemandeLivraison demande) {

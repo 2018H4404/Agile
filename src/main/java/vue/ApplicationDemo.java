@@ -257,7 +257,7 @@ public class ApplicationDemo extends Application{
 	
 	/**
 	 * Methode pour modifier l'information dans le labelInfo.
-	 * @param texte : info à saisie
+	 * @param texte : info à saisir
 	 */
 	public void setInfo(String texte){
 		labelInfo.setTextFill(Color.BLACK);
@@ -508,6 +508,7 @@ public class ApplicationDemo extends Application{
 	         public void handle(ActionEvent event) {
              graph.clearEntrepotLivraison();
              graph.clearTournees();
+             texte.clearVue();
              labelNombreLivreurs.setText("Nombre de livreurs :");
              textFieldnombreLivreur.setText("");
              Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
@@ -694,6 +695,8 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -714,6 +717,8 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -734,6 +739,8 @@ public class ApplicationDemo extends Application{
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -751,6 +758,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
+			buttonUndo.setDisable(false);
+			buttonRedo.setDisable(false);
 			textFieldDuree.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
 			buttonDeplacerLivraison.setDisable(false);
@@ -771,6 +780,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
@@ -791,6 +802,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
@@ -811,6 +824,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
@@ -831,6 +846,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -850,6 +867,8 @@ public class ApplicationDemo extends Application{
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
+			buttonUndo.setDisable(true);
+			buttonRedo.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);

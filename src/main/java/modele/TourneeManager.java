@@ -445,6 +445,11 @@ public class TourneeManager extends Observable{
 			}
 			indexApresDeplacer++;
 		}
+		if(indexADeplacer == indexApresDeplacer) {
+			System.out.println("Deplacement irrealisable");
+			Exception e = new Exception();
+			throw e;
+		}else {
 		//Effectuer le d��placement
 		if(findADplacer == 1 && findApresDplacer == 1) {
 			//Supprimer le point de livraison �� d��placer 
@@ -503,6 +508,7 @@ public class TourneeManager extends Observable{
 			System.out.println("Point Livraison Introuvable");
 			Exception e = new Exception();
 			throw e;
+		}
 		}
 	}
 }
