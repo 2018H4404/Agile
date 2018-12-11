@@ -781,6 +781,10 @@ public class ApplicationDemo extends Application {
 					FileChooser fileChooser = new FileChooser();
 		        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
 					Document feuilleDeRoute = Controleur.getInstance().exportFeuilleDeRoute();
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setHeaderText("Succes");
+					alert.setContentText("feuille de route cree dans: "+ fileChooser.getInitialDirectory());
+					alert.show();
 					} catch (Exception e) {
 						e.printStackTrace();
 				}
