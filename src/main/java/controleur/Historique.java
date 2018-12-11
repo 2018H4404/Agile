@@ -20,6 +20,10 @@ public class Historique {
 		indice = -1;
 	}
 	
+	public int getIndice(){
+		return indice;
+	}
+	
 	public void ajouteCmd(Commande cmd) {
 		int i = indice +1;
 		if(i<listeDeCommande.size()) {

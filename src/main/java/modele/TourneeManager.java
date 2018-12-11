@@ -278,23 +278,29 @@ public class TourneeManager extends Observable {
 		int find = 0;
 		int index = 0;
 		int posChemin = 0;
-		for (Tournee t : listeTournees) {
-			if (find == 0) {
-				posChemin = 0;
-				ArrayList<Chemin> tempChemin = t.getListeChemins();
-				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
-					Intersection dest = c.getIntersectionDest();
-					if (dest.equals(idDepart)) {
-						find = 1;
-						break;
+		if(idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
+			find = 1;
+			index = 1;
+			posChemin = -1;
+		}else {
+			for (Tournee t : listeTournees) {
+				if (find == 0) {
+					posChemin = 0;
+					ArrayList<Chemin> tempChemin = t.getListeChemins();
+					for (Chemin c : tempChemin) {
+						Intersection depart = c.getIntersectionDepart();
+						Intersection dest = c.getIntersectionDest();
+						if (dest.equals(idDepart)) {
+							find = 1;
+							break;
+						}
+						posChemin++;
 					}
-					posChemin++;
+				} else {
+					break;
 				}
-			} else {
-				break;
+				index++;
 			}
-			index++;
 		}
 		if (find == 1) {
 			index--;
@@ -344,23 +350,29 @@ public class TourneeManager extends Observable {
 		int find = 0;
 		int index = 0;
 		int posChemin = 0;
-		for (Tournee t : listeTournees) {
-			if (find == 0) {
-				posChemin = 0;
-				ArrayList<Chemin> tempChemin = t.getListeChemins();
-				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
-					Intersection dest = c.getIntersectionDest();
-					if (dest.equals(idDepart)) {
-						find = 1;
-						break;
+		if(idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
+			find = 1;
+			index = 1;
+			posChemin = -1;
+		}else {
+			for (Tournee t : listeTournees) {
+				if (find == 0) {
+					posChemin = 0;
+					ArrayList<Chemin> tempChemin = t.getListeChemins();
+					for (Chemin c : tempChemin) {
+						Intersection depart = c.getIntersectionDepart();
+						Intersection dest = c.getIntersectionDest();
+						if (dest.equals(idDepart)) {
+							find = 1;
+							break;
+						}
+						posChemin++;
 					}
-					posChemin++;
+				} else {
+					break;
 				}
-			} else {
-				break;
+				index++;
 			}
-			index++;
 		}
 		if (find == 1) {
 			index--;

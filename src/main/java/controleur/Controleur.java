@@ -440,6 +440,24 @@ public class Controleur {
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;
 	}
+	
+	/**
+	 * Methode pour obtenir longitude d'une intersection.
+	 * @param id: id de l'intersection.
+	 * @return longittude de cette intersection.
+	 */
+	public double getLongititudeIntersection(long id) {
+		return monPlan.getIntersectionNormal(id).getLongitude();
+	}
+	
+	/**
+	 * Methode pour obtenir latitude d'une intersection.
+	 * @param id: id de l'intersection.
+	 * @return latitude de cette intersection.
+	 */
+	public double getLatitudeIntersection(long id) {
+		return monPlan.getIntersectionNormal(id).getLatitude();
+	}
 
 	public void undo() {
 		etat.undo();

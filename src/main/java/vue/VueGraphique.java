@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -151,166 +152,185 @@ public class VueGraphique extends Parent implements Observer {
 		noeudGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(final MouseEvent event) {
 				if (event.getTarget() instanceof IntersectionNormalVue) {
-					if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
-							.equals("EtatAjouterChoixNouvellePointLivraison")) {
-						try {
-							IntersectionNormalVue temp = (IntersectionNormalVue) event.getTarget();
-							ajoutInterChoisi = temp;
-							int duree = parent.getDuree();
-							if (duree == Integer.MAX_VALUE) {
-								Exception e = new Exception();
-								throw e;
+					MouseButton button = event.getButton();
+					if(button.equals(MouseButton.PRIMARY)) {
+						if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
+								.equals("EtatAjouterChoixNouvellePointLivraison")) {
+							try {
+								IntersectionNormalVue temp = (IntersectionNormalVue) event.getTarget();
+								ajoutInterChoisi = temp;
+								int duree = parent.getDuree();
+								if (duree == Integer.MAX_VALUE) {
+									Exception e = new Exception();
+									throw e;
+								}
+								temp.setFill(Color.GREEN);
+								temp.setRadius(8);
+
+								CommandeAjouterLivraison cmd = new CommandeAjouterLivraison(ajoutPointChoisi.getIntersectionId(),ajoutInterChoisi.getIntersectionId(),duree);
+								Controleur.getInstance().setTempAjout(cmd);
+								Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(), duree);
+								parent.VerifierEtat(Controleur.getInstance());
+								// Remettre a l'etat initial (couleur, radius)
+								ajoutInterChoisi.setRadius(3);
+								ajoutInterChoisi.setFill(Color.BLACK);
+								ajoutPointChoisi.setFill(Color.BLUE);
+								ajoutPointChoisi.setRadius(5);
+								ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
+								IntersectionNormal tempInter = Controleur.getInstance().getMonPlan()
+										.getIntersectionNormal(temp.getIntersectionId());
+								PointLivraisonVue tempPointLivraison = new PointLivraisonVue(
+										Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),
+										Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur), 5,
+										tempInter.getId());
+								livraisonGroup.getChildren().add(tempPointLivraison);
+
+								parent.VerifierEtat(Controleur.getInstance());
+								parent.setInfo("Point de livraison ajoute");
+							} catch (Exception e) {
+								System.out.println("Duree incorrect ou Probleme durant Ajout");
+								Label temp = parent.getLabelInfo();
+								temp.setTextFill(Color.RED);
+								temp.setText(e.getMessage());
+								ajoutInterChoisi.setRadius(3);
+								ajoutInterChoisi.setFill(Color.BLACK);
+								ajoutPointChoisi.setFill(Color.BLUE);
+								ajoutPointChoisi.setRadius(5);
+								ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
+								compagnie.activerSynchronisationLivraison();
+								activerSynchronisationLivraison();
+								Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+								parent.VerifierEtat(Controleur.getInstance());
+								e.printStackTrace();
 							}
-							temp.setFill(Color.GREEN);
-							temp.setRadius(8);
-
-							CommandeAjouterLivraison cmd = new CommandeAjouterLivraison(ajoutPointChoisi.getIntersectionId(),ajoutInterChoisi.getIntersectionId(),duree);
-							Controleur.getInstance().setTempAjout(cmd);
-							Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(), duree);
-							parent.VerifierEtat(Controleur.getInstance());
-							// Remettre a l'etat initial (couleur, radius)
-							ajoutInterChoisi.setRadius(3);
-							ajoutInterChoisi.setFill(Color.BLACK);
-							ajoutPointChoisi.setFill(Color.BLUE);
-							ajoutPointChoisi.setRadius(5);
-							ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
-							IntersectionNormal tempInter = Controleur.getInstance().getMonPlan()
-									.getIntersectionNormal(temp.getIntersectionId());
-							PointLivraisonVue tempPointLivraison = new PointLivraisonVue(
-									Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),
-									Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur), 5,
-									tempInter.getId());
-							livraisonGroup.getChildren().add(tempPointLivraison);
-
-							parent.VerifierEtat(Controleur.getInstance());
-							parent.setInfo("Point de livraison ajoute");
-						} catch (Exception e) {
-							System.out.println("Duree incorrect ou Probleme durant Ajout");
-							Label temp = parent.getLabelInfo();
-							temp.setTextFill(Color.RED);
-							temp.setText(e.getMessage());
-							ajoutInterChoisi.setRadius(3);
-							ajoutInterChoisi.setFill(Color.BLACK);
-							ajoutPointChoisi.setFill(Color.BLUE);
-							ajoutPointChoisi.setRadius(5);
-							ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
-							compagnie.activerSynchronisationLivraison();
-							activerSynchronisationLivraison();
-							Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
-							parent.VerifierEtat(Controleur.getInstance());
-							e.printStackTrace();
 						}
+					}else {
+						IntersectionNormalVue tempVue = (IntersectionNormalVue) event.getTarget();
+						String temp = "";
+						temp += "Latitude :"+Controleur.getInstance().getLatitudeIntersection(tempVue.getIntersectionId()) + "\n";
+						temp += "Longitude :" + Controleur.getInstance().getLongititudeIntersection(tempVue.getIntersectionId());
+						compagnie.setInfoIntersection(temp);
 					}
+					
 				}
 			}
 		});
 		livraisonGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(final MouseEvent event) {
 				if (event.getTarget() instanceof PointLivraisonVue) {
-					if (!permisSynchronise) {
-						if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
-								.equals("EtatAjouterChoixPointLivraison")) {
-							try {
-								PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
-								ajoutPointChoisi = temp;
-								temp.setActiveChangerCouleurSelectionne(false);
-								temp.setFill(Color.GREEN);
+					MouseButton button = event.getButton();
+					if(button.equals(MouseButton.PRIMARY)) {
+						if (!permisSynchronise) {
+							if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
+									.equals("EtatAjouterChoixPointLivraison")) {
+								try {
+									PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
+									ajoutPointChoisi = temp;
+									temp.setActiveChangerCouleurSelectionne(false);
+									temp.setFill(Color.GREEN);
 
-								temp.setRadius(7);
-								Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
+									temp.setRadius(7);
+									Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
 
-								parent.VerifierEtat(Controleur.getInstance());
+									parent.VerifierEtat(Controleur.getInstance());
 
-								parent.setInfo(
-										"Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
-							} catch (Exception e) {
-								System.out.println("Probleme durant Ajout");
-								e.printStackTrace();
+									parent.setInfo(
+											"Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
+								} catch (Exception e) {
+									System.out.println("Probleme durant Ajout");
+									e.printStackTrace();
+								}
+							} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
+									.equals("EtatSupprimerChoixPointLivraison")) {
+								try {
+									PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
+									temp.setActiveChangerCouleurSelectionne(false);
+									temp.setFill(Color.GREEN);
+									temp.setRadius(7);
+
+									PointLivraison tempPoint = Controleur.getInstance().getMaDemande().getPointLivraisonParId(temp.getIntersectionId());
+									Intersection tempPrePoint = Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId());
+									CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(tempPoint,tempPrePoint);
+									Controleur.getInstance().setTempSupprimer(cmd);
+									Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());// methode
+									livraisonGroup.getChildren().remove(temp);
+									parent.VerifierEtat(Controleur.getInstance());
+
+									parent.setInfo("Point de livraison supprime.");
+								} catch (Exception e) {
+									System.out.println("Probleme durant le processus pour supprimer");
+									e.printStackTrace();
+								}
+							} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
+									.equals("EtatChoixPointLivraisonADeplacer")) {
+								try {
+									PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
+									deplacerPointChoisiUn = temp;
+									temp.setActiveChangerCouleurSelectionne(false);
+									temp.setFill(Color.GREEN);
+									temp.setRadius(7);
+									Controleur.getInstance().setADeplacer(temp.getIntersectionId());
+									parent.VerifierEtat(Controleur.getInstance());
+									parent.setInfo(
+											"Choisissez maintenant apres quel point de livraison vous voulez placer le point de livraison que vous venez de choisir..");
+								} catch (Exception e) {
+									System.out.println("Probleme durant le choix d'un point a deplacer");
+									e.printStackTrace();
+								}
+							} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
+									.equals("EtatChoixPointLivraisonApresDeplacer")) {
+								try {
+									PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
+									deplacerPointChoisiDeux = temp;
+									temp.setActiveChangerCouleurSelectionne(false);
+									temp.setFill(Color.GREEN);
+									temp.setRadius(8);
+									Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
+									// Remettre a l'etat initial (couleur, radius)
+									deplacerPointChoisiUn.setRadius(5);
+									deplacerPointChoisiUn.setFill(Color.BLUE);
+									deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
+									deplacerPointChoisiDeux.setFill(Color.BLUE);
+									deplacerPointChoisiDeux.setRadius(5);
+									deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+									Controleur.getInstance().getHistorique().clear();
+									parent.VerifierEtat(Controleur.getInstance());
+									parent.setInfo("Point de livraison deplace.");
+								} catch (Exception e) {
+									System.out.println(
+											"Probleme durant le choix d'un point apres lequel nous placons un point");
+									parent.setInfo(
+											"Nous ne pouvons pas faire un deplacement sur deux points d'une meme tournee.");
+									deplacerPointChoisiUn.setRadius(5);
+									deplacerPointChoisiUn.setFill(Color.BLUE);
+									deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
+									deplacerPointChoisiDeux.setFill(Color.BLUE);
+									deplacerPointChoisiDeux.setRadius(5);
+									deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+									Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+									parent.VerifierEtat(Controleur.getInstance());
+									e.printStackTrace();
+								}
 							}
-						} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
-								.equals("EtatSupprimerChoixPointLivraison")) {
-							try {
-								PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
-								temp.setActiveChangerCouleurSelectionne(false);
-								temp.setFill(Color.GREEN);
-								temp.setRadius(7);
-
-								PointLivraison tempPoint = Controleur.getInstance().getMaDemande().getPointLivraisonParId(temp.getIntersectionId());
-								Intersection tempPrePoint = Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId());
-								CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(tempPoint,tempPrePoint);
-								Controleur.getInstance().setTempSupprimer(cmd);
-								Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());// methode
-								livraisonGroup.getChildren().remove(temp);
-								parent.VerifierEtat(Controleur.getInstance());
-
-								parent.setInfo("Point de livraison supprime.");
-							} catch (Exception e) {
-								System.out.println("Probleme durant le processus pour supprimer");
-								e.printStackTrace();
-							}
-						} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
-								.equals("EtatChoixPointLivraisonADeplacer")) {
-							try {
-								PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
-								deplacerPointChoisiUn = temp;
-								temp.setActiveChangerCouleurSelectionne(false);
-								temp.setFill(Color.GREEN);
-								temp.setRadius(7);
-								Controleur.getInstance().setADeplacer(temp.getIntersectionId());
-								parent.VerifierEtat(Controleur.getInstance());
-								parent.setInfo(
-										"Choisissez maintenant apres quel point de livraison vous voulez placer le point de livraison que vous venez de choisir..");
-							} catch (Exception e) {
-								System.out.println("Probleme durant le choix d'un point a deplacer");
-								e.printStackTrace();
-							}
-						} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
-								.equals("EtatChoixPointLivraisonApresDeplacer")) {
-							try {
-								PointLivraisonVue temp = (PointLivraisonVue) event.getTarget();
-								deplacerPointChoisiDeux = temp;
-								temp.setActiveChangerCouleurSelectionne(false);
-								temp.setFill(Color.GREEN);
-								temp.setRadius(8);
-								Controleur.getInstance().setApresDeplacer(temp.getIntersectionId());
-								// Remettre a l'etat initial (couleur, radius)
-								deplacerPointChoisiUn.setRadius(5);
-								deplacerPointChoisiUn.setFill(Color.BLUE);
-								deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
-								deplacerPointChoisiDeux.setFill(Color.BLUE);
-								deplacerPointChoisiDeux.setRadius(5);
-								deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
-								Controleur.getInstance().getHistorique().clear();
-								parent.VerifierEtat(Controleur.getInstance());
-								parent.setInfo("Point de livraison deplace.");
-							} catch (Exception e) {
-								System.out.println(
-										"Probleme durant le choix d'un point apres lequel nous placons un point");
-								parent.setInfo(
-										"Nous ne pouvons pas faire un deplacement sur deux points d'une meme tournee.");
-								deplacerPointChoisiUn.setRadius(5);
-								deplacerPointChoisiUn.setFill(Color.BLUE);
-								deplacerPointChoisiUn.setActiveChangerCouleurSelectionne(true);
-								deplacerPointChoisiDeux.setFill(Color.BLUE);
-								deplacerPointChoisiDeux.setRadius(5);
-								deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
-								Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
-								parent.VerifierEtat(Controleur.getInstance());
-								e.printStackTrace();
-							}
-						}
-					} else {
-						PointLivraisonVue vue = (PointLivraisonVue) event.getTarget();
-						if (!vue.isSynchronisee()) {
-							vue.changerFormeSynchronise();
-							compagnie.synchroniserLivraisonPane(vue.getIntersectionId(), true);
 						} else {
-							vue.setSynchronisee(false);
-							vue.setOriginalColor(Color.BLUE);
-							vue.changeRadius(5);
-							vue.changerCouleurNonSelectionnee();
-							compagnie.synchroniserLivraisonPane(vue.getIntersectionId(), false);
+							PointLivraisonVue vue = (PointLivraisonVue) event.getTarget();
+							if (!vue.isSynchronisee()) {
+								vue.changerFormeSynchronise();
+								compagnie.synchroniserLivraisonPane(vue.getIntersectionId(), true);
+							} else {
+								vue.setSynchronisee(false);
+								vue.setOriginalColor(Color.BLUE);
+								vue.changeRadius(5);
+								vue.changerCouleurNonSelectionnee();
+								compagnie.synchroniserLivraisonPane(vue.getIntersectionId(), false);
+							}
 						}
+					}else{
+						PointLivraisonVue tempVue = (PointLivraisonVue) event.getTarget();
+						String temp = "";
+						temp +="Latitude :"+ Controleur.getInstance().getLatitudeIntersection(tempVue.getIntersectionId()) + "\n";
+						temp += "Longitude :"+Controleur.getInstance().getLongititudeIntersection(tempVue.getIntersectionId());
+						compagnie.setInfoIntersection(temp);
 					}
 				}
 			}

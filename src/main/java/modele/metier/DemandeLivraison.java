@@ -3,6 +3,7 @@ package modele.metier;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 
@@ -69,6 +70,20 @@ public class DemandeLivraison extends Observable{
 		setChanged();
 		notifyObservers("DemandeLivraison");
 	
+	}
+	
+	/**
+	 * Methode permettant de retourner id du premier entrepot.
+	 * @return id du premier entrepot
+	 */
+	public long getIdEntrepot() {
+		long retour = 0;
+		Set<Long> idEntrepots = entrepots.keySet();
+		for(Long id : idEntrepots) {
+			retour = id;
+			break;
+		}
+		return retour;
 	}
 	
 	public void ajouterPoint(long id,PointLivraison p) {
