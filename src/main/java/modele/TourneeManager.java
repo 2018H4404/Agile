@@ -50,6 +50,10 @@ public class TourneeManager extends Observable {
 		TIME_LIMITE = unTime;
 	}
 	
+	public int getTimeLimite() {
+		return TIME_LIMITE;
+	}
+	
 	public void notifyVue() {
 		setChanged();
 		notifyObservers("TourneesEtDemandeLivraison");
