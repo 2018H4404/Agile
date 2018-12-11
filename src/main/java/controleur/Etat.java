@@ -1,6 +1,10 @@
 package controleur;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 
 /**
  * La classe Etat.
@@ -104,6 +108,8 @@ public interface Etat {
 	public void undo();
 
 	public void redo();
+
+	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException;
 	
 	//public void effaceListenerOnClick();
 	
