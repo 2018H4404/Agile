@@ -1,4 +1,4 @@
-package modele.algo;
+package exceptions;
 
 /** 
  * La classe des exceptions d'algorithme.
