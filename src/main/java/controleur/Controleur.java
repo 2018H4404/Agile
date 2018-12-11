@@ -120,8 +120,8 @@ public class Controleur {
 	 * @param nbLivreur nombre de livreurs.
 	 * @throws Exception l'exception au calcul des tournee.
 	 */
-	public void calculerLesTournees(int nbLivreur) throws Exception{
-		etat.CalculerLesTournees(nbLivreur);
+	public void calculerLesTournees(int nbLivreur, int mode) throws Exception{
+		etat.CalculerLesTournees(nbLivreur,mode);
 	}
 	
 	/**
@@ -164,6 +164,10 @@ public class Controleur {
 
 	public Intersection getPrePointLivraisonId(long id) throws Exception{
 		return monManager.getPrePointLivraisonId(id);
+	}
+	
+	public void setTimeLimite(int time){
+		monManager.setTimeLimite(time);;
 	}
 	
   	/**

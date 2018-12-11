@@ -18,9 +18,10 @@ public interface Etat {
 	/**
 	 * Methode etat pour la methode CalculerLesTournees.
 	 * @param nbLivreur le nombre de livreurs.
+	 * @param mode le mode choisi par l'utilisateur pour calculer les tournees.
 	 * @throws Exception l'exception lors du calcul des tournees.
 	 */
-	public void CalculerLesTournees(int nbLivreur)throws Exception;
+	public void CalculerLesTournees(int nbLivreur,int mode)throws Exception;
 
 	/**
 	 * Methode etat pour la methode lectureLivraisonEntrepotXML.

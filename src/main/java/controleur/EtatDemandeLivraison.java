@@ -10,10 +10,9 @@ import vue.element.IntersectionNormalVue;
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override
-	public void CalculerLesTournees(int nbLivreur) throws Exception{
+	public void CalculerLesTournees(int nbLivreur,int mode) throws Exception{
 		
-		//Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
-		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+		Controleur.getInstance().getMonManager().calculerLesTourneesSelonMode(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur, mode);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	

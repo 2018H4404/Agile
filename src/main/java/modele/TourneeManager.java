@@ -29,13 +29,14 @@ import modele.metier.Troncon;
 public class TourneeManager extends Observable {
 
 	private ArrayList<Tournee> listeTournees;
-	private static final int TIME_LIMITE = 10000;
+	private int TIME_LIMITE;
 	private int tourneeChangedIndex;
 	private int tourneeSupprimerIndex;
 	private int tourneeAjouterIndex;
 
 	public TourneeManager() {
 		listeTournees = new ArrayList<Tournee>();
+		TIME_LIMITE = 10000;
 		tourneeChangedIndex = 0;
 		tourneeSupprimerIndex = 0;
 		tourneeAjouterIndex = 0;
@@ -43,6 +44,10 @@ public class TourneeManager extends Observable {
 
 	public void clear() {
 		this.listeTournees.clear();
+	}
+	
+	public void setTimeLimite(int unTime) {
+		TIME_LIMITE = unTime;
 	}
 	
 	public void notifyVue() {
@@ -72,13 +77,28 @@ public class TourneeManager extends Observable {
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
 	}
+	
+	/**
+	 * Methode pour calculer les tournees selon le mode choisi par l'utilisateur
+	 * @param demande les demandes de livraison.
+	 * @param unPlan  le plan de la ville.
+	 * @param nbLivreur: Nombre de livreurs.
+	 * @param mode :mode choisi par l'utilisateur (1 pour sans clustering et 2 pour clustering).
+	 */
+	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur,int mode) throws Exception{
+		if(mode == 1) {
+			calculerLesTournees(demande, unPlan, nbLivreur);
+		}else{
+			calculerLesTourneesClustering(demande, unPlan, nbLivreur);
+		}
+	}
 
 	/**
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version sans
 	 * clustering)
-	 * 
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
+	 * @param nbLivreur: Nombre de livreurs.
 	 */
 	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -142,7 +162,7 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version
 	 * clustering).
-	 * 
+	 * @param nbLivreur: Nombre de livreurs. 
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
 	 */

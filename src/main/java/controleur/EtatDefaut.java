@@ -14,7 +14,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void CalculerLesTournees(int nbLivreur) throws Exception {
+	public void CalculerLesTournees(int nbLivreur,int mode) throws Exception {
 		
 	}
 

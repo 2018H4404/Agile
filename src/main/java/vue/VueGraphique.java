@@ -685,7 +685,7 @@ public class VueGraphique extends Parent implements Observer {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText("Attention");
 			alert.setContentText(
-					"Depasser la limite de temps : 10 secondes! Une Solution est affichee mais elle n'est pas optimale.");
+					"Depasser la limite de temps! Une Solution est affichee mais elle n'est pas optimale. Augmenter la limite du temps afin d'avoir la meilleure solution!");
 			alert.show();
 			break;
 		}

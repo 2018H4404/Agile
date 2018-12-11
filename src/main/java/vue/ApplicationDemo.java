@@ -31,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
@@ -78,6 +79,11 @@ public class ApplicationDemo extends Application {
 	private Label labelDuree;
 	private TextField textFieldDuree;
 	private Label labelDureeError;
+
+	private ComboBox<String> timeLimite;
+	private ToggleGroup radioGroup;   
+	private RadioButton modeSansClustering;   
+	private RadioButton modeClustering;   
 
 	private Label labelInfo;
 
@@ -180,7 +186,36 @@ public class ApplicationDemo extends Application {
 		labelError.setMaxWidth(300);
 		labelError.setWrapText(true);
 		labelError.setTextFill(Color.web("#FF0000"));
-
+		
+		timeLimite = new ComboBox<String>();
+		timeLimite.getItems().addAll("10 secondes",
+			    "20 secondes",
+			    "30 secondes",
+			    "40 secondes",
+			    "50 secondes",
+			    "60 secondes",
+			    "70 secondes",
+			    "80 secondes",
+			    "90 secondes",
+			    "100 secondes",
+			    "110 secondes",
+			    "120 secondes");
+		timeLimite.getSelectionModel().select(0);
+		timeLimite.setMaxWidth(300);
+		timeLimite.setMinWidth(300);
+		GridPane conteneurMode = new GridPane();
+		radioGroup = new ToggleGroup();   
+		modeSansClustering = new RadioButton();
+		modeSansClustering.setSelected(true);
+		modeSansClustering.setText("Solution optimale      ");
+		modeSansClustering.setToggleGroup(radioGroup);
+		modeClustering = new RadioButton();
+		modeClustering.setSelected(true);
+		modeClustering.setText("Solution clustering");
+		modeClustering.setToggleGroup(radioGroup);
+		conteneurMode.add(modeSansClustering, 1, 1);
+		conteneurMode.add(modeClustering, 2, 1);
+		
 		buttonEffacer = new Button("Effacer tout");
 		buttonEffacer.setMinWidth(300);
 		buttonEffacer.setMaxWidth(300);
@@ -219,7 +254,7 @@ public class ApplicationDemo extends Application {
 		separator.setMaxWidth(300);
 
 		vbox.getChildren().addAll(buttonChargePlan, buttonChargeDemandeLivraison, labelNombreLivreurs,
-				textFieldnombreLivreur, labelError, buttonCalculer, buttonAjouterLivraison, labelDuree, textFieldDuree,
+				textFieldnombreLivreur, labelError, new Label("Limite de temps : "), timeLimite, conteneurMode,buttonCalculer,buttonAjouterLivraison, labelDuree, textFieldDuree,
 				labelDureeError, buttonSupprimerLivraison, buttonDeplacerLivraison, buttonEffacer, buttonEffacerDemande,
 				buttonRedo, buttonUndo, separator, labelInfo);
 
@@ -439,7 +474,15 @@ public class ApplicationDemo extends Application {
 									+ " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
 						} else {
 							try {
-								Controleur.getInstance().calculerLesTournees(nbLivreur);
+								String time = timeLimite.getValue();
+								String[] value = time.split(" ");
+								Controleur.getInstance().setTimeLimite(Integer.parseInt(value[0]));
+								if(modeClustering.isSelected()) {
+									Controleur.getInstance().calculerLesTournees(nbLivreur,2);
+								}else {
+									Controleur.getInstance().calculerLesTournees(nbLivreur,1);
+								}
+								
 								Controleur.getInstance().getHistorique().clear();
 								labelError.setText("");
 								VerifierEtat(controleur);
@@ -478,7 +521,15 @@ public class ApplicationDemo extends Application {
 									+ " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
 						} else {
 							try {
-								Controleur.getInstance().calculerLesTournees(nbLivreur);
+								String time = timeLimite.getValue();
+								String[] value = time.split(" ");
+								Controleur.getInstance().setTimeLimite(Integer.parseInt(value[0])*1000);
+								if(modeClustering.isSelected()) {
+									Controleur.getInstance().calculerLesTournees(nbLivreur,2);
+								}else {
+									Controleur.getInstance().calculerLesTournees(nbLivreur,1);
+								}
+								
 								Controleur.getInstance().getHistorique().clear();
 								labelError.setText("");
 								VerifierEtat(controleur);
@@ -732,6 +783,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -754,6 +808,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -776,6 +833,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(false);
+			modeSansClustering.setDisable(false);
+			modeClustering.setDisable(false);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -798,6 +858,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(false);
+			modeSansClustering.setDisable(false);
+			modeClustering.setDisable(false);
 			buttonSupprimerLivraison.setDisable(false);
 			buttonDeplacerLivraison.setDisable(false);
 			itemDeplacerLivraison.setDisable(false);
@@ -822,6 +885,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -844,6 +910,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(false);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -866,6 +935,9 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
@@ -889,6 +961,10 @@ public class ApplicationDemo extends Application {
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
@@ -909,6 +985,10 @@ public class ApplicationDemo extends Application {
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
+			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
@@ -927,6 +1007,10 @@ public class ApplicationDemo extends Application {
 			textFieldnombreLivreur.setDisable(true);
 			itemEffacer.setDisable(true);
 			buttonEffacer.setDisable(true);
+			textFieldDuree.setDisable(true);
+			timeLimite.setDisable(true);
+			modeSansClustering.setDisable(true);
+			modeClustering.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
 			buttonSupprimerLivraison.setDisable(true);
