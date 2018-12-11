@@ -135,7 +135,7 @@ public class VueTextuelle extends Parent implements Observer {
 		infoPourIntersection.setMinWidth(300);
 		infoPourIntersection.setWrapText(true);
 		infoPourIntersection.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-		Label tempLabelIntersection = new Label("Info sur l'intersection cliquee:");
+		Label tempLabelIntersection = new Label("Info sur l'intersection cliquee(Clic droit):");
 		tempLabelIntersection.setLayoutX(0);
 		tempLabelIntersection.setLayoutY(0);
 		tempLabelIntersection.setMaxWidth(300);
@@ -568,6 +568,9 @@ public class VueTextuelle extends Parent implements Observer {
 		conteneurFiltres.getChildren().clear();
 		conteneurInfoParTournee.getPanes().clear();
 		conteneurLivraison.getChildren().clear();
+		infoPourIntersection.setText("");
+		monLabel.setText("");
+		parent.setInfo("");
 	}
 
 	public void ajouteTitledPane(DemandeLivraison demande) {
