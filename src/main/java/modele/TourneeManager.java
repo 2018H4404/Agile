@@ -178,7 +178,16 @@ public class TourneeManager extends Observable {
 		OutilTSP.intialisationTabDuree(intersectionsDemande, duree, length);
 		TSPSimple tsp = new TSPSimple();
 		int[] nbPointLivraisonParLivreur = tsp.clusteringNbPointLivraisonParLivreurNaive(nbLivreur, length - 1);
+		for(int i =0; i < nbPointLivraisonParLivreur.length;i++) {
+			System.out.println(nbPointLivraisonParLivreur[i]);
+		}
 		ArrayList<int[]> groupes = tsp.clusteringPointLivraisonNaive(length, cout, nbPointLivraisonParLivreur);
+		for(int i =0; i < groupes.size();i++) {
+			int [] temp = groupes.get(i);
+			for(int j = 0; j < temp.length;j++) {
+				System.out.println(temp[j]);
+			}
+		}
 
 		int nbGroupes = groupes.size();
 		boolean alert = false;

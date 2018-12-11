@@ -1,8 +1,15 @@
 package modele.algo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+import modele.metier.Intersection;
 
 /**
  * La classe de la template du TSP.
@@ -77,24 +84,26 @@ public abstract class TemplateTSP implements TSP {
 			int[] tempGroupe = new int[nbTotal];
 			Integer interCourant = lesIntersections.get(0);
 			lesIntersections.remove(interCourant);
-			PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+			 PriorityQueue<Paire> queue = new PriorityQueue<Paire>(1,  
+		                new Comparator<Paire>() {  
+		                  public int compare(Paire p1, Paire p2) {  
+		                    if(p1.getCout() < p2.getCout()) {  
+		                    	return -1;
+		                    }
+		                    if (p1.getCout() > p2.getCout()) { return 1; }
+		                    return 0;
+		                  }  
+		                });  
 			int length = lesIntersections.size();
-			for (int j = 0; j < length; j++) {
-				queue.add(cout[interCourant][lesIntersections.get(j)]);
+			for(int j = 0; j < length; j++) {
+				Paire temp = new Paire(cout[interCourant][lesIntersections.get(j)],lesIntersections.get(j));
+				queue.add(temp);
 			}
 			tempGroupe[0] = interCourant;
-			for (int j = 1; j < nbTotal; j++) {
-				int tempPos = 0;
-				int coutCourant = queue.poll();
-				int size = cout[interCourant].length;
-				for (int p = 0; p < size; p++) {
-					if (coutCourant == cout[interCourant][p]) {
-						tempPos = p;
-						break;
-					}
-				}
-				tempGroupe[j] = tempPos;
-				lesIntersections.remove((Integer) tempPos);
+			for(int j = 1; j < nbTotal; j++) {
+				Paire paireCourant = queue.poll();
+				tempGroupe[j] = paireCourant.getNumeroLivraison();
+				lesIntersections.remove((Integer)paireCourant.getNumeroLivraison());
 			}
 			retour.add(tempGroupe);
 		}
