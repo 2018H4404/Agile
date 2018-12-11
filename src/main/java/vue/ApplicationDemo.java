@@ -791,6 +791,7 @@ public class ApplicationDemo extends Application {
 
 		menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
 		pane.setTop(menuBar);
+	}
 
 
 	public void setLabelNbLivreur(int nbLivreur) {

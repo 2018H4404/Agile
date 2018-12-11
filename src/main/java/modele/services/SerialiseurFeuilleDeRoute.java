@@ -24,12 +24,10 @@ public class SerialiseurFeuilleDeRoute {
 	public static Document feuilleDeRoute;
 	
 	public static Document exportFeuilleDeRoute(ArrayList<Tournee> tournees) throws FileNotFoundException, DocumentException {
-		Document d = new Document();
-		FileOutputStream fop = new FileOutputStream(new File("feuilleDeRoutepdf.txt"));
-		PdfWriter.getInstance(d, fop);
 		feuilleDeRoute = new Document();
-		String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
-		//FileOutputStream fop2 = new FileOutputStream(new File("feuilleDeRoute " + date + ".pdf"));
+		String date = new SimpleDateFormat("MM.dd.HH.mm.ss").format(new Date());
+		File f = new File("feuilleDeRoute " + date + ".pdf");
+		FileOutputStream fop = new FileOutputStream(f);
 		PdfWriter.getInstance(feuilleDeRoute, fop);
 		feuilleDeRoute.open();
 		
@@ -47,7 +45,7 @@ public class SerialiseurFeuilleDeRoute {
 	}
 	public static void ecrireTournee(Tournee t, Integer num) throws DocumentException {
 		ArrayList<Chemin> listeChemins = t.getListeChemins();
-		ajouterParagraphe("Tournée numéro " + Integer.toString(num)+1," " , false);
+		ajouterParagraphe("Tournée numéro " + Integer.toString(num+1)," " , false);
 		for (int j = 0; j < listeChemins.size(); j++) {
 			ajouterParagraphe("Livraison " + Integer.toString(j), " ", false);
 			ajouterParagraphe("Depart", listeChemins.get(j).getIntersectionDepart().toString(), true);
@@ -58,7 +56,8 @@ public class SerialiseurFeuilleDeRoute {
 	
 	public static void ajouterParagraphe(String paragraphName, String content, boolean addLine) throws DocumentException {
 		feuilleDeRoute.add(new Paragraph(paragraphName));
-		addEmptyLine(1);
+		if (addLine)
+			addEmptyLine(1);
 		feuilleDeRoute.add(new Paragraph(content));
 	}
     
