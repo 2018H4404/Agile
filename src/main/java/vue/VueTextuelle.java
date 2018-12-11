@@ -199,6 +199,10 @@ public class VueTextuelle extends Parent implements Observer {
 	public void setTabNomRue(String nomRue) {
 		monLabel.setText(nomRue);
 	}
+	
+	public void setInfoIntersection(String texte) {
+		infoPourIntersection.setText(texte);
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {

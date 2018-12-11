@@ -348,7 +348,12 @@ public class ApplicationDemo extends Application {
 					} catch (Exception e) {
 						labelInfo.setTextFill(Color.web("#FF0000"));
 						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-						labelInfo.setText(e.getMessage());
+						if(e.getMessage() == null) {
+							labelInfo.setText("Il existe des points de livraison ou des entrepots en dehors du plan.");
+						}else {
+							labelInfo.setText(e.getMessage());
+						}
+						
 						e.printStackTrace();
 					}
 				}
@@ -383,7 +388,11 @@ public class ApplicationDemo extends Application {
 					} catch (Exception e) {
 						labelInfo.setTextFill(Color.web("#FF0000"));
 						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-						labelInfo.setText(e.getMessage());
+						if(e.getMessage() == null) {
+							labelInfo.setText("Il existe des points de livraison ou des entrepots en dehors du plan.");
+						}else {
+							labelInfo.setText(e.getMessage());
+						}
 						e.printStackTrace();
 					}
 				}
@@ -621,6 +630,10 @@ public class ApplicationDemo extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
+					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+						Controleur.getInstance().getHistorique().clear();
+					}
 					Controleur.getInstance().ajouterPointLivraison();
 					VerifierEtat(controleur);
 					graph.arreterSynchronisationLivraison();
@@ -641,6 +654,10 @@ public class ApplicationDemo extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
+					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+						Controleur.getInstance().getHistorique().clear();
+					}
 					Controleur.getInstance().setEtat(Controleur.getInstance().getEtatSupprimerChoixPointLivraison());
 					VerifierEtat(controleur);
 					graph.arreterSynchronisationLivraison();
@@ -677,6 +694,10 @@ public class ApplicationDemo extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
+					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+						Controleur.getInstance().getHistorique().clear();
+					}
 					Controleur.getInstance().ajouterPointLivraison();
 					VerifierEtat(controleur);
 					graph.arreterSynchronisationLivraison();
@@ -697,6 +718,10 @@ public class ApplicationDemo extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
+					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+						Controleur.getInstance().getHistorique().clear();
+					}
 					Controleur.getInstance().supprimerPointLivraison();
 					VerifierEtat(controleur);
 					graph.arreterSynchronisationLivraison();

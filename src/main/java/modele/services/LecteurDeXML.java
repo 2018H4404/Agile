@@ -80,7 +80,7 @@ public class LecteurDeXML {
 									PointLivraison tempObject = new PointLivraison(tempId,tempInter.getLatitude(),tempInter.getLongitude(),duree);
 									tempLivraisons.put(tempId,tempObject);
 								}else {
-									DemandeLivraisonXMLFileException e = new DemandeLivraisonXMLFileException();
+									XMLMalFormeException e = new XMLMalFormeException();
 									System.out.println("Erreur de l'architecture du fichier xml");
 									throw e;
 								}
@@ -89,7 +89,7 @@ public class LecteurDeXML {
 					}
 			    }   
 			}else{
-				XMLMalFormeException e = new XMLMalFormeException();
+				DemandeLivraisonXMLFileException e = new DemandeLivraisonXMLFileException();
 				System.out.println("Erreur de l'architecture du fichier xml");
 				throw e;
 			}
@@ -170,7 +170,7 @@ public class LecteurDeXML {
 										tempTroncons.put(idOrigine, tempListe);
 									}
 								}else {
-									PlanXMLFileException e = new PlanXMLFileException();
+									XMLMalFormeException e = new XMLMalFormeException();
 									System.out.println("Erreur de l'architecture du fichier xml");
 									throw e;
 								}
@@ -180,7 +180,7 @@ public class LecteurDeXML {
 					setLatLongDesTroncons(tempIntersections, tempTroncons);
 			    }   
 			}else {
-				XMLMalFormeException e = new XMLMalFormeException();
+				PlanXMLFileException e = new PlanXMLFileException();
 				System.out.println("Erreur de l'architecture du fichier xml");
 				throw e;
 			}
@@ -196,7 +196,7 @@ public class LecteurDeXML {
 	 * @param tempIntersections les intersections.
 	 * @param tempTroncons les troncons.
 	 */
-	public void setLatLongDesTroncons(HashMap<Long,IntersectionNormal> tempIntersections, HashMap<Long,ArrayList<Troncon>> tempTroncons) {
+	public void setLatLongDesTroncons(HashMap<Long,IntersectionNormal> tempIntersections, HashMap<Long,ArrayList<Troncon>> tempTroncons) throws Exception{
 		for(HashMap.Entry<Long,ArrayList<Troncon>> entry: tempTroncons.entrySet())
         {
 			for(Troncon c : entry.getValue()) {
