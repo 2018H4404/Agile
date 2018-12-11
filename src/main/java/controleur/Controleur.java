@@ -1,6 +1,11 @@
 package controleur;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 
 import org.joda.time.DateTime;
 
@@ -8,7 +13,9 @@ import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.Plan;
+import modele.metier.Tournee;
 import modele.services.LecteurDeXML;
+import modele.services.SerialiseurFeuilleDeRoute;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 import vue.element.IntersectionNormalVue;
@@ -255,4 +262,9 @@ public class Controleur {
 	public Historique getHistorique() {
 		return historique;
 	}
+
+	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
+		return etat.exportFeuilleDeRoute();
+	}
+	
 }

@@ -1,6 +1,10 @@
 package controleur;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 
 public class EtatDefaut implements Etat{
 
@@ -84,6 +88,11 @@ public class EtatDefaut implements Etat{
 		
 	}
 
+	@Override
+	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
+		return new Document();
+	}
+	
 	/*
 	@Override
 	public void effaceListenerOnClick() {

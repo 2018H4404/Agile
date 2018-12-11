@@ -3,13 +3,20 @@ package vue;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
+import javafx.stage.DirectoryChooser;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeMap;
+
+import javax.swing.plaf.FileChooserUI;
+
+import com.itextpdf.text.Document;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -43,6 +50,7 @@ import controleur.EtatAjouterChoixNouvellePointLivraison;
  * @since 1.0
 */
 
+@SuppressWarnings("restriction")
 enum ETAT {
     EtatInit,EtatPlanCharge,EtatDemandeLivraison,EtatPosteCalcul,
     EtatAjouterChoixPointLivraison,EtatAjouterChoixNouvellePointLivraison,
@@ -64,6 +72,7 @@ public class ApplicationDemo extends Application{
 	private Button buttonDeplacerLivraison;
 	private Button buttonRedo;
 	private Button buttonUndo;
+	private Button buttonExport;
 
 	private Label labelNombreLivreurs;
 	private TextField textFieldnombreLivreur;
@@ -203,6 +212,10 @@ public class ApplicationDemo extends Application{
 		buttonUndo.setMinWidth(300);
 		buttonUndo.setMaxWidth(300);
 		
+		buttonExport =  new Button("Export en feuille de route");
+		buttonExport.setMinWidth(300);
+		buttonExport.setMaxWidth(300);
+		
 		labelInfo = new Label();
 		labelInfo.setMinWidth(300);
 		labelInfo.setMaxWidth(300);
@@ -211,7 +224,7 @@ public class ApplicationDemo extends Application{
         vbox.getChildren().addAll(buttonChargePlan,buttonChargeDemandeLivraison, labelNombreLivreurs, 
         		textFieldnombreLivreur, labelError, buttonCalculer,buttonAjouterLivraison,labelDuree,textFieldDuree,
         		labelDureeError,buttonSupprimerLivraison,buttonDeplacerLivraison,
-        		buttonEffacer, buttonEffacerDemande, labelInfo,buttonRedo,buttonUndo);
+        		buttonEffacer, buttonEffacerDemande, labelInfo,buttonRedo,buttonUndo,buttonExport);
 
 		//Ajout de la barre de menu
         Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -614,6 +627,7 @@ public class ApplicationDemo extends Application{
 				}
 	         }
 	      }); 
+        
         buttonRedo.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -627,6 +641,7 @@ public class ApplicationDemo extends Application{
 				}
 	         }
 	      }); 
+        
         buttonUndo.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	         @Override
@@ -640,7 +655,22 @@ public class ApplicationDemo extends Application{
 				}
 	         }
 	      }); 
-
+        
+        buttonExport.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					FileChooser fileChooser = new FileChooser();
+		        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+					Document feuilleDeRoute = Controleur.getInstance().exportFeuilleDeRoute();
+					} catch (Exception e) {
+						e.printStackTrace();
+				}
+			}
+		});
+        
+        
         menuLivraison.getItems().addAll(itemAjouterLivraison,itemSupprimerLivraison);
         
         menuBar.getMenus().addAll(menuFile, menuTournee, menuLivraison);
