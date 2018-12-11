@@ -28,9 +28,8 @@ public class TestDemandeLivraison {
 	}
 	
 	@Test
-	public void testAjouterPointLivraison() {
+	public void testAjouterPointLivraisonMetier() {
 		DemandeLivraison dl = new DemandeLivraison();
-		dl.addObserver(observer);
 		dl.ajouterPointLivraisonMetier(48830472, 45.75406, 4.857418, 360);
 		PointLivraison test = new PointLivraison(48830472, 45.75406, 4.857418, 360);
 		assert(dl.getAllPointLivraisons().contains(test));
@@ -48,15 +47,21 @@ public class TestDemandeLivraison {
 	
 	@Test
 	public void testAjouterPoint() {
-		
-		
+		DemandeLivraison dl = new DemandeLivraison();
+		dl.addObserver(observer);
+		dl.ajouterPoint(48830472, 45.75406, 4.857418);
+		assert(updateAppele);
 	}
 	
 	@Test
 	public void testSupprimerPoint() {
-		
-		
-		
+		DemandeLivraison dl = new DemandeLivraison();
+		dl.addObserver(observer);
+		dl.ajouterPoint(48830472, 45.75406, 4.857418);
+		updateAppele = false;
+		dl.supprimerPoint(48830472);
+		assert(updateAppele);
+		assertNull(dl.getPointLivraisonParId(48830472));
 	}
 	
 	@Test

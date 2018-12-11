@@ -31,8 +31,8 @@ public class PointLivraisonVue extends Circle{
 	 */
 	public PointLivraisonVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.web("0x0000FF",1.0));
-		this.originalColor = Color.web("0x0000FF",1.0);
+		this.setFill(Color.BLUE);
+		this.originalColor = Color.BLUE;
 		this.idPointLivraison = unId;
 		this.selectionnee = false;
 		this.synchronisee = false;
@@ -99,7 +99,7 @@ public class PointLivraisonVue extends Circle{
 	            System.out.println(idPointLivraison);
 	            try {
 	            	if(Controleur.getInstance().getEtatCourant().getClass().getSimpleName().equals("EtatDemandeLivraison")) {
-	            		Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
+	            		//Controleur.getInstance().getMaDemande().supprimerPoint(idPointLivraison);
 	            	}else {
 	            		
 	            	}

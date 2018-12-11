@@ -31,11 +31,11 @@ public class Chemin {
 	 * @param uneListeTroncons 
 	 * @param uneDuree la duree utilisee pour parcourir ce chemin
 	 */
-	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons, int uneDuree) {
+	/*public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons, int uneDuree) {
 		this.listeIntersections = uneListeIntersections;
 		this.listeTroncons = uneListeTroncons;
 		this.duree = uneDuree;
-	}
+	}*/
 	
 	public ArrayList<Intersection> getListeIntersections() {
 		return listeIntersections;

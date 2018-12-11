@@ -1,5 +1,6 @@
 package controleur;
 
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -12,14 +13,18 @@ import modele.services.SerialiseurFeuilleDeRoute;
 import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 
+
+/**
+ * La classe de l'etat poste calcul.
+ * @author H4404
+ */
+
 public class EtatPosteCalcul extends EtatDefaut {
 	/*public void effaceListenerOnClick() {
 		for(Node vue : Controleur.getInstance().getGraph().getLivraisonGroup().getChildren()) {
 			if(vue instanceof PointLivraisonVue) {
-				
 				PointLivraisonVue temp = (PointLivraisonVue) vue;
 				temp.effaceListenerOnClick();
-				
 			}			
 		}
 	for(Node vue : Controleur.getInstance().getGraph().getNoeudGroup().getChildren()) {
@@ -29,9 +34,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 			temp.effaceListenerOnClick();
 			
 		}
-	
 	}
-
 	}*/
 	
 	@Override
@@ -50,15 +53,15 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 	
 	@Override
-	public void CalculerLesTournees(int nbLivreur) throws Exception{
+	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception{
 		
 		//Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
-		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+		Controleur.getInstance().getMonManager().calculerLesTourneesSelonMode(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur,mode);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	

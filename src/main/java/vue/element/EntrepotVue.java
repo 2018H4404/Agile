@@ -24,7 +24,7 @@ public class EntrepotVue extends Circle{
 	 */
 	public EntrepotVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
-		this.setFill(Color.web("0xFF0000",1.0));
+		this.setFill(Color.RED);
 		this.idEntrepot = unId;
 	}
 	

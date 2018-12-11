@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 
+/**
+ * La classe de l'etat par defaut.
+ * @author H4404
+ */
 public class EtatDefaut implements Etat{
 
 	@Override
@@ -14,7 +18,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void CalculerLesTournees(int nbLivreur) throws Exception {
+	public void CalculerLesTournees(int nbLivreur,int mode) throws Exception {
 		
 	}
 
@@ -24,7 +28,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return 0;
 	}
 
@@ -44,7 +48,7 @@ public class EtatDefaut implements Etat{
 	}
 
 	@Override
-	public void choixNouvellePointLivraison() throws Exception {
+	public void choixNouveauPointLivraison() throws Exception {
 		
 	}
 

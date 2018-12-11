@@ -39,7 +39,7 @@ public class OutilTSP {
 	 * @param pccs le plus court chemin.
 	 * @param length la longueur du chemin.
 	 */
-	public static void initialisationTabCoutEtChemin(Plan unPlan, ArrayList<Intersection> intersectionsDemande, int[][] cout, Chemin[][] pccs, int length){
+	public static void initialisationTabCoutEtChemin(Plan unPlan, ArrayList<Intersection> intersectionsDemande, int[][] cout, Chemin[][] pccs, int length) throws Exception{
 		for(int i = 0; i < length; i++) {
 			for(int j = 0; j < length; j++) {
 				if(i == j) {

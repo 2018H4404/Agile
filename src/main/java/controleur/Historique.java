@@ -1,7 +1,10 @@
 package controleur;
 import java.util.LinkedList;
 
-
+/**
+ * La classe de l'historique.
+ * @author H4404
+ */
 public class Historique {
 	protected LinkedList <Commande> listeDeCommande;
 	protected int indice;
@@ -12,6 +15,11 @@ public class Historique {
 		
 	}
 	
+	public void clear(){
+		listeDeCommande.clear();
+		indice = -1;
+	}
+	
 	public void ajouteCmd(Commande cmd) {
 		int i = indice +1;
 		if(i<listeDeCommande.size()) {
@@ -20,7 +28,6 @@ public class Historique {
 		indice++;
 		listeDeCommande.add(cmd);
 		System.out.println("cmd list length:"+ listeDeCommande.size());
-//		cmd.doCmd();
 	}
 	
 	public void undo() {
@@ -40,7 +47,12 @@ public class Historique {
 	}
 	
 	public void reset() {
-		
+		this.listeDeCommande = new LinkedList();
+		this.indice = -1;
+	}
+	
+	public int getLength() {
+		return listeDeCommande.size();
 	}
 	
 

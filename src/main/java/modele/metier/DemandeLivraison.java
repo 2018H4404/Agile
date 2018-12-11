@@ -70,6 +70,12 @@ public class DemandeLivraison extends Observable{
 		notifyObservers("DemandeLivraison");
 	
 	}
+	
+	public void ajouterPoint(long id,PointLivraison p) {
+		livraisons.put(id, p);
+		setChanged();
+		notifyObservers("DemandeLivraison");
+	}
 	/**
 	 * Methode permettant de liberer l'entreprôt et les livraisons.
 	 */
@@ -133,7 +139,7 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode permettant de retourner le nombre maximum de livreur.
+	 * Methode permettant de retourner le map des points de livraison.
 	 * @return le map des points de livraison.
 	 */
 	public HashMap<Long, PointLivraison> getLivraisons() {

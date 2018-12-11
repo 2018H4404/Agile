@@ -2,20 +2,22 @@ package controleur;
 
 import javafx.scene.Node;
 import vue.element.IntersectionNormalVue;
-import vue.element.PointLivraisonVue;
 
+/**
+ * La classe de l'etat de demande de livraison.
+ * @author H4404
+ */
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	@Override
-	public void CalculerLesTournees(int nbLivreur) throws Exception{
+	public void CalculerLesTournees(int nbLivreur,int mode) throws Exception{
 		
-		//Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
-		Controleur.getInstance().getMonManager().calculerLesTourneesClustering(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
+		Controleur.getInstance().getMonManager().calculerLesTourneesSelonMode(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur, mode);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	
 	@Override
-	public int getNbLivreurMaximum() throws Exception {
+	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 	
