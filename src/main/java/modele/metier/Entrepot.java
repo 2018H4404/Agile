@@ -3,6 +3,7 @@ package modele.metier;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 /** 
  * La classe de l'entrepôt.
@@ -26,8 +27,9 @@ public class Entrepot extends Intersection {
 	 */
 	public Entrepot(long id, double latitude, double longitude, int heure, int minute, int seconde) {
 		super(id,latitude,longitude);
-		Date sys = new Date();
-		this.heureDepart = new DateTime(sys.getYear()+1900,sys.getMonth()+1,sys.getDate(),heure,minute,seconde);
+		this.heureDepart = new DateTime(DateTimeZone.UTC).withZone(DateTimeZone.forID("Europe/Paris"));
+
+
 	}
 
 	@Override

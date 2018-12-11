@@ -61,8 +61,8 @@ public class PointLivraison extends Intersection{
 
 	@Override
 	public String toString() {
-		return "PointLivraison [heureDepart=" + heureDepart + ", heureArrivee=" + heureArrivee + ", duree=" + duree
-				+ ", id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+		return "PointLivraison " +  " duree=" + duree
+				+ "s, id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 	
 	
