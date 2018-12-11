@@ -31,7 +31,7 @@ public class SerialiseurFeuilleDeRoute {
 		PdfWriter.getInstance(feuilleDeRoute, fop);
 		feuilleDeRoute.open();
 		
-		Paragraph title = new Paragraph("Récapitulatif des tournées");
+		Paragraph title = new Paragraph("Recapitulatif des tournees");
 		title.setAlignment(Element.ALIGN_CENTER);
 		
 		feuilleDeRoute.add(title);
@@ -45,7 +45,7 @@ public class SerialiseurFeuilleDeRoute {
 	}
 	public static void ecrireTournee(Tournee t, Integer num) throws DocumentException {
 		ArrayList<Chemin> listeChemins = t.getListeChemins();
-		ajouterParagraphe("Tournée numéro " + Integer.toString(num+1)," " , false);
+		ajouterParagraphe("Tournee numero " + Integer.toString(num+1)," " , false);
 		for (int j = 0; j < listeChemins.size(); j++) {
 			ajouterParagraphe("Livraison " + Integer.toString(j), " ", false);
 			ajouterParagraphe("Depart", listeChemins.get(j).getIntersectionDepart().toString(), true);
