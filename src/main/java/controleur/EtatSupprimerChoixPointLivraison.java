@@ -3,11 +3,10 @@ package controleur;
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
-		Controleur.getInstance().getMonManager().supprimerPointLivraison(id);
+		boolean supprime = Controleur.getInstance().getMonManager().supprimerPointLivraison(id);
+		Controleur.getInstance().getTempSupprimer().setSupprime(supprime);
+		Controleur.getInstance().getHistorique().ajouteCmd(Controleur.getInstance().getTempSupprimer());
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
-		CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(Controleur.getInstance().getCommandeIdPrece(),Controleur.getInstance().getCommandeId(),Controleur.getInstance().getCommandeVue(),Controleur.getInstance().getCommandeDuree());
-		Controleur.getInstance().getHistorique().ajouteCmd(cmd);
-
 	}
 	
 	@Override

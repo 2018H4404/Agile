@@ -62,6 +62,7 @@ public class VueTextuelle extends Parent implements Observer {
 	private Tab infosTournee;
 	private TitledPane filtreTournees;
 	private GridPane conteneurFiltres;
+	private Label infoPourIntersection;
 	private Accordion conteneurInfoParTournee;
 	private CheckBox[] lesFiltres = null;
 	private TitledPane[] infoParTournee = null;
@@ -85,6 +86,7 @@ public class VueTextuelle extends Parent implements Observer {
 		separator.setMaxWidth(20);
 		separator.setLayoutX(300);
 		infos = new TabPane();
+		GridPane conteneurNomRue = new GridPane();
 		monLabel = new Label("Bienvenue sur PLD Agile.");
 		monLabel.setLayoutX(0);
 		monLabel.setLayoutY(0);
@@ -92,6 +94,15 @@ public class VueTextuelle extends Parent implements Observer {
 		monLabel.setMinWidth(300);
 		monLabel.setWrapText(true);
 		monLabel.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+		Label tempLabelRue = new Label("Nom de la rue choisie:");
+		tempLabelRue.setLayoutX(0);
+		tempLabelRue.setLayoutY(0);
+		tempLabelRue.setMaxWidth(300);
+		tempLabelRue.setMinWidth(300);
+		tempLabelRue.setWrapText(true);
+		tempLabelRue.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+		conteneurNomRue.add(tempLabelRue, 1, 1);
+		conteneurNomRue.add(monLabel, 1, 2);
 		infoGeneral = new VBox();
 		lesFormesSens = new GridPane();
 		Circle signeLivraison = new Circle(8);
@@ -113,12 +124,32 @@ public class VueTextuelle extends Parent implements Observer {
 		Separator sep = new Separator();
 		sep.setMinWidth(300);
 		sep.setMaxWidth(300);
-		infoGeneral.getChildren().addAll(monLabel, sep, lesFormesSens);
+		Separator sep2 = new Separator();
+		sep2.setMinWidth(300);
+		sep2.setMaxWidth(300);
+		GridPane conteneurInfo = new GridPane();
+		infoPourIntersection = new Label("");
+		infoPourIntersection.setLayoutX(0);
+		infoPourIntersection.setLayoutY(0);
+		infoPourIntersection.setMaxWidth(300);
+		infoPourIntersection.setMinWidth(300);
+		infoPourIntersection.setWrapText(true);
+		infoPourIntersection.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+		Label tempLabelIntersection = new Label("Info sur l'intersection cliquee:");
+		tempLabelIntersection.setLayoutX(0);
+		tempLabelIntersection.setLayoutY(0);
+		tempLabelIntersection.setMaxWidth(300);
+		tempLabelIntersection.setMinWidth(300);
+		tempLabelIntersection.setWrapText(true);
+		tempLabelIntersection.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+		conteneurInfo.add(tempLabelIntersection, 1, 1);
+		conteneurInfo.add(infoPourIntersection, 1, 2);
+		infoGeneral.getChildren().addAll(conteneurNomRue, sep, lesFormesSens,sep2,conteneurInfo);
 		// Creation des Tabs
 		nomRue = new Tab();
 		nomRue.setClosable(false);
 		nomRue.setContent(infoGeneral);
-		nomRue.setText("Nom de la rue");
+		nomRue.setText("Info General");
 
 		infosLivraison = new Tab();
 		infosLivraison.setText("Livraisons");
@@ -220,6 +251,19 @@ public class VueTextuelle extends Parent implements Observer {
 		case "DeplacementSansSupprimerTournee":
 			changerInfoTourneePaneSansSupprimer((TourneeManager) arg0);
 			activerSynchronisationLivraison();
+			break;
+		case "TourneesEtDemandeLivraison":
+			ajouterTimeTableTournees((TourneeManager) arg0);
+			ajouterFiltreTournees((TourneeManager) arg0);
+			ajouterListeners();
+			ajouteTitledPane(Controleur.getInstance().getMaDemande());
+			try {
+				maximum = Controleur.getInstance().getNbLivreurMaximum();
+				parent.setLabelNbLivreur(maximum);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "Alert Temps":
 			ajouterTimeTableTournees((TourneeManager) arg0);

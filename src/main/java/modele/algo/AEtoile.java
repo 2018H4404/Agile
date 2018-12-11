@@ -1,11 +1,15 @@
 package modele.algo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import exceptions.IntersectionNonLivrableException;
+
 import java.util.Map.Entry;
 
 import modele.metier.Intersection;
@@ -71,86 +75,92 @@ public class AEtoile {
 	 * @param monPlan la plan de la ville.
 	 * @return la liste des intersections du chemin à prendre.
 	 */
-	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan){
-		ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
-		
-		HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
-		parents.put(depart, depart);
-		HashMap<Intersection,Double> distanceEstimeeF = new HashMap<Intersection,Double>();
-		distanceEstimeeF.put(depart,heuristique(depart,dest));
-		
-		ArrayList<Intersection> noir = new ArrayList<Intersection>();
-		
-		/*PriorityQueue<Paire> gris = new PriorityQueue<Paire>(1,
-				new Comparator<Paire>() {  
-	                  public int compare(Paire p1, Paire p2) {  
-	                	  if (p1.valeurF < p2.valeurF) { return -1; }
-	                      if (p1.valeurF  > p2.valeurF){ return 1; }
-	                      return 0;
-	                    }  
-	                  }); */
-		Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
-				new Comparator<Double>() {  
-	                  public int compare(Double p1, Double p2) {  
-	                	  if (p1 < p2) { return -1; }
-	                      if (p1 > p2) { return 1; }
-	                      return 0;
-	                    }  
-	                  });
-		gris.put(heuristique(depart,dest), depart);
-		//gris.offer(new Paire(depart,heuristique(depart,dest)));
-		
-		ArrayList<Troncon> voisins = new ArrayList<Troncon>();
-		
-		while( !gris.isEmpty() )
-		{
-			Map.Entry<Double, Intersection> elemCourant = premierElement(gris);
-			Intersection interCourant = elemCourant.getValue();
+	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan)  throws Exception{
+		if(atteignable(dest,monPlan)) {
+			ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
 			
-			if(dest.equals(interCourant)) {
-				meilleurChemin.clear();
-				meilleurChemin.add(0, dest);
-				interCourant = parents.get(interCourant);
-				while(!depart.equals(interCourant)) { 
-					meilleurChemin.add(0, interCourant);
+			HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
+			parents.put(depart, depart);
+			HashMap<Intersection,Double> distanceEstimeeF = new HashMap<Intersection,Double>();
+			distanceEstimeeF.put(depart,heuristique(depart,dest));
+			
+			ArrayList<Intersection> noir = new ArrayList<Intersection>();
+			
+			/*PriorityQueue<Paire> gris = new PriorityQueue<Paire>(1,
+					new Comparator<Paire>() {  
+		                  public int compare(Paire p1, Paire p2) {  
+		                	  if (p1.valeurF < p2.valeurF) { return -1; }
+		                      if (p1.valeurF  > p2.valeurF){ return 1; }
+		                      return 0;
+		                    }  
+		                  }); */
+			Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
+					new Comparator<Double>() {  
+		                  public int compare(Double p1, Double p2) {  
+		                	  if (p1 < p2) { return -1; }
+		                      if (p1 > p2) { return 1; }
+		                      return 0;
+		                    }  
+		                  });
+			gris.put(heuristique(depart,dest), depart);
+			//gris.offer(new Paire(depart,heuristique(depart,dest)));
+			
+			ArrayList<Troncon> voisins = new ArrayList<Troncon>();
+			
+			while( !gris.isEmpty() )
+			{
+				Map.Entry<Double, Intersection> elemCourant = premierElement(gris);
+				Intersection interCourant = elemCourant.getValue();
+				
+				if(dest.equals(interCourant)) {
+					meilleurChemin.clear();
+					meilleurChemin.add(0, dest);
 					interCourant = parents.get(interCourant);
-				}
-				meilleurChemin.add(0, depart);
-				return meilleurChemin;
-			}
-			
-			noir.add(interCourant);
-			gris.remove(elemCourant.getKey());
-			
-			voisins = trouverVosins(interCourant.getId(),monPlan);
-			
-			if(voisins != null) {
-			for(Troncon voisin : voisins) {
-				if(noir.contains(voisin.getDestination())) continue;
-				Intersection interVoisin = voisin.getDestination();
-				double nouvelleDistance = distanceEstimeeF.get(interCourant) + voisin.getLongueur() - heuristique(interCourant,dest) + heuristique(interVoisin,dest);
-				if(isGris(gris,voisin.getDestination().getId())) {
-					
-					if(distanceEstimeeF.get(interVoisin) > nouvelleDistance) {
-						distanceEstimeeF.remove(interVoisin);
-						distanceEstimeeF.put(interVoisin, nouvelleDistance);
-						parents.remove(interVoisin);
-						parents.put(interVoisin, interCourant);
-						Double position = trouverKey(interVoisin,gris);
-						gris.remove(position);
-						gris.put(nouvelleDistance, interVoisin);
-						
+					while(!depart.equals(interCourant)) { 
+						meilleurChemin.add(0, interCourant);
+						interCourant = parents.get(interCourant);
 					}
-				}else {
-					distanceEstimeeF.put(interVoisin, nouvelleDistance);
-					parents.put(interVoisin, interCourant);
-					gris.put(nouvelleDistance, interVoisin);
+					meilleurChemin.add(0, depart);
+					return meilleurChemin;
 				}
+				
+				noir.add(interCourant);
+				gris.remove(elemCourant.getKey());
+				
+				voisins = trouverVosins(interCourant.getId(),monPlan);
+				
+				if(voisins != null) {
+				for(Troncon voisin : voisins) {
+					if(noir.contains(voisin.getDestination())) continue;
+					Intersection interVoisin = voisin.getDestination();
+					double nouvelleDistance = distanceEstimeeF.get(interCourant) + voisin.getLongueur() - heuristique(interCourant,dest) + heuristique(interVoisin,dest);
+					if(isGris(gris,voisin.getDestination().getId())) {
+						
+						if(distanceEstimeeF.get(interVoisin) > nouvelleDistance) {
+							distanceEstimeeF.remove(interVoisin);
+							distanceEstimeeF.put(interVoisin, nouvelleDistance);
+							parents.remove(interVoisin);
+							parents.put(interVoisin, interCourant);
+							Double position = trouverKey(interVoisin,gris);
+							gris.remove(position);
+							gris.put(nouvelleDistance, interVoisin);
+							
+						}
+					}else {
+						distanceEstimeeF.put(interVoisin, nouvelleDistance);
+						parents.put(interVoisin, interCourant);
+						gris.put(nouvelleDistance, interVoisin);
+					}
+				}
+				}
+				
 			}
-			}
-			
+			return meilleurChemin;
+		}else {
+			IntersectionNonLivrableException  e = new IntersectionNonLivrableException();
+			System.out.println("Non atteignable");
+			throw e;
 		}
-		return meilleurChemin;
 	}
 	
 	/**
@@ -164,6 +174,30 @@ public class AEtoile {
 		for(Map.Entry<Double, Intersection> element : set) {
 			retour = element;
 			break;
+		}
+		return retour;
+	}
+	
+	/**
+	 * Methode pour determiner si la destination est atteignable.
+	 * @param dest : Intersection pour laquelle nous voulons determiner si c'est atteiganble.
+	 * @param unPlan : le plan ou toutes les informations des intersections et des troncons ssont stockees
+	 * @return boolean qui indique le point est atteignable ou pas.
+	 */
+	public boolean atteignable(Intersection dest, Plan unPlan){
+		boolean retour = false;
+		Collection<ArrayList<Troncon>> lesTroncons = unPlan.getAllTroncons();
+		for(ArrayList<Troncon> liste : lesTroncons) {
+			if(retour == false) {
+				for(Troncon c : liste) {
+					if(c.getDestination().getId() == dest.getId()) {
+						retour = true;
+						break;
+					}
+				}
+			}else {
+				break;
+			}
 		}
 		return retour;
 	}

@@ -1,27 +1,28 @@
 package controleur;
 
-import javafx.scene.paint.Color;
-import vue.element.PointLivraisonVue;
+import modele.metier.Intersection;
+import modele.metier.PointLivraison;
 
 public class CommandeSupprimeLivraison implements Commande {
-	private long idCommandePointLivraisonPrece;
-	private long idCommandePointLivraison;
-	private PointLivraisonVue vue;
-	private int dureeCommandePointLivraison;
+	private PointLivraison livraisonSupprime;
+	private Intersection prePoint;
+	private boolean supprime;
 
-	public CommandeSupprimeLivraison(long idCommandePointLivraisonPrece, long idCommandePointLivraison,
-			PointLivraisonVue vue, int dureeCommandePointLivraison) {
-		this.idCommandePointLivraisonPrece = idCommandePointLivraisonPrece;
-		this.idCommandePointLivraison = idCommandePointLivraison;
-		this.vue = vue;
-		this.dureeCommandePointLivraison = dureeCommandePointLivraison;
+	public CommandeSupprimeLivraison(PointLivraison livraisonSupprime, Intersection prePoint) {
+		this.livraisonSupprime = livraisonSupprime;
+		this.prePoint = prePoint;
+		supprime = false;
+	}
+
+	public void setSupprime(boolean supprime) {
+		this.supprime = supprime;
 	}
 
 	@Override
 	public void doCmd() {
 		try {
-			Controleur.getInstance().getMonManager().supprimerPointLivraison(idCommandePointLivraison);
-			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().remove(vue);
+			Controleur.getInstance().getMonManager().supprimerPointLivraisonMetier(livraisonSupprime.getId());
+			Controleur.getInstance().getMonManager().notifyVue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -31,12 +32,12 @@ public class CommandeSupprimeLivraison implements Commande {
 	@Override
 	public void undoCmd() {
 		try {
-			vue.setRadius(5);
-			vue.setFill(Color.BLUE);
-			Controleur.getInstance().getMonManager().ajouterPointLivraison(idCommandePointLivraisonPrece,
-					idCommandePointLivraison, dureeCommandePointLivraison);
-			Controleur.getInstance().getGraph().getLivraisonGroup().getChildren().add(vue);
-
+			if(supprime == true) {
+				Controleur.getInstance().getMonManager().creerTourneeJusteUnLivraison(livraisonSupprime, prePoint);
+			}else {
+				Controleur.getInstance().getMonManager().ajouterPointLivraisonMetier(prePoint.getId(), livraisonSupprime.getId(), livraisonSupprime.getDuree());
+			}
+			Controleur.getInstance().getMonManager().notifyVue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

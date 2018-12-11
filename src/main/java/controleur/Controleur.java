@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
+import modele.metier.Intersection;
 import modele.metier.Plan;
 import modele.metier.PointLivraison;
 import modele.metier.Tournee;
@@ -30,9 +31,8 @@ public class Controleur {
 	private long ajoutIdNouvellePointLivraison;
 	private long idADeplacerPointLivraison;
 	private long idApresDeplacerPointLivraison;
-	private long commandeId;
-	private long commandeIdPrece;
-	private int commandeDuree;
+	private CommandeAjouterLivraison tempAjout;
+	private CommandeSupprimeLivraison tempSupprimer;
 	private static Controleur instance = null;
 	private EtatPlanCharge etatPlanCharge;
 	private EtatInit etatInit;
@@ -43,11 +43,7 @@ public class Controleur {
 	private EtatSupprimerChoixPointLivraison etatSupprimerChoixPointLivraison;
 	private EtatChoixPointLivraisonADeplacer etatChoixPointLivraisonADeplacer;
 	private EtatChoixPointLivraisonApresDeplacer etatChoixPointLivraisonApresDeplacer;
-	private PointLivraisonVue commandeVue;
-	private ArrayList<Tournee> listeTournees;
-	private ArrayList<Tournee> listeTourneesPrece;
-	private long commandeIdPointLivraison;
-	private PointLivraison commandePointLivraison;
+
 	/**
 	 * Constructeur du controlleur.
 	 */
@@ -67,61 +63,14 @@ public class Controleur {
 		etatChoixPointLivraisonADeplacer = new EtatChoixPointLivraisonADeplacer();
 		etatChoixPointLivraisonApresDeplacer = new EtatChoixPointLivraisonApresDeplacer();
 		etat = etatInit;
-		commandeVue = null;
+		tempAjout = null;
+		tempSupprimer = null;
 	}
 	
   
 	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
 		this.ajoutIdNouvellePointLivraison = id;
 		etat.effectuerAjoutPointLivraison(ajoutIdDepartPointLivraison, ajoutIdNouvellePointLivraison, duree);
-	}
-	
-	public void setCommandeDuree(int duree) {
-		this.commandeDuree = duree;
-	}
-  
-	public void setCommandeVue(PointLivraisonVue vue) {
-		this.commandeVue = vue;
-	}
-	
-	public void setCommandeId(long id) {
-		this.commandeId = id;
-	}
-	
-	public void setCommandeIdPrece(long id) {
-		this.commandeIdPrece = id;
-	}
-	
-	public void setListeTournees(ArrayList<Tournee> listeTournees) {
-		this.listeTournees = listeTournees;
-	}
-	
-	public ArrayList<Tournee> getListeTournees(){
-		return this.listeTournees;
-	}
-	
-	public void setListeTourneesPrece(ArrayList<Tournee> listeTourneesPrece) {
-		this.listeTourneesPrece = listeTourneesPrece;
-	}
-	
-	public ArrayList<Tournee> getListeTourneesPrece() {
-		return this.listeTourneesPrece;
-	}
-	
-	public long getCommandeId() {
-		return commandeId;
-	}
-	
-	public long getCommandeIdPrece() {
-		return commandeIdPrece;
-	}
-	
-	public PointLivraisonVue getCommandeVue() {
-		return commandeVue;
-	}
-	
-	public int getCommandeDuree() {
-		return commandeDuree;
 	}
 	
   /**
@@ -213,13 +162,8 @@ public class Controleur {
 		return maDemande.getPointLivraisonParId(id).getDuree();
 	}
 
-	public long getPrePointLivraisonId(long id) throws Exception{
-		long retour = monManager.getPrePointLivraisonId(id);
-		if(retour == id) {
-			Exception e = new Exception();
-			throw e;
-		}
-		return retour;
+	public Intersection getPrePointLivraisonId(long id) throws Exception{
+		return monManager.getPrePointLivraisonId(id);
 	}
 	
   	/**
@@ -494,8 +438,32 @@ public class Controleur {
 	public Historique getHistorique() {
 		return historique;
 	}
+	
+	public void clearHistorique() {
+		historique.clear();
+	}
 
 
+	public CommandeAjouterLivraison getTempAjout() {
+		return tempAjout;
+	}
+
+
+	public void setTempAjout(CommandeAjouterLivraison tempAjout) {
+		this.tempAjout = tempAjout;
+	}
+
+
+	public CommandeSupprimeLivraison getTempSupprimer() {
+		return tempSupprimer;
+	}
+
+
+	public void setTempSupprimer(CommandeSupprimeLivraison tempSupprimer) {
+		this.tempSupprimer = tempSupprimer;
+	}
+
+	/*
 	public void setIdCommandePointLivraison(long id) {
 		this.commandeIdPointLivraison = id;
 	}
@@ -511,5 +479,5 @@ public class Controleur {
 	
 	public long getIdCommandePointLivraison() {
 		return this.commandeIdPointLivraison;
-	}
+	}*/
 }

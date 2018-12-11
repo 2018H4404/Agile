@@ -14,6 +14,7 @@ import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 //import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
+import modele.metier.PointLivraison;
 import modele.metier.Tournee;
 import modele.metier.Troncon;
 
@@ -40,35 +41,13 @@ public class TourneeManager extends Observable {
 		tourneeAjouterIndex = 0;
 	}
 
-	/*
-	 * public void calculTournees(Plan plan){ listeTournees = Algo(plan); <<<<<<<
-	 * HEAD notifyObservers("Supprimer");
-	 * 
-	 * } ||||||| merged common ancestors
-	 * 
-	 * } =======
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public ArrayList<Tournee> Algo(Plan plan){ ArrayList<Tournee> res = null;
-	 * return res; }
-	 */
-
-	public void setTournee(ArrayList<Tournee> listeTournees) {
-		this.listeTournees = listeTournees;
-		setChanged();
-		notifyObservers("Tournees");
-
-	}
-
-	public Tournee getDernierTournee() {
-		return listeTournees.get(listeTournees.size() - 1);
-	}
-
 	public void clear() {
 		this.listeTournees.clear();
+	}
+	
+	public void notifyVue() {
+		setChanged();
+		notifyObservers("TourneesEtDemandeLivraison");
 	}
 
 	/**
@@ -266,6 +245,8 @@ public class TourneeManager extends Observable {
 	public void setListeTournees(ArrayList<Tournee> listeTournees) {
 		this.listeTournees = listeTournees;
 	}
+	
+	
 
 	/**
 	 * Methode pour ajouter un point de livraison dans une tournee specifiee.
@@ -331,11 +312,75 @@ public class TourneeManager extends Observable {
 			throw e;
 		}
 	}
-
-	public void supprimerPointLivraison(long id) throws Exception {
+	
+	
+	/**
+	 * Methode pour ajouter un point de livraison dans une tournee specifiee(Qui ne modifie pas l'affichage).
+	 * 
+	 * @param idDepart : id du point de livraison .
+	 * @param unPlan   le plan de la ville.
+	 */
+	public void ajouterPointLivraisonMetier(long idDepart, long idNouvelle, int duree) throws Exception {
 		int find = 0;
 		int index = 0;
 		int posChemin = 0;
+		for (Tournee t : listeTournees) {
+			if (find == 0) {
+				posChemin = 0;
+				ArrayList<Chemin> tempChemin = t.getListeChemins();
+				for (Chemin c : tempChemin) {
+					Intersection depart = c.getIntersectionDepart();
+					Intersection dest = c.getIntersectionDest();
+					if (dest.equals(idDepart)) {
+						find = 1;
+						break;
+					}
+					posChemin++;
+				}
+			} else {
+				break;
+			}
+			index++;
+		}
+		if (find == 1) {
+			index--;
+			posChemin++;
+			Intersection depart = listeTournees.get(index).getListeChemins().get(posChemin).getIntersectionDepart();
+			Intersection oldDest = listeTournees.get(index).getListeChemins().get(posChemin).getIntersectionDest();
+			IntersectionNormal tempNouvellePoint = Controleur.getInstance().getMonPlan()
+					.getIntersectionNormal(idNouvelle);
+			Controleur.getInstance().getMaDemande().ajouterPointLivraisonMetier(idNouvelle,
+					tempNouvellePoint.getLatitude(), tempNouvellePoint.getLongitude(), duree);
+			Intersection newDest = Controleur.getInstance().getMaDemande().getPointLivraisonParId(idNouvelle);
+			ArrayList<Intersection> interdepartNewDest = AEtoile.getInstance().algoAEtoile(depart, newDest,
+					Controleur.getInstance().getMonPlan());
+			ArrayList<Intersection> inetrnewDestOldDest = AEtoile.getInstance().algoAEtoile(newDest, oldDest,
+					Controleur.getInstance().getMonPlan());
+			ArrayList<Troncon> tronDepartNewDest = AEtoile.getInstance().traductionTrajet(interdepartNewDest,
+					Controleur.getInstance().getMonPlan());
+			ArrayList<Troncon> tronNewDestOldDest = AEtoile.getInstance().traductionTrajet(inetrnewDestOldDest,
+					Controleur.getInstance().getMonPlan());
+			Chemin departNewDest = new Chemin(interdepartNewDest, tronDepartNewDest);
+			Chemin newDestOldDest = new Chemin(inetrnewDestOldDest, tronNewDestOldDest);
+			int newDestDuree = (int) (departNewDest.getCout() / 15000 * 60 * 60);
+			int oldDestDuree = (int) (newDestOldDest.getCout() / 15000 * 60 * 60);
+			departNewDest.setDuree(newDestDuree);
+			newDestOldDest.setDuree(oldDestDuree);
+			listeTournees.get(index).getListeChemins().remove(posChemin);
+			listeTournees.get(index).getListeChemins().add(posChemin, departNewDest);
+			listeTournees.get(index).getListeChemins().add(posChemin + 1, newDestOldDest);
+		} else {
+			System.out.println("Point Livraison Introuvable");
+			Exception e = new Exception();
+			throw e;
+		}
+	}
+
+	public boolean supprimerPointLivraison(long id) throws Exception {
+		int find = 0;
+		int index = 0;
+		int posChemin = 0;
+		boolean supprime = false;
 		for (Tournee t : listeTournees) {
 			if (find == 0) {
 				posChemin = 0;
@@ -372,6 +417,7 @@ public class TourneeManager extends Observable {
 			if (newDepart instanceof Entrepot && newDest instanceof Entrepot) {
 				listeTournees.remove(index);
 				tourneeChangedIndex = index;
+				supprime = true;
 				setChanged();
 				notifyObservers("SupprimerTournee");
 			} else {
@@ -382,6 +428,61 @@ public class TourneeManager extends Observable {
 				setChanged();
 				notifyObservers("UniqueTournee");
 			}
+			return supprime;
+		} else {
+			System.out.println("Point Livraison Introuvable");
+			Exception e = new Exception();
+			throw e;
+		}
+	}
+	
+	public boolean supprimerPointLivraisonMetier(long id) throws Exception {
+		int find = 0;
+		int index = 0;
+		int posChemin = 0;
+		boolean supprime = false;
+		for (Tournee t : listeTournees) {
+			if (find == 0) {
+				posChemin = 0;
+				ArrayList<Chemin> tempChemin = t.getListeChemins();
+				for (Chemin c : tempChemin) {
+					Intersection depart = c.getIntersectionDepart();
+					Intersection dest = c.getIntersectionDest();
+					if (dest.equals(id)) {
+						find = 1;
+						break;
+					}
+					posChemin++;
+				}
+			} else {
+				break;
+			}
+			index++;
+		}
+		if (find == 1) {
+			index--;
+			int posOneEnleve = posChemin;
+			int posTwoEnleve = posChemin + 1;
+			Intersection newDepart = listeTournees.get(index).getListeChemins().get(posOneEnleve)
+					.getIntersectionDepart();
+			Intersection newDest = listeTournees.get(index).getListeChemins().get(posTwoEnleve).getIntersectionDest();
+			ArrayList<Intersection> internewDepartNewDest = AEtoile.getInstance().algoAEtoile(newDepart, newDest,
+					Controleur.getInstance().getMonPlan());
+			ArrayList<Troncon> tronNewDestNewDest = AEtoile.getInstance().traductionTrajet(internewDepartNewDest,
+					Controleur.getInstance().getMonPlan());
+			Chemin newDepartNewDest = new Chemin(internewDepartNewDest, tronNewDestNewDest);
+			int newDuree = (int) (newDepartNewDest.getCout() / 15000 * 60 * 60);
+			newDepartNewDest.setDuree(newDuree);
+			Controleur.getInstance().getMaDemande().supprimerPointLivraisonMetier(id);
+			if (newDepart instanceof Entrepot && newDest instanceof Entrepot) {
+				supprime = true;
+				listeTournees.remove(index);
+			} else {
+				listeTournees.get(index).getListeChemins().remove(posTwoEnleve);
+				listeTournees.get(index).getListeChemins().remove(posOneEnleve);
+				listeTournees.get(index).getListeChemins().add(posChemin, newDepartNewDest);
+			}
+			return supprime;
 		} else {
 			System.out.println("Point Livraison Introuvable");
 			Exception e = new Exception();
@@ -490,7 +591,6 @@ public class TourneeManager extends Observable {
 				int newDuree = (int) (newDepartNewDest.getCout() / 15000 * 60 * 60);
 				newDepartNewDest.setDuree(newDuree);
 				if (newDepart instanceof Entrepot && newDest instanceof Entrepot) {
-//				Empty
 					supprimerTourneeADeplacer = true;
 					listeTournees.remove(indexADeplacer);
 					tourneeSupprimerIndex = indexADeplacer;
@@ -515,10 +615,29 @@ public class TourneeManager extends Observable {
 			}
 		}
 	}
+	
+	public void creerTourneeJusteUnLivraison(PointLivraison tempP, Intersection prePoint) throws Exception {
+		Controleur.getInstance().getMaDemande().ajouterPoint(tempP.getId(), tempP);
+		ArrayList<Intersection> interUn = AEtoile.getInstance().algoAEtoile(prePoint, tempP,
+				Controleur.getInstance().getMonPlan());
+		ArrayList<Troncon> tronUn = AEtoile.getInstance().traductionTrajet(interUn,
+				Controleur.getInstance().getMonPlan());
+		ArrayList<Intersection> interDeux = AEtoile.getInstance().algoAEtoile(tempP, prePoint,
+				Controleur.getInstance().getMonPlan());
+		ArrayList<Troncon> tronDeux = AEtoile.getInstance().traductionTrajet(interDeux,
+				Controleur.getInstance().getMonPlan());
+		Chemin cheminUn = new Chemin(interUn, tronUn);
+		Chemin cheminDeux = new Chemin(interDeux, tronDeux);
+		ArrayList<Chemin> liste = new ArrayList<Chemin>();
+		liste.add(cheminUn);
+		liste.add(cheminDeux);
+		Tournee temp = new Tournee(liste);
+		listeTournees.add(temp);
+	}
 
-	public long getPrePointLivraisonId(long id) {
+	public Intersection getPrePointLivraisonId(long id) {
 		int find = 0;
-		long ret = id;
+		Intersection retour = null;
 		for (Tournee t : listeTournees) {
 			if (find == 0) {
 				ArrayList<Chemin> tempChemin = t.getListeChemins();
@@ -528,24 +647,23 @@ public class TourneeManager extends Observable {
 
 					if (dest.equals(id)) {
 						find = 1;
-						ret = depart.getId();
-						return ret;
+						retour = depart;
+						return retour;
 					}
 				}
 			} else {
 				break;
 			}
 		}
-		return ret;
-
+		return retour;
 	}
 
-	public ArrayList<Tournee> cloneList(ArrayList<Tournee> list) {
+	/*public ArrayList<Tournee> cloneList(ArrayList<Tournee> list) {
 		ArrayList<Tournee> clone = new ArrayList<Tournee>(list.size());
 		for (Tournee item : list) {
 			clone.add(new Tournee(item));
 		}
 		return clone;
-	}
+	}*/
 
 }

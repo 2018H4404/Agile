@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
+import controleur.CommandeAjouterLivraison;
+import controleur.CommandeSupprimeLivraison;
 import controleur.Controleur;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -12,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +24,7 @@ import modele.TourneeManager;
 import modele.metier.Chemin;
 import modele.metier.DemandeLivraison;
 import modele.metier.Entrepot;
+import modele.metier.Intersection;
 import modele.metier.IntersectionNormal;
 import modele.metier.Plan;
 import modele.metier.PointLivraison;
@@ -160,18 +164,8 @@ public class VueGraphique extends Parent implements Observer {
 							temp.setFill(Color.GREEN);
 							temp.setRadius(8);
 
-//                			 Controleur.getInstance().setAjoutDuree(duree);
-							// Rajout du point de livraison
-							IntersectionNormal tempInter = Controleur.getInstance().getMonPlan()
-									.getIntersectionNormal(temp.getIntersectionId());
-							PointLivraisonVue tempPointLivraison = new PointLivraisonVue(
-									Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),
-									Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur), 5,
-									tempInter.getId());
-							Controleur.getInstance().setCommandeVue(tempPointLivraison);
-
-							Controleur.getInstance().setCommandeId(temp.getIntersectionId());
-
+							CommandeAjouterLivraison cmd = new CommandeAjouterLivraison(ajoutPointChoisi.getIntersectionId(),ajoutInterChoisi.getIntersectionId(),duree);
+							Controleur.getInstance().setTempAjout(cmd);
 							Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(), duree);
 							parent.VerifierEtat(Controleur.getInstance());
 							// Remettre a l'etat initial (couleur, radius)
@@ -180,15 +174,30 @@ public class VueGraphique extends Parent implements Observer {
 							ajoutPointChoisi.setFill(Color.BLUE);
 							ajoutPointChoisi.setRadius(5);
 							ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
-
-//                			 Controleur.getInstance().setVueSelectionne(tempPointLivraison);
-							Controleur.getInstance().setCommandeDuree(duree);
+							IntersectionNormal tempInter = Controleur.getInstance().getMonPlan()
+									.getIntersectionNormal(temp.getIntersectionId());
+							PointLivraisonVue tempPointLivraison = new PointLivraisonVue(
+									Controleur.getInstance().transformerLongitude(tempInter.getLongitude(), largeur),
+									Controleur.getInstance().transformerLatitude(tempInter.getLatitude(), hauteur), 5,
+									tempInter.getId());
 							livraisonGroup.getChildren().add(tempPointLivraison);
 
 							parent.VerifierEtat(Controleur.getInstance());
 							parent.setInfo("Point de livraison ajoute");
 						} catch (Exception e) {
 							System.out.println("Duree incorrect ou Probleme durant Ajout");
+							Label temp = parent.getLabelInfo();
+							temp.setTextFill(Color.RED);
+							temp.setText(e.getMessage());
+							ajoutInterChoisi.setRadius(3);
+							ajoutInterChoisi.setFill(Color.BLACK);
+							ajoutPointChoisi.setFill(Color.BLUE);
+							ajoutPointChoisi.setRadius(5);
+							ajoutPointChoisi.setActiveChangerCouleurSelectionne(true);
+							compagnie.activerSynchronisationLivraison();
+							activerSynchronisationLivraison();
+							Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
+							parent.VerifierEtat(Controleur.getInstance());
 							e.printStackTrace();
 						}
 					}
@@ -209,7 +218,6 @@ public class VueGraphique extends Parent implements Observer {
 
 								temp.setRadius(7);
 								Controleur.getInstance().setAjoutDepart(temp.getIntersectionId());
-								Controleur.getInstance().setCommandeIdPrece(temp.getIntersectionId());
 
 								parent.VerifierEtat(Controleur.getInstance());
 
@@ -227,26 +235,11 @@ public class VueGraphique extends Parent implements Observer {
 								temp.setFill(Color.GREEN);
 								temp.setRadius(7);
 
-								int duree = Controleur.getInstance().getDureePointLivraison(temp.getIntersectionId());
-
-								Controleur.getInstance().setAjoutDepart(
-										Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
-								Controleur.getInstance().setAjoutNouvellePoint(temp.getIntersectionId(), duree);
-								Controleur.getInstance().setCommandeId(temp.getIntersectionId());
-								Controleur.getInstance().setCommandeDuree(duree);
-								Controleur.getInstance().setCommandeIdPrece(
-										Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId()));
-								Controleur.getInstance().setCommandeVue(temp);
-//               			 	ArrayList<Tournee> clone = Controleur.getInstance().getMonManager().cloneList(Controleur.getInstance().getMonManager().getListeTournees());
-//               			 	Controleur.getInstance().setListeTourneesPrece(clone);
-//               			 	Controleur.getInstance().setIdCommandePointLivraison(temp.getIntersectionId());
-//               			 	Controleur.getInstance().setCommandePointLivraison(Controleur.getInstance().getMaDemande().getPointLivraisonParId(temp.getIntersectionId()));
-
+								PointLivraison tempPoint = Controleur.getInstance().getMaDemande().getPointLivraisonParId(temp.getIntersectionId());
+								Intersection tempPrePoint = Controleur.getInstance().getPrePointLivraisonId(temp.getIntersectionId());
+								CommandeSupprimeLivraison cmd = new CommandeSupprimeLivraison(tempPoint,tempPrePoint);
+								Controleur.getInstance().setTempSupprimer(cmd);
 								Controleur.getInstance().setSupprimerPointLivraison(temp.getIntersectionId());// methode
-																												// calcul
-//               			 	ArrayList<Tournee> clone1 = Controleur.getInstance().getMonManager().cloneList(Controleur.getInstance().getMonManager().getListeTournees());
-//                 			Controleur.getInstance().setListeTournees(clone1);
-
 								livraisonGroup.getChildren().remove(temp);
 								parent.VerifierEtat(Controleur.getInstance());
 
@@ -287,6 +280,7 @@ public class VueGraphique extends Parent implements Observer {
 								deplacerPointChoisiDeux.setFill(Color.BLUE);
 								deplacerPointChoisiDeux.setRadius(5);
 								deplacerPointChoisiDeux.setActiveChangerCouleurSelectionne(true);
+								Controleur.getInstance().getHistorique().clear();
 								parent.VerifierEtat(Controleur.getInstance());
 								parent.setInfo("Point de livraison deplace.");
 							} catch (Exception e) {
@@ -681,6 +675,10 @@ public class VueGraphique extends Parent implements Observer {
 		case "DeplacementSansSupprimerTournee":
 			changerVueTourneeSansSupprimer((TourneeManager) o);
 			activerSynchronisationLivraison();
+			break;
+		case "TourneesEtDemandeLivraison":
+			dessinerDemandeLivraison(Controleur.getInstance().getMaDemande());
+			dessinerTournees((TourneeManager) o);
 			break;
 		case "Alert Temps":
 			dessinerTournees((TourneeManager) o);

@@ -270,6 +270,14 @@ public class ApplicationDemo extends Application {
 		labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
 		labelInfo.setText(texte);
 	}
+	
+	/**
+	 * Methode pour retourner labelInfo de la fentere.
+	 * @return label : labelInfo de cette fenetre
+	 */
+	public Label getLabelInfo() {
+		return labelInfo;
+	}
 
 	/**
 	 * Methode pour ajouter la barre de navigation.
@@ -304,7 +312,8 @@ public class ApplicationDemo extends Application {
 						VerifierEtat(controleur);
 					} catch (Exception e) {
 						labelInfo.setTextFill(Color.web("#FF0000"));
-						labelInfo.setText("Le fichier XML de livraison fourni est mal formé.");
+						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+						labelInfo.setText(e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -338,7 +347,8 @@ public class ApplicationDemo extends Application {
 						VerifierEtat(controleur);
 					} catch (Exception e) {
 						labelInfo.setTextFill(Color.web("#FF0000"));
-						labelInfo.setText("Le fichier XML de livraison fourni est mal forme.");
+						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+						labelInfo.setText(e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -371,7 +381,8 @@ public class ApplicationDemo extends Application {
 						VerifierEtat(controleur);
 					} catch (Exception e) {
 						labelInfo.setTextFill(Color.web("#FF0000"));
-						labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
+						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+						labelInfo.setText(e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -395,8 +406,9 @@ public class ApplicationDemo extends Application {
 						VerifierEtat(controleur);
 
 					} catch (Exception e) {
-						labelInfo.setTextFill(Color.web("#FF0000"));
-						labelInfo.setText("Le fichier XML de plan fourni est mal forme.");
+						labelInfo.setTextFill(Color.RED);
+						labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+						labelInfo.setText(e.getMessage());
 						e.printStackTrace();
 					}
 
@@ -428,10 +440,13 @@ public class ApplicationDemo extends Application {
 						} else {
 							try {
 								Controleur.getInstance().calculerLesTournees(nbLivreur);
-								// Controleur.getInstance().effaceListenerOnClick();
+								Controleur.getInstance().getHistorique().clear();
 								labelError.setText("");
 								VerifierEtat(controleur);
 							} catch (Exception e) {
+								labelInfo.setTextFill(Color.RED);
+								labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+								labelInfo.setText(e.getMessage());
 								e.printStackTrace();
 							}
 						}
@@ -464,9 +479,13 @@ public class ApplicationDemo extends Application {
 						} else {
 							try {
 								Controleur.getInstance().calculerLesTournees(nbLivreur);
+								Controleur.getInstance().getHistorique().clear();
 								labelError.setText("");
 								VerifierEtat(controleur);
 							} catch (Exception e) {
+								labelInfo.setTextFill(Color.RED);
+								labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
+								labelInfo.setText(e.getMessage());
 								e.printStackTrace();
 							}
 						}
@@ -486,6 +505,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearVue();
 				texte.clearVue();
+				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -499,6 +519,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearEntrepotLivraison();
 				graph.clearTournees();
+				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
@@ -512,6 +533,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearVue();
 				texte.clearVue();
+				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
@@ -526,6 +548,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearEntrepotLivraison();
 				graph.clearTournees();
+				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
@@ -774,7 +797,7 @@ public class ApplicationDemo extends Application {
 			itemEffacerDemande.setDisable(false);
 			buttonEffacerDemande.setDisable(false);
 			buttonAjouterLivraison.setDisable(false);
-			textFieldDuree.setDisable(false);
+			textFieldDuree.setDisable(true);
 			buttonSupprimerLivraison.setDisable(false);
 			buttonDeplacerLivraison.setDisable(false);
 			itemDeplacerLivraison.setDisable(false);
@@ -820,7 +843,7 @@ public class ApplicationDemo extends Application {
 			itemEffacerDemande.setDisable(true);
 			buttonEffacerDemande.setDisable(true);
 			buttonAjouterLivraison.setDisable(true);
-			textFieldDuree.setDisable(true);
+			textFieldDuree.setDisable(false);
 			buttonSupprimerLivraison.setDisable(true);
 			buttonDeplacerLivraison.setDisable(true);
 			itemDeplacerLivraison.setDisable(true);

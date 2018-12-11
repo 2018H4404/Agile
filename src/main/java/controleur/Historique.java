@@ -15,6 +15,11 @@ public class Historique {
 		
 	}
 	
+	public void clear(){
+		listeDeCommande.clear();
+		indice = -1;
+	}
+	
 	public void ajouteCmd(Commande cmd) {
 		int i = indice +1;
 		if(i<listeDeCommande.size()) {
