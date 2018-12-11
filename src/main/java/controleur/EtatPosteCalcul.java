@@ -1,9 +1,24 @@
 package controleur;
 
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+
+import javafx.scene.Node;
+import modele.metier.Tournee;
+import modele.services.SerialiseurFeuilleDeRoute;
+import vue.element.IntersectionNormalVue;
+import vue.element.PointLivraisonVue;
+
+
 /**
  * La classe de l'etat poste calcul.
  * @author H4404
  */
+
 public class EtatPosteCalcul extends EtatDefaut {
 	/*public void effaceListenerOnClick() {
 		for(Node vue : Controleur.getInstance().getGraph().getLivraisonGroup().getChildren()) {
@@ -58,6 +73,11 @@ public class EtatPosteCalcul extends EtatDefaut {
 		Controleur.getInstance().getHistorique().redo();
 
 	}
-	
-	
+
+	@Override
+	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
+		ArrayList<Tournee> listeTournees = Controleur.getInstance().getMonManager().getListeTournees();
+		Document feuilleDeRoute = SerialiseurFeuilleDeRoute.exportFeuilleDeRoute(listeTournees);
+		return feuilleDeRoute;
+	}
 }
