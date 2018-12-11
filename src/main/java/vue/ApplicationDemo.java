@@ -598,6 +598,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearEntrepotLivraison();
 				graph.clearTournees();
+				texte.clearVue();
 				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
@@ -627,6 +628,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				graph.clearEntrepotLivraison();
 				graph.clearTournees();
+				texte.clearVue();
 				Controleur.getInstance().getHistorique().clear();
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
@@ -851,6 +853,7 @@ public class ApplicationDemo extends Application {
 			itemAjouterLivraison.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
+			buttonExport.setDisable(true);
 			break;
 		case EtatPlanCharge:
 			itemChargerPlan.setDisable(true);
@@ -876,6 +879,7 @@ public class ApplicationDemo extends Application {
 			itemAjouterLivraison.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
+			buttonExport.setDisable(true);
 			break;
 		case EtatDemandeLivraison:
 			itemChargerPlan.setDisable(true);
@@ -901,6 +905,7 @@ public class ApplicationDemo extends Application {
 			itemAjouterLivraison.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
+			buttonExport.setDisable(true);
 			break;
 
 		case EtatPosteCalcul:
@@ -924,6 +929,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(false);
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
+			buttonExport.setDisable(false);
 			if (c.getHistorique().getLength() > 0) {
 				buttonRedo.setDisable(false);
 				buttonUndo.setDisable(false);
@@ -951,6 +957,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;
@@ -976,6 +983,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;
@@ -1001,6 +1009,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;
@@ -1026,6 +1035,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;
@@ -1051,6 +1061,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;
@@ -1075,6 +1086,7 @@ public class ApplicationDemo extends Application {
 			itemDeplacerLivraison.setDisable(true);
 			itemSupprimerLivraison.setDisable(true);
 			itemAjouterLivraison.setDisable(true);
+			buttonExport.setDisable(true);
 			buttonRedo.setDisable(true);
 			buttonUndo.setDisable(true);
 			break;

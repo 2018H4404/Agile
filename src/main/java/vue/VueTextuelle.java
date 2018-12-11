@@ -585,7 +585,13 @@ public class VueTextuelle extends Parent implements Observer {
 			content.setMinWidth(300);
 			content.setMaxWidth(300);
 
-			Label label = new Label(pointLivraison.toString());
+			Label label = new Label();
+			String tempS = "";
+			tempS += "Id :" + pointLivraison.getId() + "\n";
+			tempS += "Latitude :" + pointLivraison.getLatitude() + "\n";
+			tempS += "Longitude :" + pointLivraison.getLongitude() + "\n";
+			tempS += "Duree :" + pointLivraison.getDuree() + " secondes \n";
+			label.setText(tempS);
 			label.setMinWidth(300);
 			label.setMaxWidth(300);
 			label.setWrapText(true);

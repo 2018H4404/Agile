@@ -1,5 +1,7 @@
 package modele.metier;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
 /** 
@@ -24,7 +26,8 @@ public class Entrepot extends Intersection {
 	 */
 	public Entrepot(long id, double latitude, double longitude, int heure, int minute, int seconde) {
 		super(id,latitude,longitude);
-		this.heureDepart = new DateTime(2018,11,30,heure,minute,seconde);
+		Date sys = new Date();
+		this.heureDepart = new DateTime(sys.getYear()+1900,sys.getMonth()+1,sys.getDate(),heure,minute,seconde);
 	}
 
 	@Override
