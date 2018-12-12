@@ -25,9 +25,20 @@ import modele.metier.Tournee;
 
 import com.itextpdf.text.Document;
 
+/**
+ * @author baptiste.thivend
+ * Classe permettant l´export des tournées dans un fichier pdf
+ */
 public class SerialiseurFeuilleDeRoute {
 	public static Document feuilleDeRoute;
 
+	/**
+	 * Méthode pour exporter une liste de tournee en fichier pdf
+	 * @param tournees
+	 * @return document
+	 * @throws FileNotFoundException
+	 * @throws DocumentException
+	 */
 	public static Document exportFeuilleDeRoute(ArrayList<Tournee> tournees)
 			throws FileNotFoundException, DocumentException {
 		feuilleDeRoute = new Document();
@@ -41,7 +52,8 @@ public class SerialiseurFeuilleDeRoute {
 		title.setAlignment(Element.ALIGN_CENTER);
 
 		feuilleDeRoute.add(title);
-		addEmptyLine(2);
+		feuilleDeRoute.add(new Paragraph());
+		feuilleDeRoute.add(new Paragraph());
 		String content = "";
 		content = ecrireTournee(tournees,content);
 		feuilleDeRoute.add(new Paragraph(content));
@@ -52,6 +64,13 @@ public class SerialiseurFeuilleDeRoute {
 		return feuilleDeRoute;
 	}
 
+	/**
+	 * Méthode pour ecrire une tournee dans le document pdf
+	 * @param tournees
+	 * @param contenuLabel
+	 * @return
+	 * @throws DocumentException
+	 */
 	public static String ecrireTournee(ArrayList<Tournee> tournees,String contenuLabel) throws DocumentException {
 		int index = 0;
 		for (Tournee t : tournees) {
@@ -93,19 +112,5 @@ public class SerialiseurFeuilleDeRoute {
 			}
 		}
 		return contenuLabel;
-	}
-
-	public static void ajouterParagraphe(String paragraphName, String content, boolean addLine)
-			throws DocumentException {
-		feuilleDeRoute.add(new Paragraph(paragraphName));
-		if (addLine)
-			addEmptyLine(1);
-		feuilleDeRoute.add(new Paragraph(content));
-	}
-
-	public static void addEmptyLine(int number) throws DocumentException {
-		for (int i = 0; i < number; i++) {
-			feuilleDeRoute.add(new Paragraph(" "));
-		}
 	}
 }

@@ -229,27 +229,28 @@ public class ApplicationDemo extends Application {
 		buttonEffacer.setMinWidth(300);
 		buttonEffacer.setMaxWidth(300);
 
-		buttonEffacerDemande = new Button("Effacer demande de livraison");
+		buttonEffacerDemande = new Button("Effacer les points de livraison");
 		buttonEffacerDemande.setMinWidth(300);
 		buttonEffacerDemande.setMaxWidth(300);
 
 		buttonSupprimerLivraison = new Button("Supprimer un point de livraison");
-		buttonSupprimerLivraison.setMinWidth(300);
-		buttonSupprimerLivraison.setMaxWidth(300);
+		buttonSupprimerLivraison.setMinWidth(200);
+		buttonSupprimerLivraison.setMaxWidth(200);
 
 		buttonAjouterLivraison = new Button("Ajouter un point de livraison");
 		buttonAjouterLivraison.setMinWidth(300);
 		buttonAjouterLivraison.setMaxWidth(300);
 
-		buttonDeplacerLivraison = new Button("Deplacer un point de livraison");
+		buttonDeplacerLivraison = new Button("Déplacer un point de livraison");
+
 		buttonDeplacerLivraison.setMinWidth(300);
 		buttonDeplacerLivraison.setMaxWidth(300);
 
-		buttonRedo = new Button("Redo");
+		buttonRedo = new Button("Refaire");
 		buttonRedo.setMinWidth(300);
 		buttonRedo.setMaxWidth(300);
 
-		buttonUndo = new Button("Undo");
+		buttonUndo = new Button("Annuler");
 		buttonUndo.setMinWidth(300);
 		buttonUndo.setMaxWidth(300);
 
