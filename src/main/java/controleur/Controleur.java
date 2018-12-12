@@ -499,22 +499,4 @@ public class Controleur {
 	public void setTempSupprimer(CommandeSupprimeLivraison tempSupprimer) {
 		this.tempSupprimer = tempSupprimer;
 	}
-
-	/*
-	public void setIdCommandePointLivraison(long id) {
-		this.commandeIdPointLivraison = id;
-	}
-
-
-	public void setCommandePointLivraison(PointLivraison commandePointLivraison) {
-		this.commandePointLivraison = commandePointLivraison;
-	}
-	
-	public PointLivraison getCommandePointLivraison() {
-		return this.commandePointLivraison;
-	}
-	
-	public long getIdCommandePointLivraison() {
-		return this.commandeIdPointLivraison;
-	}*/
 }
