@@ -50,6 +50,10 @@ public class TourneeManager extends Observable {
 		TIME_LIMITE = unTime;
 	}
 	
+	public int getTimeLimite() {
+		return TIME_LIMITE;
+	}
+	
 	public void notifyVue() {
 		setChanged();
 		notifyObservers("TourneesEtDemandeLivraison");
@@ -179,7 +183,6 @@ public class TourneeManager extends Observable {
 		TSPSimple tsp = new TSPSimple();
 		int[] nbPointLivraisonParLivreur = tsp.clusteringNbPointLivraisonParLivreurNaive(nbLivreur, length - 1);
 		ArrayList<int[]> groupes = tsp.clusteringPointLivraisonNaive(length, cout, nbPointLivraisonParLivreur);
-
 		int nbGroupes = groupes.size();
 		boolean alert = false;
 		for (int i = 0; i < nbGroupes; i++) {

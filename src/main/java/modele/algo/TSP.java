@@ -1,5 +1,7 @@
 package modele.algo;
 
+import exceptions.AlgoException;
+
 /** 
  * La classe du TSP.
  * @author H4404

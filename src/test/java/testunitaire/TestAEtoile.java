@@ -3,6 +3,7 @@ package testunitaire;
 import org.junit.*;
 
 import controleur.Controleur;
+import exceptions.IntersectionNonLivrableException;
 
 import static org.junit.Assert.*;
 
@@ -63,6 +64,22 @@ public class TestAEtoile {
 		ArrayList<Intersection> chemin = aEtoile.algoAEtoile(depart, dest, monPlan);
 		Intersection test = new IntersectionNormal(55475052,45.758472,4.8751354);
 		assertEquals(chemin.get(1),test);
+	}
+	
+	/**
+	 * Tester algorithme A* en presentant une intersection inaccessible par les autre intersections
+	 * @result IntersectionNonLivrableException
+	 * @throws Exception
+	 */
+	@Test(expected = IntersectionNonLivrableException.class)
+	public void testAlgoAEtoile_NonAtteint() throws Exception{
+		System.out.println("test Algo A Etoile Non Atteint:");
+		File fichierTestPlan = new File("fichiersXML2018/fichiersTest/testAEtoilePlan2.xml");	
+		controleur.chargerFichierPlan(fichierTestPlan);
+		Plan monPlan = controleur.getMonPlan();
+		Intersection depart = new IntersectionNormal(48830472,45.758003,4.874931);
+		Intersection dest = new IntersectionNormal(208769499,45.760597,4.87622);
+		ArrayList<Intersection> chemin = aEtoile.algoAEtoile(depart, dest, monPlan);
 	}
 	
 	@Test
