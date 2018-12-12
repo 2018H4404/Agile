@@ -235,7 +235,7 @@ public class VueGraphique extends Parent implements Observer {
 									parent.VerifierEtat(Controleur.getInstance());
 
 									parent.setInfo(
-											"Choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
+											"Entrez la duree de livraison et choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
 								} catch (Exception e) {
 									System.out.println("Probleme durant Ajout");
 									e.printStackTrace();

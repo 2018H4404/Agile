@@ -767,7 +767,7 @@ public class ApplicationDemo extends Application {
 					texte.arreterSynchronisationLivraison();
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison que vous voulez déplacer.");
+					labelInfo.setText("Choisissez le point de livraison que vous voulez deplacer.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
