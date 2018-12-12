@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import controleur.Controleur;
 import modele.metier.*;
 import modele.services.LecteurDeXML;
-import exceptions.*;
+import modele.services.exceptions.*;
 
 public class TestLecteurDeXML {
 	

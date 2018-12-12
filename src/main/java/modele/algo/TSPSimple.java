@@ -16,7 +16,17 @@ public class TSPSimple extends TemplateTSP {
 	protected Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
 		return new IteratorSeq(nonVus, sommetCrt);
 	}
-
+	
+	/**
+	 * Methode pour calculer une heuristique afin de faire des coupes sur les branches.
+	 * @param sommetCourant : sommet actuel que nous sommes en train de explorer.
+	 * @param nonVus : la liste des intersections pas encore exploitees.
+	 * @param duree : la liste des durees des points de livraison
+	 * @param nbTourneeAvantDest : le nombre de tournee qui doit etre fait avant atteindre la destination(Entrepot).
+	 * @param tourneeFaite : le nombre de tournee deja fait
+	 * @param nbPointLivraisonParLivreur : le tableau qui contient le nombre des points de livraison pour chaque livreur.
+	 * @param compteurNbLivraisonsActuels : le nombre des points de livraison deja livres dans la tournee actuelle.
+	 */
 	@Override
 	protected int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite, int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels) {
 		int min = Integer.MAX_VALUE;

@@ -2,19 +2,19 @@ package modele.algo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import exceptions.IntersectionNonLivrableException;
-
 import java.util.Map.Entry;
 
 import modele.metier.Intersection;
 import modele.metier.Plan;
 import modele.metier.Troncon;
+import modele.services.exceptions.IntersectionNonLivrableException;
 
 /** 
  * La classe de l'algorithme A*.
@@ -77,6 +77,7 @@ public class AEtoile {
 	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan)  throws Exception{
 		if(atteignable(dest,monPlan)) {
+			/* Ancienne version
 			ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
 			
 			HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
@@ -86,14 +87,6 @@ public class AEtoile {
 			
 			ArrayList<Intersection> noir = new ArrayList<Intersection>();
 			
-			/*PriorityQueue<Paire> gris = new PriorityQueue<Paire>(1,
-					new Comparator<Paire>() {  
-		                  public int compare(Paire p1, Paire p2) {  
-		                	  if (p1.valeurF < p2.valeurF) { return -1; }
-		                      if (p1.valeurF  > p2.valeurF){ return 1; }
-		                      return 0;
-		                    }  
-		                  }); */
 			Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
 					new Comparator<Double>() {  
 		                  public int compare(Double p1, Double p2) {  
@@ -155,6 +148,75 @@ public class AEtoile {
 				}
 				
 			}
+			return meilleurChemin;*/
+			ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
+			
+			HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
+			parents.put(depart, depart);
+			HashMap<Intersection,Double> distanceEstimeeF = new HashMap<Intersection,Double>();
+			distanceEstimeeF.put(depart,heuristique(depart,dest));
+			
+			ArrayList<Intersection> noir = new ArrayList<Intersection>();
+			
+			Map<Intersection, Double> gris = new HashMap<Intersection, Double>();  
+	        gris.put(depart,heuristique(depart,dest));
+			
+			ArrayList<Troncon> voisins = new ArrayList<Troncon>();
+			
+			while( !gris.isEmpty() )
+			{
+				List<Entry<Intersection, Double>> list = new ArrayList<Entry<Intersection, Double>>(gris.entrySet());  
+		        
+		        Collections.sort(list,new Comparator<Map.Entry<Intersection,Double>>() {    
+		            public int compare(Entry<Intersection, Double> o1, Entry<Intersection, Double> o2) {  
+		                return o1.getValue().compareTo(o2.getValue());  
+		            }  
+		        });
+				Map.Entry<Intersection, Double> elemCourant = premierElement(list);
+				Intersection interCourant = elemCourant.getKey();
+				
+				if(dest.equals(interCourant)) {
+					meilleurChemin.clear();
+					meilleurChemin.add(0, dest);
+					interCourant = parents.get(interCourant);
+					while(!depart.equals(interCourant)) { 
+						meilleurChemin.add(0, interCourant);
+						interCourant = parents.get(interCourant);
+					}
+					meilleurChemin.add(0, depart);
+					return meilleurChemin;
+				}
+				
+				noir.add(interCourant);
+				gris.remove(interCourant);
+				
+				voisins = trouverVosins(interCourant.getId(),monPlan);
+				
+				if(voisins != null) {
+					for(Troncon voisin : voisins) {
+						if(noir.contains(voisin.getDestination())) continue;
+						Intersection interVoisin = voisin.getDestination();
+						double nouvelleDistance = distanceEstimeeF.get(interCourant) + voisin.getLongueur() - heuristique(interCourant,dest) + heuristique(interVoisin,dest);
+						if(isGris(gris,voisin.getDestination().getId())) {
+							
+							if(distanceEstimeeF.get(interVoisin) > nouvelleDistance) {
+								distanceEstimeeF.remove(interVoisin);
+								distanceEstimeeF.put(interVoisin, nouvelleDistance);
+								parents.remove(interVoisin);
+								parents.put(interVoisin, interCourant);
+								gris.remove(interVoisin);
+								gris.put(interVoisin, nouvelleDistance);
+								
+							}
+						}else {
+							distanceEstimeeF.put(interVoisin, nouvelleDistance);
+							parents.put(interVoisin, interCourant);
+							gris.put(interVoisin, nouvelleDistance);
+						}
+					}
+				}
+			}
+			
 			return meilleurChemin;
 		}else {
 			IntersectionNonLivrableException  e = new IntersectionNonLivrableException();
@@ -165,9 +227,23 @@ public class AEtoile {
 	
 	/**
 	 * Methode pour le premier element.
+	 * @param list la liste des entites de map triees.
+	 * @return le premier element.
+	 */
+	public Entry<Intersection, Double> premierElement(List<Entry<Intersection, Double>> list){
+		Entry<Intersection, Double> retour = null;
+		for(Entry<Intersection, Double> element : list) {
+			retour = element;
+			break;
+		}
+		return retour;
+	}
+	/**
+	 * Methode pour le premier element.
 	 * @param map le mapping des intersections.
 	 * @return le premier element.
 	 */
+	/*Ancienne version
 	public Map.Entry<Double, Intersection> premierElement(Map<Double,Intersection> map){
 		Map.Entry<Double, Intersection> retour = null;
 		Set<Entry<Double,Intersection>> set = map.entrySet();
@@ -176,7 +252,8 @@ public class AEtoile {
 			break;
 		}
 		return retour;
-	}
+	}*/
+	
 	
 	/**
 	 * Methode pour determiner si la destination est atteignable.
@@ -251,10 +328,27 @@ public class AEtoile {
 	
 	/**
 	 * Methode pour savoir si le noeud est gris.
-	 * @param gris noeuds gris.
-	 * @param voisin identifiant du voisin.
+	 * @param gris map des noeuds gris.
+	 * @param voisin identifiant du voisin (noeud actuel considere).
 	 * @return retourne vrai si le noeud est gris.
 	 */
+	public boolean isGris(Map<Intersection, Double> gris, Long voisin) {
+		boolean retour = false;
+		Set<Entry<Intersection,Double>> tempSet = gris.entrySet();
+		for(Entry<Intersection,Double> element : tempSet) {
+			if(element.getKey().getId() == voisin) {//.getId()
+				retour = true;
+			}
+		}
+		return retour;
+	}
+	/**
+	 * Methode pour savoir si le noeud est gris.
+	 * @param gris noeuds gris.
+	 * @param voisin identifiant du voisin (noeud actuel considere).
+	 * @return retourne vrai si le noeud est gris.
+	 */
+	/* Ancienne version
 	public boolean isGris(Map<Double, Intersection> gris, Long voisin) {
 		boolean retour = false;
 		Set<Entry<Double,Intersection>> tempSet = gris.entrySet();
@@ -264,7 +358,7 @@ public class AEtoile {
 			}
 		}
 		return retour;
-	}
+	}*/
 	
 	/**
 	 * Methode pour calculer la distance entre deux points.

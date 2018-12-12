@@ -234,8 +234,8 @@ public class ApplicationDemo extends Application {
 		buttonEffacerDemande.setMaxWidth(300);
 
 		buttonSupprimerLivraison = new Button("Supprimer un point de livraison");
-		buttonSupprimerLivraison.setMinWidth(200);
-		buttonSupprimerLivraison.setMaxWidth(200);
+		buttonSupprimerLivraison.setMinWidth(300);
+		buttonSupprimerLivraison.setMaxWidth(300);
 
 		buttonAjouterLivraison = new Button("Ajouter un point de livraison");
 		buttonAjouterLivraison.setMinWidth(300);

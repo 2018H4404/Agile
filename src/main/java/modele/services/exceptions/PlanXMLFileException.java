@@ -1,4 +1,4 @@
-package exceptions;
+package modele.services.exceptions;
 
 @SuppressWarnings("serial")
 public class PlanXMLFileException extends Exception {

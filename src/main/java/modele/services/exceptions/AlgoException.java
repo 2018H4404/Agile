@@ -1,4 +1,4 @@
-package exceptions;
+package modele.services.exceptions;
 
 /** 
  * La classe des exceptions d'algorithme.

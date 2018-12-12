@@ -13,13 +13,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import controleur.Controleur;
-import exceptions.DemandeLivraisonXMLFileException;
-import exceptions.PlanXMLFileException;
-import exceptions.XMLMalFormeException;
 import modele.metier.Entrepot;
 import modele.metier.IntersectionNormal;
 import modele.metier.PointLivraison;
 import modele.metier.Troncon;
+import modele.services.exceptions.DemandeLivraisonXMLFileException;
+import modele.services.exceptions.PlanXMLFileException;
+import modele.services.exceptions.XMLMalFormeException;
 
 /** 
  * La classe du lecteur XML.

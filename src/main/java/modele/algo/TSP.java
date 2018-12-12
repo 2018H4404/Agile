@@ -1,6 +1,6 @@
 package modele.algo;
 
-import exceptions.AlgoException;
+import modele.services.exceptions.AlgoException;
 
 /** 
  * La classe du TSP.

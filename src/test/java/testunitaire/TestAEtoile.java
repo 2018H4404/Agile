@@ -3,7 +3,6 @@ package testunitaire;
 import org.junit.*;
 
 import controleur.Controleur;
-import exceptions.IntersectionNonLivrableException;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 
 import modele.algo.*;
 import modele.metier.*;
+import modele.services.exceptions.IntersectionNonLivrableException;
 
 public class TestAEtoile {
 	

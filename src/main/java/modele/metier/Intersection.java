@@ -71,7 +71,7 @@ public abstract class Intersection {
 	
 	@Override
 	public int hashCode() {
-		return (int)id;
+		return Long.hashCode(id);
 	}
 
 	/**
