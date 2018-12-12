@@ -45,15 +45,15 @@ public class TourneeManager extends Observable {
 	public void clear() {
 		this.listeTournees.clear();
 	}
-	
+
 	public void setTimeLimite(int unTime) {
 		TIME_LIMITE = unTime;
 	}
-	
+
 	public int getTimeLimite() {
 		return TIME_LIMITE;
 	}
-	
+
 	public void notifyVue() {
 		setChanged();
 		notifyObservers("TourneesEtDemandeLivraison");
@@ -81,18 +81,21 @@ public class TourneeManager extends Observable {
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
 	}
-	
+
 	/**
 	 * Methode pour calculer les tournees selon le mode choisi par l'utilisateur
+	 * 
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
-	 * @param nbLivreur: Nombre de livreurs.
-	 * @param mode :mode choisi par l'utilisateur (1 pour sans clustering et 2 pour clustering).
+	 * @param         nbLivreur: Nombre de livreurs.
+	 * @param mode    :mode choisi par l'utilisateur (1 pour sans clustering et 2
+	 *                pour clustering).
 	 */
-	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur,int mode) throws Exception{
-		if(mode == 1) {
+	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur, int mode)
+			throws Exception {
+		if (mode == 1) {
 			calculerLesTournees(demande, unPlan, nbLivreur);
-		}else{
+		} else {
 			calculerLesTourneesClustering(demande, unPlan, nbLivreur);
 		}
 	}
@@ -100,9 +103,10 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version sans
 	 * clustering)
+	 * 
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
-	 * @param nbLivreur: Nombre de livreurs.
+	 * @param         nbLivreur: Nombre de livreurs.
 	 */
 	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -166,7 +170,8 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version
 	 * clustering).
-	 * @param nbLivreur: Nombre de livreurs. 
+	 * 
+	 * @param         nbLivreur: Nombre de livreurs.
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
 	 */
@@ -268,8 +273,6 @@ public class TourneeManager extends Observable {
 	public void setListeTournees(ArrayList<Tournee> listeTournees) {
 		this.listeTournees = listeTournees;
 	}
-	
-	
 
 	/**
 	 * Methode pour ajouter un point de livraison dans une tournee specifiee.
@@ -281,11 +284,11 @@ public class TourneeManager extends Observable {
 		int find = 0;
 		int index = 0;
 		int posChemin = 0;
-		if(idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
+		if (idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
 			find = 1;
 			index = 1;
 			posChemin = -1;
-		}else {
+		} else {
 			for (Tournee t : listeTournees) {
 				if (find == 0) {
 					posChemin = 0;
@@ -341,10 +344,10 @@ public class TourneeManager extends Observable {
 			throw e;
 		}
 	}
-	
-	
+
 	/**
-	 * Methode pour ajouter un point de livraison dans une tournee specifiee(Qui ne modifie pas l'affichage).
+	 * Methode pour ajouter un point de livraison dans une tournee specifiee(Qui ne
+	 * modifie pas l'affichage).
 	 * 
 	 * @param idDepart : id du point de livraison .
 	 * @param unPlan   le plan de la ville.
@@ -353,11 +356,11 @@ public class TourneeManager extends Observable {
 		int find = 0;
 		int index = 0;
 		int posChemin = 0;
-		if(idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
+		if (idDepart == Controleur.getInstance().getMaDemande().getIdEntrepot()) {
 			find = 1;
 			index = 1;
 			posChemin = -1;
-		}else {
+		} else {
 			for (Tournee t : listeTournees) {
 				if (find == 0) {
 					posChemin = 0;
@@ -411,6 +414,12 @@ public class TourneeManager extends Observable {
 		}
 	}
 
+	/**
+	 * Methode pour supprimer un point de livraison dans objet metier et dans vue de l'application
+	 * @param id    id du point à supprimer
+	 * @return   true si le point est bien supprime, false sinon
+	 * @throws Exception
+	 */
 	public boolean supprimerPointLivraison(long id) throws Exception {
 		int find = 0;
 		int index = 0;
@@ -470,7 +479,13 @@ public class TourneeManager extends Observable {
 			throw e;
 		}
 	}
-	
+
+	/**
+	 * Methode pour supprimer un point livraison que dans les objets metiers
+	 * @param id    id du point qu'on doit supprimer
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean supprimerPointLivraisonMetier(long id) throws Exception {
 		int find = 0;
 		int index = 0;
@@ -524,6 +539,13 @@ public class TourneeManager extends Observable {
 			throw e;
 		}
 	}
+	
+	/**
+	 * Methode pour deplacer le point de idADeplacer apres idApresDeplacer et supprimer le point de idADeplacer dans la tournee
+	 * @param idADeplacer  id du point a deplacer
+	 * @param idApresDeplacer   id du point apres lequelle qu'on met notre point 
+	 * @throws Exception
+	 */
 
 	public void deplacerPointLivraison(long idADeplacer, long idApresDeplacer) throws Exception {
 		// Trouver oe se situe le point e deplacer dans la liste des tournees
@@ -650,7 +672,13 @@ public class TourneeManager extends Observable {
 			}
 		}
 	}
-	
+
+	/**
+	 * Creer une tournee qui a juste une livraison
+	 * @param tempP   le point qu'on ajoute dans le plan
+	 * @param prePoint    l'entrepot de la tournee
+	 * @throws Exception
+	 */
 	public void creerTourneeJusteUnLivraison(PointLivraison tempP, Intersection prePoint) throws Exception {
 		Controleur.getInstance().getMaDemande().ajouterPoint(tempP.getId(), tempP);
 		ArrayList<Intersection> interUn = AEtoile.getInstance().algoAEtoile(prePoint, tempP,
@@ -669,6 +697,12 @@ public class TourneeManager extends Observable {
 		Tournee temp = new Tournee(liste);
 		listeTournees.add(temp);
 	}
+	
+	/**
+	 * Get le point precedent du point qu'on donne
+	 * @param id   id du point 
+	 * @return
+	 */
 
 	public Intersection getPrePointLivraisonId(long id) {
 		int find = 0;
@@ -693,12 +727,6 @@ public class TourneeManager extends Observable {
 		return retour;
 	}
 
-	/*public ArrayList<Tournee> cloneList(ArrayList<Tournee> list) {
-		ArrayList<Tournee> clone = new ArrayList<Tournee>(list.size());
-		for (Tournee item : list) {
-			clone.add(new Tournee(item));
-		}
-		return clone;
-	}*/
+
 
 }
