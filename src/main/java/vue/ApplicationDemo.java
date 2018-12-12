@@ -241,7 +241,7 @@ public class ApplicationDemo extends Application {
 		buttonAjouterLivraison.setMinWidth(300);
 		buttonAjouterLivraison.setMaxWidth(300);
 
-		buttonDeplacerLivraison = new Button("Déplacer un point de livraison");
+		buttonDeplacerLivraison = new Button("Deplacer un point de livraison");
 		buttonDeplacerLivraison.setMinWidth(300);
 		buttonDeplacerLivraison.setMaxWidth(300);
 
