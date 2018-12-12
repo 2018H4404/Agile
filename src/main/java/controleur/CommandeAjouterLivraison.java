@@ -1,6 +1,6 @@
 package controleur;
 
-public class CommandeAjouterLivraison implements Commande{
+public class CommandeAjouterLivraison implements Commande {
 	private long prePoint;
 	private long nouvellePoint;
 	private int duree;
@@ -11,25 +11,31 @@ public class CommandeAjouterLivraison implements Commande{
 		this.duree = duree;
 	}
 
+	/**
+	 * Methode pour faire une commande
+	 */
 	@Override
 	public void doCmd() {
-			try {
-				Controleur.getInstance().getMonManager().ajouterPointLivraisonMetier(prePoint, nouvellePoint, duree);
-				Controleur.getInstance().getMonManager().notifyVue();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			Controleur.getInstance().getMonManager().ajouterPointLivraisonMetier(prePoint, nouvellePoint, duree);
+			Controleur.getInstance().getMonManager().notifyVue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * Methode pour annuler une commande
+	 */
 	@Override
 	public void undoCmd() {
-			try {
-				Controleur.getInstance().getMonManager().supprimerPointLivraisonMetier(nouvellePoint);
-				Controleur.getInstance().getMonManager().notifyVue();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
+		try {
+			Controleur.getInstance().getMonManager().supprimerPointLivraisonMetier(nouvellePoint);
+			Controleur.getInstance().getMonManager().notifyVue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
