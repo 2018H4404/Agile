@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <enumeration id="1" language="java" name="vue.ETAT" project="optimodLyon" 
     file="/optimodLyon/src/main/java/vue/ApplicationDemo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="137" width="183" x="384" y="259"/>    
+    <position height="-1" width="-1" x="1214" y="187"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </enumeration>  
   <class id="2" language="java" name="vue.VueGraphique" project="optimodLyon" 
     file="/optimodLyon/src/main/java/vue/VueGraphique.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="515" width="305" x="540" y="1207"/>    
+    <position height="-1" width="-1" x="1675" y="430"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="vue.VueTextuelle" project="optimodLyon" 
     file="/optimodLyon/src/main/java/vue/VueTextuelle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="443" width="292" x="384" y="724"/>    
+    <position height="-1" width="-1" x="1199" y="808"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="vue.ApplicationDemo" project="optimodLyon" 
     file="/optimodLyon/src/main/java/vue/ApplicationDemo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="425" width="343" x="607" y="259"/>    
+    <position height="-1" width="-1" x="730" y="438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="vue.App" project="optimodLyon" file="/optimodLyon/src/main/java/vue/App.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="101" width="124" x="990" y="259"/>    
+    <position height="-1" width="-1" x="777" y="1040"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -47,34 +47,49 @@
     </display>  
   </class>  
   <association id="6">    
-    <bendpoint x="706" y="724"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="7" name="graph"/>      
-      <multiplicity id="8" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="7" name="compagnie">        
+        <position height="0" width="0" x="983" y="-1034"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="983" y="-1034"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="9">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="10" name="compagnie"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="12">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="13" name="texte"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="10" name="compagnie">        
+        <position height="0" width="0" x="669" y="-137"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="669" y="-137"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="12">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="13" name="graph">        
+        <position height="0" width="0" x="983" y="-1034"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="983" y="-1034"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="15">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="compagnie"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="texte">        
+        <position height="0" width="0" x="669" y="-137"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="669" y="-137"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

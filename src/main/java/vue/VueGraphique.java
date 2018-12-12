@@ -188,7 +188,7 @@ public class VueGraphique extends Parent implements Observer {
 								parent.VerifierEtat(Controleur.getInstance());
 								parent.setInfo("Point de livraison ajoute");
 							} catch (Exception e) {
-								System.out.println("Duree incorrect ou Probleme durant Ajout");
+								System.out.println("Duree incorrecte ou probleme durant l'ajout");
 								Label temp = parent.getLabelInfo();
 								temp.setTextFill(Color.RED);
 								temp.setText(e.getMessage());
@@ -237,7 +237,7 @@ public class VueGraphique extends Parent implements Observer {
 									parent.setInfo(
 											"Entrez la duree de livraison et choisissez maintenant ou vous voulez rajouter un nouveau point de Livraison apres le point de livraison que vous venez de choisir.");
 								} catch (Exception e) {
-									System.out.println("Probleme durant Ajout");
+									System.out.println("Probleme durant l'ajout");
 									e.printStackTrace();
 								}
 							} else if (Controleur.getInstance().getEtatCourant().getClass().getSimpleName()
@@ -705,7 +705,7 @@ public class VueGraphique extends Parent implements Observer {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText("Attention");
 			alert.setContentText(
-					"Depasser la limite de temps! Une Solution est affichee mais elle n'est pas optimale. Augmenter la limite du temps afin d'avoir la meilleure solution!");
+					"Limite de temps dépassée ! Une solution est affichee mais elle n'est pas optimale. Augmenter la limite du temps afin d'obtenir la meilleure solution!");
 			alert.show();
 			break;
 		}

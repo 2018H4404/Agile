@@ -307,7 +307,7 @@ public class ApplicationDemo extends Application {
 	public int getDuree() {
 		String text = textFieldDuree.getText();
 		if (text.equals("")) {
-			labelDureeError.setText("Entree une valeur, s'il vous plaît.");
+			labelDureeError.setText("Entrer une valeur, s'il vous plait.");
 			return Integer.MAX_VALUE;
 		} else {
 			labelDureeError.setText("");
@@ -498,7 +498,7 @@ public class ApplicationDemo extends Application {
 					} else {
 						int nbLivreur = Integer.parseInt(contenu);
 						if (nbLivreur > maximum || nbLivreur < 1) {
-							labelError.setText("Le nombre de livreurs donnee est plus grand que le nombre "
+							labelError.setText("Le nombre de livreurs saisi est superieur au nombre "
 									+ "maximum de livreurs (" + maximum
 									+ " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
 						} else {
@@ -547,7 +547,7 @@ public class ApplicationDemo extends Application {
 						if (nbLivreur > maximum || nbLivreur < 1) {
 							labelError.setText("Le nombre de livreurs donnee est plus grand que le nombre "
 									+ "maximum de livreurs (" + maximum
-									+ " livreurs) ou inferieur à 1,  veuillez specifier une valeur valide.");
+									+ " livreurs) ou inferieur à 1, veuillez specifier une valeur valide.");
 						} else {
 							try {
 								String time = timeLimite.getValue();
@@ -811,7 +811,7 @@ public class ApplicationDemo extends Application {
 					Document feuilleDeRoute = Controleur.getInstance().exportFeuilleDeRoute();
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Succes");
-					alert.setContentText("feuille de route cree dans: "+ fileChooser.getInitialDirectory());
+					alert.setContentText("feuille de route créée dans: "+ fileChooser.getInitialDirectory());
 					alert.show();
 					} catch (Exception e) {
 						e.printStackTrace();

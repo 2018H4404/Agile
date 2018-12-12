@@ -3,95 +3,86 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="modele.algo.AEtoile" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/AEtoile.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="299" width="409" x="46" y="70"/>    
+    <position height="-1" width="-1" x="1672" y="561"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="modele.algo.AlgoException" project="optimodLyon" 
-    file="/optimodLyon/src/main/java/modele/algo/AlgoException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="83" width="143" x="505" y="70"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="modele.algo.SimulatedAnnealing" project="optimodLyon" 
-    file="/optimodLyon/src/main/java/modele/algo/SimulatedAnnealing.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="335" width="293" x="688" y="70"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="4" language="java" name="modele.algo.TSP" project="optimodLyon" 
+  <interface id="2" language="java" name="modele.algo.TSP" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/TSP.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="137" width="243" x="738" y="445"/>    
+    <position height="-1" width="-1" x="1303" y="379"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="modele.algo.TSPSimple" project="optimodLyon" 
+  <class id="3" language="java" name="modele.algo.TSPSimple" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/TSPSimple.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="355" x="1021" y="445"/>    
+    <position height="-1" width="-1" x="1350" y="186"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="modele.algo.IteratorSeq" project="optimodLyon" 
+  <class id="4" language="java" name="modele.algo.IteratorSeq" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/IteratorSeq.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="173" width="214" x="1611" y="70"/>    
+    <position height="-1" width="-1" x="1284" y="632"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="modele.algo.OutilTSP" project="optimodLyon" 
+  <class id="5" language="java" name="modele.algo.OutilTSP" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/OutilTSP.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="137" width="473" x="1865" y="70"/>    
+    <position height="-1" width="-1" x="817" y="578"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="modele.algo.TemplateTSP" project="optimodLyon" 
+  <class id="6" language="java" name="modele.algo.TemplateTSP" project="optimodLyon" 
     file="/optimodLyon/src/main/java/modele/algo/TemplateTSP.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="281" width="550" x="1021" y="70"/>    
+    <position height="-1" width="-1" x="812" y="282"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="9">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="8"/>  
+  <class id="7" language="java" name="modele.algo.Paire" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/modele/algo/Paire.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1739" y="221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
-  <realization id="10">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="11">    
+  <association id="9">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="instance"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+      <attribute id="10" name="instance">        
+        <position height="0" width="0" x="1422" y="342"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1422" y="342"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="14">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
+  <realization id="12">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
