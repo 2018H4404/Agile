@@ -303,6 +303,7 @@ public class ApplicationDemo extends Application {
 
 	/**
 	 * Methode pour ajouter la duree saisie par utilisateur.
+	 * @return la duree que l'utilisateur a saisi
 	 */
 	public int getDuree() {
 		String text = textFieldDuree.getText();
@@ -337,9 +338,9 @@ public class ApplicationDemo extends Application {
 	/**
 	 * Methode pour ajouter la barre de navigation.
 	 * 
-	 * @param pane
-	 * @param primaryStage
-	 * @param controleur
+	 * @param pane    pane dans IHM
+	 * @param primaryStage    primaryStage dans l'application
+	 * @param controleur    controleur 
 	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage, Controleur controleur) {
 
