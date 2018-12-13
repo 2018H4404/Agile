@@ -42,6 +42,10 @@ public class IntersectionNormalVue extends Circle{
 		return idInter;
 	}
 	
+	/**
+	 * Methode pour verifier si l'IntersectionVue est selectione
+	 * @return
+	 */
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}

@@ -48,10 +48,17 @@ public class PointLivraisonVue extends Circle{
 		return idPointLivraison;
 	}
 
+	/**
+	 * Methode pour verifier si le PointLivraisonVue est selectionne
+	 * @return
+	 */
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}
-	
+	/**
+	 * Methode pour verifier si le PointLivraisonVue est synchronisee
+	 * @return
+	 */
 	public boolean isSynchronisee() {
 		return synchronisee;
 	}
@@ -60,6 +67,10 @@ public class PointLivraisonVue extends Circle{
 		synchronisee = bool;;
 	}
 	
+	/**
+	 * Change la valeur de radius de ce PointLivraisonVue
+	 * @param radius  la nouvelle valeur du radius
+	 */
 	public void changeRadius(double radius) {
 		this.setRadius(radius);
 	}

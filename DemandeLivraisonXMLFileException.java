@@ -1,11 +1,10 @@
-package modele.services.exceptions;
-/** 
- * La classe des exceptions lors on lire une fichier XML.
- * @author H4404
- * @version 1.0
- * @since 1.0
-*/
+package exceptions;
 
+/**
+ * la classe de l'exception quand le fichier XML n'est pas une demande de livraison
+ * @author H4404
+ *
+ */
 @SuppressWarnings("serial")
 public class DemandeLivraisonXMLFileException extends Exception {
 	static String EXCEPTION_MESSAGE = "Le fichier XML ne correspond pas a une demande de livraison.";

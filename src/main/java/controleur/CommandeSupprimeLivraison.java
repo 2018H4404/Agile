@@ -3,6 +3,12 @@ package controleur;
 import modele.metier.Intersection;
 import modele.metier.PointLivraison;
 
+
+/**
+ * la classe de Commande pour supprimer une livraison
+ * @author H4404
+ *
+ */
 public class CommandeSupprimeLivraison implements Commande {
 	private PointLivraison livraisonSupprime;
 	private Intersection prePoint;
@@ -17,7 +23,7 @@ public class CommandeSupprimeLivraison implements Commande {
 	public void setSupprime(boolean supprime) {
 		this.supprime = supprime;
 	}
-	
+
 	/**
 	 * Methode pour faire une commande
 	 */
@@ -31,9 +37,9 @@ public class CommandeSupprimeLivraison implements Commande {
 		}
 
 	}
-	
+
 	/**
-	 * Methode pour faire une commande
+	 * Methode pour annuler une commande
 	 */
 	@Override
 	public void undoCmd() {

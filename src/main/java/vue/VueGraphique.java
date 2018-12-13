@@ -336,7 +336,12 @@ public class VueGraphique extends Parent implements Observer {
 			}
 		});
 	}
-
+	
+	
+/**
+ * Methode pour ajouter les listeners sur les elements des rues sur le plan
+ * @param g  le groupe a ajouter les listeners
+ */
 	public void ajouterListenerRueNom(Group g) {
 		g.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(final MouseEvent event) {
@@ -348,6 +353,10 @@ public class VueGraphique extends Parent implements Observer {
 		});
 	}
 
+	/**
+	 * Methode qui parametre configure le vueTextuelle comme compagnie du vueGraphique
+	 * @param vue
+	 */
 	public void setCompagnie(VueTextuelle vue) {
 		this.compagnie = vue;
 	}

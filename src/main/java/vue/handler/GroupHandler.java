@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Group;
 
 /** 
- * La classe du groupe handler.
+ * La classe du groupe handler pour gerer l'action sur IHM.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -24,6 +24,9 @@ public class GroupHandler implements EventHandler<MouseEvent> {
         this.monGroup = unGroup;
     }
 
+    /**
+     * Cette methode nous permet de deplacer tous les elements sur le plan en tirant par le souris. 
+     */
     @Override
     public void handle(MouseEvent e) {
         if (e.getEventType() == MouseEvent.MOUSE_PRESSED) {  

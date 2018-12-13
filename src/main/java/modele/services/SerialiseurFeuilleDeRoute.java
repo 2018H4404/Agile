@@ -27,13 +27,13 @@ import com.itextpdf.text.Document;
 
 /**
  * @author baptiste.thivend
- * Classe permettant l´export des tournées dans un fichier pdf
+ * Classe permettant lï¿½export des tournï¿½es dans un fichier pdf
  */
 public class SerialiseurFeuilleDeRoute {
 	public static Document feuilleDeRoute;
 
 	/**
-	 * Méthode pour exporter une liste de tournee en fichier pdf
+	 * Methode pour exporter une liste de tournee en fichier pdf
 	 * @param tournees
 	 * @return document
 	 * @throws FileNotFoundException
@@ -65,7 +65,7 @@ public class SerialiseurFeuilleDeRoute {
 	}
 
 	/**
-	 * Méthode pour ecrire une tournee dans le document pdf
+	 * Methode pour ecrire une tournee dans le document pdf
 	 * @param tournees
 	 * @param contenuLabel
 	 * @return

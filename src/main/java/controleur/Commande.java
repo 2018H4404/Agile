@@ -1,7 +1,7 @@
 package controleur;
 
 /**
- * La classe commande.
+ * L'interface commande.
  * @author H4404
  */
 public interface Commande {

@@ -5,6 +5,9 @@ package controleur;
  * @author H4404
  */
 public class EtatChoixPointLivraisonADeplacer extends EtatDefaut{
+	/**
+	 * Methode pour passer a la prochaine etat EtatChoixPointLivraisonApresDeplacer
+	 */
 	@Override
 	public void choixPointLivraisonApresDeplacer() throws Exception {
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatChoixPointLivraisonApresDeplacer());

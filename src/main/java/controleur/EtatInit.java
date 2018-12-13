@@ -10,6 +10,10 @@ import modele.services.LecteurDeXML;
  */
 public class EtatInit extends EtatDefaut {
 
+	
+	/**
+	 * Methode pour charger une fichier XML
+	 */
 	@Override
 	public void chargerFichierPlan(File f) throws Exception {
 		LecteurDeXML.getInstance().lecturePlanXML(f);

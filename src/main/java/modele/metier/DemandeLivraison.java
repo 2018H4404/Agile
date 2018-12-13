@@ -58,12 +58,23 @@ public class DemandeLivraison extends Observable{
 		notifyObservers("DemandeLivraison");
 	}
 	
+	/**
+	 * supprimer un point donne dans IHM et niveua metier
+	 * @param id   id du point supprime
+	 */
 	public void supprimerPoint(long id) {
 		livraisons.remove(id);
 		setChanged();
 		notifyObservers("DemandeLivraison");
 	
 	}
+	
+	/**
+	 * ajouter un point donne et la position de ce point 
+	 * @param id  id du point a ajouter
+	 * @param latitude   latitude de ce point 
+	 * @param longitude  longitude de ce point 
+	 */
 	public void ajouterPoint(long id,double latitude, double longitude) {
 		PointLivraison tempObject = new PointLivraison(id,latitude,longitude);
 		livraisons.put(id,tempObject);

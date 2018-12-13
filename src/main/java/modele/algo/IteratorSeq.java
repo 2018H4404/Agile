@@ -27,6 +27,7 @@ public class IteratorSeq implements Iterator<Integer> {
 		}
 	}
 	
+	
 	@Override
 	public boolean hasNext() {
 		return nbCandidats > 0;

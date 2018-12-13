@@ -1,5 +1,11 @@
 package controleur;
 
+
+/**
+ * la classe de commande pour ajouter une livraison
+ * @author H4404
+ *
+ */
 public class CommandeAjouterLivraison implements Commande {
 	private long prePoint;
 	private long nouvellePoint;

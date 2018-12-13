@@ -1,17 +1,14 @@
-package modele.services.exceptions;
+package exceptions;
 
 /**
- * La classe des exceptions lors on effectuer ou annule la derniere commande.
- * 
+ * La classe pour traiter l'exception lors undo redo des modification
  * @author H4404
- * @version 1.0
- * @since 1.0
+ *
  */
 @SuppressWarnings("serial")
 public class UndoRedoNoPointDLException extends Exception {
 	static String EXCEPTION_MESSAGE = "Tous les points de livraisons ont été supprimés, vous ne pouvez annuler la suppression.";
-
-	public UndoRedoNoPointDLException() {
-		super(EXCEPTION_MESSAGE);
-	}
+	public UndoRedoNoPointDLException(){
+        super(EXCEPTION_MESSAGE);
+    }
 }
