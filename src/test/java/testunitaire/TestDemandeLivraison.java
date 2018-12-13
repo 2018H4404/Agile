@@ -1,14 +1,17 @@
 package testunitaire;
 
-import static org.junit.Assert.*;
-import org.junit.*;
-import org.joda.time.DateTime;
-import java.util.Date;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.HashMap;
-import modele.metier.*;
+
+import org.joda.time.DateTime;
+import org.junit.Before;
+import org.junit.Test;
+
+import modele.metier.DemandeLivraison;
+import modele.metier.PointLivraison;
 
 public class TestDemandeLivraison {
 	
@@ -83,7 +86,7 @@ public class TestDemandeLivraison {
 	public void testGetDebutTime() {
 		DemandeLivraison dl = new DemandeLivraison();
 		dl.ajouterEntrepot(48830472, 45.75406, 4.857418, 8,0,0);
-		DateTime test = new DateTime(2018,12,12,8,0,0);
+		DateTime test = new DateTime(2018,12,13,8,0,0);
 		DateTime timeDepart = dl.getDebutTime();
 		assertEquals(test,timeDepart);
 	}
