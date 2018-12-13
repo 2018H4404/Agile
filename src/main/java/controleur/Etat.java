@@ -104,11 +104,20 @@ public interface Etat {
 	 * @throws Exception l'exception lors du deplacement.
 	 */
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception;
-
+	
+	/**
+	 * Methode pour annuler une commande
+	 */
 	public void undo();
-
+	
+	/**
+	 * Methode pour faire une commande
+	 */
 	public void redo();
-
+	
+	/**
+	 * Methode pour exporter la feuille de route
+	 */
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException;
 	
 	//public void effaceListenerOnClick();

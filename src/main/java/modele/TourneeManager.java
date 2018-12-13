@@ -42,10 +42,13 @@ public class TourneeManager extends Observable {
 		tourneeAjouterIndex = 0;
 	}
 
+	/**
+	 * Methode pour effacer toutes les tournees.
+	 */
 	public void clear() {
 		this.listeTournees.clear();
 	}
-
+	
 	public void setTimeLimite(int unTime) {
 		TIME_LIMITE = unTime;
 	}
@@ -53,7 +56,10 @@ public class TourneeManager extends Observable {
 	public int getTimeLimite() {
 		return TIME_LIMITE;
 	}
-
+	
+	/**
+	 * Methode pour notifier les obeservateurs a rafraichir leur contenu (Sur la tournee et la demande de livraison).
+	 */
 	public void notifyVue() {
 		setChanged();
 		notifyObservers("TourneesEtDemandeLivraison");
@@ -255,7 +261,13 @@ public class TourneeManager extends Observable {
 		}
 
 	}
-
+	
+	/**
+	 * Methode pour les positions des entrepots dans la meilleure solution trouvee
+	 * (methode utilisee pour une solution trouvee avec l'algo sans clustering).
+	 * (existence des entrepots fictifs)
+	 * @param meilleureSolution : meilleureSolution trouvee .
+	 */
 	private ArrayList<Integer> trouverPositionsEntrepot(Integer[] meilleureSolution) throws Exception {
 		ArrayList<Integer> retour = new ArrayList<Integer>();
 		for (Integer i = 0; i < meilleureSolution.length; i++) {
@@ -675,8 +687,8 @@ public class TourneeManager extends Observable {
 
 	/**
 	 * Creer une tournee qui a juste une livraison
-	 * @param tempP   le point qu'on ajoute dans le plan
-	 * @param prePoint    l'entrepot de la tournee
+	 * @param tempP   :le point qu'on ajoute dans le plan
+	 * @param prePoint    :l'entrepot de la tournee
 	 * @throws Exception
 	 */
 	public void creerTourneeJusteUnLivraison(PointLivraison tempP, Intersection prePoint) throws Exception {
@@ -700,8 +712,8 @@ public class TourneeManager extends Observable {
 	
 	/**
 	 * Get le point precedent du point qu'on donne
-	 * @param id   id du point 
-	 * @return
+	 * @param id   : id du point 
+	 * @return  point livraison trouve.
 	 */
 
 	public Intersection getPrePointLivraisonId(long id) {

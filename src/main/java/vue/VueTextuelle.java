@@ -203,7 +203,10 @@ public class VueTextuelle extends Parent implements Observer {
 	public void setInfoIntersection(String texte) {
 		infoPourIntersection.setText(texte);
 	}
-
+	
+	/**
+	 * Methode qui rafraichit le contenu de la vue textuelle selon le parametre arg1 passe.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
@@ -448,7 +451,7 @@ public class VueTextuelle extends Parent implements Observer {
 
 	/**
 	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement
-	 * (Avec supprimer)
+	 * (Quand on supprime une tournee)
 	 * 
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
@@ -460,7 +463,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * manager.getListeTournees().size(); Methode qui ajoute l'agenda planifie pour
+	 * Methode qui ajoute l'agenda planifie pour
 	 * l'horaire dans le panneau infos dans le TitledPane Tournees
 	 * 
 	 * @param manager : TourneeManager qui contient la liste des tournees
@@ -572,7 +575,11 @@ public class VueTextuelle extends Parent implements Observer {
 		monLabel.setText("");
 		parent.setInfo("");
 	}
-
+	
+	/**
+	 * Methode qui ajoute les informations concernant les points de livraison dans la demande de livraison passee.
+	 * @param demande : une demande de livraison.
+	 */
 	public void ajouteTitledPane(DemandeLivraison demande) {
 		Collection<PointLivraison> lesPointLivraisons = demande.getAllPointLivraisons();
 		conteneurLivraison.getChildren().clear();

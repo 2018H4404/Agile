@@ -361,12 +361,7 @@ public class Controleur {
 	public void ajouterListenerOnClick() {
 		etat.ajouterListenerOnClick();
 	}
-	
-	/*
-	public void effaceListenerOnClick() {
-		etat.effaceListenerOnClick();
-	}*/
-	
+
 	/**
 	 * Methode pour mettre le controlleur sur l'etat choixNouvellePointLivraison.
 	 * @param id l'id du point de livraison.
@@ -471,7 +466,9 @@ public class Controleur {
 		return historique;
 	}
 
-
+	/**
+	 * Methode pour exporter une feuille de route dans l'espace de travail.
+	 */
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
 		return etat.exportFeuilleDeRoute();
 	}

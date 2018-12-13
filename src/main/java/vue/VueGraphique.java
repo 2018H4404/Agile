@@ -596,7 +596,7 @@ public class VueGraphique extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour supprimer une tournee.
+	 * Methode pour recharger la vue des deux tournees modifiees(Sans supprimer).
 	 * 
 	 * @param manager : objet TourneeManager stocke dans le controleur
 	 */
@@ -655,7 +655,7 @@ public class VueGraphique extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour supprimer une tournee.
+	 * Methode pour supprimer une tournee dans la vue graphique.
 	 * 
 	 * @param manager : objet TourneeManager stocke dans le controleur
 	 */
@@ -666,6 +666,9 @@ public class VueGraphique extends Parent implements Observer {
 		tourneesGroup.remove(tempReference);
 	}
 
+	/**
+	 * Methode qui rafraichit le contenu de la vue graphique selon le parametre arg1 passe.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub\

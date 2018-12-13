@@ -17,7 +17,10 @@ public class CommandeSupprimeLivraison implements Commande {
 	public void setSupprime(boolean supprime) {
 		this.supprime = supprime;
 	}
-
+	
+	/**
+	 * Methode pour faire une commande
+	 */
 	@Override
 	public void doCmd() {
 		try {
@@ -28,7 +31,10 @@ public class CommandeSupprimeLivraison implements Commande {
 		}
 
 	}
-
+	
+	/**
+	 * Methode pour faire une commande
+	 */
 	@Override
 	public void undoCmd() {
 		try {

@@ -829,7 +829,10 @@ public class ApplicationDemo extends Application {
 	public void setLabelNbLivreur(int nbLivreur) {
 		labelNombreLivreurs.setText("Nombre de livreurs (maximum :" + nbLivreur + ") :");
 	}
-
+	/**
+	 * Methode pour activer ou desactiver des boutons en verifiant l'etat du controleur.
+	 * @param c : controleur de l'appli.
+	 */
 	public void VerifierEtat(Controleur c) {
 		ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
 
