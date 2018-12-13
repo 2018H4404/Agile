@@ -3,8 +3,8 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="controleur.EtatDemandeLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatDemandeLivraison.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2433" y="-530"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="253" x="1319" y="-446"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -12,8 +12,8 @@
   </class>  
   <class id="2" language="java" name="controleur.EtatPlanCharge" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatPlanCharge.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2309" y="-671"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="252" x="1319" y="-514"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -21,8 +21,8 @@
   </class>  
   <class id="3" language="java" name="controleur.EtatDefaut" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatDefaut.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1127" y="-572"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="55" width="251" x="1008" y="-432"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -30,8 +30,8 @@
   </class>  
   <interface id="4" language="java" name="controleur.Etat" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/Etat.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1471" y="-7"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="54" width="251" x="1319" y="-642"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -39,8 +39,8 @@
   </interface>  
   <class id="5" language="java" name="controleur.Controleur" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/Controleur.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1973" y="216"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="210" x="1781" y="-422"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -48,8 +48,8 @@
   </class>  
   <class id="6" language="java" name="controleur.EtatInit" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatInit.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1501" y="-282"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="251" x="1318" y="-581"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -57,8 +57,8 @@
   </class>  
   <interface id="7" language="java" name="controleur.Commande" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/Commande.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2565" y="47"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="103" x="2201" y="-265"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -66,8 +66,8 @@
   </interface>  
   <class id="8" language="java" name="controleur.CommandeSupprimeLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/CommandeSupprimeLivraison.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2511" y="490"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="55" width="196" x="1937" y="-240"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -76,8 +76,8 @@
   <class id="9" language="java" name="controleur.EtatAjouterChoixNouvellePointLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatAjouterChoixNouvellePointLivraison.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1935" y="-701"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="260" x="1316" y="-12"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -86,8 +86,8 @@
   <class id="10" language="java" name="controleur.EtatAjouterChoixPointLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatAjouterChoixPointLivraison.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1812" y="-483"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="252" x="1319" y="-378"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -96,8 +96,8 @@
   <class id="11" language="java" name="controleur.EtatChoixPointLivraisonADeplacer" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatChoixPointLivraisonADeplacer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1527" y="-434"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="256" x="1319" y="-258"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -106,8 +106,8 @@
   <class id="12" language="java" name="controleur.EtatChoixPointLivraisonApresDeplacer" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatChoixPointLivraisonApresDeplacer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1256" y="440"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="257" x="1319" y="-200"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -115,8 +115,8 @@
   </class>  
   <class id="13" language="java" name="controleur.EtatModiferPointLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatModiferPointLivraison.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1015" y="89"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="55" width="258" x="1318" y="-77"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -124,7 +124,7 @@
   </class>  
   <class id="14" language="java" name="controleur.EtatPosteCalcul" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatPosteCalcul.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="234" width="209" x="1349" y="558"/>    
+    <position height="53" width="255" x="1319" y="-317"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -134,8 +134,8 @@
   <class id="15" language="java" name="controleur.EtatSupprimerChoixPointLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/EtatSupprimerChoixPointLivraison.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1059" y="288"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="53" width="256" x="1319" y="-138"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -143,8 +143,8 @@
   </class>  
   <class id="16" language="java" name="controleur.CommandeAjouterLivraison" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/CommandeAjouterLivraison.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2384" y="244"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="55" width="182" x="1934" y="-568"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -152,233 +152,262 @@
   </class>  
   <class id="17" language="java" name="controleur.Historique" project="optimodLyon" 
     file="/optimodLyon/src/main/java/controleur/Historique.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2371" y="-163"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="55" width="124" x="2108" y="-419"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="20">    
+  <association id="18">    
+    <bendpoint x="1885" y="-487"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="21" name="etat">        
-        <position height="0" width="0" x="911" y="-559"/>      
+      <attribute id="19" name="etatPlanCharge">        
+        <position height="0" width="0" x="591" y="-990"/>      
       </attribute>      
-      <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="0" width="0" x="911" y="-559"/>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="0" width="0" x="591" y="-990"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="24">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="25" name="etatDemandeLivraison">        
-        <position height="0" width="0" x="2342" y="-1073"/>      
-      </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="2342" y="-1073"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="etatChoixPointLivraisonApresDeplacer">        
-        <position height="0" width="0" x="484" y="221"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="1">        
-        <position height="0" width="0" x="484" y="221"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="31" name="instance">        
-        <position height="0" width="0" x="1342" y="76"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1342" y="76"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="33">    
+  <generalization id="21">    
+    <bendpoint x="1133" y="-234"/>    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="34">    
+  <realization id="22">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="23">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="24">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="35" name="tempSupprimer">        
-        <position height="0" width="0" x="1231" y="-163"/>      
+      <attribute id="25" name="etatAjouterChoixPointLivraison">        
+        <position height="0" width="0" x="-413" y="167"/>      
       </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1231" y="-163"/>      
+      <multiplicity id="26" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-413" y="167"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="38">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="39" name="etatChoixPointLivraisonADeplacer">        
-        <position height="0" width="0" x="259" y="-243"/>      
-      </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
-        <position height="0" width="0" x="259" y="-243"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="43">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="44" name="etatPosteCalcul">        
-        <position height="0" width="0" x="271" y="603"/>      
-      </attribute>      
-      <multiplicity id="45" minimum="0" maximum="1">        
-        <position height="0" width="0" x="271" y="603"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="46">    
+  <generalization id="27">    
+    <bendpoint x="1132" y="14"/>    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="47">    
+  <generalization id="28">    
+    <bendpoint x="1132" y="-112"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="29">    
+    <bendpoint x="1885" y="-111"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="48" name="etatSupprimerChoixPointLivraison">        
-        <position height="0" width="0" x="125" y="406"/>      
+      <attribute id="30" name="etatSupprimerChoixPointLivraison">        
+        <position height="0" width="0" x="504" y="38"/>      
       </attribute>      
-      <multiplicity id="49" minimum="0" maximum="1">        
-        <position height="0" width="0" x="125" y="406"/>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="504" y="38"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="32">    
+    <bendpoint x="1250" y="-611"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="33">    
+    <bendpoint x="1885" y="-292"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="34" name="etatPosteCalcul">        
+        <position height="0" width="0" x="241" y="-272"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="241" y="-272"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="37" name="etatDemandeLivraison">        
+        <position height="0" width="0" x="1320" y="-913"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1320" y="-913"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="39">    
+    <bendpoint x="1132" y="-292"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="40">    
+    <bendpoint x="1133" y="-175"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="41">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="42" name="tempAjout">        
+        <position height="0" width="0" x="-339" y="-727"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-339" y="-727"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="45" name="listeDeCommande">        
+        <position height="0" width="0" x="-313" y="-263"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-313" y="-263"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="48" name="historique">        
+        <position height="0" width="0" x="-183" y="-144"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-183" y="-144"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="50">    
+    <bendpoint x="1885" y="12"/>    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="51" name="etatAjouterChoixNouvellePointLivraison">        
-        <position height="0" width="0" x="441" y="-282"/>      
+        <position height="0" width="0" x="-53" y="465"/>      
       </attribute>      
       <multiplicity id="52" minimum="0" maximum="1">        
-        <position height="0" width="0" x="441" y="-282"/>      
+        <position height="0" width="0" x="-53" y="465"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="53">    
+    <bendpoint x="1885" y="-555"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="54" name="etatPlanCharge">        
-        <position height="0" width="0" x="1476" y="-1196"/>      
+      <attribute id="54" name="etatInit">        
+        <position height="0" width="0" x="1085" y="-1057"/>      
       </attribute>      
       <multiplicity id="55" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1476" y="-1196"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="56">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="57">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="58" name="etatAjouterChoixPointLivraison">        
-        <position height="0" width="0" x="-20" y="4"/>      
-      </attribute>      
-      <multiplicity id="59" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-20" y="4"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="60">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="61" name="listeDeCommande"/>      
-      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="63">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="64" name="etatInit">        
-        <position height="0" width="0" x="1187" y="-807"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1187" y="-807"/>      
+        <position height="0" width="0" x="1085" y="-1057"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="66">    
+  <association id="56">    
+    <bendpoint x="1885" y="-616"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="67" name="historique"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
+      <attribute id="57" name="etat">        
+        <position height="0" width="0" x="884" y="-1010"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="884" y="-1010"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="69">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <generalization id="70">    
+  <generalization id="59">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="60">    
+    <bendpoint x="1885" y="-170"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="61" name="etatChoixPointLivraisonApresDeplacer">        
+        <position height="0" width="0" x="669" y="-361"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="669" y="-361"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <bendpoint x="1885" y="-232"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="64" name="etatChoixPointLivraisonADeplacer">        
+        <position height="0" width="0" x="162" y="-9"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="0" width="0" x="162" y="-9"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="66">    
+    <bendpoint x="1133" y="-52"/>    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <generalization id="71">    
+  <association id="67">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="68" name="tempSupprimer">        
+        <position height="0" width="0" x="808" y="-799"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="808" y="-799"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="70">    
+    <bendpoint x="1134" y="-555"/>    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="72">    
+  <generalization id="71">    
+    <bendpoint x="1132" y="-490"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="72">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="73">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="73" name="tempAjout"/>      
-      <multiplicity id="74" minimum="0" maximum="1"/>    
+      <attribute id="74" name="instance">        
+        <position height="0" width="0" x="1364" y="45"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1364" y="45"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="75">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
