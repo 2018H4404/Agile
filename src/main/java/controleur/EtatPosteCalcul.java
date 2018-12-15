@@ -22,7 +22,7 @@ import vue.element.PointLivraisonVue;
 public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
-	 * Methode pour ajouter un point de livraison
+	 * Methode pour passer a etat suivant en ajoutant un point de livraison
 	 */
 	@Override
 	public void ajouterPointLivraison() throws Exception {
@@ -30,7 +30,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour deplacer un point de livraison
+	 * Methode pour passer a etat suivant en deplacant un point de livraison
 	 */
 	@Override
 	public void deplacerPointLivraison() throws Exception {
@@ -38,7 +38,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour supprimer un point de livraison
+	 * Methode pour  passer a etat suivant en supprimant un point de livraison
 	 */
 	@Override
 	public void supprimerPointLivraison() throws Exception {

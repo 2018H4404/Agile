@@ -110,6 +110,14 @@ public abstract class TemplateTSP implements TSP {
 		return retour;
 	}
 
+	/**
+	 *  Methode pour trouver une solution.
+	 *  @param tpsLimit: le temps limite pour trouver une solution saisi par l'utilisateur
+	 *  @param nbSommets: le nombre de sommets totals
+	 *  @param cout: le cout entre differents points de livraisons
+	 *  @param duree: duree[i] = duree pour visiter le sommet i
+	 *  @param nbLivreur: le nombre de livreurs totals                                 
+	 */
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur) {
 		tempsLimiteAtteint = false;
 		coutMeilleureSolution = Integer.MAX_VALUE;

@@ -8,32 +8,33 @@ import com.itextpdf.text.DocumentException;
 
 /**
  * La classe de l'etat par defaut qui implement l'interface du Etat et la classe
+ * 
  * @author H4404
  */
-public class EtatDefaut implements Etat{
+public class EtatDefaut implements Etat {
 
 	/**
-	 * Methode pour charger une fichier
+	 * Methode pour charger une fichier XML de plan
 	 */
 	@Override
 	public void chargerFichierPlan(File f) throws Exception {
-		
+
 	}
 
 	/**
 	 * Methode pour calculer les tournees
 	 */
 	@Override
-	public void CalculerLesTournees(int nbLivreur,int mode) throws Exception {
-		
+	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception {
+
 	}
-	
+
 	/**
-	 * Methode pour lire une fichier XML
+	 * Methode pour lire une fichier XML de point de livraison
 	 */
 	@Override
 	public void lectureLivraisonEntrepotXML(File f) throws Exception {
-		
+
 	}
 
 	@Override
@@ -42,20 +43,11 @@ public class EtatDefaut implements Etat{
 	}
 
 	/**
-	 * Methode pour modifier un point de livraison
-	 */
-	@Override
-	public void modifierPointLivraison() throws Exception {
-		
-	}
-
-	
-	/**
-	 * Methode pour ajouter des listeners sur elements dans certain etat 
+	 * Methode pour ajouter des listeners sur elements dans certain etat
 	 */
 	@Override
 	public void ajouterListenerOnClick() {
-		
+
 	}
 
 	/**
@@ -63,15 +55,16 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void ajouterPointLivraison() throws Exception {
-		
+
 	}
 
 	/**
-	 * Methode pour choisir le nouveau point de livraison quand on ajoute le point de livraison
+	 * Methode pour choisir le nouveau point de livraison quand on ajoute le point
+	 * de livraison
 	 */
 	@Override
 	public void choixNouveauPointLivraison() throws Exception {
-		
+
 	}
 
 	/**
@@ -79,7 +72,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
-		
+
 	}
 
 	/**
@@ -87,7 +80,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
-		
+
 	}
 
 	/**
@@ -95,7 +88,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void choixPointLivraisonApresDeplacer() throws Exception {
-		
+
 	}
 
 	/**
@@ -103,7 +96,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception {
-		
+
 	}
 
 	/**
@@ -111,7 +104,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void supprimerPointLivraison() throws Exception {
-		
+
 	}
 
 	/**
@@ -119,7 +112,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void deplacerPointLivraison() throws Exception {
-		
+
 	}
 
 	/**
@@ -127,7 +120,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void undo() {
-		
+
 	}
 
 	/**
@@ -135,7 +128,7 @@ public class EtatDefaut implements Etat{
 	 */
 	@Override
 	public void redo() {
-		
+
 	}
 
 	/**
@@ -145,8 +138,5 @@ public class EtatDefaut implements Etat{
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
 		return new Document();
 	}
-	
-	
-}
-	
 
+}

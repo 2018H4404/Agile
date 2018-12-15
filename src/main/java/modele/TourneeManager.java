@@ -70,6 +70,7 @@ public class TourneeManager extends Observable {
 
 	/**
 	 * Methode pour retourner l'index de la tournee changee
+	 * @return l'index de la tournee changee
 	 */
 	public int getTourneeChangedIndex() {
 		return tourneeChangedIndex;
@@ -78,6 +79,7 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour retourner l'index de la tournee ou nous avons ajoute un point de
 	 * livraison apres le deplacement
+	 * @return l'index de la tournee ajoutee
 	 */
 	public int getTourneeAjouterIndex() {
 		return tourneeAjouterIndex;
@@ -86,6 +88,7 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour retourner l'index de la tournee ou nous avons supprime un point
 	 * de livraison apres le deplacement
+	 * @return l'index de la tournee supprimee
 	 */
 	public int getTourneeSupprimerIndex() {
 		return tourneeSupprimerIndex;
@@ -270,6 +273,7 @@ public class TourneeManager extends Observable {
 	 * (methode utilisee pour une solution trouvee avec l'algo sans clustering).
 	 * (existence des entrepots fictifs)
 	 * @param meilleureSolution : meilleureSolution trouvee .
+	 * @return position d'entrepots dans la meilleur solution
 	 */
 	private ArrayList<Integer> trouverPositionsEntrepot(Integer[] meilleureSolution) throws Exception {
 		ArrayList<Integer> retour = new ArrayList<Integer>();
