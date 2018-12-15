@@ -40,12 +40,4 @@ public class EtatDemandeLivraison extends EtatDefaut {
 		}
 	}
 
-	/**
-	 * Methode pour modifier un point de livraison
-	 */
-	@Override
-	public void modifierPointLivraison() throws Exception {
-
-	}
-
 }

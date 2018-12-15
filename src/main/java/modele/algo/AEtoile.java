@@ -77,78 +77,7 @@ public class AEtoile {
 	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan)  throws Exception{
 		if(atteignable(dest,monPlan)) {
-			/* Ancienne version
-			ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
 			
-			HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();
-			parents.put(depart, depart);
-			HashMap<Intersection,Double> distanceEstimeeF = new HashMap<Intersection,Double>();
-			distanceEstimeeF.put(depart,heuristique(depart,dest));
-			
-			ArrayList<Intersection> noir = new ArrayList<Intersection>();
-			
-			Map<Double, Intersection> gris = new TreeMap<Double, Intersection>(
-					new Comparator<Double>() {  
-		                  public int compare(Double p1, Double p2) {  
-		                	  if (p1 < p2) { return -1; }
-		                      if (p1 > p2) { return 1; }
-		                      return 0;
-		                    }  
-		                  });
-			gris.put(heuristique(depart,dest), depart);
-			//gris.offer(new Paire(depart,heuristique(depart,dest)));
-			
-			ArrayList<Troncon> voisins = new ArrayList<Troncon>();
-			
-			while( !gris.isEmpty() )
-			{
-				Map.Entry<Double, Intersection> elemCourant = premierElement(gris);
-				Intersection interCourant = elemCourant.getValue();
-				
-				if(dest.equals(interCourant)) {
-					meilleurChemin.clear();
-					meilleurChemin.add(0, dest);
-					interCourant = parents.get(interCourant);
-					while(!depart.equals(interCourant)) { 
-						meilleurChemin.add(0, interCourant);
-						interCourant = parents.get(interCourant);
-					}
-					meilleurChemin.add(0, depart);
-					return meilleurChemin;
-				}
-				
-				noir.add(interCourant);
-				gris.remove(elemCourant.getKey());
-				
-				voisins = trouverVosins(interCourant.getId(),monPlan);
-				
-				if(voisins != null) {
-				for(Troncon voisin : voisins) {
-					if(noir.contains(voisin.getDestination())) continue;
-					Intersection interVoisin = voisin.getDestination();
-					double nouvelleDistance = distanceEstimeeF.get(interCourant) + voisin.getLongueur() - heuristique(interCourant,dest) + heuristique(interVoisin,dest);
-					if(isGris(gris,voisin.getDestination().getId())) {
-						
-						if(distanceEstimeeF.get(interVoisin) > nouvelleDistance) {
-							distanceEstimeeF.remove(interVoisin);
-							distanceEstimeeF.put(interVoisin, nouvelleDistance);
-							parents.remove(interVoisin);
-							parents.put(interVoisin, interCourant);
-							Double position = trouverKey(interVoisin,gris);
-							gris.remove(position);
-							gris.put(nouvelleDistance, interVoisin);
-							
-						}
-					}else {
-						distanceEstimeeF.put(interVoisin, nouvelleDistance);
-						parents.put(interVoisin, interCourant);
-						gris.put(nouvelleDistance, interVoisin);
-					}
-				}
-				}
-				
-			}
-			return meilleurChemin;*/
 			ArrayList<Intersection> meilleurChemin = new ArrayList<Intersection>(); 
 			
 			HashMap<Intersection,Intersection> parents = new HashMap<Intersection,Intersection>();

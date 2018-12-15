@@ -25,7 +25,7 @@ public class CommandeSupprimeLivraison implements Commande {
 	}
 
 	/**
-	 * Methode pour faire une commande
+	 * Methode pour effectuer une commande
 	 */
 	@Override
 	public void doCmd() {

@@ -27,17 +27,17 @@ import com.itextpdf.text.Document;
 
 /**
  * @author baptiste.thivend
- * Classe permettant l�export des tourn�es dans un fichier pdf
+ * Classe permettant l'export des tournees dans un fichier pdf
  */
 public class SerialiseurFeuilleDeRoute {
 	public static Document feuilleDeRoute;
 
 	/**
 	 * Methode pour exporter une liste de tournee en fichier pdf
-	 * @param tournees
-	 * @return document
-	 * @throws FileNotFoundException
-	 * @throws DocumentException
+	 * @param tournees:  le resultat final des tournees calculees
+	 * @return document: le fichier qu'on ecrit l'info des tournees calculees
+	 * @throws FileNotFoundException:  l'exception lors on cree une fichier
+	 * @throws DocumentException:   l'exception lors on ecrit une document     
 	 */
 	public static Document exportFeuilleDeRoute(ArrayList<Tournee> tournees)
 			throws FileNotFoundException, DocumentException {
@@ -66,9 +66,9 @@ public class SerialiseurFeuilleDeRoute {
 
 	/**
 	 * Methode pour ecrire une tournee dans le document pdf
-	 * @param tournees
-	 * @param contenuLabel
-	 * @return
+	 * @param tournees   le resultat final des tournees calculees
+	 * @param contenuLabel     l'info du resultat des tournees calculees
+	 * @return  l'info du resultat des tournees calculees
 	 * @throws DocumentException
 	 */
 	public static String ecrireTournee(ArrayList<Tournee> tournees,String contenuLabel) throws DocumentException {

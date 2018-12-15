@@ -63,7 +63,6 @@ public class OutilTSP {
 	 * @param duree la duree des demandes.
 	 * @param length la longueur des demandes.
 	 */
-	//Initialisation du tableau de duree demande par TSP
 	public static void intialisationTabDuree( ArrayList<Intersection> intersectionsDemande, int[] duree, int length) {
 		duree[0] = 0;
 		for(int i = 1; i < length; i++) {

@@ -7,6 +7,9 @@ package controleur;
  *
  */
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
+	/**
+	 * Methode pour passer a l'etat suivant en suipprimant le pouint livraison choisi
+	 */
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
 		boolean supprime = Controleur.getInstance().getMonManager().supprimerPointLivraison(id);

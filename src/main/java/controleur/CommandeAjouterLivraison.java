@@ -18,7 +18,7 @@ public class CommandeAjouterLivraison implements Commande {
 	}
 
 	/**
-	 * Methode pour faire une commande
+	 * Methode pour effecuter une commande
 	 */
 	@Override
 	public void doCmd() {
