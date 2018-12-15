@@ -34,6 +34,9 @@ public class TourneeManager extends Observable {
 	private int tourneeSupprimerIndex;
 	private int tourneeAjouterIndex;
 
+	/**
+	 * Constructeur de la classe tourneeManager.
+	 */
 	public TourneeManager() {
 		listeTournees = new ArrayList<Tournee>();
 		TIME_LIMITE = 10000;
@@ -93,8 +96,8 @@ public class TourneeManager extends Observable {
 	 * 
 	 * @param demande les demandes de livraison.
 	 * @param unPlan  le plan de la ville.
-	 * @param         nbLivreur: Nombre de livreurs.
-	 * @param mode    :mode choisi par l'utilisateur (1 pour sans clustering et 2
+	 * @param nbLivreur Nombre de livreurs.
+	 * @param mode mode choisi par l'utilisateur (1 pour sans clustering et 2
 	 *                pour clustering).
 	 */
 	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur, int mode)

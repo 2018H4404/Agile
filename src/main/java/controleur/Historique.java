@@ -9,6 +9,9 @@ public class Historique {
 	protected LinkedList <Commande> listeDeCommande;
 	protected int indice;
 	
+	/**
+	 * Constructeur de la classe Historique.
+	 */
 	public Historique() {
 		listeDeCommande = new LinkedList();
 		indice = -1;
@@ -16,20 +19,22 @@ public class Historique {
 	}
 	
 	/**
-	 * reset le historique
+	 * Reset le historique
 	 */
 	public void clear(){
 		listeDeCommande.clear();
 		indice = -1;
 	}
 	
-	
+	/**
+	 * Methode pour retourner l'indice actuelle de commande de l'historrique
+	 */
 	public int getIndice(){
 		return indice;
 	}
 	
 	/**
-	 * ajoute la commande dans l'historique
+	 * Methode pour ajouter une commande dans l'historique
 	 * @param cmd  commande a ajouter
 	 */
 	public void ajouteCmd(Commande cmd) {
@@ -52,6 +57,7 @@ public class Historique {
 			cmd.undoCmd();
 		}
 	}
+	
 	/**
 	 * Methode pour effctuer le commande courant
 	 */
@@ -72,8 +78,8 @@ public class Historique {
 	}
 	
 	/**
-	 * Methode pour retourner le length de l'historique
-	 * @return
+	 * Methode pour retourner la longeur de l'historique
+	 * @return la longueur de l'historique.
 	 */
 	public int getLength() {
 		return listeDeCommande.size();

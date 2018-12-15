@@ -120,6 +120,4 @@ public interface Etat {
 	 */
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException;
 	
-	//public void effaceListenerOnClick();
-	
 }

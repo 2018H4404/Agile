@@ -2,7 +2,7 @@ package controleur;
 
 
 /**
- * la classe de commande pour ajouter une livraison
+ * la classe de commande pour ajouter un point de livraison
  * @author H4404
  *
  */
@@ -10,7 +10,13 @@ public class CommandeAjouterLivraison implements Commande {
 	private long prePoint;
 	private long nouvellePoint;
 	private int duree;
-
+	
+	/**
+	 * Contstructeur d'une commande qui ajoute un point de livraison
+	 * @param prePoint : le point de livraison qui est avant le point de livraison a ajouter
+	 * @param nouvellePoint : le nouveau point de livraison a ajouter
+	 * @param duree : la duree de ce point de livraison a ajouter
+	 */
 	public CommandeAjouterLivraison(long prePoint, long nouvellePoint, int duree) {
 		this.prePoint = prePoint;
 		this.nouvellePoint = nouvellePoint;
@@ -18,7 +24,7 @@ public class CommandeAjouterLivraison implements Commande {
 	}
 
 	/**
-	 * Methode pour faire une commande
+	 * Methode pour faire cette commande qui ajoute un point de livraison
 	 */
 	@Override
 	public void doCmd() {
@@ -31,7 +37,7 @@ public class CommandeAjouterLivraison implements Commande {
 	}
 
 	/**
-	 * Methode pour annuler une commande
+	 * Methode pour annuler cette commande qui ajoute un point de livraison
 	 */
 	@Override
 	public void undoCmd() {

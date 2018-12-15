@@ -13,19 +13,25 @@ public class CommandeSupprimeLivraison implements Commande {
 	private PointLivraison livraisonSupprime;
 	private Intersection prePoint;
 	private boolean supprime;
-
+	
+	/**
+	 * Constructeur d'une commande qui supprime un point de livraison
+	 * @param livraisonSupprime : le point de livraison a supprimer
+	 * @param prePoint : le point de livraison qui est avant le point de livraison a supprimer dans la tournee
+	 */
 	public CommandeSupprimeLivraison(PointLivraison livraisonSupprime, Intersection prePoint) {
 		this.livraisonSupprime = livraisonSupprime;
 		this.prePoint = prePoint;
 		supprime = false;
 	}
-
+	
+	//Setter
 	public void setSupprime(boolean supprime) {
 		this.supprime = supprime;
 	}
 
 	/**
-	 * Methode pour faire une commande
+	 * Methode pour faire cette commande qui supprime un point de livraison
 	 */
 	@Override
 	public void doCmd() {
@@ -39,7 +45,7 @@ public class CommandeSupprimeLivraison implements Commande {
 	}
 
 	/**
-	 * Methode pour annuler une commande
+	 * Methode pour annuler cette commande qui supprime un point de livraison
 	 */
 	@Override
 	public void undoCmd() {
