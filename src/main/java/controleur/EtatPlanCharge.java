@@ -11,7 +11,8 @@ import modele.services.LecteurDeXML;
 public class EtatPlanCharge extends EtatDefaut {
 
 	/**
-	 * Methode pour lire une fichier XML
+	 * Methode pour charger une demande de livraison selon le fichier XML passe.
+	 * @see Etat.
 	 */
 	@Override
 	public void lectureLivraisonEntrepotXML(File f) throws Exception {

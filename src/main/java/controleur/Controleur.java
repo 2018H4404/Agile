@@ -112,18 +112,18 @@ public class Controleur {
 	}
 	
 	/**
-	 * Methode pour mettre le controleur sur l'etat EtatPlanCharge et charger le plan dans le fichier XML dont le flux est passe en parametre.
+	 * Methode pour mettre le controleur sur l'etat EtatPlanCharge et charger le plan dans le fichier XML qui est passe en parametre.
 	 * @param f le fichier XML.
-	 * @throws Exception si erreur durant le chargement d'un plan.
+	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void chargerFichierPlan(File f) throws Exception {
 		etat.chargerFichierPlan(f);
 	}
 	
 	/**
-	 * Methode pour mettre le controleur sur l'etat EtatDemandeLivraison et charger la demande de livraison dans le fichier XML dont le flux est passe en parametre..
+	 * Methode pour mettre le controleur sur l'etat EtatDemandeLivraison et charger la demande de livraison dans le fichier XML qui est passe en parametre.
 	 * @param f le fichier XML.
-	 * @throws Exception si erreur durant le chargement d'une demande de livraison.
+	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void chargerFichierDemandeLivraison(File f) throws Exception{
 		etat.lectureLivraisonEntrepotXML(f);
@@ -383,7 +383,7 @@ public class Controleur {
 	}
 	
 	/**
-	 * Methode pour ajouter le listner qui permet l'utilisateur de ajouter des points de livraison (avec duree 0) avant le calcul des tournnees.
+	 * Methode pour ajouter le listner qui permet a l'utilisateur de ajouter des points de livraison (avec duree 0) avant le calcul des tournnees.
 	 */
 	public void ajouterListenerOnClick() {
 		etat.ajouterListenerOnClick();

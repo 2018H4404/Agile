@@ -12,7 +12,8 @@ public class EtatInit extends EtatDefaut {
 
 	
 	/**
-	 * Methode pour charger une fichier XML
+	 * Methode pour charger un plan selon le fichier XML passe.
+	 * @see Etat.
 	 */
 	@Override
 	public void chargerFichierPlan(File f) throws Exception {

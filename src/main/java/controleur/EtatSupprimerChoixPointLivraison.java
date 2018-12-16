@@ -8,7 +8,8 @@ package controleur;
  */
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	/**
-	 * Methode pour passer a l'etat suivant en suipprimant le pouint livraison choisi
+	 * Methode pour supprimer un point de livraison selon l'id passe.
+	 * @see Etat.
 	 */
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
@@ -18,6 +19,10 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	
+	/**
+	 * Methode pour obtenir le nombre de livreur maximum.
+	 * @see Etat.
+	 */
 	@Override
 	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();

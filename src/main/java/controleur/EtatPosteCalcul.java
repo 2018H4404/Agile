@@ -22,7 +22,8 @@ import vue.element.PointLivraisonVue;
 public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
-	 * Methode pour passer a etat suivant en ajoutant un point de livraison
+	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a ajouter.
+	 * @see Etat.
 	 */
 	@Override
 	public void ajouterPointLivraison() throws Exception {
@@ -30,7 +31,8 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour passer a etat suivant en deplacant un point de livraison
+	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a deplacer.
+	 * @see Etat.
 	 */
 	@Override
 	public void deplacerPointLivraison() throws Exception {
@@ -38,40 +40,42 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour  passer a etat suivant en supprimant un point de livraison
+	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a supprimer.
+	 * @see Etat.
 	 */
 	@Override
 	public void supprimerPointLivraison() throws Exception {
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatSupprimerChoixPointLivraison());
 	}
 	
+	/**
+	 * Methode pour obtenir le nombre de livreur maximum.
+	 * @see Etat.
+	 */
 	@Override
 	public int getNbLivreurMaximum() {
 		return Controleur.getInstance().getMaDemande().getNbLivreurMaximum();
 	}
 	
 	/**
-	 * Methode pour calculer les tournees
-	 * @param nbLivreur  nombre de livreur
-	 * @param mode  le choix entre algorithm clustering et optimal
+	 * Methode pour calculer les tournees selon le nombre de livreur passe et le mode passe.
+	 * @see Etat.
 	 */
 	@Override
 	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception{
-		
-		//Controleur.getInstance().getMonManager().calculerLesTournees(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur);
 		Controleur.getInstance().getMonManager().calculerLesTourneesSelonMode(Controleur.getInstance().getMaDemande(), Controleur.getInstance().getMonPlan(), nbLivreur,mode);
 		Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPosteCalcul());
 	}
 	
 	/**
-	 * Methode pour annuler une commande
+	 * Methode pour annuler une commande.
 	 */
 	public void undo() {
 		Controleur.getInstance().getHistorique().undo();
 	}
 	
 	/**
-	 * Methode pour effectuer une commande
+	 * Methode pour effectuer une commande.
 	 */
 	public void redo() {
 		Controleur.getInstance().getHistorique().redo();
@@ -79,8 +83,8 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 
 	/**
-	 * Methode pour exporter la feuille de route
-	 * @throws Exception l'exception lors ecriturer du fichier.
+	 * Methode pour exporter la feuille de route.
+	 * @see Etat.
 	 */
 	@Override
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
