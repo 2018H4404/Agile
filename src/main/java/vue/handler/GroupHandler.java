@@ -20,6 +20,10 @@ public class GroupHandler implements EventHandler<MouseEvent> {
     private double oldScreenX;
     private double oldScreenY;
 
+    /**
+     * Contstructeur de la classe GroupHandler.
+     * @param unGroup : le groupe ou nous voulons ajouter ce handler.
+     */
     public GroupHandler(Group unGroup) {
         this.monGroup = unGroup;
     }

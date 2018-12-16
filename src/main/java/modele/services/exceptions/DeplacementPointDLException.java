@@ -7,7 +7,12 @@ package modele.services.exceptions;
 */
 
 public class DeplacementPointDLException extends Exception {
-	static String EXCEPTION_MESSAGE = "Un point de livraison ne peut pas être déplacé vers la même tournée.";
+	static String EXCEPTION_MESSAGE = "Un point de livraison ne peut pas etre deplace vers la meme tournee.";
+	
+	/**
+	 * Constructeur de la classe DeplacementPointDLException.
+	 * L'exception est lancee quand le deplacement se passe au sein d'une meme tournee.
+	 */
 	public DeplacementPointDLException(){
         super(EXCEPTION_MESSAGE);
     }

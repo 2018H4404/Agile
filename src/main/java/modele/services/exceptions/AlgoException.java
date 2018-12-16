@@ -10,7 +10,7 @@ package modele.services.exceptions;
 public class AlgoException extends Exception {
 
 	/**
-	 * 
+	 * Constructeur de la classe AlgoException.
 	 * @param msg message de l'exception.
 	 */
 	public AlgoException(String msg){

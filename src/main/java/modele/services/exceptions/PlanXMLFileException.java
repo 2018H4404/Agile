@@ -11,6 +11,10 @@ package modele.services.exceptions;
 public class PlanXMLFileException extends Exception {
 	static String EXCEPTION_MESSAGE = "Le fichier XML fourni ne correspond pas a un plan.";
 
+	/**
+	 * Constructeur de la classe PlanXMLFileException.
+	 * L'exception est lancee quand le fichier XML ne correspond pas a un plan.
+	 */
 	public PlanXMLFileException() {
 		super(EXCEPTION_MESSAGE);
 	}

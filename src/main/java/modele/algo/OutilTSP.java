@@ -14,9 +14,9 @@ import modele.metier.Intersection;
 public class OutilTSP {
 	
 	/**
-	 * Methode qui retourne toutes les intersections des demandes.
-	 * @param demande les demande de livraison.
-	 * @return la liste des demandes de livraison.
+	 * Methode qui retourne toutes les intersections d'une demande de livraison.
+	 * @param demande : la demande de livraison.
+	 * @return la liste qui contient l'entrepot et les points de livraison dans la demande passee.
 	 */
 	public static ArrayList<Intersection> getAllIntersectionDemande(DemandeLivraison demande){
 		Collection<Entrepot> entrepots = demande.getAllEntrepots();
@@ -32,12 +32,13 @@ public class OutilTSP {
 	}
 	
 	/**
-	 * Methode pour initialiser le cout de la demande par TSP.
-	 * @param unPlan le plan de la ville.
-	 * @param intersectionsDemande les intersections de la demande.
-	 * @param cout le cout du chemin.
-	 * @param pccs le plus court chemin.
-	 * @param length la longueur du chemin.
+	 * Methode pour initialiser les couts(en secondes) des chemins 
+	 * entre l'entrepot et les points de livraison de la demande pour TSP.
+	 * @param unPlan : le plan de la ville.
+	 * @param intersectionsDemande : les intersections de la demande.
+	 * @param cout : les couts calcules des chemins.
+	 * @param pccs : les plus courts chemins trouves.
+	 * @param length : le nombre de intersections dans la demande(entrepot et point de livraison).
 	 */
 	public static void initialisationTabCoutEtChemin(Plan unPlan, ArrayList<Intersection> intersectionsDemande, int[][] cout, Chemin[][] pccs, int length) throws Exception{
 		for(int i = 0; i < length; i++) {
@@ -58,10 +59,10 @@ public class OutilTSP {
 	}
 	
 	/**
-	 * Methode pour initialiser la duree de la demande par TSP.
-	 * @param intersectionsDemande la liste des intersections des demandes.
-	 * @param duree la duree des demandes.
-	 * @param length la longueur des demandes.
+	 * Methode pour initialiser la duree de la demande de livraison pour TSP.
+	 * @param intersectionsDemande : la liste des intersections des demandes.
+	 * @param duree : les durees trouvees pour la demande passee.
+	 * @param length : le nombre de intersections dans la demande(entrepot et point de livraison).
 	 */
 	public static void intialisationTabDuree( ArrayList<Intersection> intersectionsDemande, int[] duree, int length) {
 		duree[0] = 0;

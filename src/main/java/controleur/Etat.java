@@ -16,7 +16,7 @@ public interface Etat {
 	/**
 	 * Methode de la classe Etat pour charger un plan selon le fichier XML passe.
 	 * 
-	 * @param f le fichier XML a charger.
+	 * @param f : le fichier XML a charger.
 	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void chargerFichierPlan(File f) throws Exception;
@@ -24,8 +24,8 @@ public interface Etat {
 	/**
 	 * Methode de la classe Etat pour calculer les tournees selon le nombre de livreur et le mode passe.
 	 * 
-	 * @param nbLivreur le nombre de livreurs.
-	 * @param mode      le mode choisi par l'utilisateur pour calculer les tournees.
+	 * @param nbLivreur : le nombre de livreurs.
+	 * @param mode :      le mode choisi par l'utilisateur pour calculer les tournees.
 	 * @throws Exception si un point de livraison n'est pas livrable.
 	 */
 	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception;
@@ -33,7 +33,7 @@ public interface Etat {
 	/**
 	 * Methodede la classe Etat pour charger une demande de livraison selon le fichier XML passe.
 	 * 
-	 * @param f le fichier XML a charger.
+	 * @param f : le fichier XML a charger.
 	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void lectureLivraisonEntrepotXML(File f) throws Exception;
@@ -83,9 +83,9 @@ public interface Etat {
 	 * Methode de la classe Etat pour ajouter un point de livraison 
 	 * et passer le controleur dans l'etat EtatPosteCalcul .
 	 * 
-	 * @param idDepart   l'id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
-	 * @param idNouvelle l'id du point de livraison a ajouter.
-	 * @param duree      la duree du nouveau point de livraison.
+	 * @param idDepart :   l'id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
+	 * @param idNouvelle : l'id du point de livraison a ajouter.
+	 * @param duree :      la duree du nouveau point de livraison.
 	 * @throws Exception si le point de livraison a ajouter n'est pas livrable.
 	 */
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception;
@@ -94,7 +94,7 @@ public interface Etat {
 	 *  Methode de la classe Etat pour supprimer un point de livraison 
 	 * et passer le controleur dans l'etat EtatPosteCalcul .
 	 * 
-	 * @param id du point de livraison a supprimer.
+	 * @param id : du point de livraison a supprimer.
 	 * @throws Exception si erreur lors de la suppression du point de livraison.
 	 */
 	public void effectuerSupprimerPointLivraison(long id) throws Exception;
@@ -110,8 +110,8 @@ public interface Etat {
 	 * * Methode de la classe Etat pour deplacer un point de livraison 
 	 * et passer le controleur dans l'etat EtatPosteCalcul .
 	 * 
-	 * @param idADeplacer l'id du point de livraison a deplacer.
-	 * @param idApres     l'id du point de livraison apres lequel nous voulons mettre le point de livraison a deplacer.
+	 * @param idADeplacer : l'id du point de livraison a deplacer.
+	 * @param idApres :     l'id du point de livraison apres lequel nous voulons mettre le point de livraison a deplacer.
 	 * @throws Exception si le deplacement est au sein d'une meme tournee.
 	 */
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception;

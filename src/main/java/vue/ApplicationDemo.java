@@ -1,23 +1,10 @@
-//Ces exceptions, où faut-il les mettre ? 
-//throw new IntersectionNonLivrableException : Quand on clique sur un point de livraison impossible à ajouter
-//throw new UndoRedoNoPointDLException : Quand on clique sur "Undo" après avoir supprimé tous les points de livraison un par un (Zhenyu et Yang qu'avez-vous décidé ?)
-//throw new DeplacementPointDLException : Quand on déplace un point de livraison d'une tournée vers la même
-
 package vue;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
-import javafx.stage.DirectoryChooser;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeMap;
 
 import javax.swing.plaf.FileChooserUI;
 
@@ -27,12 +14,8 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -40,14 +23,7 @@ import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
-import modele.TourneeManager;
-import modele.metier.DemandeLivraison;
-import modele.metier.Intersection;
-import modele.metier.IntersectionNormal;
-import modele.metier.Plan;
-import controleur.CommandeAjouterLivraison;
 import controleur.Controleur;
-import controleur.EtatAjouterChoixNouvellePointLivraison;
 
 /**
  * La classe de la demo de l'application.
@@ -110,7 +86,8 @@ public class ApplicationDemo extends Application {
 	private MenuItem itemDeplacerLivraison;
 
 	/**
-	 * Methode permettant de commencer la demo de l'application.
+	 * Methode permettant de commencer l'application.
+	 * @parmam primaryStage : la fenetre principale.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -302,7 +279,7 @@ public class ApplicationDemo extends Application {
 	}
 
 	/**
-	 * Methode pour ajouter la duree saisie par utilisateur.
+	 * Methode pour obtenir la duree saisie par utilisateur.
 	 * @return la duree que l'utilisateur a saisi
 	 */
 	public int getDuree() {
@@ -319,7 +296,7 @@ public class ApplicationDemo extends Application {
 	/**
 	 * Methode pour modifier l'information dans le labelInfo.
 	 * 
-	 * @param texte : info à saisie
+	 * @param texte : info a mettre dans le labelInfo.
 	 */
 	public void setInfo(String texte) {
 		labelInfo.setTextFill(Color.BLACK);
@@ -338,9 +315,9 @@ public class ApplicationDemo extends Application {
 	/**
 	 * Methode pour ajouter la barre de navigation.
 	 * 
-	 * @param pane    pane dans IHM
-	 * @param primaryStage    primaryStage dans l'application
-	 * @param controleur    controleur 
+	 * @param pane : pane dans IHM.
+	 * @param primaryStage : la fenetre de l'application
+	 * @param controleur : un controleur. 
 	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage, Controleur controleur) {
 
@@ -382,10 +359,10 @@ public class ApplicationDemo extends Application {
 			}
 		});
 
-		// Vérifier que le fichier XML est bien formé (pas de caractère absent ou
+		// Verifier que le fichier XML est bien forme (pas de caractère absent ou
 		// manquant)
 		// sinon : throw new XMLMalFormeException
-		// Vérifier que le fichier XML correspond à une demande de livraison
+		// Verifier que le fichier XML correspond à une demande de livraison
 		// (<demandeDeLivraisons> puis <entrepot> puis <livraison>)
 		// sinon : throw new DemandeLivraisonXMLFileException
 
@@ -420,10 +397,10 @@ public class ApplicationDemo extends Application {
 			}
 		});
 
-		// Vérifier que le fichier XML est bien formé (pas de caractère absent ou
+		// Verifier que le fichier XML est bien forme (pas de caractère absent ou
 		// manquant)
 		// sinon : throw new XMLMalFormeException
-		// Vérifier que le fichier XML correspond à un plan ( <reseau> puis <noeud> et
+		// Verifier que le fichier XML correspond à un plan ( <reseau> puis <noeud> et
 		// <troncon>)
 		// sinon : throw new PlanXMLFileException
 
@@ -646,7 +623,7 @@ public class ApplicationDemo extends Application {
 		menuLivraison = new Menu("Livraison");
 		itemAjouterLivraison = new MenuItem("Ajouter un point de livraison");
 		itemSupprimerLivraison = new MenuItem("Supprimer un point de livraison");
-		itemDeplacerLivraison = new MenuItem("Déplacer un point de livraison");
+		itemDeplacerLivraison = new MenuItem("Deplacer un point de livraison");
 
 		itemAjouterLivraison.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -705,7 +682,7 @@ public class ApplicationDemo extends Application {
 					texte.arreterSynchronisationLivraison();
 					labelInfo.setTextFill(Color.BLACK);
 					labelInfo.setFont(Font.font("Verdana", FontPosture.ITALIC, 20));
-					labelInfo.setText("Choisissez le point de livraison que vous voulez déplacer.");
+					labelInfo.setText("Choisissez le point de livraison que vous voulez deplacer.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -812,7 +789,7 @@ public class ApplicationDemo extends Application {
 					Document feuilleDeRoute = Controleur.getInstance().exportFeuilleDeRoute();
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Succes");
-					alert.setContentText("feuille de route créée dans: "+ fileChooser.getInitialDirectory());
+					alert.setContentText("feuille de route creee dans: "+ fileChooser.getInitialDirectory());
 					alert.show();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -827,6 +804,10 @@ public class ApplicationDemo extends Application {
 	}
 
 
+	/**
+	 * Methode pour modifier le nombre de livreur maximum affiche dans le label.
+	 * @param nbLivreur : nombre de livreur maximum a afficher.
+	 */
 	public void setLabelNbLivreur(int nbLivreur) {
 		labelNombreLivreurs.setText("Nombre de livreurs (maximum :" + nbLivreur + ") :");
 	}
@@ -1103,7 +1084,7 @@ public class ApplicationDemo extends Application {
 	}
 
 	/**
-	 * La methode main.
+	 * La methode main pour lancer l'aaplication.
 	 * 
 	 * @param args
 	 */

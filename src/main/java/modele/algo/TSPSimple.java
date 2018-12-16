@@ -11,7 +11,9 @@ import java.util.Iterator;
 */
 
 public class TSPSimple extends TemplateTSP {
-
+	/**
+	 * @see TSP.
+	 */
 	@Override
 	protected Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
 		return new IteratorSeq(nonVus, sommetCrt);

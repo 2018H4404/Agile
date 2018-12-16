@@ -11,7 +11,7 @@ package modele.metier;
 public class IntersectionNormal extends Intersection{
 	
 	/**
-	 * Constructeur d'une intersection normal avec identifiant.
+	 * Constructeur d'une intersection normale avec identifiant.
 	 * @param id identifiant de l'intersection.
 	 */
 	public IntersectionNormal(long id) {
@@ -19,7 +19,7 @@ public class IntersectionNormal extends Intersection{
 	}
 
 	/**
-	 * Constructeur parametre d'une intersection normal.
+	 * Constructeur parametre d'une intersection normale.
 	 * @param id identifiant de l'intersection.
 	 * @param latitude latitude de l'intersection.
 	 * @param longitude longitude de l'intersection.
@@ -28,11 +28,19 @@ public class IntersectionNormal extends Intersection{
 		super(id,latitude,longitude);
 	}
 
+	/**
+	 * Surcharge de la methode toString de la classe Intersection.
+	 * @see Intersection.
+	 */
 	@Override
 	public String toString() {
 		return "IntersectionNormal [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 	
+	/**
+	 * Methode pour obtenir la duree de l'intersection correspondante.
+	 * @see Intersection.
+	 */
 	public int getDuree() {return 0;}
 	
 }

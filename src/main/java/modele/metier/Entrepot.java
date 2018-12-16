@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 /** 
- * La classe de l'entrepôt.
+ * La classe de l'entrepot.
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -17,13 +17,13 @@ public class Entrepot extends Intersection {
 	private DateTime heureDepart;
 	
 	/**
-	 * 
-	 * @param id identifiant de l'entrepôt.
-	 * @param latitude latitude de l'entrepôt.
-	 * @param longitude longitude de l'entrepôt.
-	 * @param heure heure du premier passage par l'entrepôt.
-	 * @param minute minutes du premier passage par l'entrepôt.
-	 * @param seconde secondes du premier passage par l'entrepôt.
+	 * Constructeur de l'Entrepot.
+	 * @param id : identifiant de l'entrepot.
+	 * @param latitude : latitude de l'entrepot.
+	 * @param longitude : longitude de l'entrepot.
+	 * @param heure : heure du premier passage par l'entrepot.
+	 * @param minute : minute du premier passage par l'entrepot.
+	 * @param seconde : secondesdu premier passage par l'entrepot.
 	 */
 	public Entrepot(long id, double latitude, double longitude, int heure, int minute, int seconde) {
 		super(id,latitude,longitude);
@@ -33,6 +33,9 @@ public class Entrepot extends Intersection {
 
 	}
 
+	/**
+	 * @see Intersection.
+	 */
 	@Override
 	public String toString() {
 		return "Entrepot [heureDepart=" + heureDepart + ", id=" + id + ", latitude="
@@ -46,6 +49,9 @@ public class Entrepot extends Intersection {
 		return heureDepart;
 	}
 	
+	/**
+	 * @see Intersection.
+	 */
 	public int getDuree() {return 0;}
 	
 }

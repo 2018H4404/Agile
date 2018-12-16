@@ -24,10 +24,10 @@ public class PointLivraisonVue extends Circle{
 	
 	/**
 	 * Constructeur de la vue du point de livraison.
-	 * @param x
-	 * @param y
-	 * @param radius
-	 * @param unId
+	 * @param x : coordonnee X de ce cercle.
+	 * @param y : coordonnee Y de ce cercle.
+	 * @param radius : rayon de ce cercle.
+	 * @param unId : l'id de l'objet PointLivraison auquel ce cercle correspond.
 	 */
 	public PointLivraisonVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
@@ -40,29 +40,42 @@ public class PointLivraisonVue extends Circle{
 		ajouterListener();
 	}
 	
+	/**
+	 * Methode pour mettre la valeur du boolean activeChangerCouleurSelectionne
+	 * (le boolean qui decide si le changement de couleur est active)
+	 * @param activeChangerCouleurSelectionne : un boolean.
+	 */
 	public void setActiveChangerCouleurSelectionne(boolean activeChangerCouleurSelectionne) {
 		this.activeChangerCouleurSelectionne = activeChangerCouleurSelectionne;
 	}
 
+	/**
+	 * Methode pour obtenir l'id du point de livraison auquel cette vue correspond.
+	 * @return l'id du point de livraison auquel cette vue correspond.
+	 */
 	public long getIntersectionId() {
 		return idPointLivraison;
 	}
 
 	/**
 	 * Methode pour verifier si le PointLivraisonVue est selectionne
-	 * @return
+	 * @return true si selectionnee, sinon false.
 	 */
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}
 	/**
 	 * Methode pour verifier si le PointLivraisonVue est synchronisee
-	 * @return
+	 * @return true si synchronisee, sinon false.
 	 */
 	public boolean isSynchronisee() {
 		return synchronisee;
 	}
 
+	/**
+	 * Methode pour mettre la valeur du boolean synchronisee de cette vue.
+	 * @param selectionnee : un boolean.
+	 */
 	public void setSynchronisee(boolean bool) {
 		synchronisee = bool;;
 	}
@@ -75,10 +88,17 @@ public class PointLivraisonVue extends Circle{
 		this.setRadius(radius);
 	}
 	
+	/**
+	 * Methode pour mettre la valeur du boolean selectionnee de cette vue.
+	 * @param selectionnee : un boolean.
+	 */
 	public void setSelectionnee(boolean selectionnee) {
 		this.selectionnee = selectionnee;
 	}
 	
+	/**
+	 * Methode pour mettre cette vue qui represente un point de livraison en mode synchronise.
+	 */
 	public void changerFormeSynchronise() {
 		synchronisee = true;
 		this.setRadius(8);
@@ -86,12 +106,16 @@ public class PointLivraisonVue extends Circle{
 		this.originalColor = Color.ORANGE;
 	}
 	
+	/**
+	 * Methode pour mettre la couleur originale de cette TourneeVue.
+	 * @param c : une couleur.
+	 */
 	public void setOriginalColor(Color couleur) {
 		this.originalColor = couleur;
 	}
 	
 	/**
-	 * Méthode pour ajouter un listner.
+	 * Methode pour ajouter des listners.
 	 */
 	public void ajouterListener() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -126,7 +150,7 @@ public class PointLivraisonVue extends Circle{
 	
 	
 	/**
-	 * Méthode pour changer la couleur du point de livraison sélectionné.
+	 * Methode pour changer la couleur de ce cercle qui correspond a un point de livraison en mode selectionnee.
 	 */
 	public void changerCouleurSelectionnee() {
 		if(activeChangerCouleurSelectionne == true) {
@@ -135,23 +159,13 @@ public class PointLivraisonVue extends Circle{
 	}
 	
 	/**
-	 * Méthode pour changer la couleur du point de livraison non sélectionné.
+	 * Methode pour changer la couleur de ce cercle qui correspond a un point de livraison en mode non selectionnee.
 	 */
 	public void changerCouleurNonSelectionnee() {
 		if(activeChangerCouleurSelectionne == true) {
 			this.setFill(originalColor);
 		}
 	}
-
-	/*
-	public void effaceListenerOnClick() {
-		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
-			public void handle(final MouseEvent event) {
-				
-			}
-		});
-		
-	}*/
 
 	
 	

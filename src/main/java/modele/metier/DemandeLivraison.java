@@ -28,8 +28,8 @@ public class DemandeLivraison extends Observable{
 	
 	/**
 	 * Methode pour initialiser la demande de livraison.
-	 * @param livraisons le disctionnaire des livraison.
-	 * @param entrepots le dictionnaire des entrepots.
+	 * @param livraisons : le dictionnaire des points de livraison.
+	 * @param entrepots : le dictionnaire des entrepots.
 	 */
 	public void intialiserDemandeLivraison(HashMap<Long,PointLivraison> livraisons, HashMap<Long,Entrepot> entrepots) {
 		if(this.livraisons != null && this.entrepots != null) {
@@ -43,13 +43,13 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode pour ajouter un entrepôt.
-	 * @param id identifiant de l'entrepôt.
-	 * @param latitude latitude de l'entrepôt.
-	 * @param longitude longitude de l'entrepôt.
-	 * @param heure heures de debut de la tournee.
-	 * @param minute minutes de debut de la tournee.
-	 * @param seconde secondes de debut de la tournee.
+	 * Methode pour ajouter un entrepot.
+	 * @param id : identifiant de l'entrepot.
+	 * @param latitude : latitude de l'entrepot.
+	 * @param longitude : longitude de l'entrepot.
+	 * @param heure : heure de debut de la tournee.
+	 * @param minute : minute de debut de la tournee.
+	 * @param seconde : secondes de debut de la tournee.
 	 */
 	public void ajouterEntrepot(long id, double latitude, double longitude,int heure,int minute,int seconde) {
 		Entrepot tempObject = new Entrepot(id,latitude,longitude,heure,minute,seconde);
@@ -59,8 +59,8 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * supprimer un point donne dans IHM et niveua metier
-	 * @param id   id du point supprime
+	 * Methode pour supprimer un point de livraison et notifier les vues.
+	 * @param id : id du point de livraison a supprimer.
 	 */
 	public void supprimerPoint(long id) {
 		livraisons.remove(id);
@@ -70,10 +70,10 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * ajouter un point donne et la position de ce point 
-	 * @param id  id du point a ajouter
-	 * @param latitude   latitude de ce point 
-	 * @param longitude  longitude de ce point 
+	 * Methode pour ajouter un point de livraison.
+	 * @param id : id du point a ajouter
+	 * @param latitude : latitude de ce point.
+	 * @param longitude : longitude de ce point.
 	 */
 	public void ajouterPoint(long id,double latitude, double longitude) {
 		PointLivraison tempObject = new PointLivraison(id,latitude,longitude);
@@ -97,13 +97,18 @@ public class DemandeLivraison extends Observable{
 		return retour;
 	}
 	
+	/**
+	 * Methode pour ajouter un point de livraison selon un objet PointLivraison existant.
+	 * @param id : l'id de ce point de livraison.
+	 * @param p : l'objet PointLivraison existant.
+	 */
 	public void ajouterPoint(long id,PointLivraison p) {
 		livraisons.put(id, p);
 		setChanged();
 		notifyObservers("DemandeLivraison");
 	}
 	/**
-	 * Methode permettant de liberer l'entreprôt et les livraisons.
+	 * Methode permettant de liberer l'entreprot et les points de livraison.
 	 */
 	public void clear() {
 		entrepots.clear();
@@ -111,8 +116,8 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode pour acceder à l'entrepôt par l'ID.
-	 * @param id identifiant de l'entrepôt.
+	 * Methode pour acceder a l'entrepot par l'ID.
+	 * @param id : identifiant de l'entrepot.
 	 * @return l'entrepot voulu.
 	 */
 	public Entrepot getEntrepotParId(long id) {
@@ -120,19 +125,19 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode permettant de retourner tous les entrepôts.
-	 * @return la collection de tous les entrepôts.
+	 * Methode permettant de retourner tous les entrepots.
+	 * @return la collection de tous les entrepots.
 	 */
 	public Collection<Entrepot> getAllEntrepots(){
 		return entrepots.values();
 	}
 	
 	/**
-	 * Methode pour ajouter un point de livraison.
-	 * @param id identifiant du point du livraison.
-	 * @param latitude la latitude du point de livraison.
-	 * @param longitude la longitude du point de livraison.
-	 * @param duree la duree de livraison.
+	 * Methode pour ajouter un point de livraison sans notifier les vues.
+	 * @param id : identifiant du point du livraison.
+	 * @param latitude : la latitude du point de livraison.
+	 * @param longitude : la longitude du point de livraison.
+	 * @param duree : la duree de livraison.
 	 */
 	public void ajouterPointLivraisonMetier(long id, double latitude, double longitude,int duree) {
 		PointLivraison tempObject = new PointLivraison(id,latitude,longitude,duree);
@@ -140,24 +145,24 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode pour supprimer un point de livraison.
-	 * @param id identifiant du point du livraison.
+	 * Methode pour supprimer un point de livraison sans notifier les vues.
+	 * @param id : identifiant du point du livraison.
 	 */
 	public void supprimerPointLivraisonMetier(long id) {
 		livraisons.remove(id);
 	}
 	
 	/**
-	 * Methode pour avoir un point de livraison.
-	 * @param id identification.
-	 * @return le point de livraison.
+	 * Methode pour obtenir un point de livraison.
+	 * @param id : l'id du point de livraison voulu.
+	 * @return le point de livraison correspondant.
 	 */
 	public PointLivraison getPointLivraisonParId(long id) {
 		return livraisons.get(id);
 	}
 	
 	/**
-	 * Methode permettant de retourner une collection des points de livraisons.
+	 * Methode permettant de retourner la collection des points de livraisons.
 	 * @return la collection des points de livraison.
 	 */
 	public Collection<PointLivraison> getAllPointLivraisons(){

@@ -13,6 +13,10 @@ package modele.services.exceptions;
 public class IntersectionNonLivrableException extends Exception {
 	static String EXCEPTION_MESSAGE = "Un des points de livraison n'est pas livrable..";
 
+	/**
+	 * Constructeur de la classe IntersectionNonLivrableException.
+	 * L'exception est lancee quand un point de livraison est non livrable.
+	 */
 	public IntersectionNonLivrableException() {
 		super(EXCEPTION_MESSAGE);
 	}

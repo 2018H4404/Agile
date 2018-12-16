@@ -20,12 +20,13 @@ public class IntersectionNormalVue extends Circle{
 	private Color originalColor;
 	private double copieX;
 	private double copieY;
+	
 	/**
 	 * Constructeur de la vue de l'intersection normale.
-	 * @param x
-	 * @param y
-	 * @param radius
-	 * @param unId
+	 * @param x : coordonnee X de ce cercle.
+	 * @param y : coordonnee Y de ce cercle.
+	 * @param radius : rayon de ce cercle.
+	 * @param unId : l'id de l'objet IntersectionNormal auquel ce cercle correspond.
 	 */
 	public IntersectionNormalVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
@@ -38,24 +39,32 @@ public class IntersectionNormalVue extends Circle{
 		ajouterListener();
 	}
 	
+	/**
+	 * Methode pour obtenir l'id de l'objet IntersectionNormal auquel ce cercle correspond.
+	 * @return l'id de l'objet IntersectionNormal auquel ce cercle correspond.
+	 */
 	public long getIntersectionId() {
 		return idInter;
 	}
 	
 	/**
-	 * Methode pour verifier si l'IntersectionVue est selectione
-	 * @return
+	 * Methode pour verifier si l'IntersectionVue est selectionne
+	 * @return true si selectionnee, sinon false.
 	 */
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}
 
+	/**
+	 * Methode pour mettre la valeur du boolean selectionnee de cette vue.
+	 * @param selectionnee : un boolean.
+	 */
 	public void setSelectionnee(boolean selectionnee) {
 		this.selectionnee = selectionnee;
 	}
 
 	/**
-	 * Méthode du listener.
+	 * Methode pour ajouter des listeners necessaires.
 	 */
 	public void ajouterListener() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -71,6 +80,9 @@ public class IntersectionNormalVue extends Circle{
 		
 	}
 	
+	/**
+	 * Methode pour ajouter des listeners necessaires.
+	 */
 	public void ajouterListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -93,24 +105,15 @@ public class IntersectionNormalVue extends Circle{
         });
 	}
 	
-	/*
-	public void effaceListenerOnClick() {
-		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
-			public void handle(final MouseEvent event) {
-				
-			}
-		});
-	}*/
-	
 	/**
-	 * Méthode pour changer la couleur de l'intersection selectionnée.
+	 * Methode pour changer la couleur de cette vue en mode selectionnee.
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setFill(Color.YELLOW);
 	}
 	
 	/**
-	 * Méthode pour changer la couleur de l'intersection non sélectionnée.
+	 * Methode pour changer la couleur de cette vue en mode non selectionnee.
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setFill(originalColor);

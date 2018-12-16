@@ -66,8 +66,8 @@ public class SerialiseurFeuilleDeRoute {
 
 	/**
 	 * Methode pour ecrire une tournee dans le document pdf
-	 * @param tournees   le resultat final des tournees calculees
-	 * @param contenuLabel     l'info du resultat des tournees calculees
+	 * @param tournees : le resultat final des tournees calculees
+	 * @param contenuLabel : l'info du resultat des tournees calculees
 	 * @return  l'info du resultat des tournees calculees
 	 * @throws DocumentException
 	 */

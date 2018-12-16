@@ -20,11 +20,11 @@ public class TronconVue extends Line{
 	
 	/**
 	 * constructeur de la vue troncon.
-	 * @param startX
-	 * @param startY
-	 * @param endX
-	 * @param endY
-	 * @param name
+	 * @param startX : coordonnee X du point de debut de cette ligne.
+	 * @param startY : coordonnee Y du point de fin de cette ligne.
+	 * @param endX : coordonnee X du point de debut de cette ligne.
+	 * @param endY : coordonnee Y du point de fin de cette ligne.
+	 * @param name : le nom de rue auquel ce troncon d'une tournee correspond.
 	 */
 	public TronconVue(double startX, double startY, double endX, double endY, String name) {
 		super(startX,startY,endX,endY);
@@ -36,7 +36,7 @@ public class TronconVue extends Line{
 	}
 	
 	/**
-	 * Méthode pour ajouter un listner.
+	 * Méthode pour ajouter des listeners.
 	 */
 	public void ajouterListner() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -52,23 +52,31 @@ public class TronconVue extends Line{
 	}
 	
 	/**
-	 * Méthode pour changer la couleur du troncon sélectionné.
+	 * Méthode pour changer la couleur de cette ligne qui correspond a un troncon en mode selectionnee.
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setStroke(Color.ORANGE);
 	}
 	
 	/**
-	 * Méthode pour changer la couleur du troncon non séléctionné.
+	 * Méthode pour changer la couleur  de cette ligne qui correspond a un troncon en mode non selectionnee.
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setStroke(originalColor);
 	}
 	
+	/**
+	 * Methode pour mettre la couleur originale de cette TronconVue.
+	 * @param c : une couleur.
+	 */
 	public void setOriginalColor(Color c) {
 		this.originalColor = c;
 	}
 	
+	/**
+	 * Methode pour retourner le nom de rue auquel ce troncon correspond.
+	 * @return le nom de rue correspondant.
+	 */
 	public String getNomRue() {
 		return rueName;
 	}

@@ -17,10 +17,10 @@ public class EntrepotVue extends Circle{
 	
 	/**
 	 * Contructeur de la vue de l'entrepôt.
-	 * @param x
-	 * @param y
-	 * @param radius
-	 * @param unId
+	 * @param x : coordonnee X de ce cercle.
+	 * @param y : coordonnee Y de ce cercle.
+	 * @param radius : rayon de ce cercle.
+	 * @param unId : l'id de l'objet Entrepot auquel ce cercle correspond.
 	 */
 	public EntrepotVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
@@ -28,6 +28,10 @@ public class EntrepotVue extends Circle{
 		this.idEntrepot = unId;
 	}
 	
+	/**
+	 * Methode pour obtenir l'id de l'entrepot auquel cette vue correspond.
+	 * @return l'id de l'entrepot auquel cette vue correspond.
+	 */
 	public long getIntersectionId() {
 		return idEntrepot;
 	}

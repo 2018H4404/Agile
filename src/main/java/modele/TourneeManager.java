@@ -52,10 +52,18 @@ public class TourneeManager extends Observable {
 		this.listeTournees.clear();
 	}
 	
+	/**
+	 * Methode pour mettre la limite du temps.
+	 * @param unTime : une limite du temps.
+	 */
 	public void setTimeLimite(int unTime) {
 		TIME_LIMITE = unTime;
 	}
 
+	/**
+	 * Methode pour obtenir la limite du temps.
+	 * @return la limite du temps actuel du tourneeManager.
+	 */
 	public int getTimeLimite() {
 		return TIME_LIMITE;
 	}
@@ -97,10 +105,10 @@ public class TourneeManager extends Observable {
 	/**
 	 * Methode pour calculer les tournees selon le mode choisi par l'utilisateur
 	 * 
-	 * @param demande les demandes de livraison.
-	 * @param unPlan  le plan de la ville.
-	 * @param nbLivreur Nombre de livreurs.
-	 * @param mode mode choisi par l'utilisateur (1 pour sans clustering et 2
+	 * @param demande : la demande de livraison.
+	 * @param unPlan :  le plan de la ville.
+	 * @param nbLivreur : Nombre de livreurs.
+	 * @param mode : mode choisi par l'utilisateur (1 pour sans clustering et 2
 	 *                pour clustering).
 	 */
 	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur, int mode)
@@ -116,9 +124,9 @@ public class TourneeManager extends Observable {
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version sans
 	 * clustering)
 	 * 
-	 * @param demande les demandes de livraison.
-	 * @param unPlan  le plan de la ville.
-	 * @param         nbLivreur: Nombre de livreurs.
+	 * @param demande : la demande de livraison.
+	 * @param unPlan :  le plan de la ville.
+	 * @param nbLivreur : Nombre de livreurs.
 	 */
 	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -183,9 +191,9 @@ public class TourneeManager extends Observable {
 	 * Methode pour calculer les tournees selon le nombre de livreur (Version
 	 * clustering).
 	 * 
-	 * @param         nbLivreur: Nombre de livreurs.
-	 * @param demande les demandes de livraison.
-	 * @param unPlan  le plan de la ville.
+	 * @param nbLivreur : Nombre de livreurs.
+	 * @param demande : la demande de livraison.
+	 * @param unPlan : le plan de la ville.
 	 */
 	public void calculerLesTourneesClustering(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -269,11 +277,11 @@ public class TourneeManager extends Observable {
 	}
 	
 	/**
-	 * Methode pour les positions des entrepots dans la meilleure solution trouvee
+	 * Methode pour trouver les positions des entrepots dans la meilleure solution trouvee
 	 * (methode utilisee pour une solution trouvee avec l'algo sans clustering).
 	 * (existence des entrepots fictifs)
-	 * @param meilleureSolution : meilleureSolution trouvee .
-	 * @return position d'entrepots dans la meilleur solution
+	 * @param : meilleureSolution meilleureSolution trouvee .
+	 * @return positions d'entrepot dans la meilleur solution
 	 */
 	private ArrayList<Integer> trouverPositionsEntrepot(Integer[] meilleureSolution) throws Exception {
 		ArrayList<Integer> retour = new ArrayList<Integer>();
@@ -285,19 +293,28 @@ public class TourneeManager extends Observable {
 		return retour;
 	}
 
+	/**
+	 * Methode pour avoir la liste des tournees stockees dans le tourneeManager.
+	 * @return la liste des tournees calculees.
+	 */
 	public ArrayList<Tournee> getListeTournees() {
 		return listeTournees;
 	}
 
+	/**
+	 * Methode pour mettre une liste des tournees dans le tourneeManager.  
+	 * @param listeTournees : une liste des tournees.
+	 */
 	public void setListeTournees(ArrayList<Tournee> listeTournees) {
 		this.listeTournees = listeTournees;
 	}
 
 	/**
-	 * Methode pour ajouter un point de livraison dans une tournee specifiee.
+	 * Methode pour ajouter un point de livraison dans une tournee specifiee.(qui notifie les vues a rafraichir).
 	 * 
-	 * @param idDepart : id du point de livraison .
-	 * @param unPlan   le plan de la ville.
+	 * @param idDepart : id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
+	 * @param idNouvelle : id du nouveau point de livraison.
+	 * @param unPlan : le plan de la ville.
 	 */
 	public void ajouterPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
 		int find = 0;
@@ -365,11 +382,12 @@ public class TourneeManager extends Observable {
 	}
 
 	/**
-	 * Methode pour ajouter un point de livraison dans une tournee specifiee(Qui ne
+	 * Methode pour ajouter un point de livraison dans une tournee specifiee(qui ne
 	 * modifie pas l'affichage).
 	 * 
-	 * @param idDepart : id du point de livraison .
-	 * @param unPlan   le plan de la ville.
+	 * @param idDepart : id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
+	 * @param idNouvelle : id du nouveau point de livraison.
+	 * @param unPlan : le plan de la ville.
 	 */
 	public void ajouterPointLivraisonMetier(long idDepart, long idNouvelle, int duree) throws Exception {
 		int find = 0;
@@ -434,10 +452,11 @@ public class TourneeManager extends Observable {
 	}
 
 	/**
-	 * Methode pour supprimer un point de livraison dans objet metier et dans vue de l'application
-	 * @param id    id du point à supprimer
-	 * @return   true si le point est bien supprime, false sinon
-	 * @throws Exception
+	 * Methode pour supprimer un point de livraison (qui notifie les vues a rafraichir).
+	 * @param id : id du point de livraison a supprimer
+	 * @return true si la tournee ou le point de livraison se situe 
+	 * a ete supprimee(cas d'une tournee qui a juste un point de livraison), false sinon.
+	 * @throws Exception si erreur durant la suppression.
 	 */
 	public boolean supprimerPointLivraison(long id) throws Exception {
 		int find = 0;
@@ -500,10 +519,11 @@ public class TourneeManager extends Observable {
 	}
 
 	/**
-	 * Methode pour supprimer un point livraison que dans les objets metiers
-	 * @param id    id du point qu'on doit supprimer
-	 * @return
-	 * @throws Exception
+	 *  Methode pour supprimer un point de livraison (qui ne notifie pas les vues a rafraichir).
+	 * @param : id id du point de livraison a supprimer
+	 * @return true si la tournee ou le point de livraison se situe 
+	 * a ete supprimee(cas d'une tournee qui a juste un point de livraison), false sinon.
+	 * @throws Exception si erreur durant la suppression.
 	 */
 	public boolean supprimerPointLivraisonMetier(long id) throws Exception {
 		int find = 0;
@@ -560,12 +580,12 @@ public class TourneeManager extends Observable {
 	}
 	
 	/**
-	 * Methode pour deplacer le point de idADeplacer apres idApresDeplacer et supprimer le point de idADeplacer dans la tournee
-	 * @param idADeplacer  id du point a deplacer
-	 * @param idApresDeplacer   id du point apres lequelle qu'on met notre point 
-	 * @throws Exception
+	 * Methode pour deplacer le point de livraison ayant l'id idADeplacer apres le point de livraison ayant l'id idApresDeplacer 
+	 * et supprimer le point de idADeplacer dans sa tournee.
+	 * @param idADeplacer : id du point de livraison a deplacer.
+	 * @param idApresDeplacer : id du point de livraison apres lequel on met le point de livraison a deplacer.
+	 * @throws Exception si le deplacement se passe au sein d'une meme tournee.
 	 */
-
 	public void deplacerPointLivraison(long idADeplacer, long idApresDeplacer) throws Exception {
 		// Trouver oe se situe le point e deplacer dans la liste des tournees
 		int findADplacer = 0;
@@ -693,10 +713,10 @@ public class TourneeManager extends Observable {
 	}
 
 	/**
-	 * Creer une tournee qui a juste une livraison
-	 * @param tempP   :le point qu'on ajoute dans le plan
-	 * @param prePoint    :l'entrepot de la tournee
-	 * @throws Exception
+	 * Creer une tournee qui a juste une livraison.
+	 * @param tempP : le point qu'on ajoute dans le plan.
+	 * @param prePoint : l'entrepot de la demande de livraison.
+	 * @throws Exception si erreur durant l'ajout.
 	 */
 	public void creerTourneeJusteUnLivraison(PointLivraison tempP, Intersection prePoint) throws Exception {
 		Controleur.getInstance().getMaDemande().ajouterPoint(tempP.getId(), tempP);
@@ -718,11 +738,10 @@ public class TourneeManager extends Observable {
 	}
 	
 	/**
-	 * Get le point precedent du point qu'on donne
-	 * @param id   : id du point 
-	 * @return  point livraison trouve.
+	 * Obtenir l'id du point de livraison etant avant du point de livraison passe en parametre dans une tournee.
+	 * @param id : id d'un point de livraison.
+	 * @return point livraison trouve.
 	 */
-
 	public Intersection getPrePointLivraisonId(long id) {
 		int find = 0;
 		Intersection retour = null;

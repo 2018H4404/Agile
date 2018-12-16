@@ -15,7 +15,9 @@ import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
@@ -73,6 +75,7 @@ public class VueTextuelle extends Parent implements Observer {
 
 	/**
 	 * Constructeur de la vue textuelle.
+	 * @param unParent : l'application qui contient cette vue textuelle.
 	 */
 	public VueTextuelle(ApplicationDemo unParent) {
 		// Intialisation de sa compagnie par defaut
@@ -192,14 +195,26 @@ public class VueTextuelle extends Parent implements Observer {
 		this.getChildren().add(separator);
 	}
 
+	/**
+	 * Methode qui fait la vue textuelle connaitre la vue textuelle qui l'accompagne.
+	 * @param vue : une vue graphique.
+	 */
 	public void setCompagnie(VueGraphique vue) {
 		this.compagnie = vue;
 	}
 
+	/**
+	 * Methode pour modifier le nom de rue affiche.
+	 * @param nomRue : un nom de rue.
+	 */
 	public void setTabNomRue(String nomRue) {
 		monLabel.setText(nomRue);
 	}
 	
+	/**
+	 * Methode pour modifier la latitude et la lonfitude affichee.
+	 * @param texte : la latitude et la longitude a afficher.
+	 */
 	public void setInfoIntersection(String texte) {
 		infoPourIntersection.setText(texte);
 	}
@@ -283,9 +298,9 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui ajoute les checkBoxs du filtre dans le panneau Tournee
+	 * Methode qui ajoute les checkBoxs du filtre dans le panneau Tournee.
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees
+	 * @param manager : TourneeManager qui contient la liste des tournees.
 	 */
 	public void ajouterFiltreTournees(TourneeManager manager) {
 		conteneurFiltres.getChildren().clear();
@@ -304,9 +319,9 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui mettre a jour l'info d'une tournee
+	 * Methode qui mettre a jour l'info d'une tournee.
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees
+	 * @param manager : TourneeManager qui contient la liste des tournees.
 	 */
 	public void changerInfoTourneePane(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();
@@ -356,9 +371,9 @@ public class VueTextuelle extends Parent implements Observer {
 
 	/**
 	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement
-	 * (Sans supprimer)
+	 * (Sans supprimer).
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees
+	 * @param manager : TourneeManager qui contient la liste des tournees.
 	 */
 	public void changerInfoTourneePaneSansSupprimer(TourneeManager manager) {
 		int indexUn = manager.getTourneeAjouterIndex();
@@ -451,9 +466,9 @@ public class VueTextuelle extends Parent implements Observer {
 
 	/**
 	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement
-	 * (Quand on supprime une tournee)
+	 * (Quand on supprime une tournee).
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees
+	 * @param manager : TourneeManager qui contient la liste des tournees.
 	 */
 	public void changerInfoTourneePaneSupprimer(TourneeManager manager) {
 		ajouterTimeTableTournees(manager);
@@ -463,8 +478,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui ajoute l'agenda planifie pour
-	 * l'horaire dans le panneau infos dans le TitledPane Tournees
+	 * Methode qui ajoute l'agenda planifie pour l'horaire dans le panneau infos.
 	 * 
 	 * @param manager : TourneeManager qui contient la liste des tournees
 	 */
@@ -528,7 +542,7 @@ public class VueTextuelle extends Parent implements Observer {
 
 	/**
 	 * Methode qui ajoute des listeners necessaire pour les composants dans la vue
-	 * textuelle
+	 * textuelle.
 	 */
 	public void ajouterListeners() {
 		for (int i = 0; i < lesFiltres.length; i++) {
@@ -565,7 +579,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui efface les contenus de la vue textuelle
+	 * Methode qui efface les contenus de la vue textuelle.
 	 */
 	public void clearVue() {
 		conteneurFiltres.getChildren().clear();

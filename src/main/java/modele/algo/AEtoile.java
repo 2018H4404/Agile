@@ -29,18 +29,25 @@ public class AEtoile {
 	
 	private static final double RAYON_TERRE = 6378.137;
 	
+	/**
+	 * Constructeur de la classe AEtoile.
+	 */
 	private AEtoile() {}
 	
+	/**
+	 * Methode pour obtenir l'instance de l'algo AEtoile.
+	 * @return l'instance.
+	 */
 	public static AEtoile getInstance() {
 		if(instance == null) instance = new AEtoile();
 		return instance;
 	}
 	
 	/**
-	 * Methode pour traduire le trajet.
-	 * @param chemin le chemin en intersection.
-	 * @param unPlan le plan de la ville. 
-	 * @return la traduction du chemin en trajet.
+	 * Methode pour traduire un trajet.
+	 * @param chemin : le chemin en intersections.
+	 * @param unPlan : le plan de la ville. 
+	 * @return la traduction en troncons du chemin passe en parametre.
 	 */
 	public ArrayList<Troncon> traductionTrajet(ArrayList<Intersection> chemin, Plan unPlan){
 		ArrayList<Troncon> traduction = new ArrayList<Troncon>();
@@ -60,9 +67,9 @@ public class AEtoile {
 	
 	/**
 	 * Methode permettant de trouver les voisins d'une intersection.
-	 * @param idCourant l'identifiant de l'intersection en cours.
-	 * @param monPlan le plan de la ville.
-	 * @return la liste des voisins
+	 * @param idCourant : l'identifiant de l'intersection en cours.
+	 * @param monPlan : le plan de la ville.
+	 * @return la liste des voisins(exprimee en troncons).
 	 */
 	private ArrayList<Troncon> trouverVosins(final long idCourant, Plan monPlan) {
 		return monPlan.getTronconsParOrigine(idCourant);
@@ -70,10 +77,10 @@ public class AEtoile {
 	
 	/**
 	 * Methode de l'algorithme A*.
-	 * @param depart l'intersection de depart.
-	 * @param dest l'intersection de la destination.
-	 * @param monPlan la plan de la ville.
-	 * @return la liste des intersections du chemin à prendre.
+	 * @param depart : l'intersection de depart.
+	 * @param dest : l'intersection de la destination.
+	 * @param monPlan : la plan de la ville.
+	 * @return la liste des intersections du plus court chemin trouve.
 	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan)  throws Exception{
 		if(atteignable(dest,monPlan)) {
@@ -155,9 +162,9 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Methode pour le premier element.
-	 * @param list la liste des entites de map triees.
-	 * @return le premier element.
+	 * Methode pour obtenir le premier element dans la liste des noeuds gris.
+	 * @param list : la liste des entites de map triees.
+	 * @return le premier element de la liste.
 	 */
 	public Entry<Intersection, Double> premierElement(List<Entry<Intersection, Double>> list){
 		Entry<Intersection, Double> retour = null;
@@ -167,23 +174,7 @@ public class AEtoile {
 		}
 		return retour;
 	}
-	/**
-	 * Methode pour le premier element.
-	 * @param map le mapping des intersections.
-	 * @return le premier element.
-	 */
-	/*Ancienne version
-	public Map.Entry<Double, Intersection> premierElement(Map<Double,Intersection> map){
-		Map.Entry<Double, Intersection> retour = null;
-		Set<Entry<Double,Intersection>> set = map.entrySet();
-		for(Map.Entry<Double, Intersection> element : set) {
-			retour = element;
-			break;
-		}
-		return retour;
-	}*/
-	
-	
+
 	/**
 	 * Methode pour determiner si la destination est atteignable.
 	 * @param dest : Intersection pour laquelle nous voulons determiner si c'est atteiganble.
@@ -209,47 +200,10 @@ public class AEtoile {
 	}
 	
 	/**
-	 * Methode pour trouver la valeur F.
-	 * @param unInter une intersection.
-	 * @param distanceEstimeeF la distance estimee de F.
-	 * @return la valeur de F.
-	 */
-	/*
-	public Double trouverValuerF(Intersection unInter, HashMap<Intersection,Double> distanceEstimeeF){
-		Double retour = 0.0;
-		Set<Entry<Intersection,Double>> set = distanceEstimeeF.entrySet();
-		for(Map.Entry<Intersection,Double> element : set) {
-			if(element.getKey().equals(unInter)) {
-				retour = element.getValue();
-				break;
-			}
-		}
-		return retour;
-	}*/
-	
-	/**
-	 * Methode pour trouver la cle
-	 * @param inter une intersection.
-	 * @param map un mapping d'intersection.
-	 * @return retourn la cle.
-	 */
-	public Double trouverKey(Intersection inter, Map<Double,Intersection> map) {
-		Double keyTrouve = 0.0;
-		Set<Entry<Double,Intersection>> set = map.entrySet();
-		for(Map.Entry<Double, Intersection> element : set) {
-			if(inter.equals(element.getValue())) {
-				keyTrouve = element.getKey();
-				break;
-			}
-		}
-		return keyTrouve;
-	}
-	
-	/**
 	 * Methode de l'heuristique.
-	 * @param depart intersection de depart.
-	 * @param dest intersection d'arrivee.
-	 * @return retourne la distance entre le depart et l'arrivee.
+	 * @param depart : intersection de depart.
+	 * @param dest : intersection de destination.
+	 * @return retourne la distance estimee entre le depart et la destination.
 	 */
 	public double heuristique(Intersection depart, Intersection dest) {
 		return getDistance(depart.getLatitude(), depart.getLongitude(), dest.getLatitude(), dest.getLongitude());
@@ -257,8 +211,8 @@ public class AEtoile {
 	
 	/**
 	 * Methode pour savoir si le noeud est gris.
-	 * @param gris map des noeuds gris.
-	 * @param voisin identifiant du voisin (noeud actuel considere).
+	 * @param gris : map des noeuds gris.
+	 * @param voisin : id du voisin (noeud actuel considere).
 	 * @return retourne vrai si le noeud est gris.
 	 */
 	public boolean isGris(Map<Intersection, Double> gris, Long voisin) {
@@ -271,30 +225,13 @@ public class AEtoile {
 		}
 		return retour;
 	}
-	/**
-	 * Methode pour savoir si le noeud est gris.
-	 * @param gris noeuds gris.
-	 * @param voisin identifiant du voisin (noeud actuel considere).
-	 * @return retourne vrai si le noeud est gris.
-	 */
-	/* Ancienne version
-	public boolean isGris(Map<Double, Intersection> gris, Long voisin) {
-		boolean retour = false;
-		Set<Entry<Double,Intersection>> tempSet = gris.entrySet();
-		for(Entry<Double,Intersection> element : tempSet) {
-			if(element.getValue().getId() == voisin) {//.getId()
-				retour = true;
-			}
-		}
-		return retour;
-	}*/
 	
 	/**
 	 * Methode pour calculer la distance entre deux points.
-	 * @param latStart la latitude de debut.
-	 * @param longStart la longitude du debut.
-	 * @param latEnd la latitude d'arrivee.
-	 * @param longEnd la longitude d'arrivee.
+	 * @param latStart : la latitude de debut.
+	 * @param longStart : la longitude du debut.
+	 * @param latEnd : la latitude d'arrivee.
+	 * @param longEnd : la longitude d'arrivee.
 	 * @return la distance entre les deux points.
 	 */
 	public double getDistance(double latStart,double longStart,double latEnd,double longEnd)
@@ -313,8 +250,8 @@ public class AEtoile {
     }
 	
 	/**
-	 * Methode pour convertire un degre à un radian.
-	 * @param d le degre de l'angle.
+	 * Methode pour convertire un degre en un radian.
+	 * @param d : le degre de l'angle.
 	 * @return la valeur en radian.
 	 */
 	private double rad(double d)

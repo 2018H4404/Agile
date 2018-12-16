@@ -17,22 +17,15 @@ public class Chemin {
 	
 	/**
 	 * Constructeur parametre du chemin.
-	 * @param uneListeIntersections une liste d'intersections.
-	 * @param uneListeTroncons 
+	 * @param uneListeIntersections : une liste d'Intersections.
+	 * @param uneListeTroncons : une liste des Troncons.
 	 */
 	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons) {
 		this.listeIntersections = uneListeIntersections;
 		this.listeTroncons = uneListeTroncons;
 	}
 	
-	/**
-	 * Constructeur parametre du chemin.
-	 * @param uneListeIntersections une liste d'intersections.
-	 * @param uneListeTroncons 
-	 * @param uneDuree la duree utilisee pour parcourir ce chemin
-	 */
-	
-	
+	//Getter et Setter
 	public ArrayList<Intersection> getListeIntersections() {
 		return listeIntersections;
 	}
@@ -67,7 +60,7 @@ public class Chemin {
 	
 	/**
 	 * Methode pour avoir le cout du chemin.
-	 * @return un double qui represente le cout du chemin.
+	 * @return un double(la distance) qui represente le cout du chemin.
 	 */
 	public double getCout() {
 		double somme = 0.0;

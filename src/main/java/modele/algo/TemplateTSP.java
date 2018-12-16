@@ -25,17 +25,20 @@ public abstract class TemplateTSP implements TSP {
 	private int coutMeilleureSolution = 0;
 	private Boolean tempsLimiteAtteint;
 
+	/**
+	 * @see TSP.
+	 */
 	public Boolean getTempsLimiteAtteint() {
 		return tempsLimiteAtteint;
 	}
 
 	/**
-	 * Methode qui calcule une repartition des points de livraisons sur les
+	 * Methode qui calcule une repartition des nombres des points de livraisons sur les
 	 * livreurs.
 	 * 
 	 * @param nbLivreur         : nombre de livreur.
-	 * @param nbPointLivraisons : nombre de points de livraisons total.
-	 * @return le clustering des points de livraison par livreur.
+	 * @param nbPointLivraisons : nombre total des points de livraisons.
+	 * @return le clustering des nombres de points de livraison pour les livreurs.
 	 */
 	public int[] clusteringNbPointLivraisonParLivreurNaive(int nbLivreur, int nbPointLivraisons) {
 		int[] resultat = new int[nbLivreur];
@@ -66,12 +69,12 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Methode qui calcule un clustering des points de livraisons
+	 * Methode qui calcule un clustering des points de livraisons.
 	 * 
-	 * @param nbSommets    : nombre de sommets totals
-	 * @param nbParLivreur : liste des nombres de points de livraison par livreur
-	 * @param cout         : le cout entre differents points de livraisons
-	 * @retour liste des groupes des points de livraison
+	 * @param nbSommets    : nombre de sommets.
+	 * @param nbParLivreur : liste des nombres de points de livraison par livreur.
+	 * @param cout         : les couts entre differents points de livraisons.
+	 * @retour liste des groupes des points de livraison.
 	 */
 	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
 		ArrayList<int[]> retour = new ArrayList<int[]>();
@@ -112,11 +115,11 @@ public abstract class TemplateTSP implements TSP {
 
 	/**
 	 *  Methode pour trouver une solution.
-	 *  @param tpsLimit: le temps limite pour trouver une solution saisi par l'utilisateur
-	 *  @param nbSommets: le nombre de sommets totals
-	 *  @param cout: le cout entre differents points de livraisons
-	 *  @param duree: duree[i] = duree pour visiter le sommet i
-	 *  @param nbLivreur: le nombre de livreurs totals                                 
+	 *  @param tpsLimit: le temps limite pour trouver une solution saisi par l'utilisateur.
+	 *  @param nbSommets: le nombre des sommets.
+	 *  @param cout: le cout entre differents points de livraison.
+	 *  @param duree: duree[i] = duree pour visiter le sommet i.
+	 *  @param nbLivreur: le nombre de livreurs.                                 
 	 */
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur) {
 		tempsLimiteAtteint = false;
@@ -132,12 +135,18 @@ public abstract class TemplateTSP implements TSP {
 				nbPointLivraisonParLivreur, 0, nbLivreur - 1, 0);
 	}
 
+	/**
+	 * @see TSP.
+	 */
 	public Integer getMeilleureSolution(int i) {
 		if ((meilleureSolution == null) || (i < 0) || (i >= meilleureSolution.length))
 			return null;
 		return meilleureSolution[i];
 	}
 
+	/**
+	 * @see TSP.
+	 */
 	public int getCoutMeilleureSolution() {
 		return coutMeilleureSolution;
 	}
@@ -152,7 +161,7 @@ public abstract class TemplateTSP implements TSP {
 	 *                                   i.
 	 * @param nbTourneeAvantDest         : nombre de tournees qui doivent etre
 	 *                                   faites avant la derniere tournee.
-	 * @param tourneeFaite               : nombre de tournees deja parcouru.
+	 * @param tourneeFaite               : nombre de tournees deja parcourues.
 	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison
 	 *                                   par livreur.
 	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le
@@ -194,6 +203,13 @@ public abstract class TemplateTSP implements TSP {
 	 *                  nbSommets
 	 * @param tpsDebut  : moment ou la resolution a commence
 	 * @param tpsLimite : limite de temps pour la resolution
+	 * @param nbTourneeAvantDest         : nombre de tournees qui doivent etre
+	 *                                   faites avant la derniere tournee.
+	 * @param tourneeFaite               : nombre de tournees deja parcourues.
+	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison
+	 *                                   par livreur.
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le
+	 *        livreur actuel.
 	 */
 	void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout,
 			int[] duree, long tpsDebut, int tpsLimite, int[] nbPointLivraisonParLivreur,

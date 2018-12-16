@@ -12,11 +12,19 @@ import javafx.scene.control.TitledPane;
 public class LivraisonPane extends TitledPane{
 	private long id;
 	
+	/**
+	 * Constructeur de la classe LivraisonPane.
+	 * @param unId : l'id du point de livraison auquel ce panneau correspond.
+	 */
 	public LivraisonPane(long unId) {
 		super();
 		this.id = unId;
 	}
 	
+	/**
+	 * Methode pour obtenir l'id du point de livraison auquel ce panneau correspond. 
+	 * @return l'id du point de livraison auquel ce panneau correspond. 
+	 */
 	public long getLivraisonId() {
 		return this.id;
 	}

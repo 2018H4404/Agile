@@ -8,6 +8,11 @@ package modele.services.exceptions;
 @SuppressWarnings("serial")
 public class XMLMalFormeException extends Exception {
 	static String EXCEPTION_MESSAGE = "Le fichier XML contient une erreur.(mal forme)";
+	
+	/**
+	 * Constructeur de la classe XMLMalFormeException.
+	 * L'Exception est lancee quand le fichier XML est mal forme.
+	 */
 	public XMLMalFormeException(){
 		super(EXCEPTION_MESSAGE);
     }

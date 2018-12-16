@@ -8,15 +8,13 @@ import java.util.Observer;
 import controleur.CommandeAjouterLivraison;
 import controleur.CommandeSupprimeLivraison;
 import controleur.Controleur;
+import javafx.scene.control.*;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -36,6 +34,7 @@ import vue.element.IntersectionNormalVue;
 import vue.element.PointLivraisonVue;
 import vue.element.TourneeVue;
 import vue.element.TronconVue;
+import vue.element.VeloVue;
 import vue.handler.GroupHandler;
 
 /**
@@ -55,6 +54,12 @@ public class VueGraphique extends Parent implements Observer {
 	private Group livraisonGroup;
 	private Group tourneesAfficheesGroup;
 	private ArrayList<Group> tourneesGroup;
+	private Group animationGroup;
+	private VeloVue velo;
+	private Group referenceAnima;
+	private ContextMenu menuAnima;
+	private MenuItem animation;
+	private boolean animaStart;
 	private VueTextuelle compagnie;
 	private ApplicationDemo parent;
 	private PointLivraisonVue ajoutPointChoisi = null;
@@ -70,9 +75,9 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Constructeur de la vue graphique.
 	 * 
-	 * @param lFenetre la longueure de la fenetre.
-	 * @param hFenetre la hauteur de la fenetre.
-	 * @param unParent le parent.
+	 * @param lFenetre : la longueur de la fenetre.
+	 * @param hFenetre : la hauteur de la fenetre.
+	 * @param unParent : le parent (l'application).
 	 */
 	public VueGraphique(double lFenetre, double hFenetre, ApplicationDemo unParent) {
 		// Intialisation de sa compagnie par defaut
@@ -84,6 +89,18 @@ public class VueGraphique extends Parent implements Observer {
 		ScrollPane paneGraphique = new ScrollPane();
 		BorderPane container = new BorderPane();
 		Slider zoomSlider = new Slider();
+		velo = new VeloVue(this);
+		menuAnima = new ContextMenu();
+		animation = new MenuItem("Regarder le parcours de cette tournee");
+		animation.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				animaStart = true;
+				lancerAnimation(referenceAnima);
+			}
+		});
+		menuAnima.getItems().add(animation);
+		animaStart = false;
 
 		zoomSlider.setMin(1);
 		zoomSlider.setMax(3);
@@ -99,6 +116,7 @@ public class VueGraphique extends Parent implements Observer {
 		entrepotGroup = new Group();
 		livraisonGroup = new Group();
 		tourneesAfficheesGroup = new Group();
+		animationGroup = new Group();
 		tourneesGroup = new ArrayList<Group>();
 		Group rootGroup = new Group();
 		GroupHandler handler = new GroupHandler(rootGroup);
@@ -112,6 +130,7 @@ public class VueGraphique extends Parent implements Observer {
 		rootGroup.getChildren().add(entrepotGroup);
 		rootGroup.getChildren().add(livraisonGroup);
 		rootGroup.getChildren().add(tourneesAfficheesGroup);
+		rootGroup.getChildren().add(animationGroup);
 
 		rootGroup.scaleXProperty().bind(zoomSlider.valueProperty());
 		rootGroup.scaleYProperty().bind(zoomSlider.valueProperty());
@@ -126,25 +145,53 @@ public class VueGraphique extends Parent implements Observer {
 
 		this.getChildren().add(container);
 	}
+	
+	/**
+	 * Methode pour mettre la valeur du boolean animaStart dans la vue graphique.
+	 * @param unBool
+	 */
+	public void setAnimaStart(boolean unBool) {
+		animaStart = unBool;
+	}
 
+	/**
+	 * Methode pour obtenir le groupe qui contient les intersections normales affichees.
+	 * @return le groupe qui contient les intersectionNormals affiches.
+	 */
 	public Group getNoeudGroup() {
 		return this.noeudGroup;
 
 	}
 
+	/**
+	 * Methode pour obtenir le groupe qui contient les points de livraison affiches.
+	 * @return le groupe qui contient les points de livraison affiches.
+	 */
 	public Group getLivraisonGroup() {
 		return this.livraisonGroup;
 	}
+	
+	/**
+	 * Methode pour lancer une animation pour visualiser comment une tournee est parcourue.
+	 */
+	public void lancerAnimation(Group tournee) {
+		velo.creerPath(tournee, animationGroup);
+		velo.start(animationGroup);
+	}
 
 	/**
-	 * Methode pour ajouter l'event listener.
+	 * Methode pour ajouter des listeners pour les fonctionnalites 
+	 * ajouter/supprimer/deplacer un point de livraison et l'affichage du nom de rue d'un troncon.
 	 */
 	public void ajouterEventListner() {
 		tronconGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(final MouseEvent event) {
 				if (event.getTarget() instanceof TronconVue) {
-					TronconVue temp = (TronconVue) event.getTarget();
-					compagnie.setTabNomRue(temp.getNomRue());
+					MouseButton button = event.getButton();
+					if (button.equals(MouseButton.PRIMARY)) {
+						TronconVue temp = (TronconVue) event.getTarget();
+						compagnie.setTabNomRue(temp.getNomRue());
+					}
 				}
 			}
 		});
@@ -339,33 +386,51 @@ public class VueGraphique extends Parent implements Observer {
 	
 	
 /**
- * Methode pour ajouter les listeners sur les elements des rues sur le plan
- * @param g  le groupe a ajouter les listeners
+ * Methode pour ajouter les listeners sur les TourneeVues affichees dans la vue graphique.
+ * @param g : le groupe sur lequel nous devons ajouter ce listener.
  */
 	public void ajouterListenerRueNom(Group g) {
 		g.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(final MouseEvent event) {
 				if (event.getTarget() instanceof TourneeVue) {
-					TourneeVue temp = (TourneeVue) event.getTarget();
-					compagnie.setTabNomRue(temp.getNomRue());
+					MouseButton button = event.getButton();
+					if (button.equals(MouseButton.PRIMARY)) {
+						TourneeVue temp = (TourneeVue) event.getTarget();
+						compagnie.setTabNomRue(temp.getNomRue());
+					}else {
+						if(animaStart == false) {
+							referenceAnima = g;
+							double x = event.getScreenX();
+				            double y = event.getScreenY();
+							menuAnima.show(g, x, y);
+						}
+					}
 				}
 			}
 		});
 	}
 
 	/**
-	 * Methode qui parametre configure le vueTextuelle comme compagnie du vueGraphique
-	 * @param vue
+	 * Methode qui fait la vue graphique connaitre la vue textuelle qui l'accompagne.
+	 * @param vue : une vue textuelle.
 	 */
 	public void setCompagnie(VueTextuelle vue) {
 		this.compagnie = vue;
 	}
 
+	/**
+	 * Methode pour obtenir la hauteur de la vue graphique.
+	 * @return la hauteur de la vue graphique.
+	 */
 	public double getHauteur() {
 		return hauteur;
 
 	}
 
+	/**
+	 * Methode pour obtenir la largeur de la vue graphique.
+	 * @return la largeur de la vue graphique.
+	 */
 	public double getLargeur() {
 		return largeur;
 
@@ -374,7 +439,7 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Methode pour dessiner le plan.
 	 * 
-	 * @param monPlan mon plan.
+	 * @param monPlan : le plan a dessiner.
 	 */
 	public void dessinerPlan(Plan monPlan) {
 		clearVue();
@@ -403,9 +468,9 @@ public class VueGraphique extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour dessiner les demandes de livraison.
+	 * Methode pour dessiner la demande de livraison.
 	 * 
-	 * @param maDemande mes demandes de livraison.
+	 * @param maDemande : une demande de livraison a dessiner.
 	 */
 	public void dessinerDemandeLivraison(DemandeLivraison maDemande) {
 		clearEntrepotLivraison();
@@ -432,7 +497,7 @@ public class VueGraphique extends Parent implements Observer {
 	 * Methode pour generer des couleurs aleatoires que nous utilisons afin de
 	 * dessiner les tournees.
 	 * 
-	 * @param index : un index
+	 * @param index : un index.
 	 */
 	public Color genererCouleurs(int index) {
 		return couleurs[index % couleurs.length];
@@ -441,7 +506,7 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Methode pour dessiner les tournees.
 	 * 
-	 * @param manager le manager des tournee.
+	 * @param manager : l'objet TourneeManager qui stocke les tournees a dessiner.
 	 */
 	public void dessinerTournees(TourneeManager manager) {
 		clearTournees();
@@ -475,7 +540,7 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Methode pour filtrer les tournees affichees.
 	 * 
-	 * @param afficheGroup : les numeros des tournees a afficher
+	 * @param afficheGroup : les numeros des tournees a afficher.
 	 */
 	public void filtrerTournees(ArrayList<Integer> afficheGroup) {
 		clearAfficheeTournees();
@@ -530,8 +595,8 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Methode pour synchroniser la vue avec la vue textuelle.
 	 * 
-	 * @param id       : id de PointLivraisonVue qui doit etre synchronisee
-	 * @param expanded : boolean qui indique si le TitledPane est expanded
+	 * @param id       : id de PointLivraisonVue qui doit etre synchronisee.
+	 * @param expanded : boolean qui indique si le TitledPane est expanded.
 	 */
 	public void synchronisationLivraison(long id, boolean expanded) {
 		ObservableList<Node> tempLivraisons = livraisonGroup.getChildren();
@@ -666,7 +731,7 @@ public class VueGraphique extends Parent implements Observer {
 	/**
 	 * Methode pour supprimer une tournee dans la vue graphique.
 	 * 
-	 * @param manager : objet TourneeManager stocke dans le controleur
+	 * @param manager : objet TourneeManager qui stocke les tournees.
 	 */
 	public void supprimerUneTournee(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();

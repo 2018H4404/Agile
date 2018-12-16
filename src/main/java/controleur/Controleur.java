@@ -78,8 +78,8 @@ public class Controleur {
 	
   /**
    * Methode pour mettre le nouveau point de livraison a ajouter et effectuer cette operation.
-   * @param id Id du point de livraison a ajouter.
-   * @param duree la duree de ce point de livraison.
+   * @param id : Id du point de livraison a ajouter.
+   * @param duree : la duree de ce point de livraison.
    * @throws Exception si erreur durant l'operation pour ajouter un nouveau point de livraison.
    */
 	public void setAjoutNouvellePoint(long id,int duree) throws Exception{
@@ -113,7 +113,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controleur sur l'etat EtatPlanCharge et charger le plan dans le fichier XML qui est passe en parametre.
-	 * @param f le fichier XML.
+	 * @param f : le fichier XML.
 	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void chargerFichierPlan(File f) throws Exception {
@@ -122,7 +122,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controleur sur l'etat EtatDemandeLivraison et charger la demande de livraison dans le fichier XML qui est passe en parametre.
-	 * @param f le fichier XML.
+	 * @param f : le fichier XML.
 	 * @throws Exception si le fichier XML n'est pas correctement forme.
 	 */
 	public void chargerFichierDemandeLivraison(File f) throws Exception{
@@ -132,8 +132,8 @@ public class Controleur {
 	/**
 	 * Methode pour mettre le controleur sur l'etat EtatPosteCalcul et calculer les tournees
 	 * selon le nombre de livreur et le mode passe.
-	 * @param nbLivreur nombre de livreurs.
-	 * @param mode mode utilise pour calculer les tournees(1 pour sans clustering et 2
+	 * @param nbLivreur : nombre de livreurs.
+	 * @param mode : mode utilise pour calculer les tournees(1 pour sans clustering et 2
 	 *                pour clustering)
 	 * @throws Exception l'exception au calcul des tournee(Existence d'un point de livraison non livrable).
 	 */
@@ -176,7 +176,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour obtenir la duree d'un point de livraison
-	 * @param id Id du point de livraison pour lequel nous voulons obtenir la duree
+	 * @param id : Id du point de livraison pour lequel nous voulons obtenir la duree
 	 * @return la duree de ce point de livraison
 	 */
 	public int getDureePointLivraison(long id) {
@@ -185,8 +185,8 @@ public class Controleur {
 
 	/**
 	 * Methode pour obtenir un point de livraison
-	 * @param id Id du point de livraison.
-	 * @return le point de livraison correspondant
+	 * @param id : Id du point de livraison.
+	 * @return le point de livraison correspondant.
 	 */
 	public Intersection getPrePointLivraisonId(long id) throws Exception{
 		return monManager.getPrePointLivraisonId(id);
@@ -194,7 +194,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour definir la limite du temps pour calculer les tournees.
-	 * @param time une limite du temps
+	 * @param time : une limite du temps
 	 */
 	public void setTimeLimite(int time){
 		monManager.setTimeLimite(time);;
@@ -328,8 +328,8 @@ public class Controleur {
   
 	/**
 	 * Methode pour transformer la latitude en une coordonnee X dans le plan selon la hauteur de la vue graphique.
-	 * @param latitude une lattitude.
-	 * @param hauteur la hauteur de la vue graphique.
+	 * @param latitude : une lattitude.
+	 * @param hauteur : la hauteur de la vue graphique.
 	 * @return la coordonnee X calculee.
 	 */
 	public double transformerLatitude(double latitude, double hauteur) {
@@ -338,8 +338,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour transformer la longitude en une coordonnee Y dans le plan selon la largeur de la vue graphique.
-	 * @param longitude une longitude.
-	 * @param largeur la largeur de la vue graphique.
+	 * @param longitude : une longitude.
+	 * @param largeur : la largeur de la vue graphique.
 	 * @return la coordonnee Y calculee.
 	 */
 	public double transformerLongitude(double longitude, double largeur) {
@@ -348,8 +348,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour reverser le processus de la methode transformerLatitude.
-	 * @param latitudeTransforme la coordonne Y.
-	 * @param hauteur la hauteur de la vue graphique.
+	 * @param latitudeTransforme : la coordonne Y.
+	 * @param hauteur : la hauteur de la vue graphique.
 	 * @return la latitude calculee.
 	 * @throws Exception si erreur durant la transformation.
 	 */
@@ -359,8 +359,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour reverser le processus de la methode transformerLongitude.
-	 * @param longitudeTransforme une coordonnee X.
-	 * @param largeur la largeur de la vue graphique.
+	 * @param longitudeTransforme : une coordonnee X.
+	 * @param largeur : la largeur de la vue graphique.
 	 * @return la longitude calculee.
 	 * @throws Exception si erreur durant la transformation.
 	 */
@@ -370,8 +370,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour ajouter l'observateur sur les objets observables stockes dans le controleur.
-	 * @param graph la vue graphique.
-	 * @param texte la vue textuelle.
+	 * @param graph : la vue graphique.
+	 * @param texte : la vue textuelle.
 	 */
 	public void addObserver(VueGraphique graph, VueTextuelle texte) {
 		monPlan.addObserver(graph);
@@ -391,7 +391,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre le controlleur sur l'etat etatAjouterChoixNouvellePointLivraison et definir l'id du point de livraison apres lequel nous voulons realiser un ajout.
-	 * @param id l'id du point de livraison apres lequel nous voulons ajouter un nouveau point de livraison.
+	 * @param id : l'id du point de livraison apres lequel nous voulons ajouter un nouveau point de livraison.
 	 * @throws Exception si erreur lors de l'ajout de la livraison.
 	 */
 	public void setAjoutDepart(long id) throws Exception{
@@ -401,8 +401,8 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controlleur sur l'etat etatPosteCalcul et effectuer l'ajour d'un nouveau point de livraison.
-	 * @param id id du nouvau point de livraison a ajouter.
-	 * @param duree la duree du nouveau point livraison.
+	 * @param id : id du nouvau point de livraison a ajouter.
+	 * @param duree : la duree du nouveau point livraison.
 	 * @throws Exception si erreur durant l'ajout du nouveau point de livraison.
 	 */
 	public void setAjoutNouveauPoint(long id,int duree) throws Exception{
@@ -412,7 +412,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controleur sur l'etat etatChoixPointLivraisonApresDeplacer.
-	 * @param id l'id du point de livraison a deplacer.
+	 * @param id : l'id du point de livraison a deplacer.
 	 * @throws Exception si erreur durant l'execution.
 	 */
 	public void setADeplacer(long id) throws Exception{
@@ -422,7 +422,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controleur sur l'etat etatPosteCalcul et effectuer le deplacement.
-	 * @param id l'id du point de livraison apres lequel nous voulons mettre le point de livraison a deplacer.
+	 * @param id : l'id du point de livraison apres lequel nous voulons mettre le point de livraison a deplacer.
 	 * @throws Exception si le deplacement n'est pas realisable(Un deplacement dans la meme tournee).
 	 */
 	public void setApresDeplacer(long id) throws Exception{
@@ -432,7 +432,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre sur le controleur sur l'etat etatSupprimerChoixPointLivraison et supprimer le point de livraison ayant l'id passe en parametre.
-	 * @param id l'id du point de livraison a supprimer.
+	 * @param id : l'id du point de livraison a supprimer.
 	 * @throws Exception si erreur lors de l'execution.
 	 */
 	public void setSupprimerPointLivraison(long id) throws Exception{
@@ -441,7 +441,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre le controleur sur l'etat passe.
-	 * @param etatCrt un etat.
+	 * @param etatCrt : un etat.
 	 */
 	public void setEtat(Etat etatCrt) {
 		Controleur.getInstance().etat = etatCrt;
@@ -449,7 +449,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour mettre la vue graphique.
-	 * @param graph une vue graphique.
+	 * @param graph : une vue graphique.
 	 */
 	public void setGraph(VueGraphique graph) {
 		Controleur.getInstance().graph = graph;
@@ -457,7 +457,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre la vue textuelle.
-	 * @param texte une vue textuelle.
+	 * @param texte : une vue textuelle.
 	 */
 	public void setTexte(VueTextuelle texte) {
 		Controleur.getInstance().texte = texte;
@@ -497,6 +497,10 @@ public class Controleur {
 		etat.redo();
 	}
 
+	/**
+	 * Methode pour obtenir l'historique des commandes.
+	 * @return l'historique des commandes.
+	 */
 	public Historique getHistorique() {
 		return historique;
 	}
@@ -525,7 +529,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre la commande passee an parametre dans le controleur.
-	 * @param tempAjout une commande pour ajouter un point de livraison.
+	 * @param tempAjout : une commande pour ajouter un point de livraison.
 	 */
 	public void setTempAjout(CommandeAjouterLivraison tempAjout) {
 		this.tempAjout = tempAjout;
@@ -541,7 +545,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre la commande passee an parametre dans le controleur.
-	 * @param tempAjout une commande pour supprimer un point de livraison.
+	 * @param tempAjout : une commande pour supprimer un point de livraison.
 	 */
 	public void setTempSupprimer(CommandeSupprimeLivraison tempSupprimer) {
 		this.tempSupprimer = tempSupprimer;
