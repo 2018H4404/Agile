@@ -110,6 +110,7 @@ public class TourneeManager extends Observable {
 	 * @param nbLivreur : Nombre de livreurs.
 	 * @param mode : mode choisi par l'utilisateur (1 pour sans clustering et 2
 	 *                pour clustering).
+	 * @throws Exception : l'exception lors on calcule les tournees selon mode choisie
 	 */
 	public void calculerLesTourneesSelonMode(DemandeLivraison demande, Plan unPlan, int nbLivreur, int mode)
 			throws Exception {
@@ -127,6 +128,7 @@ public class TourneeManager extends Observable {
 	 * @param demande : la demande de livraison.
 	 * @param unPlan :  le plan de la ville.
 	 * @param nbLivreur : Nombre de livreurs.
+	 * @throws Exception : l'exception lors on calcule les tournees
 	 */
 	public void calculerLesTournees(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -194,6 +196,7 @@ public class TourneeManager extends Observable {
 	 * @param nbLivreur : Nombre de livreurs.
 	 * @param demande : la demande de livraison.
 	 * @param unPlan : le plan de la ville.
+	 * @throws Exception : l'exception lors on calcule les tournees en clustering
 	 */
 	public void calculerLesTourneesClustering(DemandeLivraison demande, Plan unPlan, int nbLivreur) throws Exception {
 		clear();
@@ -314,7 +317,8 @@ public class TourneeManager extends Observable {
 	 * 
 	 * @param idDepart : id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
 	 * @param idNouvelle : id du nouveau point de livraison.
-	 * @param unPlan : le plan de la ville.
+	 * @param duree : la duree du point ajoute.
+	 * @throws Exception : l'excetion lors on ajoute un point de livraison
 	 */
 	public void ajouterPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
 		int find = 0;
@@ -330,7 +334,6 @@ public class TourneeManager extends Observable {
 					posChemin = 0;
 					ArrayList<Chemin> tempChemin = t.getListeChemins();
 					for (Chemin c : tempChemin) {
-						Intersection depart = c.getIntersectionDepart();
 						Intersection dest = c.getIntersectionDest();
 						if (dest.equals(idDepart)) {
 							find = 1;
@@ -387,7 +390,8 @@ public class TourneeManager extends Observable {
 	 * 
 	 * @param idDepart : id du point de livraison apres lequel nous voulons ajouter le nouveau point de livraison.
 	 * @param idNouvelle : id du nouveau point de livraison.
-	 * @param unPlan : le plan de la ville.
+	 * @param duree : la duree du point ajoute.
+	 * @throws Exception :  l'exception lors on ajoute un point de livraison
 	 */
 	public void ajouterPointLivraisonMetier(long idDepart, long idNouvelle, int duree) throws Exception {
 		int find = 0;
@@ -403,7 +407,6 @@ public class TourneeManager extends Observable {
 					posChemin = 0;
 					ArrayList<Chemin> tempChemin = t.getListeChemins();
 					for (Chemin c : tempChemin) {
-						Intersection depart = c.getIntersectionDepart();
 						Intersection dest = c.getIntersectionDest();
 						if (dest.equals(idDepart)) {
 							find = 1;
@@ -468,7 +471,6 @@ public class TourneeManager extends Observable {
 				posChemin = 0;
 				ArrayList<Chemin> tempChemin = t.getListeChemins();
 				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
 					if (dest.equals(id)) {
 						find = 1;
@@ -520,7 +522,7 @@ public class TourneeManager extends Observable {
 
 	/**
 	 *  Methode pour supprimer un point de livraison (qui ne notifie pas les vues a rafraichir).
-	 * @param : id id du point de livraison a supprimer
+	 * @param id: id du point de livraison a supprimer
 	 * @return true si la tournee ou le point de livraison se situe 
 	 * a ete supprimee(cas d'une tournee qui a juste un point de livraison), false sinon.
 	 * @throws Exception si erreur durant la suppression.
@@ -535,7 +537,6 @@ public class TourneeManager extends Observable {
 				posChemin = 0;
 				ArrayList<Chemin> tempChemin = t.getListeChemins();
 				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
 					if (dest.equals(id)) {
 						find = 1;
@@ -596,7 +597,6 @@ public class TourneeManager extends Observable {
 				posCheminADeplacer = 0;
 				ArrayList<Chemin> tempChemin = t.getListeChemins();
 				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
 
 					if (dest.equals(idADeplacer)) {
@@ -620,7 +620,6 @@ public class TourneeManager extends Observable {
 				posCheminApresDeplacer = 0;
 				ArrayList<Chemin> tempChemin = t.getListeChemins();
 				for (Chemin c : tempChemin) {
-					Intersection depart = c.getIntersectionDepart();
 					Intersection dest = c.getIntersectionDest();
 
 					if (dest.equals(idApresDeplacer)) {

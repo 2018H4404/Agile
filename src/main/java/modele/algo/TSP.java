@@ -20,14 +20,15 @@ public interface TSP {
 	 * Cherche un circuit de duree minimale passant par chaque sommet (compris entre 0 et nbSommets-1)
 	 * @param tpsLimite : limite (en millisecondes) sur le temps d'execution de chercheSolution
 	 * @param nbSommets : nombre de sommets du graphe
-	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 <= i < nbSommets et 0 <= j < nbSommets
-	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 <= i < nbSommets
+	 * @param cout : cout[i][j] = duree pour aller de i a j, avec 0 &lt;= i &lt; nbSommets et 0 &lt;= j &lt;nbSommets
+	 * @param duree : duree[i] = duree pour visiter le sommet i, avec 0 &lt;= i &lt; nbSommets
 	 * @param nbLivreur : nombre de livreurs.
+	 * @throws AlgoException :  l'exception lors on cherche solution
 	 */
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur) throws AlgoException;
 	
 	/**
-	 * @param i
+	 * @param i la position dans la solution calculee
 	 * @return le sommet visite en i-eme position dans la solution calculee par chercheSolution
 	 */
 	public Integer getMeilleureSolution(int i);

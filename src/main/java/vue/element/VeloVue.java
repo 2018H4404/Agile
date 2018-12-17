@@ -14,7 +14,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 
 
-@SuppressWarnings("restriction")
 public class VeloVue extends Circle{
 
 	private Path monPath;

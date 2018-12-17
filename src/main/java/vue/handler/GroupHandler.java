@@ -11,7 +11,6 @@ import javafx.scene.Group;
  * @since 1.0
 */
 
-@SuppressWarnings("restriction")
 public class GroupHandler implements EventHandler<MouseEvent> {
 	 
     private Group monGroup;

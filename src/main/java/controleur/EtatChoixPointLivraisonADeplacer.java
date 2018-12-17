@@ -8,7 +8,7 @@ public class EtatChoixPointLivraisonADeplacer extends EtatDefaut{
 	/**
 	 * Methode pour passer a l'etat suivant pour choisir le point de livraison 
 	 * apres lequel nous voulons mettre le point de livraison a deplacer.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void choixPointLivraisonApresDeplacer() throws Exception {
@@ -17,7 +17,7 @@ public class EtatChoixPointLivraisonADeplacer extends EtatDefaut{
 	
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {

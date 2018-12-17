@@ -12,7 +12,6 @@ import javafx.scene.shape.Line;
  * @since 1.0
 */
 
-@SuppressWarnings("restriction")
 public class TronconVue extends Line{
 	
 	private String rueName;

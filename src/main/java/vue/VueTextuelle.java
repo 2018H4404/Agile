@@ -15,9 +15,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
@@ -49,10 +47,8 @@ import vue.element.LivraisonPane;
  * @since 1.0
  */
 
-@SuppressWarnings("restriction")
 public class VueTextuelle extends Parent implements Observer {
 
-	@SuppressWarnings("unused")
 	private VueGraphique compagnie;
 	private ApplicationDemo parent;
 	private Label monLabel;
@@ -679,6 +675,7 @@ public class VueTextuelle extends Parent implements Observer {
 	 * graphique.
 	 * 
 	 * @param id : id du point de livraison (pour trouver le panneau correspondant)
+	 * @param ordre : si ordre est true le pane est ouvert, sinon c'est fermee
 	 */
 	public void synchroniserLivraisonPane(long id, boolean ordre) {
 		for (int i = 0; i < infoParLivraison.length; i++) {

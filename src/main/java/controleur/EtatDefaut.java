@@ -15,7 +15,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 *  Methode pour charger un plan selon le fichier XML passe.
-	 *  @see Etat.
+	 *  @see Etat
 	 */
 	@Override
 	public void chargerFichierPlan(File f) throws Exception {
@@ -24,7 +24,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour calculer les tournees.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception {
@@ -33,7 +33,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour lire un fichier XML qui contient une demande de livraison.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void lectureLivraisonEntrepotXML(File f) throws Exception {
@@ -42,7 +42,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 *  Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {
@@ -52,7 +52,7 @@ public class EtatDefaut implements Etat {
 	/**
 	 * Methode pour pour activer le listener qui permet a l'utilisateur 
 	 * d'ajouter des points de livraison(qui a une duree 0) avant le calcul des tournees.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void ajouterListenerOnClick() {
@@ -61,7 +61,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour passer le controleur dans l'etat EtatAjouterChoixPointLivraison .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void ajouterPointLivraison() throws Exception {
@@ -70,7 +70,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour passer le controleur dans l'etat EtatAjouterChoixNouvellePointLivraison .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void choixNouveauPointLivraison() throws Exception {
@@ -79,7 +79,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour ajouter un point de livraison.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
@@ -88,7 +88,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour supprimeer un point de livraison.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
@@ -97,7 +97,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour passer le controleur dans l'etat EtatChoixPointLivraisonApresDeplacer .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void choixPointLivraisonApresDeplacer() throws Exception {
@@ -106,7 +106,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour effectuer le deplacement.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void effectuerDeplacement(long idADeplacer, long idApres) throws Exception {
@@ -115,7 +115,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour passer le controleur dans l'etat EtatSupprimerChoixPointLivraison .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void supprimerPointLivraison() throws Exception {
@@ -124,7 +124,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour  passer le controleur dans l'etat EtatChoixPointLivraisonADeplacer .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void deplacerPointLivraison() throws Exception {
@@ -133,7 +133,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour effectuer une commande.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void undo() {
@@ -142,7 +142,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour annuler une commande.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void redo() {
@@ -151,7 +151,7 @@ public class EtatDefaut implements Etat {
 
 	/**
 	 * Methode pour exporter la feuille de route.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {

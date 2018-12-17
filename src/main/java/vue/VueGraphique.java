@@ -148,7 +148,7 @@ public class VueGraphique extends Parent implements Observer {
 	
 	/**
 	 * Methode pour mettre la valeur du boolean animaStart dans la vue graphique.
-	 * @param unBool
+	 * @param unBool true si l'animation est commencee false sinon
 	 */
 	public void setAnimaStart(boolean unBool) {
 		animaStart = unBool;
@@ -173,6 +173,7 @@ public class VueGraphique extends Parent implements Observer {
 	
 	/**
 	 * Methode pour lancer une animation pour visualiser comment une tournee est parcourue.
+	 * @param tournee : le tournee sur laquelle on lance l'animation
 	 */
 	public void lancerAnimation(Group tournee) {
 		velo.creerPath(tournee, animationGroup);
@@ -498,6 +499,7 @@ public class VueGraphique extends Parent implements Observer {
 	 * dessiner les tournees.
 	 * 
 	 * @param index : un index.
+	 * @return couleur calcule
 	 */
 	public Color genererCouleurs(int index) {
 		return couleurs[index % couleurs.length];

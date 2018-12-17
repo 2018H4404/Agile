@@ -12,7 +12,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 
 	/**
 	 * Methode pour lancer la calcul de tournees selon le nombre de livreur et le mode passe.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception {
@@ -24,7 +24,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {
@@ -33,7 +33,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 
 	/**
 	 * Methode pour ajouter le listener qui permet a l'utilisateur d'ajouter des points de livraison avant le calcul des tournees.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	public void ajouterListenerOnClick() {
 		for (Node vue : Controleur.getInstance().getGraph().getNoeudGroup().getChildren()) {

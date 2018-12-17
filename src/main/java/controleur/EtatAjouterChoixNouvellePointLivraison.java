@@ -9,7 +9,7 @@ public class EtatAjouterChoixNouvellePointLivraison extends EtatDefaut {
 	/**
 	 * Methode de la classe Etat pour ajouter un point de livraison 
 	 * et passer le controleur dans l'etat EtatPosteCalcul .
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void effectuerAjoutPointLivraison(long idDepart, long idNouvelle, int duree) throws Exception {
@@ -20,7 +20,7 @@ public class EtatAjouterChoixNouvellePointLivraison extends EtatDefaut {
 
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {

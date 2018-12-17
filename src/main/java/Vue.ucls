@@ -17,7 +17,7 @@
   </class>  
   <package id="3" language="java" name="vue.element" project="optimodLyon" file="/optimodLyon/src/main/java/vue/element" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="184" width="438" x="463" y="161"/>    
+    <position height="274" width="456" x="463" y="161"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <class id="4" language="java" name="vue.element.EntrepotVue" project="optimodLyon" 
@@ -115,10 +115,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="vue.App" project="optimodLyon" file="/optimodLyon/src/main/java/vue/App.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1073" y="44"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+  <class id="15" language="java" name="vue.element.VeloVue" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/vue/element/VeloVue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="182" x="713" y="361"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -127,111 +127,163 @@
   <association id="16">    
     <bendpoint x="183" y="370"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="17" name="parent"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="17" name="parent">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="19">    
+    <bendpoint x="512" y="476"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="20" name="deplacerPointChoisiUn">        
+        <position height="19" width="131" x="423" y="450"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="906" y="503"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="23" name="velo"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="20" name="compagnie"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+      <attribute id="26" name="compagnie">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
-    <bendpoint x="668" y="502"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="23" name="deplacerPointChoisiDeux">        
-        <position height="18" width="127" x="589" y="410"/>      
-      </attribute>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <bendpoint x="182" y="370"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="26" name="texte"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="28">    
-    <bendpoint x="761" y="502"/>    
-    <bendpoint x="760" y="330"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="29" name="ajoutPointChoisi">        
-        <position height="18" width="83" x="722" y="381"/>      
-      </attribute>      
+    <bendpoint x="548" y="392"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="29" name="parent"/>      
       <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="31">    
+    <bendpoint x="668" y="502"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="32" name="deplacerPointChoisiDeux">        
+        <position height="19" width="143" x="589" y="464"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <bendpoint x="761" y="502"/>    
+    <bendpoint x="760" y="330"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="35" name="ajoutPointChoisi">        
+        <position height="19" width="95" x="727" y="471"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
     <bendpoint x="450" y="100"/>    
     <bendpoint x="909" y="101"/>    
     <bendpoint x="937" y="296"/>    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="32" name="infoParLivraison"/>      
-      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
+      <attribute id="38" name="infoParLivraison">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="34">    
-    <bendpoint x="449" y="239"/>    
-    <bendpoint x="450" y="124"/>    
-    <bendpoint x="800" y="124"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="35" name="ajoutInterChoisi">        
-        <position height="18" width="81" x="716" y="129"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
+  <association id="40">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="38" name="graph"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
+      <attribute id="41" name="graph">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="41" name="parent">        
-        <position height="18" width="39" x="209" y="538"/>      
-      </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="43">    
-    <bendpoint x="497" y="382"/>    
+    <bendpoint x="449" y="239"/>    
+    <bendpoint x="450" y="124"/>    
+    <bendpoint x="800" y="124"/>    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="44" name="deplacerPointChoisiUn">        
-        <position height="18" width="115" x="456" y="392"/>      
+      <attribute id="44" name="ajoutInterChoisi">        
+        <position height="18" width="81" x="716" y="129"/>      
       </attribute>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="46">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="47" name="compagnie"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
+    <bendpoint x="182" y="370"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="47" name="texte">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="50" name="compagnie">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="53" name="parent">        
+        <position height="18" width="39" x="209" y="538"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -3,18 +3,16 @@ package modele.services;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.joda.time.DateTime;
 
-import com.itextpdf.text.DocListener;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import controleur.Controleur;
@@ -22,8 +20,6 @@ import modele.metier.Chemin;
 import modele.metier.Entrepot;
 import modele.metier.Intersection;
 import modele.metier.Tournee;
-
-import com.itextpdf.text.Document;
 
 /**
  * @author baptiste.thivend
@@ -35,9 +31,9 @@ public class SerialiseurFeuilleDeRoute {
 	/**
 	 * Methode pour exporter une liste de tournee en fichier pdf
 	 * @param tournees:  le resultat final des tournees calculees
-	 * @return document: le fichier qu'on ecrit l'info des tournees calculees
-	 * @throws FileNotFoundException:  l'exception lors on cree une fichier
-	 * @throws DocumentException:   l'exception lors on ecrit une document     
+	 * @throws FileNotFoundException: l'exception lors on cree une fichier
+	 * @throws DocumentException: l'exception lors on ecrit une document   
+	 * @return document: le fichier qu'on ecrit l'info des tournees calculees   
 	 */
 	public static Document exportFeuilleDeRoute(ArrayList<Tournee> tournees)
 			throws FileNotFoundException, DocumentException {
@@ -69,7 +65,7 @@ public class SerialiseurFeuilleDeRoute {
 	 * @param tournees : le resultat final des tournees calculees
 	 * @param contenuLabel : l'info du resultat des tournees calculees
 	 * @return  l'info du resultat des tournees calculees
-	 * @throws DocumentException
+	 * @throws DocumentException : l'exception lors on ecrire dans le document
 	 */
 	public static String ecrireTournee(ArrayList<Tournee> tournees,String contenuLabel) throws DocumentException {
 		int index = 0;

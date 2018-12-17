@@ -94,6 +94,8 @@ public abstract class Intersection {
 	
 	/**
 	 * Surcharge de la methode equals entre intersections.
+	 * @param obj : l'intersection a comparer
+	 * @return l'egalite entre deux intersections
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -115,6 +117,8 @@ public abstract class Intersection {
 
 	/**
 	 * Surcharge de la methode equals entre intersections sur l'identifiant.
+	 * @param unId : Id a comparer
+	 * @return : l'egalite entre deux intersections
 	 */
 	public boolean equals(long unId) {
 		boolean retour = false;

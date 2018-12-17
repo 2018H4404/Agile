@@ -12,7 +12,6 @@ import javafx.scene.shape.Circle;
  * @version 1.0
  * @since 1.0
 */
-@SuppressWarnings("restriction")
 public class IntersectionNormalVue extends Circle{
 	
 	private long idInter;

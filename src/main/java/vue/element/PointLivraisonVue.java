@@ -12,7 +12,6 @@ import javafx.scene.shape.Circle;
  * @version 1.0
  * @since 1.0
 */
-@SuppressWarnings("restriction")
 public class PointLivraisonVue extends Circle{
 	
 	private long idPointLivraison;
@@ -74,7 +73,7 @@ public class PointLivraisonVue extends Circle{
 
 	/**
 	 * Methode pour mettre la valeur du boolean synchronisee de cette vue.
-	 * @param selectionnee : un boolean.
+	 * @param bool : un boolean.
 	 */
 	public void setSynchronisee(boolean bool) {
 		synchronisee = bool;;
@@ -108,7 +107,7 @@ public class PointLivraisonVue extends Circle{
 	
 	/**
 	 * Methode pour mettre la couleur originale de cette TourneeVue.
-	 * @param c : une couleur.
+	 * @param couleur : une couleur.
 	 */
 	public void setOriginalColor(Color couleur) {
 		this.originalColor = couleur;

@@ -67,9 +67,8 @@ public class TestAEtoile {
 	}
 	
 	/**
-	 * Tester algorithme A* en presentant une intersection inaccessible par les autre intersections
-	 * @result IntersectionNonLivrableException
-	 * @throws Exception
+	 * Tester algorithme A* en presentant une intersection inaccessible par les autre intersections 
+	 * @throws IntersectionNonLivrableException : l'ntersection choisie n'est pas livrable 
 	 */
 	@Test(expected = IntersectionNonLivrableException.class)
 	public void testAlgoAEtoile_NonAtteint() throws Exception{

@@ -1,8 +1,6 @@
 package modele.metier;
 
 import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.Interval;
 
 /**
  * La classe point de livraison.
@@ -47,7 +45,7 @@ public class PointLivraison extends Intersection {
 
 	/**
 	 * Methode pour obtenir la duree de ce point de livraison.
-	 * @see Intersection.
+	 * @see modele.metier.Intersection
 	 */
 	@Override
 	public int getDuree() {

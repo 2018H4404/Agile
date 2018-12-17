@@ -12,7 +12,6 @@ import javafx.scene.shape.Line;
  * @since 1.0
 */
 
-@SuppressWarnings("restriction")
 public class TourneeVue extends Line{
 	
 	private String rueName;
@@ -25,6 +24,7 @@ public class TourneeVue extends Line{
 	 * @param endX : coordonnee X du point de debut de cette ligne.
 	 * @param endY : coordonnee Y du point de fin de cette ligne.
 	 * @param name : le nom de rue auquel ce troncon d'une tournee correspond.
+	 * @param couleur : le couleur choisi
 	 */
 	public TourneeVue(double startX, double startY, double endX, double endY, String name, Color couleur) {
 		super(startX,startY,endX,endY);

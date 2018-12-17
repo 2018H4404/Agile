@@ -39,6 +39,7 @@ public class OutilTSP {
 	 * @param cout : les couts calcules des chemins.
 	 * @param pccs : les plus courts chemins trouves.
 	 * @param length : le nombre de intersections dans la demande(entrepot et point de livraison).
+	 * @throws Exception : l'exception lors initialiser le tableau du cout et chemin 
 	 */
 	public static void initialisationTabCoutEtChemin(Plan unPlan, ArrayList<Intersection> intersectionsDemande, int[][] cout, Chemin[][] pccs, int length) throws Exception{
 		for(int i = 0; i < length; i++) {

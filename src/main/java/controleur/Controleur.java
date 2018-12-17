@@ -1,29 +1,19 @@
 package controleur;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import java.util.ArrayList;
-
 
 import org.joda.time.DateTime;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 
 import modele.TourneeManager;
 import modele.metier.DemandeLivraison;
 import modele.metier.Intersection;
 import modele.metier.Plan;
-import modele.metier.Tournee;
-import modele.services.LecteurDeXML;
-import modele.services.SerialiseurFeuilleDeRoute;
-import modele.metier.PointLivraison;
-
 import vue.VueGraphique;
 import vue.VueTextuelle;
-import vue.element.PointLivraisonVue;
 
 /**
  * La classe controleur.
@@ -35,6 +25,7 @@ public class Controleur {
 	private DemandeLivraison maDemande;
 	private TourneeManager monManager;
 	private VueGraphique graph;
+	@SuppressWarnings("unused")
 	private VueTextuelle texte;
 	private Historique historique;
 	private long ajoutIdDepartPointLivraison;
@@ -187,6 +178,7 @@ public class Controleur {
 	 * Methode pour obtenir un point de livraison
 	 * @param id : Id du point de livraison.
 	 * @return le point de livraison correspondant.
+	 * @throws Exception : id du point precedent
 	 */
 	public Intersection getPrePointLivraisonId(long id) throws Exception{
 		return monManager.getPrePointLivraisonId(id);
@@ -483,7 +475,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour faire une commande
-	 * @see Classe Commande
+	 * @see controleur.Commande
 	 */
 	public void undo() {
 		etat.undo();
@@ -491,7 +483,7 @@ public class Controleur {
 	
 	/**
 	 * Methode pour annuler une commande
-	 * @see Classe Commande
+	 * @see  controleur.Commande
 	 */
 	public void redo() {
 		etat.redo();
@@ -507,6 +499,9 @@ public class Controleur {
 
 	/**
 	 * Methode pour exporter une feuille de route dans l'espace de travail.
+	 * @return le document ecrit
+	 * @throws FileNotFoundException : l'exception le fichier ecrite n'est pas trouve
+	 * @throws DocumentException :  l'exception lors ecrit le document
 	 */
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {
 		return etat.exportFeuilleDeRoute();
@@ -545,7 +540,7 @@ public class Controleur {
 
 	/**
 	 * Methode pour mettre la commande passee an parametre dans le controleur.
-	 * @param tempAjout : une commande pour supprimer un point de livraison.
+	 * @param tempSupprimer : une commande pour supprimer un point de livraison.
 	 */
 	public void setTempSupprimer(CommandeSupprimeLivraison tempSupprimer) {
 		this.tempSupprimer = tempSupprimer;

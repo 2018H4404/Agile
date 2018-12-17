@@ -203,6 +203,7 @@ public class LecteurDeXML {
 	 * Methode permettant l'affectation des longitudes et latitudes des troncons.
 	 * @param tempIntersections : les intersections.
 	 * @param tempTroncons : les troncons.
+	 * @throws java.lang.Exception : l'exception lors on configure la position des troncons
 	 */
 	public void setLatLongDesTroncons(HashMap<Long,IntersectionNormal> tempIntersections, HashMap<Long,ArrayList<Troncon>> tempTroncons) throws Exception{
 		for(HashMap.Entry<Long,ArrayList<Troncon>> entry: tempTroncons.entrySet())

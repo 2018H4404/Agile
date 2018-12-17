@@ -7,7 +7,7 @@ package controleur;
 public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	/**
 	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a ajouter.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void choixNouveauPointLivraison() throws Exception {
@@ -16,7 +16,7 @@ public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {

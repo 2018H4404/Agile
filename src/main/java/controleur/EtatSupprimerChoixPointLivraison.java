@@ -9,7 +9,7 @@ package controleur;
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	/**
 	 * Methode pour supprimer un point de livraison selon l'id passe.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void effectuerSupprimerPointLivraison(long id) throws Exception {
@@ -21,7 +21,7 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {

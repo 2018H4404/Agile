@@ -1,29 +1,33 @@
 package vue;
 
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
-
 import java.io.File;
 
-import javax.swing.plaf.FileChooserUI;
-
-import com.itextpdf.text.Document;
-
+import controleur.Controleur;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-import javafx.geometry.Pos;
-import controleur.Controleur;
 
 /**
  * La classe de la demo de l'application.
@@ -33,7 +37,6 @@ import controleur.Controleur;
  * @since 1.0
  */
 
-@SuppressWarnings("restriction")
 enum ETAT {
 	EtatInit, EtatPlanCharge, EtatDemandeLivraison, EtatPosteCalcul, EtatAjouterChoixPointLivraison,
 	EtatAjouterChoixNouvellePointLivraison, EtatSupprimerChoixPointLivraison, EtatChoixPointLivraisonADeplacer,
@@ -41,7 +44,6 @@ enum ETAT {
 
 }
 
-@SuppressWarnings("restriction")
 public class ApplicationDemo extends Application {
 	private VueGraphique graph;
 	private VueTextuelle texte;
@@ -87,7 +89,7 @@ public class ApplicationDemo extends Application {
 
 	/**
 	 * Methode permettant de commencer l'application.
-	 * @parmam primaryStage : la fenetre principale.
+	 * @param primaryStage : la fenetre principale.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -786,7 +788,6 @@ public class ApplicationDemo extends Application {
 				try {
 					FileChooser fileChooser = new FileChooser();
 		        	fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-					Document feuilleDeRoute = Controleur.getInstance().exportFeuilleDeRoute();
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Succes");
 					alert.setContentText("feuille de route creee dans: "+ fileChooser.getInitialDirectory());
@@ -1086,7 +1087,7 @@ public class ApplicationDemo extends Application {
 	/**
 	 * La methode main pour lancer l'aaplication.
 	 * 
-	 * @param args
+	 * @param args les arguments commande line
 	 */
 
 	public static void main(String[] args) {

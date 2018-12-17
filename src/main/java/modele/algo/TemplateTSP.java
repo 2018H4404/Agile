@@ -3,13 +3,7 @@ package modele.algo;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.Map.Entry;
-
-import modele.metier.Intersection;
 
 /**
  * La classe de la template du TSP.
@@ -25,16 +19,13 @@ public abstract class TemplateTSP implements TSP {
 	private int coutMeilleureSolution = 0;
 	private Boolean tempsLimiteAtteint;
 
-	/**
-	 * @see TSP.
-	 */
 	public Boolean getTempsLimiteAtteint() {
 		return tempsLimiteAtteint;
 	}
 
 	/**
-	 * Methode qui calcule une repartition des nombres des points de livraisons sur les
-	 * livreurs.
+	 * Methode qui calcule une repartition des nombres des points de livraisons sur
+	 * les livreurs.
 	 * 
 	 * @param nbLivreur         : nombre de livreur.
 	 * @param nbPointLivraisons : nombre total des points de livraisons.
@@ -74,7 +65,7 @@ public abstract class TemplateTSP implements TSP {
 	 * @param nbSommets    : nombre de sommets.
 	 * @param nbParLivreur : liste des nombres de points de livraison par livreur.
 	 * @param cout         : les couts entre differents points de livraisons.
-	 * @retour liste des groupes des points de livraison.
+	 * @return liste des groupes des points de livraison.
 	 */
 	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
 		ArrayList<int[]> retour = new ArrayList<int[]>();
@@ -87,26 +78,27 @@ public abstract class TemplateTSP implements TSP {
 			int[] tempGroupe = new int[nbTotal];
 			Integer interCourant = lesIntersections.get(0);
 			lesIntersections.remove(interCourant);
-			 PriorityQueue<Paire> queue = new PriorityQueue<Paire>(1,  
-		                new Comparator<Paire>() {  
-		                  public int compare(Paire p1, Paire p2) {  
-		                    if(p1.getCout() < p2.getCout()) {  
-		                    	return -1;
-		                    }
-		                    if (p1.getCout() > p2.getCout()) { return 1; }
-		                    return 0;
-		                  }  
-		                });  
+			PriorityQueue<Paire> queue = new PriorityQueue<Paire>(1, new Comparator<Paire>() {
+				public int compare(Paire p1, Paire p2) {
+					if (p1.getCout() < p2.getCout()) {
+						return -1;
+					}
+					if (p1.getCout() > p2.getCout()) {
+						return 1;
+					}
+					return 0;
+				}
+			});
 			int length = lesIntersections.size();
-			for(int j = 0; j < length; j++) {
-				Paire temp = new Paire(cout[interCourant][lesIntersections.get(j)],lesIntersections.get(j));
+			for (int j = 0; j < length; j++) {
+				Paire temp = new Paire(cout[interCourant][lesIntersections.get(j)], lesIntersections.get(j));
 				queue.add(temp);
 			}
 			tempGroupe[0] = interCourant;
-			for(int j = 1; j < nbTotal; j++) {
+			for (int j = 1; j < nbTotal; j++) {
 				Paire paireCourant = queue.poll();
 				tempGroupe[j] = paireCourant.getNumeroLivraison();
-				lesIntersections.remove((Integer)paireCourant.getNumeroLivraison());
+				lesIntersections.remove((Integer) paireCourant.getNumeroLivraison());
 			}
 			retour.add(tempGroupe);
 		}
@@ -114,12 +106,14 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 *  Methode pour trouver une solution.
-	 *  @param tpsLimit: le temps limite pour trouver une solution saisi par l'utilisateur.
-	 *  @param nbSommets: le nombre des sommets.
-	 *  @param cout: le cout entre differents points de livraison.
-	 *  @param duree: duree[i] = duree pour visiter le sommet i.
-	 *  @param nbLivreur: le nombre de livreurs.                                 
+	 * Methode pour trouver une solution.
+	 * 
+	 * @param tpsLimite: le temps limite pour trouver une solution saisi par
+	 *        l'utilisateur.
+	 * @param nbSommets: le nombre des sommets.
+	 * @param cout: le cout entre differents points de livraison.
+	 * @param duree: duree[i] = duree pour visiter le sommet i.
+	 * @param nbLivreur: le nombre de livreurs.
 	 */
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur) {
 		tempsLimiteAtteint = false;
@@ -135,18 +129,12 @@ public abstract class TemplateTSP implements TSP {
 				nbPointLivraisonParLivreur, 0, nbLivreur - 1, 0);
 	}
 
-	/**
-	 * @see TSP.
-	 */
 	public Integer getMeilleureSolution(int i) {
 		if ((meilleureSolution == null) || (i < 0) || (i >= meilleureSolution.length))
 			return null;
 		return meilleureSolution[i];
 	}
 
-	/**
-	 * @see TSP.
-	 */
 	public int getCoutMeilleureSolution() {
 		return coutMeilleureSolution;
 	}
@@ -192,17 +180,21 @@ public abstract class TemplateTSP implements TSP {
 	 * Methode definissant le patron (template) d'une resolution par separation et
 	 * evaluation (branch and bound) du TSP
 	 * 
-	 * @param sommetCrt le dernier sommet visite
-	 * @param nonVus    la liste des sommets qui n'ont pas encore ete visites
-	 * @param vus       la liste des sommets visites (y compris sommetCrt)
-	 * @param coutVus   la somme des couts des arcs du chemin passant par tous les
-	 *                  sommets de vus + la somme des duree des sommets de vus
-	 * @param cout      : cout[i][j] = duree pour aller de i a j, avec 0 <= i <
-	 *                  nbSommets et 0 <= j < nbSommets
-	 * @param duree     : duree[i] = duree pour visiter le sommet i, avec 0 <= i <
-	 *                  nbSommets
-	 * @param tpsDebut  : moment ou la resolution a commence
-	 * @param tpsLimite : limite de temps pour la resolution
+	 * @param sommetCrt                  le dernier sommet visite
+	 * @param nonVus                     la liste des sommets qui n'ont pas encore
+	 *                                   ete visites
+	 * @param vus                        la liste des sommets visites (y compris
+	 *                                   sommetCrt)
+	 * @param coutVus                    la somme des couts des arcs du chemin
+	 *                                   passant par tous les sommets de vus + la
+	 *                                   somme des duree des sommets de vus
+	 * @param cout                       : cout[i][j] = duree pour aller de i a j,
+	 *                                   avec 0 <= i < nbSommets et 0 <= j <
+	 *                                   nbSommets
+	 * @param duree                      : duree[i] = duree pour visiter le sommet
+	 *                                   i, avec 0 <= i < nbSommets
+	 * @param tpsDebut                   : moment ou la resolution a commence
+	 * @param tpsLimite                  : limite de temps pour la resolution
 	 * @param nbTourneeAvantDest         : nombre de tournees qui doivent etre
 	 *                                   faites avant la derniere tournee.
 	 * @param tourneeFaite               : nombre de tournees deja parcourues.

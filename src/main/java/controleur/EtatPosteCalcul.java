@@ -1,7 +1,6 @@
 package controleur;
 
 
-import javafx.scene.Node;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -10,8 +9,6 @@ import com.itextpdf.text.DocumentException;
 
 import modele.metier.Tournee;
 import modele.services.SerialiseurFeuilleDeRoute;
-import vue.element.IntersectionNormalVue;
-import vue.element.PointLivraisonVue;
 
 
 /**
@@ -23,7 +20,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
 	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a ajouter.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void ajouterPointLivraison() throws Exception {
@@ -32,7 +29,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
 	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a deplacer.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void deplacerPointLivraison() throws Exception {
@@ -41,7 +38,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
 	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a supprimer.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void supprimerPointLivraison() throws Exception {
@@ -50,7 +47,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
 	 * Methode pour obtenir le nombre de livreur maximum.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public int getNbLivreurMaximum() {
@@ -59,7 +56,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	
 	/**
 	 * Methode pour calculer les tournees selon le nombre de livreur passe et le mode passe.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void CalculerLesTournees(int nbLivreur, int mode) throws Exception{
@@ -84,7 +81,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 
 	/**
 	 * Methode pour exporter la feuille de route.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException {

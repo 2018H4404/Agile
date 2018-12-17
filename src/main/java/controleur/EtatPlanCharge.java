@@ -12,7 +12,7 @@ public class EtatPlanCharge extends EtatDefaut {
 
 	/**
 	 * Methode pour charger une demande de livraison selon le fichier XML passe.
-	 * @see Etat.
+	 * @see Etat
 	 */
 	@Override
 	public void lectureLivraisonEntrepotXML(File f) throws Exception {

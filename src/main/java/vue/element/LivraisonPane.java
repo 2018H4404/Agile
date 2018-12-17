@@ -8,7 +8,6 @@ import javafx.scene.control.TitledPane;
  * @version 1.0
  * @since 1.0
 */
-@SuppressWarnings("restriction")
 public class LivraisonPane extends TitledPane{
 	private long id;
 	

@@ -10,7 +10,6 @@ import javafx.scene.shape.Circle;
  * @since 1.0
 */
 
-@SuppressWarnings("restriction")
 public class EntrepotVue extends Circle{
 	
 	private long idEntrepot;

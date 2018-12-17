@@ -128,7 +128,9 @@ public interface Etat {
 
 	/**
 	 * Methode pour exporter la feuille de route.
-	 * @throws Exception si fichier introuvable.
+	 * @throws FileNotFoundException : Exception si fichier introuvable.
+	 * @throws DocumentException : Exception lors ecrit un document
+	 * @return le document ecrit
 	 */
 	public Document exportFeuilleDeRoute() throws FileNotFoundException, DocumentException;
 }
