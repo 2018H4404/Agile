@@ -43,7 +43,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Methode pour avoir l'origine du chemin.
+	 * Methode pour obtenir l'origine du chemin.
 	 * @return Intersection qui est l'origine du chemin.
 	 */
 	public Intersection getIntersectionDepart() {
@@ -51,7 +51,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Methode pour avoir la destination du chemin.
+	 * Methode pour obtenir la destination du chemin.
 	 * @return Intersection qui est la destination du chemin.
 	 */
 	public Intersection getIntersectionDest() {
@@ -59,7 +59,7 @@ public class Chemin {
 	}
 	
 	/**
-	 * Methode pour avoir le cout du chemin.
+	 * Methode pour obtenir le cout du chemin.
 	 * @return un double(la distance) qui represente le cout du chemin.
 	 */
 	public double getCout() {
