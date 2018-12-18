@@ -5,14 +5,14 @@ import java.io.File;
 import modele.services.LecteurDeXML;
 
 /**
- * La classe de l'etat initial.
+ * La classe de l'état initial.
  * @author H4404
  */
 public class EtatInit extends EtatDefaut {
 
 	
 	/**
-	 * Methode pour charger un plan selon le fichier XML passe.
+	 * Méthode pour charger un plan selon le fichier XML passé
 	 * @see Etat
 	 */
 	@Override

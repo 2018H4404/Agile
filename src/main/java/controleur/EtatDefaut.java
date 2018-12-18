@@ -7,14 +7,14 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 
 /**
- * La classe de l'etat par defaut qui implement l'interface du Etat et la classe
+ * La classe de l'état par défaut implémentant l'interface de Etat 
  * 
  * @author H4404
  */
 public class EtatDefaut implements Etat {
 
 	/**
-	 *  Methode pour charger un plan selon le fichier XML passe.
+	 *  Méthode pour charger un plan selon le fichier XML passé
 	 *  @see Etat
 	 */
 	@Override
@@ -23,7 +23,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour calculer les tournees.
+	 * Méthode pour calculer les tournées
 	 * @see Etat
 	 */
 	@Override
@@ -32,7 +32,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour lire un fichier XML qui contient une demande de livraison.
+	 * Méthode pour lire un fichier XML qui contient une demande de livraison
 	 * @see Etat
 	 */
 	@Override
@@ -41,7 +41,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 *  Methode pour obtenir le nombre de livreur maximum.
+	 *  Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override
@@ -50,8 +50,8 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour pour activer le listener qui permet a l'utilisateur 
-	 * d'ajouter des points de livraison(qui a une duree 0) avant le calcul des tournees.
+	 * Méthode pour activer le listener permettant à l'utilisateur 
+	 * d'ajouter des points de livraison(qui a une duree 0) avant le calcul des tournées
 	 * @see Etat
 	 */
 	@Override
@@ -60,7 +60,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour passer le controleur dans l'etat EtatAjouterChoixPointLivraison .
+	 * Méthode pour passer le contrôleur dans l'état EtatAjouterChoixPointLivraison
 	 * @see Etat
 	 */
 	@Override
@@ -69,7 +69,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour passer le controleur dans l'etat EtatAjouterChoixNouvellePointLivraison .
+	 * Méthode pour passer le contrôleur dans l'état EtatAjouterChoixNouvellePointLivraison
 	 * @see Etat
 	 */
 	@Override
@@ -78,7 +78,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour ajouter un point de livraison.
+	 * Méthode pour ajouter un point de livraison
 	 * @see Etat
 	 */
 	@Override
@@ -87,7 +87,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour supprimeer un point de livraison.
+	 * Méthode pour supprimer un point de livraison
 	 * @see Etat
 	 */
 	@Override
@@ -96,7 +96,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour passer le controleur dans l'etat EtatChoixPointLivraisonApresDeplacer .
+	 * Méthode pour passer le contrôleur dans l'état EtatChoixPointLivraisonApresDeplacer
 	 * @see Etat
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour effectuer le deplacement.
+	 * Méthode pour effectuer le déplacement
 	 * @see Etat
 	 */
 	@Override
@@ -114,7 +114,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour passer le controleur dans l'etat EtatSupprimerChoixPointLivraison .
+	 * Méthode pour passer le contrôleur dans l'état EtatSupprimerChoixPointLivraison
 	 * @see Etat
 	 */
 	@Override
@@ -123,7 +123,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour  passer le controleur dans l'etat EtatChoixPointLivraisonADeplacer .
+	 * Méthode pour passer le contrôleur dans l'état EtatChoixPointLivraisonADeplacer
 	 * @see Etat
 	 */
 	@Override
@@ -132,7 +132,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour effectuer une commande.
+	 * Méthode pour effectuer une commande
 	 * @see Etat
 	 */
 	@Override
@@ -141,7 +141,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour annuler une commande.
+	 * Méthode pour annuler une commande
 	 * @see Etat
 	 */
 	@Override
@@ -150,7 +150,7 @@ public class EtatDefaut implements Etat {
 	}
 
 	/**
-	 * Methode pour exporter la feuille de route.
+	 * Méthode pour exporter la feuille de route
 	 * @see Etat
 	 */
 	@Override

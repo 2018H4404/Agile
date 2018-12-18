@@ -38,7 +38,7 @@ import javafx.stage.Stage;
  */
 
 enum ETAT {
-	EtatInit, EtatPlanCharge, EtatDemandeLivraison, EtatPosteCalcul, EtatAjouterChoixPointLivraison,
+	EtatInit, EtatPlanCharge, EtatDemandeLivraison, EtatPostCalcul, EtatAjouterChoixPointLivraison,
 	EtatAjouterChoixNouvellePointLivraison, EtatSupprimerChoixPointLivraison, EtatChoixPointLivraisonADeplacer,
 	EtatChoixPointLivraisonApresDeplacer;
 
@@ -598,7 +598,7 @@ public class ApplicationDemo extends Application {
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatInit());
-				Controleur.getInstance().getHistorique().reset();
+				Controleur.getInstance().getHistorique().reinitialiser();
 				VerifierEtat(controleur);
 			}
 		});
@@ -614,7 +614,7 @@ public class ApplicationDemo extends Application {
 				labelNombreLivreurs.setText("Nombre de livreurs :");
 				textFieldnombreLivreur.setText("");
 				Controleur.getInstance().setEtat(Controleur.getInstance().getEtatPlanCharge());
-				Controleur.getInstance().getHistorique().reset();
+				Controleur.getInstance().getHistorique().reinitialiser();
 				VerifierEtat(controleur);
 			}
 		});
@@ -633,7 +633,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
-							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLongueur()-1) {
 						Controleur.getInstance().getHistorique().clear();
 					}
 					Controleur.getInstance().ajouterPointLivraison();
@@ -657,7 +657,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
-							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLongueur()-1) {
 						Controleur.getInstance().getHistorique().clear();
 					}
 					Controleur.getInstance().setEtat(Controleur.getInstance().getEtatSupprimerChoixPointLivraison());
@@ -697,7 +697,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
-							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLongueur()-1) {
 						Controleur.getInstance().getHistorique().clear();
 					}
 					Controleur.getInstance().ajouterPointLivraison();
@@ -721,7 +721,7 @@ public class ApplicationDemo extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					if(Controleur.getInstance().getHistorique().getIndice() >= 0 
-							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLength()-1) {
+							&& Controleur.getInstance().getHistorique().getIndice() < Controleur.getInstance().getHistorique().getLongueur()-1) {
 						Controleur.getInstance().getHistorique().clear();
 					}
 					Controleur.getInstance().supprimerPointLivraison();
@@ -899,7 +899,7 @@ public class ApplicationDemo extends Application {
 			buttonExport.setDisable(true);
 			break;
 
-		case EtatPosteCalcul:
+		case EtatPostCalcul:
 			itemChargerPlan.setDisable(true);
 			buttonChargePlan.setDisable(true);
 			itemChargerDemandeLivraison.setDisable(true);
@@ -921,7 +921,7 @@ public class ApplicationDemo extends Application {
 			itemSupprimerLivraison.setDisable(false);
 			itemAjouterLivraison.setDisable(false);
 			buttonExport.setDisable(false);
-			if (c.getHistorique().getLength() > 0) {
+			if (c.getHistorique().getLongueur() > 0) {
 				buttonRedo.setDisable(false);
 				buttonUndo.setDisable(false);
 			}

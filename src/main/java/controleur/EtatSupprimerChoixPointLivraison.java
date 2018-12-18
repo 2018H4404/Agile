@@ -2,13 +2,13 @@ package controleur;
 
 
 /**
- * la classe de l'etat pour supprimer le point de livraison choisi
+ * La classe de l'état pour supprimer le point de livraison choisi
  * @author H4404
  *
  */
 public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	/**
-	 * Methode pour supprimer un point de livraison selon l'id passe.
+	 * M;ethode pour supprimer un point de livraison selon l'id passé
 	 * @see Etat
 	 */
 	@Override
@@ -20,7 +20,7 @@ public class EtatSupprimerChoixPointLivraison extends EtatDefaut{
 	}
 	
 	/**
-	 * Methode pour obtenir le nombre de livreur maximum.
+	 * Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override

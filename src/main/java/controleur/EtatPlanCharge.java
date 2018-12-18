@@ -5,13 +5,13 @@ import java.io.File;
 import modele.services.LecteurDeXML;
 
 /**
- * La classe de l'etat plan charge.
+ * La classe de l'état plan chargé
  * @author H4404
  */
 public class EtatPlanCharge extends EtatDefaut {
 
 	/**
-	 * Methode pour charger une demande de livraison selon le fichier XML passe.
+	 * Méthode pour charger une demande de livraison selon le fichier XML passé
 	 * @see Etat
 	 */
 	@Override

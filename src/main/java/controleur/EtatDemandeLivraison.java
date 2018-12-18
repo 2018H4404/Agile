@@ -4,14 +4,14 @@ import javafx.scene.Node;
 import vue.element.IntersectionNormalVue;
 
 /**
- * La classe de l'etat de demande de livraison.
+ * La classe de l'état de demande de livraison
  * 
  * @author H4404
  */
 public class EtatDemandeLivraison extends EtatDefaut {
 
 	/**
-	 * Methode pour lancer la calcul de tournees selon le nombre de livreur et le mode passe.
+	 * Méthode pour lancer le calcul de tournées selon le nombre de livreur et le mode passé
 	 * @see Etat
 	 */
 	@Override
@@ -23,7 +23,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	}
 
 	/**
-	 * Methode pour obtenir le nombre de livreur maximum.
+	 * Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override
@@ -32,7 +32,7 @@ public class EtatDemandeLivraison extends EtatDefaut {
 	}
 
 	/**
-	 * Methode pour ajouter le listener qui permet a l'utilisateur d'ajouter des points de livraison avant le calcul des tournees.
+	 * Méthode pour ajouter le listener qui permet à l'utilisateur d'ajouter des points de livraison avant le calcul des tournées
 	 * @see Etat
 	 */
 	public void ajouterListenerOnClick() {

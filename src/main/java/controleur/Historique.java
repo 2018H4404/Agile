@@ -3,7 +3,7 @@ package controleur;
 import java.util.LinkedList;
 
 /**
- * La classe de l'historique du commande.
+ * La classe de l'historique du commande
  * 
  * @author H4404
  */
@@ -12,7 +12,7 @@ public class Historique {
 	protected int indice;
 
 	/**
-	 * Constructeur de la classe Historique.
+	 * Constructeur de la classe Historique
 	 */
 	public Historique() {
 		listeDeCommande = new LinkedList<Commande>();
@@ -21,7 +21,7 @@ public class Historique {
 	}
 
 	/**
-	 * Reset le historique
+	 * Réinitialiser l´historique
 	 */
 	public void clear() {
 		listeDeCommande.clear();
@@ -29,17 +29,17 @@ public class Historique {
 	}
 
 	/**
-	 * Methode pour retourner l'indice actuelle de commande de l'historrique
-	 * @return l'indice actuelle
+	 * Méthode pour retourner l'indice actuel de commande de l'historique
+	 * @return l'indice actuel
 	 */
 	public int getIndice() {
 		return indice;
 	}
 
 	/**
-	 * Methode pour ajouter une commande dans l'historique
+	 * Méthode pour ajouter une commande dans l'historique
 	 * 
-	 * @param cmd commande a ajouter
+	 * @param cmd commande à ajouter
 	 */
 	public void ajouteCmd(Commande cmd) {
 		int i = indice + 1;
@@ -52,9 +52,9 @@ public class Historique {
 	}
 
 	/**
-	 * Methode pour annuelr le commande courant
+	 * Méthode pour annuler la commande courante
 	 */
-	public void undo() {
+	public void annuler() {
 		if (indice >= 0) {
 			Commande cmd = listeDeCommande.get(indice);
 			indice--;
@@ -63,9 +63,9 @@ public class Historique {
 	}
 
 	/**
-	 * Methode pour effctuer le commande courant
+	 * Méthode pour effectuer la commande courante
 	 */
-	public void redo() {
+	public void refaire() {
 		if (indice < listeDeCommande.size() - 1) {
 			indice++;
 			Commande cmd = listeDeCommande.get(indice);
@@ -74,19 +74,19 @@ public class Historique {
 	}
 
 	/**
-	 * Methode pour reinitialiser l'historique
+	 * Méthode pour réinitialiser l'historique
 	 */
-	public void reset() {
+	public void reinitialiser() {
 		this.listeDeCommande = new LinkedList();
 		this.indice = -1;
 	}
 
 	/**
-	 * Methode pour retourner la longeur de l'historique
+	 * Méthode pour retourner la longueur de l'historique
 	 * 
-	 * @return la longueur de l'historique.
+	 * @return la longueur de l'historique
 	 */
-	public int getLength() {
+	public int getLongueur() {
 		return listeDeCommande.size();
 	}
 

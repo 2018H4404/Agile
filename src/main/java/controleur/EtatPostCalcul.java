@@ -12,14 +12,14 @@ import modele.services.SerialiseurFeuilleDeRoute;
 
 
 /**
- * La classe de l'etat poste calcul.
+ * La classe de l'état post calcul.
  * @author H4404
  */
 
-public class EtatPosteCalcul extends EtatDefaut {
+public class EtatPostCalcul extends EtatDefaut {
 	
 	/**
-	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a ajouter.
+	 * Méthode pour passer à l'état suivant pour choisir le point de livraison à ajouter
 	 * @see Etat
 	 */
 	@Override
@@ -28,7 +28,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a deplacer.
+	 * Méthode pour passer à l'état suivant pour choisir le point de livraison à déplacer
 	 * @see Etat
 	 */
 	@Override
@@ -37,7 +37,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a supprimer.
+	 * Méthode pour passer  à l'état suivant pour choisir le point de livraison à supprimer
 	 * @see Etat
 	 */
 	@Override
@@ -46,7 +46,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour obtenir le nombre de livreur maximum.
+	 * Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override
@@ -55,7 +55,7 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour calculer les tournees selon le nombre de livreur passe et le mode passe.
+	 * Méthode pour calculer les tournées selon le nombre de livreur passé et le mode passé
 	 * @see Etat
 	 */
 	@Override
@@ -65,22 +65,22 @@ public class EtatPosteCalcul extends EtatDefaut {
 	}
 	
 	/**
-	 * Methode pour annuler une commande.
+	 * Méthode pour annuler une commande
 	 */
 	public void undo() {
-		Controleur.getInstance().getHistorique().undo();
+		Controleur.getInstance().getHistorique().annuler();
 	}
 	
 	/**
-	 * Methode pour effectuer une commande.
+	 * Méthode pour effectuer une commande
 	 */
 	public void redo() {
-		Controleur.getInstance().getHistorique().redo();
+		Controleur.getInstance().getHistorique().refaire();
 
 	}
 
 	/**
-	 * Methode pour exporter la feuille de route.
+	 * Méthode pour exporter la feuille de route
 	 * @see Etat
 	 */
 	@Override

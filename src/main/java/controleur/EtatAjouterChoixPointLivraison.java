@@ -1,12 +1,12 @@
 package controleur;
 
 /**
- * La classe de l'etat ajouter le choix de livraison
+ * La classe de l'état ajouter le choix de livraison
  * @author H4404
  */
 public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	/**
-	 * Methode pour passer a l'etat suivant pour choisir le point de livraison a ajouter.
+	 * Méthode pour passer a l'état suivant pour choisir le point de livraison à ajouter
 	 * @see Etat
 	 */
 	@Override
@@ -15,7 +15,7 @@ public class EtatAjouterChoixPointLivraison extends EtatDefaut{
 	}
 	
 	/**
-	 * Methode pour obtenir le nombre de livreur maximum.
+	 * Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override

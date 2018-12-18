@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="controleur.EtatPosteCalcul" project="optimodLyon" 
-    file="/optimodLyon/src/main/java/controleur/EtatPosteCalcul.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="controleur.EtatPostCalcul" project="optimodLyon" 
+    file="/optimodLyon/src/main/java/controleur/EtatPostCalcul.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="793" y="147"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

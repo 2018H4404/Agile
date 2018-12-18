@@ -1,13 +1,13 @@
 package controleur;
 
 /**
- * La classe de l'etat du choix du point de livraison a deplacer.
+ * La classe de l'état du choix du point de livraison à déplacer
  * @author H4404
  */
 public class EtatChoixPointLivraisonADeplacer extends EtatDefaut{
 	/**
-	 * Methode pour passer a l'etat suivant pour choisir le point de livraison 
-	 * apres lequel nous voulons mettre le point de livraison a deplacer.
+	 * Méthode pour passer a l'état suivant pour choisir le point de livraison 
+	 * après lequel on veut mettre le point de livraison à déplacer
 	 * @see Etat
 	 */
 	@Override
@@ -16,7 +16,7 @@ public class EtatChoixPointLivraisonADeplacer extends EtatDefaut{
 	}
 	
 	/**
-	 * Methode pour obtenir le nombre de livreur maximum.
+	 * Méthode pour obtenir le nombre maximum de livreur
 	 * @see Etat
 	 */
 	@Override
