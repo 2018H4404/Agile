@@ -7,7 +7,7 @@ package controleur;
 public interface Commande {
 
   /**
-	 * Realiser la commande.
+	 * Réaliser la commande.
 	 */
 	 void doCmd();
 	
