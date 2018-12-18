@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 
 /**
- * La classe de la template du TSP.
+ * La classe du template du TSP
  * 
  * @author H4404
  * @version 1.0
@@ -24,12 +24,10 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Methode qui calcule une repartition des nombres des points de livraisons sur
-	 * les livreurs.
-	 * 
-	 * @param nbLivreur         : nombre de livreur.
-	 * @param nbPointLivraisons : nombre total des points de livraisons.
-	 * @return le clustering des nombres de points de livraison pour les livreurs.
+	 * Méthode qui calcule une répartition des points de livraison sur les livreurs
+	 * @param nbLivreur         : nombre de livreur
+	 * @param nbPointLivraisons : nombre total des points de livraisons
+	 * @return le clustering des nombres de points de livraison pour les livreurs
 	 */
 	public int[] clusteringNbPointLivraisonParLivreurNaive(int nbLivreur, int nbPointLivraisons) {
 		int[] resultat = new int[nbLivreur];
@@ -60,12 +58,12 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Methode qui calcule un clustering des points de livraisons.
+	 * Méthode qui calcule un clustering des points de livraisons
 	 * 
-	 * @param nbSommets    : nombre de sommets.
-	 * @param nbParLivreur : liste des nombres de points de livraison par livreur.
-	 * @param cout         : les couts entre differents points de livraisons.
-	 * @return liste des groupes des points de livraison.
+	 * @param nbSommets    : nombre de sommets
+	 * @param nbParLivreur : liste des nombres de points de livraison par livreur
+	 * @param cout         : les coûts entre les différents points de livraison
+	 * @return liste des groupes des points de livraison
 	 */
 	public ArrayList<int[]> clusteringPointLivraisonNaive(int nbSommets, int[][] cout, int[] nbParLivreur) {
 		ArrayList<int[]> retour = new ArrayList<int[]>();
@@ -106,14 +104,13 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Methode pour trouver une solution.
+	 * Méthode pour trouver une solution
 	 * 
-	 * @param tpsLimite: le temps limite pour trouver une solution saisi par
-	 *        l'utilisateur.
-	 * @param nbSommets: le nombre des sommets.
-	 * @param cout: le cout entre differents points de livraison.
-	 * @param duree: duree[i] = duree pour visiter le sommet i.
-	 * @param nbLivreur: le nombre de livreurs.
+	 * @param tpsLimite: le temps limite pour trouver une solution saisi par l'utilisateur
+	 * @param nbSommets: le nombre des sommets
+	 * @param cout: le coût entre différents points de livraison
+	 * @param duree: duree[i] = durée pour visiter le sommet i
+	 * @param nbLivreur: le nombre de livreurs
 	 */
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int nbLivreur) {
 		tempsLimiteAtteint = false;
@@ -140,68 +137,68 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Methode devant etre redefinie par les sous-classes de TemplateTSP.
+	 * Méthode d'élaguage devant être redéfinie par les sous-classes du TemplateTSP
 	 * 
-	 * @param                            sommetCourant.
-	 * @param nonVus                     : tableau des sommets restant a visiter.
-	 * @param cout                       : cout[i][j] = duree pour aller de i a j.
-	 * @param duree                      : duree[i] = duree pour visiter le sommet
+	 * @param                            sommetCourant
+	 * @param nonVus                     : tableau des sommets restant à visiter
+	 * @param cout                       : cout[i][j] = durée pour aller de i a j
+	 * @param duree                      : duree[i] = durée pour visiter le sommet
 	 *                                   i.
-	 * @param nbTourneeAvantDest         : nombre de tournees qui doivent etre
-	 *                                   faites avant la derniere tournee.
-	 * @param tourneeFaite               : nombre de tournees deja parcourues.
+	 * @param nbTourneeAvantDest         : nombre de tournées devant être
+	 *                                   faites avant la derniere tournée
+	 * @param tourneeFaite               : nombre de tournées déjà parcourues
 	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison
-	 *                                   par livreur.
-	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le
-	 *        livreur actuel.
-	 * @return une borne inferieure du cout des permutations commencant par
-	 *         sommetCourant. contenant chaque sommet de nonVus exactement une fois
-	 *         et terminant par le sommet 0.
+	 *                                   par livreur
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraisons déjà faite par le
+	 *        livreur actuel
+	 * @return une borne inferieure du coût des permutations commençant par
+	 *         sommetCourant. Contenant chaque sommet de nonVus exactement une fois
+	 *         et terminant par le sommet 0
 	 */
 	protected abstract int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree,
 			int nbTourneeAvantDest, int tourneeFaite, int[] nbPointLivraisonParLivreur,
 			int compteurNbLivraisonsActuels);
 
 	/**
-	 * Methode devant etre redefinie par les sous-classes de TemplateTSP
+	 * Méthode  définissant un itérateur devant être redéfini par les sous-classes de TemplateTSP
 	 * 
 	 * @param sommetCrt
-	 * @param nonVus    : tableau des sommets restant a visiter
-	 * @param cout      : cout[i][j] = duree pour aller de i a j, avec 0 <= i <
+	 * @param nonVus    : tableau des sommets restant à visiter
+	 * @param cout      : cout[i][j] = durée pour aller de i a j, avec 0 <= i <
 	 *                  nbSommets et 0 <= j < nbSommets
-	 * @param duree     : duree[i] = duree pour visiter le sommet i, avec 0 <= i <
+	 * @param duree     : duree[i] = durée pour visiter le sommet i, avec 0 <= i <
 	 *                  nbSommets
-	 * @return un iterateur permettant d'iterer sur tous les sommets de nonVus
+	 * @return un itérateur permettant d'iterer sur tous les sommets de nonVus
 	 */
 	protected abstract Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout,
 			int[] duree);
 
 	/**
-	 * Methode definissant le patron (template) d'une resolution par separation et
-	 * evaluation (branch and bound) du TSP
+	 * Méthode définissant le patron (template) d'une résolution par separation et
+	 * évaluation (branch and bound) du TSP
 	 * 
-	 * @param sommetCrt                  le dernier sommet visite
+	 * @param sommetCrt                  le dernier sommet visité
 	 * @param nonVus                     la liste des sommets qui n'ont pas encore
-	 *                                   ete visites
-	 * @param vus                        la liste des sommets visites (y compris
+	 *                                   été visités
+	 * @param vus                        la liste des sommets visités (y compris
 	 *                                   sommetCrt)
-	 * @param coutVus                    la somme des couts des arcs du chemin
+	 * @param coutVus                    la somme des coûts des arcs du chemin
 	 *                                   passant par tous les sommets de vus + la
-	 *                                   somme des duree des sommets de vus
-	 * @param cout                       : cout[i][j] = duree pour aller de i a j,
+	 *                                   somme des durée des sommets de vus
+	 * @param cout                       : cout[i][j] = durée pour aller de i a j,
 	 *                                   avec 0 <= i < nbSommets et 0 <= j <
 	 *                                   nbSommets
-	 * @param duree                      : duree[i] = duree pour visiter le sommet
+	 * @param duree                      : duree[i] = durée pour visiter le sommet
 	 *                                   i, avec 0 <= i < nbSommets
-	 * @param tpsDebut                   : moment ou la resolution a commence
+	 * @param tpsDebut                   : moment où la resolution a commencé
 	 * @param tpsLimite                  : limite de temps pour la resolution
-	 * @param nbTourneeAvantDest         : nombre de tournees qui doivent etre
-	 *                                   faites avant la derniere tournee.
-	 * @param tourneeFaite               : nombre de tournees deja parcourues.
+	 * @param nbTourneeAvantDest         : nombre de tournées qui doivent être
+	 *                                   faites avant la derniere tournée
+	 * @param tourneeFaite               : nombre de tournées deja parcourues
 	 * @param nbPointLivraisonParLivreur :tableau de nombre de point de livraison
-	 *                                   par livreur.
-	 * @oaram compteurNbLivraisonsActuels : nombre de livraison deja faite par le
-	 *        livreur actuel.
+	 *                                   par livreur
+	 * @oaram compteurNbLivraisonsActuels : nombre de livraison déjà faite par le
+	 *        livreur actuel
 	 */
 	void branchAndBound(int sommetCrt, ArrayList<Integer> nonVus, ArrayList<Integer> vus, int coutVus, int[][] cout,
 			int[] duree, long tpsDebut, int tpsLimite, int[] nbPointLivraisonParLivreur,

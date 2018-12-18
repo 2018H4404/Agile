@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /** 
- * La classe du simple TSP.
+ * La classe du simple TSP
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -20,14 +20,14 @@ public class TSPSimple extends TemplateTSP {
 	}
 	
 	/**
-	 * Methode pour calculer une heuristique afin de faire des coupes sur les branches.
-	 * @param sommetCourant : sommet actuel que nous sommes en train de explorer.
-	 * @param nonVus : la liste des intersections pas encore exploitees.
-	 * @param duree : la liste des durees des points de livraison
-	 * @param nbTourneeAvantDest : le nombre de tournee qui doit etre fait avant atteindre la destination(Entrepot).
-	 * @param tourneeFaite : le nombre de tournee deja fait
-	 * @param nbPointLivraisonParLivreur : le tableau qui contient le nombre des points de livraison pour chaque livreur.
-	 * @param compteurNbLivraisonsActuels : le nombre des points de livraison deja livres dans la tournee actuelle.
+	 * Méthode pour calculer une heuristique afin d'élaguer les branches
+	 * @param sommetCourant : sommet actuel que nous sommes en train de explorer
+	 * @param nonVus : la liste des intersections pas encore exploitées
+	 * @param duree : la liste des durées des points de livraison
+	 * @param nbTourneeAvantDest : le nombre de tournée qui doit être fait avant atteindre la destination(Entrepôt)
+	 * @param tourneeFaite : le nombre de tournée déjà fait
+	 * @param nbPointLivraisonParLivreur : le tableau qui contient le nombre des points de livraison pour chaque livreur
+	 * @param compteurNbLivraisonsActuels : le nombre des points de livraison déjà livrés dans la tournée actuelle
 	 */
 	@Override
 	protected int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree, int nbTourneeAvantDest, int tourneeFaite, int[] nbPointLivraisonParLivreur, int compteurNbLivraisonsActuels) {

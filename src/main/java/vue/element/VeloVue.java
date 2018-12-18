@@ -14,6 +14,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 
 
+/**
+ * La classe de l'algorithme VeloVue
+ * 
+ * @author H4404
+ * @version 1.0
+ * @since 1.0
+ */
 public class VeloVue extends Circle{
 
 	private Path monPath;

@@ -16,7 +16,7 @@ import modele.metier.Troncon;
 import modele.services.exceptions.IntersectionNonLivrableException;
 
 /**
- * La classe de l'algorithme A*.
+ * La classe de l'algorithme A*
  * 
  * @author H4404
  * @version 1.0
@@ -30,15 +30,15 @@ public class AEtoile {
 	private static final double RAYON_TERRE = 6378.137;
 
 	/**
-	 * Constructeur de la classe AEtoile.
+	 * Constructeur de la classe AEtoile
 	 */
 	private AEtoile() {
 	}
 
 	/**
-	 * Methode pour obtenir l'instance de l'algo AEtoile.
+	 * Méthode pour obtenir l'instance de l'algorithme AEtoile
 	 * 
-	 * @return l'instance.
+	 * @return l'instance
 	 */
 	public static AEtoile getInstance() {
 		if (instance == null)
@@ -47,11 +47,11 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode pour traduire un trajet.
+	 * Méthode pour traduire un trajet
 	 * 
-	 * @param chemin : le chemin en intersections.
-	 * @param unPlan : le plan de la ville.
-	 * @return la traduction en troncons du chemin passe en parametre.
+	 * @param chemin : le chemin en intersections
+	 * @param unPlan : le plan de la ville
+	 * @return la traduction du chemin en tronçons
 	 */
 	public ArrayList<Troncon> traductionTrajet(ArrayList<Intersection> chemin, Plan unPlan) {
 		ArrayList<Troncon> traduction = new ArrayList<Troncon>();
@@ -70,24 +70,24 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode permettant de trouver les voisins d'une intersection.
+	 * Méthode permettant de trouver les voisins d'une intersection
 	 * 
-	 * @param idCourant : l'identifiant de l'intersection en cours.
-	 * @param monPlan   : le plan de la ville.
-	 * @return la liste des voisins(exprimee en troncons).
+	 * @param idCourant : l'identifiant de l'intersection en cours
+	 * @param monPlan   : le plan de la ville
+	 * @return la liste des voisins exprimée en tronçons
 	 */
 	private ArrayList<Troncon> trouverVosins(final long idCourant, Plan monPlan) {
 		return monPlan.getTronconsParOrigine(idCourant);
 	}
 
 	/**
-	 * Methode de l'algorithme A*.
+	 * Méthode de l'algorithme A*
 	 * 
-	 * @param depart  : l'intersection de depart.
-	 * @param dest    : l'intersection de la destination.
-	 * @param monPlan : la plan de la ville.
+	 * @param depart  : l'intersection de départ
+	 * @param dest    : l'intersection de la destination
+	 * @param monPlan : la plan de la ville
 	 * @throws Exception: l'exception lors calcul en A*
-	 * @return la liste des intersections du plus court chemin trouve.
+	 * @return la liste des intersections du plus court chemin trouvé
 	 */
 	public ArrayList<Intersection> algoAEtoile(Intersection depart, Intersection dest, Plan monPlan) throws Exception {
 		if (atteignable(dest, monPlan)) {
@@ -170,10 +170,10 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode pour obtenir le premier element dans la liste des noeuds gris.
+	 * Méthode pour obtenir le premier élément dans la liste des noeuds gris
 	 * 
-	 * @param list : la liste des entites de map triees.
-	 * @return le premier element de la liste.
+	 * @param list : la liste des entites de map triées
+	 * @return le premier élément de la liste
 	 */
 	public Entry<Intersection, Double> premierElement(List<Entry<Intersection, Double>> list) {
 		Entry<Intersection, Double> retour = null;
@@ -185,13 +185,11 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode pour determiner si la destination est atteignable.
+	 * Méthode pour determiner si la destination est atteignable
 	 * 
-	 * @param dest   : Intersection pour laquelle nous voulons determiner si c'est
-	 *               atteiganble.
-	 * @param unPlan : le plan ou toutes les informations des intersections et des
-	 *               troncons ssont stockees
-	 * @return boolean qui indique le point est atteignable ou pas.
+	 * @param dest   : Intersection pour laquelle nous voulons déterminer si elle est atteignable
+	 * @param unPlan : le plan où toutes les informations des intersections et des tronçons sont stockées
+	 * @return boolean qui indique le point est atteignable ou pas
 	 */
 	public boolean atteignable(Intersection dest, Plan unPlan) {
 		boolean retour = false;
@@ -212,22 +210,22 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode de l'heuristique.
+	 * Méthode de l'heuristique
 	 * 
-	 * @param depart : intersection de depart.
-	 * @param dest   : intersection de destination.
-	 * @return retourne la distance estimee entre le depart et la destination.
+	 * @param depart : intersection de départ
+	 * @param dest   : intersection de destination
+	 * @return retourne la distance estimée entre le départ et la destination
 	 */
 	public double heuristique(Intersection depart, Intersection dest) {
 		return getDistance(depart.getLatitude(), depart.getLongitude(), dest.getLatitude(), dest.getLongitude());
 	}
 
 	/**
-	 * Methode pour savoir si le noeud est gris.
+	 * Méthode pour savoir si le noeud est gris
 	 * 
-	 * @param gris   : map des noeuds gris.
-	 * @param voisin : id du voisin (noeud actuel considere).
-	 * @return retourne vrai si le noeud est gris.
+	 * @param gris   : map des noeuds gris
+	 * @param voisin : id du voisin (noeud actuel considéré)
+	 * @return retourne vrai si le noeud est gris
 	 */
 	public boolean isGris(Map<Intersection, Double> gris, Long voisin) {
 		boolean retour = false;
@@ -241,13 +239,13 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode pour calculer la distance entre deux points.
+	 * Méthode pour calculer la distance entre deux points
 	 * 
-	 * @param latStart  : la latitude de debut.
-	 * @param longStart : la longitude du debut.
-	 * @param latEnd    : la latitude d'arrivee.
-	 * @param longEnd   : la longitude d'arrivee.
-	 * @return la distance entre les deux points.
+	 * @param latStart  : la latitude de début
+	 * @param longStart : la longitude du début
+	 * @param latEnd    : la latitude d'arrivée
+	 * @param longEnd   : la longitude d'arrivée
+	 * @return la distance entre les deux points
 	 */
 	public double getDistance(double latStart, double longStart, double latEnd, double longEnd) {
 		double radLat1 = rad(latStart);
@@ -264,10 +262,10 @@ public class AEtoile {
 	}
 
 	/**
-	 * Methode pour convertire un degre en un radian.
+	 * Méthode pour convertir un angle en degré en radian
 	 * 
-	 * @param d : le degre de l'angle.
-	 * @return la valeur en radian.
+	 * @param d : le degré de l'angle
+	 * @return la valeur en radian
 	 */
 	private double rad(double d) {
 		return d * Math.PI / 180.0;
