@@ -22,7 +22,7 @@ import modele.services.exceptions.PlanXMLFileException;
 import modele.services.exceptions.XMLMalFormeException;
 
 /** 
- * La classe du lecteur XML.
+ * La classe du lecteur XML
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -33,13 +33,13 @@ public class LecteurDeXML {
 	private static LecteurDeXML instance = null;
 	
 	/**
-	 * Constructeur de la classe LecteurDeXML.
+	 * Constructeur de la classe LecteurDeXML
 	 */
 	private LecteurDeXML() {}
 	
 	/**
-	 * Methode pour obtenir une instance de la classe LecteurDeXML.
-	 * @return l'instance.
+	 * Méthode pour obtenir une instance de la classe LecteurDeXML
+	 * @return l'instance de la classe LecteurDe XML
 	 */
 	public static LecteurDeXML getInstance() {
 		if(instance == null) instance = new LecteurDeXML();
@@ -47,9 +47,9 @@ public class LecteurDeXML {
 	}
 	
 	/**
-	 * Methode permettant la lecture d'un fichier XML qui contient une demande de livraison.
-	 * @param f : le fichier XML.
-	 * @throws Exception si le fichier XML est mal forme.
+	 * Méthode permettant la lecture d'un fichier XML qui contient une demande de livraison
+	 * @param f : le fichier XML
+	 * @throws Exception si le fichier XML est mal formé
 	 */
 	public void lectureLivraisonEntrepotXML(File f) throws Exception{ 
 		HashMap<Long,PointLivraison> tempLivraisons = new HashMap<Long,PointLivraison>();
@@ -108,9 +108,9 @@ public class LecteurDeXML {
 	}
 
 	/**
-	 * Methode permettant la lecture d'un fichier XML qui contient un plan.
-	 * @param f : le fichier XML.
-	 * @throws Exception si le fichier XML est mal forme.
+	 * Méthode permettant la lecture d'un fichier XML qui contient un plan
+	 * @param f : le fichier XML
+	 * @throws Exception si le fichier XML est mal formé
 	 */
 	public void lecturePlanXML(File f) throws Exception{
 		HashMap<Long,IntersectionNormal> tempIntersections = new HashMap<Long,IntersectionNormal>();  
@@ -200,10 +200,10 @@ public class LecteurDeXML {
 	}
 	
 	/**
-	 * Methode permettant l'affectation des longitudes et latitudes des troncons.
-	 * @param tempIntersections : les intersections.
-	 * @param tempTroncons : les troncons.
-	 * @throws java.lang.Exception : l'exception lors on configure la position des troncons
+	 * Méthode permettant l'affectation des longitudes et latitudes des troncons
+	 * @param tempIntersections : les intersections
+	 * @param tempTroncons : les tronçons.
+	 * @throws java.lang.Exception : exception lors de la configuration de la position des tronçons
 	 */
 	public void setLatLongDesTroncons(HashMap<Long,IntersectionNormal> tempIntersections, HashMap<Long,ArrayList<Troncon>> tempTroncons) throws Exception{
 		for(HashMap.Entry<Long,ArrayList<Troncon>> entry: tempTroncons.entrySet())

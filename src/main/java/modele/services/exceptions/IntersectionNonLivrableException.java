@@ -1,8 +1,7 @@
 package modele.services.exceptions;
 
 /**
- * La classe des exceptions lors on ajoute un point dans la liste de livraison
- * or ce point n'est pas livrable.
+ * La classe des exceptions lorsqu'on ajoute un point inatteignable
  * 
  * @author H4404
  * @version 1.0
@@ -15,7 +14,7 @@ public class IntersectionNonLivrableException extends Exception {
 
 	/**
 	 * Constructeur de la classe IntersectionNonLivrableException.
-	 * L'exception est lancee quand un point de livraison est non livrable.
+	 * L'exception est lancée quand un point de livraison est inatteignable
 	 */
 	public IntersectionNonLivrableException() {
 		super(EXCEPTION_MESSAGE);

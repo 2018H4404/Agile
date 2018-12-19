@@ -23,7 +23,7 @@ public class Plan extends Observable {
 	private double minLat;
 
 	/**
-	 * Constructeur par defaut du Plan.
+	 * Constructeur par défaut du Plan
 	 */
 	public Plan() {
 		super();
@@ -32,14 +32,14 @@ public class Plan extends Observable {
 	}
 
 	/**
-	 * Methode permettant l'initialisation d'un plan.
+	 * Méthode permettant l'initialisation d'un plan
 	 * 
-	 * @param intersections : les intersections d'un plan.
-	 * @param troncons      : les troncons d'un plan.
-	 * @param maxLong       : la longitude maximale d'un plan.
-	 * @param minLong       : la longitude minimale d'un plan.
-	 * @param maxLat        : la latitude maximale d'un plan.
-	 * @param minLat        : la latitude minimale d'un plan.
+	 * @param intersections : les intersections d'un plan
+	 * @param troncons      : les troncons d'un plan
+	 * @param maxLong       : la longitude maximale d'un plan
+	 * @param minLong       : la longitude minimale d'un plan
+	 * @param maxLat        : la latitude maximale d'un plan
+	 * @param minLat        : la latitude minimale d'un plan
 	 */
 	public void initialiserPlan(HashMap<Long, IntersectionNormal> intersections,
 			HashMap<Long, ArrayList<Troncon>> troncons, double maxLong, double minLong, double maxLat, double minLat) {
@@ -58,7 +58,7 @@ public class Plan extends Observable {
 	}
 
 	/**
-	 * Methode permettant de liberer les intersections et les troncons dans le plan.
+	 * Méthode permettant de libérer les intersections et les troncons dans le plan
 	 */
 	public void clear() {
 		this.intersectionNormals.clear();
@@ -66,78 +66,78 @@ public class Plan extends Observable {
 	}
 
 	/**
-	 * Methode pour obtenir une intersection dans le plan par Id.
+	 * Méthode pour obtenir une intersection dans le plan par Id
 	 * 
-	 * @param id : l'id de l'intersection voulue.
-	 * @return IntersectionNormal trouvee.
+	 * @param id : l'id de l'intersection voulue
+	 * @return IntersectionNormal trouvée
 	 */
 	public IntersectionNormal getIntersectionNormal(long id) {
 		return this.intersectionNormals.get(id);
 	}
 
 	/**
-	 * Methode pour obtenir un troncon selon l'id de l'origine.
+	 * Méthode pour obtenir un troncon selon l'id de l'origine
 	 * 
-	 * @param origine : l'id de l'intersection etant l'origine.
-	 * @return la liste des troncons trouves.
+	 * @param origine : l'id de l'intersection étant l'origine
+	 * @return la liste des tronçons trouvés
 	 */
 	public ArrayList<Troncon> getTronconsParOrigine(long origine) {
 		return this.troncons.get(origine);
 	}
 
 	/**
-	 * Methode pour obtenir le map des intersections.
+	 * Méthode pour obtenir la map des intersections
 	 * 
-	 * @return le map des intersections.
+	 * @return le map des intersections
 	 */
 	public HashMap<Long, IntersectionNormal> getIntersectionNormals() {
 		return intersectionNormals;
 	}
 
 	/**
-	 * Methode pour obtenir la Collection des intersections.
+	 * Méthode pour obtenir la collection des intersections
 	 * 
-	 * @return la Collection des intersections.
+	 * @return la collection des intersections
 	 */
 	public Collection<IntersectionNormal> getAllIntersectionNormals() {
 		return intersectionNormals.values();
 	}
 
 	/**
-	 * Methode pour obtenir la Collection des troncons.
+	 * Méthode pour obtenir la collection des tronçons
 	 * 
-	 * @return la Collection des troncons.
+	 * @return la collection des tronçons
 	 */
 	public Collection<ArrayList<Troncon>> getAllTroncons() {
 		return troncons.values();
 	}
 
 	/**
-	 * Methode pour obtenir le map des troncons.
+	 * Méthode pour obtenir le map des tronçons
 	 * 
-	 * @return le map des troncons.
+	 * @return le map des tronçons
 	 */
 	public HashMap<Long, ArrayList<Troncon>> getTroncons() {
 		return troncons;
 	}
 
 	/**
-	 * Methode pour transformer la longitude en une coordonnee Y selon ce plan.
+	 * Méthode pour transformer la longitude en une coordonnée Y selon ce plan
 	 * 
-	 * @param longitude : une longitude.
-	 * @param largeur   : la largeur de la vue graphique.
-	 * @return la coordonnee Y calculee.
+	 * @param longitude : une longitude
+	 * @param largeur   : la largeur de la vue graphique
+	 * @return la coordonnée Y calculée
 	 */
 	public double transformLongitude(double longitude, double largeur) {
 		return (longitude - minLong) * largeur / (maxLong - minLong);
 	}
 
 	/**
-	 * Methode pour transformer la latitude en une coordonnee X selon ce plan.
+	 * Méthode pour transformer la latitude en une coordonnée X selon ce plan
 	 * 
-	 * @param latitude : une lattitude.
-	 * @param hauteur  : la hauteur de la vue graphique.
-	 * @return la coordonnee X calculee.
+	 * @param latitude : une latitude
+	 * @param hauteur  : la hauteur de la vue graphique
+	 * @return la coordonnée X calculée
 	 */
 
 	public double transformLatitude(double latitude, double hauteur) {
@@ -145,22 +145,22 @@ public class Plan extends Observable {
 	}
 
 	/**
-	 * Methode pour reverser le processus de la methode transformerLongitude.
+	 * Méthode pour renverser le processus de la méthode transformerLongitude
 	 * 
-	 * @param longitudeTransforme : une coordonnee X.
-	 * @param largeur             : la largeur de la vue graphique.
-	 * @return la longitude calculee.
+	 * @param longitudeTransforme : une coordonnée X
+	 * @param largeur             : la largeur de la vue graphique
+	 * @return la longitude calculée
 	 */
 	public double reverseTransformLongitude(double longitudeTransforme, double largeur) {
 		return longitudeTransforme * (maxLong - minLong) / largeur + minLong;
 	}
 
 	/**
-	 * Methode pour reverser le processus de la methode transformerLatitude.
+	 * Méthode pour renverser le processus de la methode transformerLatitude
 	 * 
-	 * @param latitudeTransforme : la coordonne Y.
-	 * @param hauteur            : la hauteur de la vue graphique.
-	 * @return la latitude calculee.
+	 * @param latitudeTransforme : la coordonnée Y
+	 * @param hauteur            : la hauteur de la vue graphique
+	 * @return la latitude calculée
 	 */
 	public double reverseTransformLatitude(double latitudeTransforme, double hauteur) {
 		return maxLat - (latitudeTransforme * (maxLat - minLat) / hauteur);

@@ -1,7 +1,7 @@
 package modele.services.exceptions;
 
 /** 
- * La classe des exceptions d'algorithme.
+ * La classe des exceptions d'algorithmes
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -10,8 +10,8 @@ package modele.services.exceptions;
 public class AlgoException extends Exception {
 
 	/**
-	 * Constructeur de la classe AlgoException.
-	 * @param msg message de l'exception.
+	 * Constructeur de la classe AlgoException
+	 * @param msg message de l'exception
 	 */
 	public AlgoException(String msg){
         super(msg);

@@ -28,8 +28,8 @@ public class VeloVue extends Circle{
 	private VueGraphique parent;
 	
 	/**
-	 * Constructeur de la classe VeloVue.
-	 * @param unParent : la vue graphique qui contient cet objet.
+	 * Constructeur de la classe VeloVue
+	 * @param unParent : la vue graphique qui contient cet objet
 	 */
 	public VeloVue(VueGraphique unParent) {
 		super(7);
@@ -38,9 +38,9 @@ public class VeloVue extends Circle{
 	}
 	
 	/**
-	 * Methode pour creer un path d'aniamtion.
-	 * @param tournees : le groupe qui contient la tournee pour laquelle nous voulons creer un path.
-	 * @param animationGroup : le groupe qui affiche l'animation.
+	 * Méthode pour créer un chemin d'animation
+	 * @param tournees : le groupe qui contient la tournée pour laquelle nous voulons créer un chemin
+	 * @param animationGroup : le groupe qui affiche l'animation
 	 */
 	public void creerPath(Group tournees, Group animationGroup) {
 		monPath = new Path();
@@ -65,8 +65,8 @@ public class VeloVue extends Circle{
 	}
 	
 	/**
-	 * Methode pour lancer l'aniamtion.
-	 * @param animationGroup : le groupe qui affiche l'animation.
+	 * Méthode pour lancer l'animation
+	 * @param animationGroup : le groupe qui affiche l'animation
 	 */
 	public void start(Group animationGroup) {
 		animationGroup.getChildren().add(this);

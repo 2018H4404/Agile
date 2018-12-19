@@ -23,17 +23,17 @@ import modele.metier.Tournee;
 
 /**
  * @author baptiste.thivend
- * Classe permettant l'export des tournees dans un fichier pdf
+ * Classe permettant l'export des tournées dans un fichier pdf
  */
 public class SerialiseurFeuilleDeRoute {
 	public static Document feuilleDeRoute;
 
 	/**
-	 * Methode pour exporter une liste de tournee en fichier pdf
-	 * @param tournees:  le resultat final des tournees calculees
-	 * @throws FileNotFoundException: l'exception lors on cree une fichier
-	 * @throws DocumentException: l'exception lors on ecrit une document   
-	 * @return document: le fichier qu'on ecrit l'info des tournees calculees   
+	 * Méthode pour exporter une liste de tournée en fichier pdf
+	 * @param tournees:  le resultat final des tournées calculées
+	 * @throws FileNotFoundException: exception lors de la création d'un fichier
+	 * @throws DocumentException: exception lors de l'écriture d'un document   
+	 * @return document: le fichier qu'on écrit l'info des tournées calculées   
 	 */
 	public static Document exportFeuilleDeRoute(ArrayList<Tournee> tournees)
 			throws FileNotFoundException, DocumentException {
@@ -61,11 +61,11 @@ public class SerialiseurFeuilleDeRoute {
 	}
 
 	/**
-	 * Methode pour ecrire une tournee dans le document pdf
-	 * @param tournees : le resultat final des tournees calculees
-	 * @param contenuLabel : l'info du resultat des tournees calculees
-	 * @return  l'info du resultat des tournees calculees
-	 * @throws DocumentException : l'exception lors on ecrire dans le document
+	 * Méthode pour écrire une tournée dans le document pdf
+	 * @param tournées : le résultat final des tournées calculées
+	 * @param contenuLabel : l'info du resultat des tournées calculées
+	 * @return  l'info du résultat des tournées calculées
+	 * @throws DocumentException : l'exception lors de l'écriture d'un document
 	 */
 	public static String ecrireTournee(ArrayList<Tournee> tournees,String contenuLabel) throws DocumentException {
 		int index = 0;

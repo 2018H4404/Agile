@@ -3,7 +3,7 @@ package modele.metier;
 import java.util.ArrayList;
 
 /** 
- * La classe du chemin.
+ * La classe du chemin
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -16,9 +16,9 @@ public class Chemin {
 	private int duree;
 	
 	/**
-	 * Constructeur parametre du chemin.
-	 * @param uneListeIntersections : une liste d'Intersections.
-	 * @param uneListeTroncons : une liste des Troncons.
+	 * Constructeur paramètre du chemin
+	 * @param uneListeIntersections : une liste d'intersections
+	 * @param uneListeTroncons : une liste des tronçons
 	 */
 	public Chemin(ArrayList <Intersection> uneListeIntersections, ArrayList <Troncon> uneListeTroncons) {
 		this.listeIntersections = uneListeIntersections;
@@ -43,24 +43,24 @@ public class Chemin {
 	}
 	
 	/**
-	 * Methode pour obtenir l'origine du chemin.
-	 * @return Intersection qui est l'origine du chemin.
+	 * Méthode pour obtenir l'origine du chemin
+	 * @return Intersection qui étant l'origine du chemin
 	 */
 	public Intersection getIntersectionDepart() {
 		return listeIntersections.get(0);
 	}
 	
 	/**
-	 * Methode pour obtenir la destination du chemin.
-	 * @return Intersection qui est la destination du chemin.
+	 * Méthode pour obtenir la destination du chemin
+	 * @return Intersection qui est la destination du chemin
 	 */
 	public Intersection getIntersectionDest() {
 		return listeIntersections.get(listeIntersections.size()-1);
 	}
 	
 	/**
-	 * Methode pour obtenir le cout du chemin.
-	 * @return un double(la distance) qui represente le cout du chemin.
+	 * Méthode pour obtenir le cot du chemin.
+	 * @return un double(la distance) qui représente le coût du chemin
 	 */
 	public double getCout() {
 		double somme = 0.0;

@@ -1,7 +1,7 @@
 package modele.metier;
 
 /** 
- * La classe du troncon.
+ * La classe du tronçon
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -15,11 +15,11 @@ public class Troncon {
 	protected IntersectionNormal origine;
 	
 	/**
-	 * Constructeur parametre du troncon.
-	 * @param destination : la destination du troncon.
-	 * @param origine : l'origine du troncon.
-	 * @param longueur : la longueur du troncon.
-	 * @param nomRue : le nom de la rue du troncon.
+	 * Constructeur parametre du tronçon
+	 * @param destination : la destination du tronçon
+	 * @param origine : l'origine du tronçon
+	 * @param longueur : la longueur du tronçon
+	 * @param nomRue : le nom de la rue du tronçon
 	 */
 	public Troncon(IntersectionNormal destination, IntersectionNormal origine, double longueur, String nomRue) {
 		this.destination = destination;
@@ -29,7 +29,7 @@ public class Troncon {
 	}
 
 	/**
-	 * Surcharge de la methode toString.
+	 * Surcharge de la méthode toString
 	 */
 	@Override
 	public String toString() {
@@ -38,8 +38,8 @@ public class Troncon {
 	}
 
 	/**
-	 * Methode pour obtenir la destination de troncon.
-	 * @return IntersectionNormal qui est la destination du troncon.
+	 * Méthode pour obtenir la destination de tronçon
+	 * @return IntersectionNormal qui est la destination du tronçon
 	 */
 	public IntersectionNormal getDestination() {
 		return destination;
@@ -47,8 +47,8 @@ public class Troncon {
 
 	
 	/**
-	 * Methode pour obtenir la longeur du troncon.
-	 * @return la longueur du troncon.
+	 * Méthode pour obtenir la longueur du tronçon
+	 * @return la longueur du tronçon
 	 */
 	public double getLongueur() {
 		return longueur;
@@ -56,8 +56,8 @@ public class Troncon {
 
 	
 	/**
-	 * Methode pour obtenir le nom de rue du troncon.
-	 * @return le nom de rue.
+	 * Méthode pour obtenir le nom de rue du tronçon
+	 * @return le nom de rue
 	 */
 	public String getNomRue() {
 		return nomRue;
@@ -65,8 +65,8 @@ public class Troncon {
 
 	
 	/**
-	 * Methode pour obtenir l'origine de troncon.
-	 * @return IntersectionNormal qui est l'origine du troncon.
+	 * Méthode pour obtenir l'origine de tronçon
+	 * @return IntersectionNormal qui est l'origine du tronçon
 	 */
 	public IntersectionNormal getOrigine() {
 		return origine;

@@ -18,13 +18,13 @@ public class TourneeVue extends Line{
 	private Color originalColor;
 	
 	/**
-	 * Constructeur de la vue tournee.
-	 * @param startX : coordonnee X du point de debut de cette ligne.
-	 * @param startY : coordonnee Y du point de fin de cette ligne.
-	 * @param endX : coordonnee X du point de debut de cette ligne.
-	 * @param endY : coordonnee Y du point de fin de cette ligne.
-	 * @param name : le nom de rue auquel ce troncon d'une tournee correspond.
-	 * @param couleur : le couleur choisi
+	 * Constructeur de la vue tournee
+	 * @param startX : coordonnee X du point de debut de cette ligne
+	 * @param startY : coordonnee Y du point de fin de cette ligne
+	 * @param endX : coordonnee X du point de debut de cette ligne
+	 * @param endY : coordonnee Y du point de fin de cette ligne
+	 * @param name : le nom de rue auquel ce troncon d'une tournee correspond
+	 * @param couleur : la couleur choisie
 	 */
 	public TourneeVue(double startX, double startY, double endX, double endY, String name, Color couleur) {
 		super(startX,startY,endX,endY);
@@ -36,7 +36,7 @@ public class TourneeVue extends Line{
 	}
 	
 	/**
-	 * Methode pour ajouter des listners.
+	 * Méthode pour ajouter des listeners
 	 */
 	public void ajouterListner() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -52,30 +52,30 @@ public class TourneeVue extends Line{
 	}
 	
 	/**
-	 * Methode pour changer la couleur de cette lignequi correspond a un troncon d'une tournee en mode selectionnee.
+	 * Méthode pour changer la couleur de cette ligne correspondant à un tronçon d'une tournée en mode selectionnee
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setStroke(Color.ORANGE);
 	}
 	
 	/**
-	 * Methode pour changer la couleur de cette ligne qui correspond a un troncon d'une tournee en mode non selectionnee.
+	 * Méthode pour changer la couleur de cette ligne correspondant à un tronçon d'une tournée en mode non selectionnee
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setStroke(originalColor);
 	}
 	
 	/**
-	 * Methode pour mettre la couleur originale de cette TourneeVue.
-	 * @param c : une couleur.
+	 * Méthode pour mettre la couleur originale de cette TourneeVue
+	 * @param c : une couleur
 	 */
 	public void setOriginalColor(Color c) {
 		this.originalColor = c;
 	}
 	
 	/**
-	 * Methode pour retourner le nom de rue auquel ce troncon d'une tournee correspond.
-	 * @return le nom de rue correspondant.
+	 * Méthode pour retourner le nom de rue auquel ce troncon d'une tournee correspond
+	 * @return le nom de rue correspondant
 	 */
 	public String getNomRue() {
 		return rueName;

@@ -3,7 +3,7 @@ package modele.metier;
 import org.joda.time.DateTime;
 
 /**
- * La classe point de livraison.
+ * La classe point de livraison
  * 
  * @author H4404
  * @version 1.0
@@ -16,11 +16,11 @@ public class PointLivraison extends Intersection {
 	private int duree;
 
 	/**
-	 * Constructeur parametre du point de livraison sans duree.
+	 * Constructeur paramètre du point de livraison sans durée
 	 * 
-	 * @param id : l'identifiant du point de livraison.
-	 * @param latitude :  la latitude du point de livraison.
-	 * @param longitude : la longitude du point de livraison.
+	 * @param id : l'identifiant du point de livraison
+	 * @param latitude :  la latitude du point de livraison
+	 * @param longitude : la longitude du point de livraison
 	 */
 	public PointLivraison(long id, double latitude, double longitude) {
 		super(id, latitude, longitude);
@@ -29,12 +29,12 @@ public class PointLivraison extends Intersection {
 	}
 
 	/**
-	 * Constructeur parametre du point de livraison avec une duree.
+	 * Constructeur paramètre du point de livraison avec une durée
 	 * 
-	 * @param id : l'identifiant du point de livraison.
-	 * @param latitude :  la latitude du point de livraison.
-	 * @param longitude : la longitude du point de livraison.
-	 * @param uneDuree :  la duree du point de livraison.
+	 * @param id : l'identifiant du point de livraison
+	 * @param latitude :  la latitude du point de livraison
+	 * @param longitude : la longitude du point de livraison
+	 * @param uneDuree :  la durée du point de livraison
 	 */
 	public PointLivraison(long id, double latitude, double longitude, int uneDuree) {
 		super(id, latitude, longitude);
@@ -44,7 +44,7 @@ public class PointLivraison extends Intersection {
 	}
 
 	/**
-	 * Methode pour obtenir la duree de ce point de livraison.
+	 * Méthode pour obtenir la durée de ce point de livraison
 	 * @see modele.metier.Intersection
 	 */
 	@Override
@@ -53,7 +53,7 @@ public class PointLivraison extends Intersection {
 	}
 
 	/**
-	 * Surcharge de la methode toString de la classe Intersection.
+	 * Surcharge de la méthode toString de la classe Intersection
 	 */
 	@Override
 	public String toString() {

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.joda.time.DateTime;
 
 /**
- * La classe de l'entrepot.
+ * La classe de l'entrepôt
  * 
  * @author H4404
  * @version 1.0
@@ -17,14 +17,14 @@ public class Entrepot extends Intersection {
 	private DateTime heureDepart;
 
 	/**
-	 * Constructeur de l'Entrepot.
+	 * Constructeur de l'entrepôt
 	 * 
-	 * @param id        : identifiant de l'entrepot.
-	 * @param latitude  : latitude de l'entrepot.
-	 * @param longitude : longitude de l'entrepot.
-	 * @param heure     : heure du premier passage par l'entrepot.
-	 * @param minute    : minute du premier passage par l'entrepot.
-	 * @param seconde   : secondesdu premier passage par l'entrepot.
+	 * @param id        : identifiant de l'entrepôt
+	 * @param latitude  : latitude de l'entrepôt
+	 * @param longitude : longitude de l'entrepôt
+	 * @param heure     : heure du premier passage par l'entrepôt
+	 * @param minute    : minute du premier passage par l'entrepôt
+	 * @param seconde   : seconde du premier passage par l'entrepôt
 	 */
 	@SuppressWarnings("deprecation")
 	public Entrepot(long id, double latitude, double longitude, int heure, int minute, int seconde) {
@@ -42,7 +42,7 @@ public class Entrepot extends Intersection {
 	}
 
 	/**
-	 * Methode qui retourne l'heure du depart
+	 * Méthode qui retourne l'heure du départ
 	 * @return l'heure depart
 	 */
 	public DateTime getHeureDeaprt() {
@@ -51,7 +51,7 @@ public class Entrepot extends Intersection {
 
 	/**
 	 * @see modele.metier.Intersection
-	 * @return duree
+	 * @return durée
 	 */
 	public int getDuree() {
 		return 0;

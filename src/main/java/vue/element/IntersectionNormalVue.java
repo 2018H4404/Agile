@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /** 
- * La classe de la vue de l'intersection normale.
+ * La classe de la vue de l'intersection normale
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -21,11 +21,11 @@ public class IntersectionNormalVue extends Circle{
 	private double copieY;
 	
 	/**
-	 * Constructeur de la vue de l'intersection normale.
-	 * @param x : coordonnee X de ce cercle.
-	 * @param y : coordonnee Y de ce cercle.
-	 * @param radius : rayon de ce cercle.
-	 * @param unId : l'id de l'objet IntersectionNormal auquel ce cercle correspond.
+	 * Constructeur de la vue de l'intersection normale
+	 * @param x : coordonnee X de ce cercle
+	 * @param y : coordonnee Y de ce cercle
+	 * @param radius : rayon de ce cercle
+	 * @param unId : l'id de l'objet IntersectionNormal auquel ce cercle correspond
 	 */
 	public IntersectionNormalVue(double x, double y, double radius, long unId) {
 		super(x,y,radius);
@@ -39,31 +39,31 @@ public class IntersectionNormalVue extends Circle{
 	}
 	
 	/**
-	 * Methode pour obtenir l'id de l'objet IntersectionNormal auquel ce cercle correspond.
-	 * @return l'id de l'objet IntersectionNormal auquel ce cercle correspond.
+	 * Méthode pour obtenir l'id de l'objet IntersectionNormal auquel ce cercle correspond
+	 * @return l'id de l'objet IntersectionNormal auquel ce cercle correspond
 	 */
 	public long getIntersectionId() {
 		return idInter;
 	}
 	
 	/**
-	 * Methode pour verifier si l'IntersectionVue est selectionne
-	 * @return true si selectionnee, sinon false.
+	 * Méthode pour verifier si l'IntersectionVue est selectionnée
+	 * @return true si selectionnée, sinon false
 	 */
 	public boolean isSelectionnee() {
 		return selectionnee;
 	}
 
 	/**
-	 * Methode pour mettre la valeur du boolean selectionnee de cette vue.
-	 * @param selectionnee : un boolean.
+	 * Méthode pour renseigner la valeur du boolean selectionnee de cette vue
+	 * @param selectionnee : un boolean
 	 */
 	public void setSelectionnee(boolean selectionnee) {
 		this.selectionnee = selectionnee;
 	}
 
 	/**
-	 * Methode pour ajouter des listeners necessaires.
+	 * Méthode pour ajouter des listeners nécessaires
 	 */
 	public void ajouterListener() {
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -80,7 +80,7 @@ public class IntersectionNormalVue extends Circle{
 	}
 	
 	/**
-	 * Methode pour ajouter des listeners necessaires.
+	 * Méthode pour ajouter des listeners nécessaires
 	 */
 	public void ajouterListenerOnClick() {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -105,14 +105,14 @@ public class IntersectionNormalVue extends Circle{
 	}
 	
 	/**
-	 * Methode pour changer la couleur de cette vue en mode selectionnee.
+	 * Méthode pour changer la couleur de cette vue en mode selectionnee
 	 */
 	public void changerCouleurSelectionnee() {
 		this.setFill(Color.YELLOW);
 	}
 	
 	/**
-	 * Methode pour changer la couleur de cette vue en mode non selectionnee.
+	 * Méthode pour changer la couleur de cette vue en mode non selectionnee
 	 */
 	public void changerCouleurNonSelectionnee() {
 		this.setFill(originalColor);

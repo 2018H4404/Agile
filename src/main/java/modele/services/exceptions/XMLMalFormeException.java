@@ -1,7 +1,7 @@
 package modele.services.exceptions;
 
 /**
- * La closse pour traiter l'exception lors on lit une fichier XML erronee.
+ * La classe pour traiter l'exception de lecture d'un fichier XML mal formée
  * @author H4404
  *
  */
@@ -10,8 +10,8 @@ public class XMLMalFormeException extends Exception {
 	static String EXCEPTION_MESSAGE = "Le fichier XML contient une erreur.(mal forme)";
 	
 	/**
-	 * Constructeur de la classe XMLMalFormeException.
-	 * L'Exception est lancee quand le fichier XML est mal forme.
+	 * Constructeur de la classe XMLMalFormeException
+	 * L'exception est lancée quand le fichier XML est mal formée
 	 */
 	public XMLMalFormeException(){
 		super(EXCEPTION_MESSAGE);

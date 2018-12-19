@@ -40,7 +40,7 @@ import modele.metier.Tournee;
 import vue.element.LivraisonPane;
 
 /**
- * La classe de la vue textuelle.
+ * La classe de la vue textuelle
  * 
  * @author H4404
  * @version 1.0
@@ -70,8 +70,8 @@ public class VueTextuelle extends Parent implements Observer {
 	private VBox conteneurLivraison;
 
 	/**
-	 * Constructeur de la vue textuelle.
-	 * @param unParent : l'application qui contient cette vue textuelle.
+	 * Constructeur de la vue textuelle
+	 * @param unParent : l'application qui contient cette vue textuelle
 	 */
 	public VueTextuelle(ApplicationDemo unParent) {
 		// Intialisation de sa compagnie par defaut
@@ -192,35 +192,34 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui fait la vue textuelle connaitre la vue textuelle qui l'accompagne.
-	 * @param vue : une vue graphique.
+	 * Méthode qui fait la vue textuelle connaître la vue graphique qui l'accompagne
+	 * @param vue : une vue graphique
 	 */
 	public void setCompagnie(VueGraphique vue) {
 		this.compagnie = vue;
 	}
 
 	/**
-	 * Methode pour modifier le nom de rue affiche.
-	 * @param nomRue : un nom de rue.
+	 * Méthode pour modifier le nom de rue affiché
+	 * @param nomRue : un nom de rue
 	 */
 	public void setTabNomRue(String nomRue) {
 		monLabel.setText(nomRue);
 	}
 	
 	/**
-	 * Methode pour modifier la latitude et la lonfitude affichee.
-	 * @param texte : la latitude et la longitude a afficher.
+	 * Méthode pour modifier la latitude et la lonfitude affichée
+	 * @param texte : la latitude et la longitude à afficher
 	 */
 	public void setInfoIntersection(String texte) {
 		infoPourIntersection.setText(texte);
 	}
 	
 	/**
-	 * Methode qui rafraichit le contenu de la vue textuelle selon le parametre arg1 passe.
+	 * Méthode qui rafraîchit le contenu de la vue textuelle selon le paramètre arg1 passé
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		String sujet = (String) arg1;
 		int maximum;
 		switch (sujet) {
@@ -294,9 +293,9 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui ajoute les checkBoxs du filtre dans le panneau Tournee.
+	 * Méthode qui ajoute les checkBoxs du filtre dans le panneau Tournee
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees.
+	 * @param manager : TourneeManager contenant la liste des tournées
 	 */
 	public void ajouterFiltreTournees(TourneeManager manager) {
 		conteneurFiltres.getChildren().clear();
@@ -315,9 +314,9 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui mettre a jour l'info d'une tournee.
+	 * Méthode qui mettre à jour l'info d'une tournée
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees.
+	 * @param manager : TourneeManager qui contient la liste des tournées
 	 */
 	public void changerInfoTourneePane(TourneeManager manager) {
 		int index = manager.getTourneeChangedIndex();
@@ -366,10 +365,10 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement
+	 * Méthode qui met à jour l'info des tournées changées après le déplacement
 	 * (Sans supprimer).
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees.
+	 * @param manager : TourneeManager qui contient la liste des tournées
 	 */
 	public void changerInfoTourneePaneSansSupprimer(TourneeManager manager) {
 		int indexUn = manager.getTourneeAjouterIndex();
@@ -461,10 +460,10 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui mettre a jour l'info des tournees changees apres le deplacement
-	 * (Quand on supprime une tournee).
+	 * Méthode qui met à jour l'info des tournées changées après le déplacement
+	 * (Quand on supprime une tournée).
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees.
+	 * @param manager : TourneeManager qui contient la liste des tournées
 	 */
 	public void changerInfoTourneePaneSupprimer(TourneeManager manager) {
 		ajouterTimeTableTournees(manager);
@@ -474,9 +473,9 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui ajoute l'agenda planifie pour l'horaire dans le panneau infos.
+	 * Méthode qui ajoute l'agenda planifié pour l'horaire dans le panneau infos
 	 * 
-	 * @param manager : TourneeManager qui contient la liste des tournees
+	 * @param manager : TourneeManager qui contient la liste des tournées
 	 */
 	public void ajouterTimeTableTournees(TourneeManager manager) {
 		conteneurInfoParTournee.getPanes().clear();
@@ -537,8 +536,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui ajoute des listeners necessaire pour les composants dans la vue
-	 * textuelle.
+	 * Méthode qui ajoute des listeners nécéssaires pour les composants dans la vue textuelle
 	 */
 	public void ajouterListeners() {
 		for (int i = 0; i < lesFiltres.length; i++) {
@@ -575,7 +573,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode qui efface les contenus de la vue textuelle.
+	 * Méthode qui efface les contenus de la vue textuelle
 	 */
 	public void clearVue() {
 		conteneurFiltres.getChildren().clear();
@@ -587,8 +585,8 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 	
 	/**
-	 * Methode qui ajoute les informations concernant les points de livraison dans la demande de livraison passee.
-	 * @param demande : une demande de livraison.
+	 * Méthode qui ajoute les informations concernant les points de livraison dans la demande de livraison passée
+	 * @param demande : une demande de livraison
 	 */
 	public void ajouteTitledPane(DemandeLivraison demande) {
 		Collection<PointLivraison> lesPointLivraisons = demande.getAllPointLivraisons();
@@ -630,7 +628,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour arreter temporairement la synchronisation.
+	 * Méthode pour arrêter temporairement la synchronisation
 	 */
 	public void arreterSynchronisationLivraison() {
 		for (int i = 0; i < infoParLivraison.length; i++) {
@@ -640,7 +638,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour reactiver la synchronisation.
+	 * Méthode pour réactiver la synchronisation
 	 */
 	public void activerSynchronisationLivraison() {
 		for (int i = 0; i < infoParLivraison.length; i++) {
@@ -649,8 +647,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour synchroniser la vue graphique avec les panneaus des points de
-	 * livraison.
+	 * Méthode pour synchroniser la vue graphique avec les panneaux des points de livraison
 	 * 
 	 * @param pane : panneau a synchroniser avec la vue graphique
 	 */
@@ -671,8 +668,7 @@ public class VueTextuelle extends Parent implements Observer {
 	}
 
 	/**
-	 * Methode pour synchroniser les panneaus des points de livraison avec la vue
-	 * graphique.
+	 * Méthode pour synchroniser les panneaux des points de livraison avec la vue graphique
 	 * 
 	 * @param id : id du point de livraison (pour trouver le panneau correspondant)
 	 * @param ordre : si ordre est true le pane est ouvert, sinon c'est fermee

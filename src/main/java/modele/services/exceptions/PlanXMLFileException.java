@@ -1,7 +1,7 @@
 package modele.services.exceptions;
 
 /**
- * La classe des exceptions lors on lire une fichier XML pour charger un plan.
+ * La classe des exceptions lors de la lecture d'un fichier XML ne correspondant pas à un plan
  * 
  * @author H4404
  * @version 1.0
@@ -12,8 +12,8 @@ public class PlanXMLFileException extends Exception {
 	static String EXCEPTION_MESSAGE = "Le fichier XML fourni ne correspond pas a un plan.";
 
 	/**
-	 * Constructeur de la classe PlanXMLFileException.
-	 * L'exception est lancee quand le fichier XML ne correspond pas a un plan.
+	 * Constructeur de la classe PlanXMLFileException
+	 * L'exception est lancée quand le fichier XML ne correspond pas à un plan
 	 */
 	public PlanXMLFileException() {
 		super(EXCEPTION_MESSAGE);

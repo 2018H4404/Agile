@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
- * La classe de la demo de l'application.
+ * La classe de la démonstration de l'application
  * 
  * @author H4404
  * @version 1.0
@@ -88,8 +88,8 @@ public class ApplicationDemo extends Application {
 	private MenuItem itemDeplacerLivraison;
 
 	/**
-	 * Methode permettant de commencer l'application.
-	 * @param primaryStage : la fenetre principale.
+	 * Méthode permettant de commencer l'application
+	 * @param primaryStage : la fenêtre principale
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -281,8 +281,8 @@ public class ApplicationDemo extends Application {
 	}
 
 	/**
-	 * Methode pour obtenir la duree saisie par utilisateur.
-	 * @return la duree que l'utilisateur a saisi
+	 * Méthode pour obtenir la durée saisie par l'utilisateur
+	 * @return la durée que l'utilisateur a saisi
 	 */
 	public int getDuree() {
 		String text = textFieldDuree.getText();
@@ -296,9 +296,9 @@ public class ApplicationDemo extends Application {
 	}
 
 	/**
-	 * Methode pour modifier l'information dans le labelInfo.
+	 * Méthode pour modifier l'information dans le labelInfo
 	 * 
-	 * @param texte : info a mettre dans le labelInfo.
+	 * @param texte : info a mettre dans le labelInfo
 	 */
 	public void setInfo(String texte) {
 		labelInfo.setTextFill(Color.BLACK);
@@ -307,19 +307,19 @@ public class ApplicationDemo extends Application {
 	}
 	
 	/**
-	 * Methode pour retourner labelInfo de la fentere.
-	 * @return label : labelInfo de cette fenetre
+	 * Méthode pour retourner labelInfo de la fenêtre
+	 * @return label : labelInfo de cette fenêtre
 	 */
 	public Label getLabelInfo() {
 		return labelInfo;
 	}
 
 	/**
-	 * Methode pour ajouter la barre de navigation.
+	 * Méthode pour ajouter la barre de navigation
 	 * 
-	 * @param pane : pane dans IHM.
-	 * @param primaryStage : la fenetre de l'application
-	 * @param controleur : un controleur. 
+	 * @param pane : pane dans IHM
+	 * @param primaryStage : la fenêtre de l'application
+	 * @param controleur : un controleur
 	 */
 	public void AjouterBarreNavigateur(BorderPane pane, Stage primaryStage, Controleur controleur) {
 
@@ -511,7 +511,7 @@ public class ApplicationDemo extends Application {
 		});
 
 		/**
-		 * Boutton calculer qui permet le calcul des tournees.
+		 * Bouton calculer qui permet le calcul des tournées
 		 */
 		buttonCalculer.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -806,15 +806,15 @@ public class ApplicationDemo extends Application {
 
 
 	/**
-	 * Methode pour modifier le nombre de livreur maximum affiche dans le label.
-	 * @param nbLivreur : nombre de livreur maximum a afficher.
+	 * Méthode pour modifier le nombre de livreur maximum affiché dans le label
+	 * @param nbLivreur : nombre de livreur maximum à afficher
 	 */
 	public void setLabelNbLivreur(int nbLivreur) {
 		labelNombreLivreurs.setText("Nombre de livreurs (maximum :" + nbLivreur + ") :");
 	}
 	/**
-	 * Methode pour activer ou desactiver des boutons en verifiant l'etat du controleur.
-	 * @param c : controleur de l'appli.
+	 * Méthode pour activer ou désactiver des boutons en vérifiant l'état du contrôleur
+	 * @param c : contrôleur de l'application
 	 */
 	public void VerifierEtat(Controleur c) {
 		ETAT e = ETAT.valueOf(c.getEtatCourant().getClass().getSimpleName());
@@ -1085,9 +1085,9 @@ public class ApplicationDemo extends Application {
 	}
 
 	/**
-	 * La methode main pour lancer l'aaplication.
+	 * La méthode main pour lancer l'application
 	 * 
-	 * @param args les arguments commande line
+	 * @param args les arguments de la ligne de commande
 	 */
 
 	public static void main(String[] args) {

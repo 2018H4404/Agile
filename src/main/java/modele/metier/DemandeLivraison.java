@@ -8,7 +8,7 @@ import java.util.Set;
 import org.joda.time.DateTime;
 
 /** 
- * La classe de la demande de livraison.
+ * La classe de la demande de livraison
  * @author H4404
  * @version 1.0
  * @since 1.0
@@ -19,7 +19,7 @@ public class DemandeLivraison extends Observable{
 	private HashMap<Long,Entrepot> entrepots;
 	
 	/**
-	 * Constructeur par defaut de la classe de demande de livraison.
+	 * Constructeur par défaut de la classe de demande de livraison
 	 */
 	public DemandeLivraison() {
 		livraisons = new HashMap<Long,PointLivraison>();
@@ -27,9 +27,9 @@ public class DemandeLivraison extends Observable{
 	}
 	
 	/**
-	 * Methode pour initialiser la demande de livraison.
-	 * @param livraisons : le dictionnaire des points de livraison.
-	 * @param entrepots : le dictionnaire des entrepots.
+	 * Méthode pour initialiser la demande de livraison
+	 * @param livraisons : le dictionnaire des points de livraison
+	 * @param entrepots : le dictionnaire des entrepôts
 	 */
 	public void intialiserDemandeLivraison(HashMap<Long,PointLivraison> livraisons, HashMap<Long,Entrepot> entrepots) {
 		if(this.livraisons != null && this.entrepots != null) {
